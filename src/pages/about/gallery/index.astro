@@ -1,0 +1,314 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+
+const metadata = {
+  title: 'Oahu Roofing Projects & Before and After Photos | R&C Roofing',
+  description:
+    'Explore roofing projects completed by R&C Roofing Contractors across Oahu, including roof repairs, replacements, residential roofing, commercial roofing, and before-and-after photos.',
+  ignoreTitleTemplate: true,
+};
+
+const projectTypes = ['All Projects', 'Roof Repair', 'Roof Replacement', 'Residential Roofing', 'Commercial Roofing', 'Storm Damage'];
+const materials = ['All Materials', 'Metal', 'Asphalt Shingle', 'Stone-Coated Steel', 'Tile'];
+const areas = ['All Oahu', 'Honolulu', 'Kailua', 'Kāneʻohe', 'Hawaiʻi Kai', 'Aiea & Pearl City', 'Kapolei & ʻEwa Beach', 'Mililani', 'Waipahu'];
+
+const featuredProjects = [
+  {
+    name: 'Roof Repair — Honolulu',
+    neighborhood: 'Honolulu',
+    propertyType: 'Residential',
+    material: 'Asphalt Shingle',
+    situation: 'The property owner noticed ceiling staining following heavy rainfall. An inspection identified localized damage around two roof penetrations.',
+    work: 'R&C repaired the affected area including flashing replacement and shingle resetting. Project details will be updated with photography at launch.',
+  },
+  {
+    name: 'Roof Replacement — Kailua',
+    neighborhood: 'Kailua',
+    propertyType: 'Residential',
+    material: 'Metal',
+    situation: 'An aging roof with recurring repairs across several areas. Inspection indicated the roofing system had reached the end of its serviceable life.',
+    work: 'Full roof replacement completed. Project details will be updated with before-and-after photography at launch.',
+  },
+  {
+    name: 'Commercial Roof Repair — Honolulu',
+    neighborhood: 'Honolulu',
+    propertyType: 'Commercial',
+    material: 'Stone-Coated Steel',
+    situation: 'Property manager reported water intrusion in multiple sections of the building. Inspection documented the affected areas.',
+    work: 'R&C completed targeted repairs across the affected sections. Project details and photography will be added at launch.',
+  },
+  {
+    name: 'Storm Damage Inspection — Kāneʻohe',
+    neighborhood: 'Kāneʻohe',
+    propertyType: 'Residential',
+    material: 'Tile',
+    situation: 'High winds caused visible tile displacement. Property owner contacted R&C for inspection and damage documentation.',
+    work: 'Inspection completed and damage documented for insurance purposes. Tile repair completed following claim approval.',
+  },
+  {
+    name: 'Roof Replacement — Hawaiʻi Kai',
+    neighborhood: 'Hawaiʻi Kai',
+    propertyType: 'Residential',
+    material: 'Asphalt Shingle',
+    situation: 'Coastal exposure had accelerated deterioration. Multiple areas showed moisture infiltration and material degradation.',
+    work: 'Full roof replacement with materials appropriate for coastal exposure. Project photography to be added at launch.',
+  },
+  {
+    name: 'HOA Roof Assessment — Pearl City',
+    neighborhood: 'Pearl City',
+    propertyType: 'Commercial',
+    material: 'Asphalt Shingle',
+    situation: 'HOA board needed a documented assessment of roofing conditions across the property to plan maintenance budget.',
+    work: 'R&C completed a full inspection and provided documentation to support the board\'s planning. Details updated at launch.',
+  },
+];
+
+const beforeAfterProjects = [
+  {
+    name: 'Roof Replacement — Kailua',
+    neighborhood: 'Kailua',
+    summary: 'Full roof replacement following repeated repairs. The original asphalt shingle roof was replaced with a new system appropriate for Windward Oahu conditions.',
+  },
+  {
+    name: 'Roof Repair — Honolulu',
+    neighborhood: 'Honolulu',
+    summary: 'Localized repair around roof penetrations. Water intrusion traced to damaged flashing rather than widespread material failure.',
+  },
+  {
+    name: 'Storm Damage Repair — Kāneʻohe',
+    neighborhood: 'Kāneʻohe',
+    summary: 'Wind-displaced tile repair following storm damage. Inspection confirmed the damage was localized to affected sections.',
+  },
+];
+
+const areaLinks = [
+  { area: 'Honolulu', href: '/areas/honolulu' },
+  { area: 'Kailua & Kāneʻohe', href: '/areas/kailua' },
+  { area: 'Aiea & Pearl City', href: '/areas/aiea-pearl-city' },
+  { area: 'Kapolei & ʻEwa Beach', href: '/areas/kapolei' },
+  { area: 'Mililani', href: '/areas/mililani' },
+  { area: 'Waipahu', href: '/areas/waipahu' },
+];
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero -->
+  <Hero2
+    image={{
+      src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2070&q=80',
+      alt: 'Completed roofing project on an Oahu home',
+    }}
+  >
+    <Fragment slot="title">
+      Roofing Projects<br />Across Oahu
+    </Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        See the Work Behind R&amp;C Roofing Contractors
+      </span>
+      Every roofing project starts with a different property and a different reason for calling.
+      <br /><br />
+      Explore completed R&amp;C Roofing Contractors projects across Oahu, including roof repairs, roof replacements, residential and commercial roofing, and different roofing materials.
+      <br /><br />
+      Use the filters below to browse projects by the type of work, roofing material, or area.
+    </Fragment>
+  </Hero2>
+
+  <!-- Filter UI -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col gap-5">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <span class="text-[14px] font-medium text-heading shrink-0 w-36">Project Type:</span>
+        <div class="flex flex-wrap gap-2">
+          {projectTypes.map((type, i) => (
+            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-[#EDD974] text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
+              {type}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <span class="text-[14px] font-medium text-heading shrink-0 w-36">Roofing Material:</span>
+        <div class="flex flex-wrap gap-2">
+          {materials.map((mat, i) => (
+            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-[#EDD974] text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
+              {mat}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <span class="text-[14px] font-medium text-heading shrink-0 w-36">Area:</span>
+        <div class="flex flex-wrap gap-2">
+          {areas.map((area, i) => (
+            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-[#EDD974] text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
+              {area}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+    <p class="mt-4 text-[12px] md:text-[13px] font-medium text-muted italic">
+      Filters allow browsing by project type, roofing material, or area. Individual project pages link to related service and area pages.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-09 Featured Projects Grid -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Featured Roofing Projects" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {featuredProjects.map(({ name, neighborhood, propertyType, material, situation, work }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <!-- Before/After image placeholder -->
+          <div class="grid grid-cols-2 h-40">
+            <div class="bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1 border-r border-gray-200 dark:border-slate-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-[11px] font-medium text-gray-400 dark:text-slate-500 uppercase tracking-wider">Before</span>
+            </div>
+            <div class="bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-[11px] font-medium text-gray-400 dark:text-slate-500 uppercase tracking-wider">After</span>
+            </div>
+          </div>
+
+          <div class="p-5 flex flex-col gap-3 flex-1">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{name}</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{neighborhood}, Oahu</span>
+              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{propertyType}</span>
+              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{material}</span>
+            </div>
+            <div class="flex flex-col gap-2 flex-1">
+              <div>
+                <p class="text-[12px] font-semibold text-heading uppercase tracking-wider mb-1">The Situation</p>
+                <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{situation}</p>
+              </div>
+              <div>
+                <p class="text-[12px] font-semibold text-heading uppercase tracking-wider mb-1">The Work</p>
+                <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{work}</p>
+              </div>
+            </div>
+            <a href="#" class="text-primary font-medium text-[14px] hover:underline mt-auto pt-2">View Project →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Before & After Section -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Before and After"
+      subtitle="Some roofing changes are easier to understand when you can see where the project started and where it finished."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {beforeAfterProjects.map(({ name, neighborhood, summary }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <!-- Side-by-side before/after -->
+          <div class="grid grid-cols-2 h-48">
+            <div class="relative bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1 border-r border-white dark:border-slate-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="absolute bottom-2 left-2 bg-black/50 text-white text-[11px] font-medium px-2 py-0.5 rounded">Before</span>
+            </div>
+            <div class="relative bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="absolute bottom-2 right-2 bg-[#EDD974]/90 text-gray-900 text-[11px] font-medium px-2 py-0.5 rounded">After</span>
+            </div>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{name}</h3>
+            <p class="text-[12px] font-medium text-muted">{neighborhood}, Oahu</p>
+            <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted flex-1">{summary}</p>
+            <a href="#" class="text-primary font-medium text-[14px] hover:underline mt-2">View Full Project →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Projects by Area -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Roofing Projects by Area"
+      subtitle="R&C works on properties in communities across its Oahu service area. Explore roofing services and completed projects closer to your property."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {areaLinks.map(({ area, href }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="w-full h-32 bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="p-4 flex flex-col gap-2 flex-1">
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{area}</h3>
+            <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted flex-1">
+              Project details and photography will be added as projects in this area are documented.
+            </p>
+            <a href={href} class="text-primary font-medium text-[14px] hover:underline mt-auto pt-2">
+              Explore {area} Roofing →
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-12 Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Have a Roofing Project of Your Own?
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          If you are dealing with a leak, an aging roof, storm damage, or another roofing concern, start by finding out what condition the roof is in.<br />
+          R&amp;C Roofing Contractors can evaluate the roof and help determine what roofing work should be considered next.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>Hawaii Contractor License C-33642</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Inspection</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

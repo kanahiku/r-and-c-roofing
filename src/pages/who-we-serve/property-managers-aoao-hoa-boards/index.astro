@@ -1,0 +1,525 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'AOAO & HOA Roofing Oahu | Property Managers | R&C Roofing',
+  description:
+    'Roofing support for Oahu property managers, AOAO and HOA boards. Get roof condition information, repair and replacement planning, project scopes, and multi-building roofing support from R&C Roofing.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Roofing for Property Managers, AOAO &amp; HOA Boards on Oahu
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Clear Roofing Information for Better Property Decisions
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>Managing a roof problem for one building is different from managing roofing across a condominium, association, or multi-building property.</p>
+        <p>There may be board approvals to secure, budgets to plan, residents to consider, and several roofs competing for attention at the same time.</p>
+        <p>R&amp;C Roofing Contractors works with property managers and AOAO / HOA boards to evaluate roofing conditions, define the work that should be considered, and provide contractor-side information that can support planning and board review.</p>
+        <p>R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined crew experience.</p>
+      </div>
+      <a href="/contact" class="btn-primary">Request a Property Roof Assessment</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-02 "What Does the Board Need to Decide?" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Does the Board Need to Decide?" subtitle="A roofing contractor should help make the decision clearer, not simply hand the board a replacement proposal." />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'What condition are the roofs in now?',
+          description: 'Evaluate visible roofing conditions and identify areas that need attention.',
+        },
+        {
+          title: 'What needs repair now?',
+          description: 'Identify localized conditions that may be addressed through repair.',
+        },
+        {
+          title: 'What may need replacement?',
+          description: 'Explain when broader roof conditions make replacement worth considering.',
+        },
+        {
+          title: 'Which buildings should come first?',
+          description: 'Help identify roofing conditions that can inform prioritization across multiple buildings.',
+        },
+        {
+          title: 'What should we budget for?',
+          description: 'Develop contractor pricing based on the proposed roofing scope.',
+        },
+        {
+          title: 'Can the work be phased?',
+          description: 'Discuss whether the project scope can reasonably be divided into stages.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10">
+      <a href="/contact" class="btn btn-secondary">Discuss Your Property or Portfolio</a>
+    </div>
+    <p class="mt-6 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      The goal is to give management and the board useful roofing information before a major spending decision is made.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Roof Inspections for Managed Properties" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Roof Inspections for Managed Properties
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>When several people are responsible for a roofing decision, verbal observations are rarely enough.</p>
+      <p>An inspection can help establish the current condition of the roofing system and identify areas that require further attention.</p>
+      <p>R&amp;C's inspection capabilities include HAAG Certified inspection expertise through Robert Pilato, certification #201408313.</p>
+      <p>Depending on the property and purpose of the assessment, roofing information can help management and board members discuss:</p>
+    </div>
+    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
+      <li>Existing roof conditions</li>
+      <li>Visible areas of deterioration or damage</li>
+      <li>Localized repair needs</li>
+      <li>Broader replacement considerations</li>
+      <li>Differences between buildings or roof sections</li>
+      <li>Roofing priorities for future planning</li>
+    </ul>
+    <div class="mt-8">
+      <a href="/roof-inspections" class="text-primary font-medium text-[15px] hover:underline">
+        Explore Roof Inspections →
+      </a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-02 "Managing More Than One Building?" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Managing More Than One Building?" classes={{ container: 'mb-2 md:mb-3' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12 text-center max-w-3xl mx-auto space-y-4">
+      <p>A multi-building property does not necessarily have one roofing problem.</p>
+      <p>One building may have an active leak. Another may have localized deterioration. A third may remain serviceable but need to be considered in future capital planning.</p>
+      <p>Treating every building as if it has the same condition can lead to poor decisions.</p>
+      <p>R&amp;C can evaluate the roofing needs across the property so management can better understand where attention may be needed first.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Prioritize',
+          description: 'Identify roofing conditions that require more immediate attention.',
+        },
+        {
+          title: 'Plan',
+          description: 'Separate immediate work from projects that may be considered later.',
+        },
+        {
+          title: 'Scope',
+          description: 'Develop roofing scopes around the buildings or roof areas being addressed.',
+        },
+        {
+          title: 'Phase',
+          description: 'Where practical for the property and project, discuss whether work can be divided into manageable stages.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10">
+      <a href="/contact" class="btn btn-secondary">Discuss a Multi-Building Roofing Project</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- "Repair Now or Plan for Replacement?" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Repair Now or Plan for Replacement?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+      <p>Not every roof problem requires a complete replacement.</p>
+      <p>That distinction becomes particularly important when an association is responsible for multiple buildings.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">Repair May Be Appropriate When</h3>
+        <ul class="space-y-2 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted list-disc list-inside">
+          <li>The problem is localized</li>
+          <li>Surrounding roofing remains serviceable</li>
+          <li>Compatible repair materials are available</li>
+          <li>A defined repair addresses the current issue</li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">Replacement May Need to Be Considered When</h3>
+        <ul class="space-y-2 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted list-disc list-inside">
+          <li>Problems affect broader areas</li>
+          <li>Failures are occurring throughout the roofing system</li>
+          <li>Existing materials or roof conditions make continued repairs difficult</li>
+          <li>Repeated repairs are becoming part of an ongoing pattern</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+      <p>Not every roof problem requires a complete replacement.</p>
+      <p>That distinction becomes particularly important when an association is responsible for multiple buildings.</p>
+    </div>
+    <div class="flex flex-col gap-3">
+      <a href="/services/roof-repair" class="text-primary font-medium text-[15px] hover:underline">Explore Roof Repair →</a>
+      <a href="/services/roof-replacement-and-new-installation" class="text-primary font-medium text-[15px] hover:underline">Explore Roof Replacement &amp; New Installation →</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Roofing Information for Board and Budget Planning" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Roofing Information for Board and Budget Planning
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Boards need enough information to understand what they are being asked to approve.</p>
+      <p>R&amp;C can develop contractor-side information around a proposed roofing project, such as the defined roofing scope and project estimate.</p>
+      <p>That information can help support discussions around:</p>
+    </div>
+    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
+      <li>Annual property budgets</li>
+      <li>Upcoming capital projects</li>
+      <li>Repair priorities</li>
+      <li>Potential replacement planning</li>
+      <li>Multi-building project sequencing</li>
+      <li>Board review and approval</li>
+    </ul>
+    <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mt-10 mb-4">Reserve Planning</h3>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Roof condition and project-cost information can also be useful when management is reviewing future capital needs or working with a reserve-study professional.</p>
+      <p>R&amp;C does not prepare reserve studies or provide reserve-study opinions.</p>
+      <p>Our role is roofing. We can provide roofing condition and contractor-side project information that management, boards, and their professional advisors can use in their own planning.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Planning Roofing Work Around Residents" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Planning Roofing Work Around Residents
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+      <p>Roofing work on an occupied property requires more coordination than roofing an empty building.</p>
+      <p>Before work begins, the project team should establish how access, staging, parking, working areas, and resident communication will be handled.</p>
+      <p>Depending on the project, planning may need to consider:</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Building Access',
+          description: 'Identify areas contractors need to reach and any property access restrictions.',
+        },
+        {
+          title: 'Resident Impact',
+          description: 'Consider how roofing activity may affect residents near active work areas.',
+        },
+        {
+          title: 'Parking and Staging',
+          description: 'Identify appropriate locations for roofing materials, equipment, and project activity.',
+        },
+        {
+          title: 'Project Sequencing',
+          description: 'For larger properties, determine whether work should move by building, section, or another logical phase.',
+        },
+        {
+          title: 'Communication Responsibilities',
+          description: 'Establish who will communicate project notices, access requirements, and schedule changes to residents.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Keeping a Consistent Look Across the Property" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Keeping a Consistent Look Across the Property
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Associations may also need to think beyond the condition of one roof.</p>
+      <p>When roofing materials are being replaced across multiple buildings, appearance can become part of the project decision.</p>
+      <p>Depending on product availability and the existing property, management may want to consider:</p>
+    </div>
+    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
+      <li>Roofing material</li>
+      <li>Profile or style</li>
+      <li>Color</li>
+      <li>Existing roofs that will remain</li>
+      <li>Future replacement phases</li>
+    </ul>
+    <div class="mt-6 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      <p>If a multi-year project is being considered, material availability should also be discussed before assuming the exact same product will remain available indefinitely.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/services/roofing-materials" class="text-primary font-medium text-[15px] hover:underline">
+        Compare Roofing Materials →
+      </a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Storm Damage and Insurance Claims" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Storm Damage and Insurance Claims
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>A storm affecting a condominium or managed property may involve more than one roof section or building.</p>
+      <p>R&amp;C can assist on the contractor side by evaluating visible roofing conditions, documenting damage where applicable, and providing information about roofing work that may be required.</p>
+      <p>If an insurance claim is involved, the insurance carrier determines coverage and payment.</p>
+      <p>R&amp;C Roofing Contractors is not a public adjuster. We do not negotiate insurance settlements, interpret policy coverage, represent an association or property owner in a claim dispute, or guarantee an insurance outcome.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/insurance-claim-help" class="text-primary font-medium text-[15px] hover:underline">
+        Explore Insurance Claim Help →
+      </a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-08 "How R&C Approaches Managed Property Roofing" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="How R&C Approaches Managed Property Roofing" />
+    <div class="flex flex-col gap-6 max-w-2xl">
+      {[
+        {
+          step: '1',
+          title: 'Understand the Property',
+          description: 'We start with the buildings involved, known roofing concerns, management priorities, and reason for the assessment.',
+        },
+        {
+          step: '2',
+          title: 'Evaluate the Roofing Conditions',
+          description: 'R&C reviews the applicable roofs or roof areas based on the agreed scope.',
+        },
+        {
+          step: '3',
+          title: 'Identify Roofing Priorities',
+          description: 'The findings help establish which conditions should be addressed and which may be part of longer-term planning.',
+        },
+        {
+          step: '4',
+          title: 'Develop the Proposed Scope',
+          description: 'R&C prepares contractor-side project information based on the work being considered.',
+        },
+        {
+          step: '5',
+          title: 'Support the Decision Process',
+          description: 'Management and the board can review the roofing information, project scope, and pricing before deciding how to proceed.',
+        },
+        {
+          step: '6',
+          title: 'Plan the Roofing Work',
+          description: 'If approved, project sequencing and site-specific coordination can be established for the roofing work.',
+        },
+      ].map(({ step, title, description }) => (
+        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+            {step}
+          </div>
+          <div>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8">
+      <a href="/contact" class="btn-primary">Request a Property Roof Assessment</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-06 "Why Property Managers and Boards Work With R&C" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Property Managers and Boards Work With R&C" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+      {[
+        {
+          title: 'Licensed Hawaii Roofing Contractor',
+          description: 'R&C Roofing Contractors operates under Hawaii contractor license C-33642.',
+        },
+        {
+          title: 'HAAG Certified Inspection Expertise',
+          description: 'Robert Pilato holds HAAG certification #201408313.',
+        },
+        {
+          title: 'Inspection and Roofing Construction',
+          description: 'R&C can evaluate roofing conditions and perform roofing construction when work is needed.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {[
+        {
+          title: '50+ Years of Combined Crew Experience',
+          description: 'R&C brings more than 50 years of combined crew experience to its roofing work.',
+        },
+        {
+          title: 'BIA Hawaii Member',
+          description: 'R&C Roofing Contractors is a member of BIA Hawaii.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-09 Managed Property Project Example — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Managed Property Project Example"
+      subtitle="See examples of roofing work completed by R&C for managed properties on Oahu."
+    />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {[
+        { title: 'Project 1', description: 'Roofing project details coming soon.' },
+        { title: 'Project 2', description: 'Roofing project details coming soon.' },
+        { title: 'Project 3', description: 'Roofing project details coming soon.' },
+      ].map(({ title: cardTitle, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{cardTitle}</h3>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/about/gallery" class="btn btn-secondary">View Our Project Gallery</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 FAQ -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Does R&C work with AOAO and HOA boards?',
+        description:
+          "Yes. Property managers and association boards are among the customer groups identified for R&C's commercial roofing services. The exact scope depends on the property and roofing need.",
+      },
+      {
+        title: 'Can R&C assess multiple buildings?',
+        description:
+          'Multi-building roofing needs can be evaluated under an agreed project scope. This can help management identify differences in roofing condition and establish priorities across the property.',
+      },
+      {
+        title: 'Can you help us plan which roofs should be addressed first?',
+        description:
+          'R&C can provide roofing-condition information that can help management and the board consider priorities. Final budgeting and capital-planning decisions remain with the association and its advisors.',
+      },
+      {
+        title: 'Can roofing work be completed in phases?',
+        description:
+          'Potentially. Whether phasing makes sense depends on the roofing system, property configuration, project scope, material availability, and other site-specific considerations.',
+      },
+      {
+        title: 'Can R&C help with a reserve study?',
+        description:
+          "R&C does not prepare reserve studies. We can provide roofing condition information, proposed scopes, and contractor pricing that may be useful to the association and its reserve-study professionals when evaluating roofing needs.",
+      },
+      {
+        title: 'Do all buildings need to be replaced at the same time?',
+        description:
+          'Not necessarily. The condition of individual buildings or roof sections should be evaluated before assuming every roof requires the same work at the same time.',
+      },
+      {
+        title: 'Can R&C help if the property has storm damage?',
+        description:
+          'Yes. R&C can inspect visible roofing conditions and provide contractor-side documentation and roofing information. If an insurance claim is involved, coverage and payment decisions remain with the carrier.',
+      },
+    ]}
+  />
+
+  <!-- P-12 Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Give the Board Better Roofing Information
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>You should not have to make a major roofing decision based on a leak report, a few photos, or a replacement recommendation without context.</p>
+          <p>Start with the roofing conditions.</p>
+          <p>R&amp;C Roofing Contractors can evaluate the property, help define the work that should be considered, and provide contractor-side information for management and board review.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Request a Property Roof Assessment</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

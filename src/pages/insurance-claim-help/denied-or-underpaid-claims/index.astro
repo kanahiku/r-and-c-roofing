@@ -1,0 +1,418 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'Denied or Underpaid Roof Claims Hawaii | R&C Roofing',
+  description:
+    'If your Hawaii roof claim was denied or the approved scope does not match the roofing work needed, R&C can inspect the roof and provide contractor-side documentation.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Denied or Underpaid Roof Insurance Claims
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Get a Closer Look at the Roofing Scope
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>A denied roof claim or an insurance estimate that does not match the roofing work you believe is needed can leave you with questions about what to do next.</p>
+        <p>Start by understanding why the carrier made its decision and how that compares with the condition of the roof.</p>
+        <p>R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and provide contractor-side information about recommended repair or replacement work.</p>
+        <p>Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313. R&amp;C is also a licensed Hawaii roofing contractor, License C-33642.</p>
+      </div>
+      <a href="/contact" class="btn-primary">Schedule a Roof Inspection</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Denied vs Incomplete — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Was Your Roof Claim Denied or Was the Approved Scope Too Limited?" subtitle="These situations are related, but they are not the same." />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">Your Claim Was Denied</h3>
+        <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted mb-4">Your carrier determined that the claimed loss is not covered under the policy. The denial should explain the reason for that decision.</p>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">R&amp;C can inspect the roof and provide contractor-side documentation about visible roofing conditions.</p>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">Questions about coverage or challenging a denial should be addressed with your carrier or an appropriately licensed insurance professional.</p>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">The Approved Roofing Scope Seems Incomplete</h3>
+        <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted mb-4">Your carrier may recognize some damage but approve a different repair scope or amount than the roofing work being recommended.</p>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">R&amp;C can explain its recommended roofing scope and provide supporting contractor information when appropriate.</p>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">Your insurance carrier determines what work and costs it will cover under the policy.</p>
+      </div>
+    </div>
+    <p class="mt-6 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
+      R&amp;C does not determine coverage or negotiate insurance settlements.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Start With the Written Explanation — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Start With the Carrier's Written Explanation
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+      <p>Before requesting another roof inspection, review the documents you received from the insurance company.</p>
+      <p>Look for the reason the claim was denied or the details of the roofing work included in the carrier's estimate.</p>
+      <p>Questions may involve:</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8">
+      {[
+        {
+          title: 'Existing Wear or Deterioration',
+          description: 'The carrier may distinguish between conditions associated with a recent event and deterioration that developed over time.',
+        },
+        {
+          title: 'Previous Roof Damage',
+          description: 'Existing damage or previous repairs may be considered during the claim review.',
+        },
+        {
+          title: 'Scope of Roofing Work',
+          description: "R&C's recommended repair may differ from the roofing scope included in the carrier's estimate.",
+        },
+        {
+          title: 'Roofing Materials or Components',
+          description: 'The contractor and carrier may have different information about which roofing materials or components require work.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Understanding the specific point of disagreement gives R&amp;C a clearer starting point when evaluating the roof.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-08 How R&C Can Help Steps — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="How R&C Can Help After a Claim Decision" subtitle="R&C stays focused on the roofing side of the process." />
+    <div class="flex flex-col gap-6 max-w-2xl">
+      {[
+        {
+          step: '1',
+          title: 'Review the Roofing Concern',
+          lines: [
+            "Tell us what your carrier decided and what questions remain about the roof.",
+            "If you have a carrier estimate or written denial, that information may help us understand which roofing conditions need closer evaluation.",
+          ],
+        },
+        {
+          step: '2',
+          title: 'Inspect Accessible Roofing Areas',
+          lines: [
+            'Where site conditions allow, we evaluate relevant areas of the roofing system for visible damage or deterioration.',
+          ],
+        },
+        {
+          step: '3',
+          title: 'Document Relevant Findings',
+          lines: [
+            "Photos and inspection notes can provide additional information about the roof's condition.",
+          ],
+        },
+        {
+          step: '4',
+          title: 'Explain the Recommended Roofing Scope',
+          lines: [
+            'If R&C believes roofing work is needed, we explain which areas require attention and why we are recommending repair or replacement.',
+          ],
+        },
+        {
+          step: '5',
+          title: 'Provide Contractor Information When Appropriate',
+          lines: [
+            'If additional contractor documentation is requested as part of the claim review, R&C can provide information related to the roofing scope or estimate.',
+          ],
+        },
+      ].map(({ step, title, lines }) => (
+        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+            {step}
+          </div>
+          <div>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+            {lines.map((line, i) => (
+              <p class={`text-[14px] md:text-[15px] font-medium leading-[160%] text-muted${i > 0 ? ' mt-2' : ''}`}>{line}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
+      Your carrier remains responsible for coverage decisions and the handling of the insurance claim.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What Additional Documentation May Include — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="What Additional Roofing Documentation May Include"
+      classes={{ container: 'mb-4 md:mb-6' }}
+    />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      The appropriate documentation depends on what we find during the inspection and what information is relevant to the roofing project. It may include:
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+      {[
+        {
+          title: 'Photos of Relevant Roof Conditions',
+          description: 'Images can show the location and visible condition of roofing materials or components being discussed.',
+        },
+        {
+          title: 'Description of the Affected Area',
+          description: 'Documentation can identify which part of the roofing system appears to require attention.',
+        },
+        {
+          title: 'Recommended Repair or Replacement Scope',
+          description: "R&C can explain the roofing work it believes is appropriate based on the visible condition of the roof.",
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {[
+        {
+          title: 'Contractor Estimate',
+          description: 'When applicable, R&C can provide pricing for the roofing work being proposed.',
+        },
+        {
+          title: 'Additional Project Information',
+          description: 'If questions arise about materials or installation requirements, R&C can provide contractor-side information relevant to the proposed roofing work.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Where HAAG Certified Can Help — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Where HAAG Certified Inspection Can Help
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>When there are questions about visible roof damage, a closer damage-focused inspection may provide additional information.</p>
+      <p>R&amp;C's Robert Pilato holds HAAG Certification #201408313. HAAG certification includes specialized education and testing in roof damage assessment.</p>
+      <p>That training can help R&amp;C evaluate visible damage patterns and surrounding roofing conditions when inspecting the property.</p>
+      <p>A HAAG Certified inspection does not overturn an insurance decision or determine whether damage is covered. It provides additional contractor-side information about the condition of the roof.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/roof-inspections/haag-certified-inspection" class="btn-primary">Learn About HAAG Certified Roof Inspections</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- R&C's Role — Can vs Cannot — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="R&C Provides Roofing Expertise, Not Claim Representation" subtitle="It is important to understand where R&C's role ends." />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-700 dark:text-green-400">R&amp;C Can</h3>
+        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect visible roofing conditions</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Document relevant findings</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Explain the roofing work we recommend</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Provide a roofing scope or estimate when appropriate</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Respond to contractor-specific questions about the proposed project</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-muted">R&amp;C Cannot</h3>
+        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Decide whether your policy covers the damage</li>
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Act as your public adjuster</li>
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Negotiate your insurance settlement</li>
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Represent you in an insurance dispute</li>
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Guarantee additional payment or claim approval</li>
+          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Provide legal advice</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-6 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
+      If you want to challenge a coverage decision or need help interpreting your insurance policy, contact your carrier or an appropriately licensed insurance professional.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- If the Carrier's Scope Differs — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      If the Carrier's Scope Differs From the Roofing Work R&amp;C Recommends
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>An insurance estimate and a contractor's roofing estimate serve different purposes.</p>
+      <p>R&amp;C's responsibility is to explain the work we believe is appropriate based on the roof we inspected.</p>
+      <p>If our proposed roofing scope differs from the information provided by the carrier, we can document our recommendations and provide contractor-side details about the project.</p>
+      <p>Your carrier determines whether additional work or cost is covered.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What Happens After — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      What Happens After Additional Information Is Provided?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>The next step depends on your carrier and your individual claim.</p>
+      <p>The carrier may review additional documentation, request more information, schedule another inspection, or maintain its original decision.</p>
+      <p>R&amp;C does not control that process.</p>
+      <p>If the roofing project moves forward, our team can complete the agreed repair or replacement work as a licensed Hawaii roofing contractor.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-05 Resource Cards — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Our Insurance Claim Resources" />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roof Insurance Claim Help',
+          description: "Understand R&C's role in documenting roof damage and providing contractor-side support during a claim.",
+          href: '/insurance-claim-help',
+          linkText: 'View Insurance Claim Help →',
+        },
+        {
+          title: 'How the Claim Process Works',
+          description: 'Follow the roofing side of an insurance claim from the initial inspection through the roofing project.',
+          href: '/insurance-claim-help/how-the-claim-process-works',
+          linkText: 'See How the Claim Process Works →',
+        },
+        {
+          title: 'Storm & Wind Damage Inspections',
+          description: 'Have visible roof conditions evaluated after strong winds or severe weather.',
+          href: '/roof-inspections/storm-and-wind-damage-inspection',
+          linkText: 'View Storm Damage Inspections →',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
+          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 FAQs -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'What should I do if my roof insurance claim was denied?',
+        description:
+          "Start by reviewing the carrier's written explanation so you understand why the claim was denied.<br><br>If you need more information about the condition of the roof, R&C can perform an inspection and provide contractor-side findings. Questions about coverage or formally challenging the insurance decision should be discussed with your carrier or an appropriately licensed insurance professional.",
+      },
+      {
+        title: 'Can R&C overturn a denied insurance claim?',
+        description:
+          "No. R&C does not make insurance coverage decisions and cannot overturn a carrier's determination.<br><br>We can provide additional information about visible roof conditions and the roofing work we believe is needed.",
+      },
+      {
+        title: 'What does it mean if the insurance estimate is lower than the roofing estimate?',
+        description:
+          "The estimates may include different scopes of work or project assumptions.<br><br>R&C can explain what is included in our roofing estimate and why we are recommending that scope. The insurance carrier determines what costs it will cover under your policy.",
+      },
+      {
+        title: 'Can R&C provide additional documentation to my carrier?',
+        description:
+          "When appropriate, R&C can provide contractor-side documentation related to the roof and proposed roofing work. The carrier determines what additional information it will consider.",
+      },
+      {
+        title: 'Can a HAAG Certified inspection help after a denial?',
+        description:
+          "A HAAG Certified inspection may provide additional information about visible roof conditions. It does not guarantee that the carrier will change its decision.",
+      },
+      {
+        title: 'Should I hire a lawyer or public adjuster?',
+        description:
+          "R&C cannot advise you on whether you need legal representation or a public adjuster. If you need help interpreting your policy, negotiating a settlement, or disputing a coverage decision, consider speaking with an appropriately licensed professional.",
+      },
+      {
+        title: 'Is there a deadline for asking my carrier to reconsider a claim?',
+        description:
+          "Deadlines and procedures can vary by policy and situation. Review your insurance documents and contact your carrier for the requirements that apply to your claim.",
+      },
+      {
+        title: 'Can R&C complete the roofing work if the project moves forward?',
+        description:
+          "Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If the project moves forward, our team can provide the agreed repair or replacement work.",
+      },
+    ]}
+  />
+
+  <!-- P-12 Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Need Another Look at the Roof?
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>If your claim was denied or the approved roofing scope does not match the work you believe is needed, start by getting clearer information about the roof itself.</p>
+          <p>R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain the roofing work we recommend.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Inspection</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

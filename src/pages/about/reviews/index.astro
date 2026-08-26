@@ -1,0 +1,278 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: 'R&C Roofing Contractors Reviews | Honolulu, HI',
+  description:
+    'Read customer reviews of R&C Roofing Contractors from Google, Yelp, and BBB and see what Oahu property owners say about their roofing experience.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero -->
+  <Hero2
+    image={{
+      src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=2070&q=80',
+      alt: 'R&C Roofing Contractors project on Oahu',
+    }}
+  >
+    <Fragment slot="title">
+      What Customers Say<br />About Working With R&C
+    </Fragment>
+    <Fragment slot="subtitle">
+      Choosing a roofing contractor usually means trusting someone with a part of your property you cannot easily evaluate on your own.
+      <br /><br />
+      That is why customer experience matters.
+      <br /><br />
+      Read feedback from people who have worked with R&amp;C Roofing Contractors on roof repairs, replacements, storm-related roofing concerns, and other roofing projects on Oahu.
+    </Fragment>
+  </Hero2>
+
+  <!-- Review Platforms Section -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Reviews From Across the Web"
+      subtitle="Customer feedback about R&C Roofing Contractors can be found on multiple independent review platforms."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          platform: 'Google',
+          description: 'Read verified customer reviews on Google. Rating and review count updated at launch.',
+          href: 'https://www.google.com/search?q=R%26C+Roofing+Contractors+Honolulu',
+          cta: 'Read Reviews on Google',
+          logo: 'G',
+          color: 'text-blue-600',
+        },
+        {
+          platform: 'Yelp',
+          description: 'Find R&C Roofing Contractors on Yelp and read customer experiences.',
+          href: 'https://www.yelp.com/',
+          cta: 'Read Reviews on Yelp',
+          logo: 'Y',
+          color: 'text-red-600',
+        },
+        {
+          platform: 'BBB',
+          description: 'View R&C Roofing Contractors on the Better Business Bureau profile.',
+          href: 'https://www.bbb.org/',
+          cta: 'View R&C on BBB',
+          logo: 'B',
+          color: 'text-blue-800',
+        },
+      ].map(({ platform, description, href, cta, logo, color }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="flex items-center gap-3">
+            <span class={`text-[32px] font-bold font-heading ${color}`}>{logo}</span>
+            <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%]">{platform}</h3>
+          </div>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <div class="flex items-center gap-1 text-[#EDD974]">
+            {'★★★★★'.split('').map((star) => (
+              <span class="text-[18px]">{star}</span>
+            ))}
+          </div>
+          <a href={href} target="_blank" rel="noopener noreferrer" class="btn btn-secondary text-center">
+            {cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-6 text-center text-[13px] md:text-[14px] font-medium text-muted italic">
+      Ratings and review counts should be confirmed from live profiles at launch and reviewed periodically.
+    </p>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-11 Featured Testimonials -->
+  <Testimonials
+    title="Featured Customer Reviews"
+    subtitle="Verified reviews from customers who have worked with R&C Roofing Contractors on Oahu."
+    testimonials={[
+      {
+        testimonial: 'Customer review content will appear here. Only verified, exact review wording will be displayed — no edits to grammar, spelling, or punctuation.',
+        name: 'Customer Name',
+        job: 'Google · Homeowner, Honolulu',
+      },
+      {
+        testimonial: 'Customer review content will appear here. Only verified, exact review wording will be displayed — no edits to grammar, spelling, or punctuation.',
+        name: 'Customer Name',
+        job: 'Yelp · Property Manager, Kailua',
+      },
+      {
+        testimonial: 'Customer review content will appear here. Only verified, exact review wording will be displayed — no edits to grammar, spelling, or punctuation.',
+        name: 'Customer Name',
+        job: 'BBB · Homeowner, Kāneʻohe',
+      },
+    ]}
+  />
+
+  <!-- Reviews by Project Type -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Reviews From Different Roofing Projects"
+      subtitle="Customers come to R&C for different reasons. Reviews organized by the type of roofing experience they describe."
+    />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          category: 'Roof Repair',
+          description: 'Verified roof repair review will appear here once available.',
+          href: '/services/roof-repair',
+          linkText: 'Explore Roof Repair →',
+        },
+        {
+          category: 'Roof Replacement',
+          description: 'Verified roof replacement review will appear here once available.',
+          href: '/services/roof-replacement-and-new-installation',
+          linkText: 'Explore Roof Replacement →',
+        },
+        {
+          category: 'Storm Damage & Insurance',
+          description: 'Verified storm or insurance-related review will appear here once available.',
+          href: '/services/storm-damage',
+          linkText: 'Explore Storm Damage Roof Inspections →',
+        },
+        {
+          category: 'Residential Roofing',
+          description: 'Verified residential roofing review will appear here once available.',
+          href: '/services/residential-roofing',
+          linkText: 'Explore Residential Roofing →',
+        },
+        {
+          category: 'Commercial Roofing',
+          description: 'Verified commercial roofing review will appear here once available.',
+          href: '/services/commercial-roofing',
+          linkText: 'Explore Commercial Roofing →',
+        },
+      ].map(({ category, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-3 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{category}</h3>
+          <div class="flex gap-1 text-[#EDD974]">
+            {'★★★★★'.split('').map((star) => (
+              <span class="text-[16px]">{star}</span>
+            ))}
+          </div>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic flex-1">"{description}"</p>
+          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- More Customer Feedback Archive -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+        More Customer Feedback
+      </h2>
+    </div>
+
+    <div class="columns-1 sm:columns-2 gap-6 md:gap-8 space-y-6">
+      {Array.from({ length: 6 }).map(() => (
+        <div class="break-inside-avoid rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <div class="flex gap-1 text-[#EDD974]">
+              {'★★★★★'.split('').map((star) => (
+                <span class="text-[16px]">{star}</span>
+              ))}
+            </div>
+            <span class="text-[12px] font-medium text-muted uppercase tracking-wider">Google</span>
+          </div>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
+            "Customer review content will appear here. Only verified, exact review wording will be displayed."
+          </p>
+          <div class="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-slate-700">
+            <span class="text-[13px] font-medium text-heading">Customer Name</span>
+            <a href="#" class="text-primary font-medium text-[13px] hover:underline">View Original →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="#" class="btn btn-secondary">Load More Reviews</a>
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Project Gallery Teaser -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+      <div class="md:basis-1/2 flex flex-col gap-4">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+          See the Roofing Work Behind the Reviews
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+          Customer feedback tells one part of the story. The finished work tells another.
+        </p>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+          Explore completed R&amp;C roofing projects across Oahu, including before-and-after photos, project locations, roofing materials, and the work completed.
+        </p>
+        <div class="mt-2">
+          <a href="/about/project-gallery" class="btn btn-secondary">View Project Gallery</a>
+        </div>
+      </div>
+      <div class="md:basis-1/2 w-full">
+        <div class="grid grid-cols-2 gap-3">
+          {[1, 2, 3, 4].map(() => (
+            <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded flex items-center justify-center text-gray-300 dark:text-slate-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-12 Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Have a Roofing Question of Your Own?
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          If something is happening with your roof, you do not need to know the solution before you call.<br />
+          R&amp;C can evaluate the roof and help determine what roofing work should be considered next.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>Hawaii Contractor License C-33642</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Inspection</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

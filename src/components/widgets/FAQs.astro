@@ -1,0 +1,51 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Faqs as Props } from '~/types';
+
+const {
+  title = '',
+  subtitle = '',
+  tagline = '',
+  items = [],
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-[1400px] mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  {
+    items.length > 0 && (
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-b border-gray-200 dark:border-gray-700 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        {items.map(({ title: itemTitle, description }) => (
+          <details class="group py-1" name="faq-accordion">
+            <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
+              <span class="text-[16px] md:text-[18px] font-medium font-heading text-heading leading-snug pr-4">
+                {itemTitle}
+              </span>
+              <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 group-open:border-primary group-open:text-primary transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-300 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </span>
+            </summary>
+            <div class="pb-5 pr-10">
+              <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted dark:text-slate-400" set:html={description} />
+            </div>
+          </details>
+        ))}
+      </div>
+    )
+  }
+</WidgetWrapper>
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

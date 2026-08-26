@@ -1,0 +1,55 @@
+---
+description: R&C Roofing project context — page patterns, design system, and build rules
+alwaysApply: true
+---
+
+# R&C Roofing — AI Agent Context
+
+This is the **R&C Roofing Contractors** website built on Astro v7 + Tailwind CSS v4 (AstroWind template).
+
+## Read These Files First
+
+Before writing or editing any page, always read:
+- `PAGE-BUILDER.md` — pattern library (P-01 to P-13), pattern selector, global rules, typography classes, and the new page checklist
+- `TEMPLATE-GUIDE.md` — full design system reference, component API, and site architecture
+
+## Non-Negotiable Rules
+
+- Every page lives at `src/pages/[route]/index.astro`
+- Max content width: `max-w-[1400px] mx-auto` on every `WidgetWrapper`
+- Backgrounds alternate white → grey → white → grey down the page
+- No eyebrow/tagline text above headings
+- No icons on cards unless the pattern explicitly includes them
+- Only use typography classes defined in `PAGE-BUILDER.md` — never invent new sizes
+- Run `npm run build` after every page change and fix any errors before finishing
+
+## Hero Rules
+
+- Omit `actions` and `<Fragment slot="content">` from `Hero2` on content-heavy or informational pages (Our Story, Reviews, Gallery, etc.)
+- Only include CTA + badges on conversion-focused heroes (service pages, homepage)
+- To add a visual subheading between H1 and body copy inside `Hero2`, use a styled `<span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">` as the first element inside `<Fragment slot="subtitle">`
+
+## Pattern Quick Reference
+
+| Shape | Pattern |
+|---|---|
+| H1 + paragraphs + optional CTA + image + badges | P-01 |
+| H2 + intro paragraphs + 2–4 item columns | P-02 |
+| H2 + paragraphs + image one side + optional CTA | P-03 |
+| H2 title sharing a row with a CTA button | P-04 |
+| 4–6 cards with per-card links | P-05 |
+| Exactly 5 benefit cards (3+2 layout) | P-06 |
+| 4 compact info cards one row | P-07 |
+| H2 + steps/timeline + optional image | P-08 |
+| Grid of project/gallery cards | P-09 |
+| FAQ accordion | P-10 |
+| Testimonials/reviews | P-11 |
+| Page-ending CTA card (every page) | P-12 |
+| H2 + multiple paragraphs, full width, no image/columns — narrative sections | P-13 |
+
+## Updating PAGE-BUILDER.md
+
+When a new layout is approved in the browser, add it to `PAGE-BUILDER.md`:
+1. Add a row to the Pattern Selector table
+2. Add a full `### P-XX · Name` entry with snippet and variants
+3. Update the next available number note at the bottom of the table

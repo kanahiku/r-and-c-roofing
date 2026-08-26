@@ -1,0 +1,525 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'Roofing Subcontractor Oahu | General Contractors | R&C Roofing',
+  description:
+    'Need a roofing subcontractor on Oahu? R&C Roofing Contractors works with general contractors on roofing scopes, scheduling, trade coordination, inspections, repairs, replacement, and new installation.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Roofing Subcontractor for General Contractors on Oahu
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Roofing Support That Fits the Larger Project
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>For a general contractor, the roofing scope is only one part of the job.</p>
+        <p>Roofing work has to fit the construction schedule, coordinate with other trades, account for site access, and move through the project without creating avoidable problems elsewhere.</p>
+        <p>R&amp;C Roofing Contractors works with general contractors on Oahu for roofing inspections, repair, replacement, and new installation.</p>
+        <p>We can review the roofing scope, discuss project requirements, and coordinate the roofing work within the larger construction plan.</p>
+        <p>R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined crew experience.</p>
+      </div>
+      <a href="/contact" class="btn-primary">Discuss a Roofing Subcontract</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- "Where Does Roofing Fit in Your Schedule?" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Where Does Roofing Fit in Your Schedule?" subtitle="Roofing can affect several other parts of the build. The earlier those dependencies are identified, the easier it is to plan the work." />
+    <div class="overflow-x-auto mb-8 md:mb-10">
+      <table class="w-full text-[15px] md:text-[16px] font-medium leading-[160%] border-collapse">
+        <thead>
+          <tr class="border-b-2 border-primary">
+            <th class="text-left py-3 pr-8 font-heading font-medium text-heading text-[16px] md:text-[18px] whitespace-nowrap">Project Stage</th>
+            <th class="text-left py-3 font-heading font-medium text-heading text-[16px] md:text-[18px]">Roofing Coordination to Consider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-100 dark:border-slate-700">
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Preconstruction</td>
+            <td class="py-3 text-muted align-top">Roofing scope, materials, drawings, existing conditions, access, and schedule requirements</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-900/20">
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Structure Ready</td>
+            <td class="py-3 text-muted align-top">Confirm conditions needed before roofing work begins</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-slate-700">
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Dry-In Planning</td>
+            <td class="py-3 text-muted align-top">Coordinate the roofing sequence with the project's weather-protection requirements</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-900/20">
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">MEP / Penetrations</td>
+            <td class="py-3 text-muted align-top">Coordinate roof penetrations and related flashing details with applicable trades</td>
+          </tr>
+          <tr class="border-b border-gray-100 dark:border-slate-700">
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Exterior Work</td>
+            <td class="py-3 text-muted align-top">Account for access, staging, equipment, and other work occurring around the building</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Roofing Completion</td>
+            <td class="py-3 text-muted align-top">Address applicable roofing closeout items and remaining project coordination</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3 mb-8">
+      <p>The exact sequence depends on the project.</p>
+      <p>R&amp;C can work with the GC to understand where the roofing scope sits within the overall construction schedule.</p>
+    </div>
+    <a href="/contact" class="btn btn-secondary">Review Your Roofing Scope</a>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-05 "Roofing Services for GC-Led Projects" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Roofing Services for GC-Led Projects" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'New Roof Installation',
+          description: 'For new construction, the roofing scope should align with the building design, selected roofing system, and construction schedule. R&C can review the proposed roofing work and coordinate the installation requirements with the project team.',
+          link: '/services/roof-replacement-and-new-installation',
+          linkText: 'Explore Roof Replacement & New Installation →',
+        },
+        {
+          title: 'Roof Replacement',
+          description: 'Renovation and reroofing projects can involve existing conditions that are not fully visible before work begins. R&C can evaluate the roof, define the proposed roofing scope, and discuss how existing conditions may affect the work.',
+          link: '/services/roof-replacement-and-new-installation',
+          linkText: 'Explore Roof Replacement →',
+        },
+        {
+          title: 'Roof Repair',
+          description: 'A roofing repair may be part of a larger renovation, corrective construction project, or property improvement scope. R&C can evaluate localized roofing conditions and determine what repair work should be considered.',
+          link: '/services/roof-repair',
+          linkText: 'Explore Roof Repair →',
+        },
+        {
+          title: 'Roof Inspections',
+          description: "When the existing roof condition is unclear, an inspection can help establish what is present before the construction scope is finalized. R&C's inspection capabilities include HAAG Certified inspection expertise through Robert Pilato, certification #201408313.",
+          link: '/roof-inspections',
+          linkText: 'Explore Roof Inspections →',
+        },
+      ].map(({ title, description, link, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
+          <a href={link} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- "Coordinate the Roofing Scope Before Mobilization" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Coordinate the Roofing Scope Before Mobilization" classes={{ container: 'mb-2 md:mb-3' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12 text-center max-w-3xl mx-auto space-y-3">
+      <p>Many roofing problems on a construction project begin with unclear scope boundaries.</p>
+      <p>Before roofing work starts, it is useful to establish who is responsible for the components and conditions that affect the roof.</p>
+      <p>Depending on the project, coordination may involve:</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roof Deck and Substrate Conditions',
+          description: 'Confirm the applicable roofing substrate and conditions expected before installation begins.',
+        },
+        {
+          title: 'Roof Penetrations',
+          description: 'Coordinate penetrations for plumbing, mechanical, electrical, and other building systems where they interface with the roofing work.',
+        },
+        {
+          title: 'Flashing and Transitions',
+          description: 'Clarify the roofing scope around walls, curbs, penetrations, edges, and transitions to adjacent construction.',
+        },
+        {
+          title: 'Material Selection',
+          description: 'Confirm the roofing material and system being proposed for the project.',
+        },
+        {
+          title: 'Site Access',
+          description: 'Discuss how crews, materials, equipment, and roofing activity will access the project.',
+        },
+        {
+          title: 'Project Schedule',
+          description: 'Establish the roofing window and identify dependencies that could affect when roofing work can proceed.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      The individual contract documents and agreed scope should define project responsibilities.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Working Around Other Trades" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Working Around Other Trades
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Roofing does not happen in isolation.</p>
+      <p>Mechanical equipment may penetrate the roof. Plumbing vents need roofing details around them. Exterior wall systems can meet the roof at transitions. Other trades may also need access to roof areas during construction.</p>
+      <p>That makes sequencing important.</p>
+      <p>R&amp;C can coordinate the roofing portion of the work with the GC so roofing activities are planned around the applicable project requirements and trade interfaces.</p>
+      <p>We would avoid promising a fixed dry-in or completion timeline before the project scope and schedule are known.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Roofing Materials for New Construction and Renovation" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Roofing Materials for New Construction and Renovation
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Material selection may already be established in the plans, or the project may still be evaluating roofing options.</p>
+      <p>R&amp;C's current primary roofing material categories include:</p>
+    </div>
+    <ul class="mt-5 space-y-2 text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-heading list-disc list-inside">
+      <li>Metal Roofing</li>
+      <li>Asphalt Shingle Roofing</li>
+      <li>Stone-Coated Steel Roofing</li>
+      <li>Clay &amp; Concrete Tile Roofing</li>
+    </ul>
+    <div class="mt-6 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>The appropriate system depends on the roof design, specifications, structure, property conditions, and project requirements.</p>
+      <p>For projects that are still in design or material selection, R&amp;C can discuss available roofing options within its current capabilities.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/services/roofing-materials" class="btn btn-secondary">Explore Roofing Materials</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Information for Bid and Procurement Review" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Information for Bid and Procurement Review
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>General contractors need enough information to evaluate the roofing scope and compare proposals properly.</p>
+      <p>R&amp;C can provide contractor-side information related to the proposed roofing work and estimate.</p>
+      <p>Depending on R&amp;C's current administrative capabilities and the individual project, procurement documentation may also be requested.</p>
+    </div>
+    <div class="mt-6 rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300">
+      Client confirmation required before publishing the following as standard deliverables.
+    </div>
+    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
+      <li>Certificate of insurance</li>
+      <li>W-9</li>
+      <li>Contractor license documentation</li>
+      <li>Product data</li>
+      <li>Material submittals</li>
+      <li>Safety documentation</li>
+      <li>Project schedules</li>
+      <li>Manufacturer information</li>
+      <li>Closeout documentation</li>
+    </ul>
+    <div class="mt-6 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      <p>R&amp;C's Hawaii contractor license C-33642 can be included in qualification materials.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/contact" class="btn btn-secondary">Request Roofing Contractor Information</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Changes and Existing Conditions" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Changes and Existing Conditions
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>Renovation work can uncover roofing conditions that were not visible before construction began.</p>
+      <p>When that happens, the project team needs clear information about what was found and how it may affect the roofing scope.</p>
+      <p>R&amp;C's role is to identify the roofing condition, document the applicable issue, and provide contractor-side information about work that may need to be considered.</p>
+      <p>Any scope or pricing changes should then follow the project's established approval process.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 "Communication Through One Roofing Contact" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Communication Through One Roofing Contact
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>A GC should not have to track down several people to understand what is happening with one subcontract.</p>
+      <p>For larger or coordinated projects, a clearly identified roofing contact can help keep questions about scope, scheduling, access, and field conditions organized.</p>
+    </div>
+    <div class="mt-6 rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300">
+      Client confirmation required: Confirm whether R&amp;C assigns a dedicated project manager or superintendent to GC-led projects before using those titles publicly.
+    </div>
+    <div class="mt-6 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      <p>R&amp;C establishes a clear point of contact for project-specific roofing coordination.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-08 "How R&C Approaches a GC-Led Roofing Project" — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="How R&C Approaches a GC-Led Roofing Project" />
+    <div class="flex flex-col gap-6 max-w-2xl">
+      {[
+        {
+          step: '1',
+          title: 'Review the Project',
+          description: 'We start with the roofing need, available plans or scope information, project stage, and construction schedule.',
+        },
+        {
+          step: '2',
+          title: 'Clarify Roofing Requirements',
+          description: 'R&C reviews the applicable roofing work and identifies questions that need to be resolved before the scope is finalized.',
+        },
+        {
+          step: '3',
+          title: 'Develop the Roofing Scope',
+          description: 'The proposed work and pricing are prepared based on the information available for the project.',
+        },
+        {
+          step: '4',
+          title: 'Coordinate the Schedule',
+          description: 'If R&C is selected for the work, roofing activities are coordinated with the GC based on the agreed project schedule and site requirements.',
+        },
+        {
+          step: '5',
+          title: 'Perform the Roofing Work',
+          description: 'R&C completes the agreed roofing scope according to the project requirements and applicable specifications.',
+        },
+        {
+          step: '6',
+          title: 'Address Roofing Closeout Items',
+          description: 'Applicable roofing completion items are coordinated with the GC according to the project scope.',
+        },
+      ].map(({ step, title, description }) => (
+        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+            {step}
+          </div>
+          <div>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8">
+      <a href="/contact" class="btn-primary">Discuss Your Construction Project</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-06 "Why General Contractors Work With R&C" — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why General Contractors Work With R&C" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+      {[
+        {
+          title: 'Licensed Hawaii Roofing Contractor',
+          description: 'R&C operates under Hawaii contractor license C-33642.',
+        },
+        {
+          title: 'Roofing and Inspection Capabilities',
+          description: 'R&C performs roofing construction and provides roof inspection services, including HAAG Certified inspection expertise.',
+        },
+        {
+          title: 'Residential and Commercial Roofing',
+          description: 'R&C can support roofing scopes across different property and project types.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {[
+        {
+          title: 'Material Options',
+          description: 'Current primary roofing materials include metal, asphalt shingles, stone-coated steel, and clay or concrete tile.',
+        },
+        {
+          title: '50+ Years of Combined Crew Experience',
+          description: 'R&C brings more than 50 years of combined crew roofing experience.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-09 General Contractor Project Example — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="General Contractor Project Example"
+      subtitle="See examples of roofing work completed by R&C for GC-led projects on Oahu."
+    />
+    <div class="rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300 mb-8">
+      Client content required before launch. This section will be much stronger with at least one verified GC-led project.
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {[
+        { title: 'Project 1', description: 'Roofing project details coming soon.' },
+        { title: 'Project 2', description: 'Roofing project details coming soon.' },
+        { title: 'Project 3', description: 'Roofing project details coming soon.' },
+      ].map(({ title: cardTitle, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{cardTitle}</h3>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/about/gallery" class="btn btn-secondary">View Our Project Gallery</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Contractor References — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Contractor References
+    </h2>
+    <div class="rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300 mb-8">
+      A GC reference is more valuable than a generic residential review for this page. Insert verified general contractor testimonial or reference before launch.
+    </div>
+    <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-8">
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted italic mb-6">
+        Verified general contractor testimonial coming soon.
+      </p>
+      <p class="text-[14px] md:text-[15px] font-medium text-muted">
+        Ideal topics: communication with the project team, schedule coordination, responsiveness to field conditions, coordination with other trades, scope clarity, reliability during construction.
+      </p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 FAQ -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Does R&C work as a roofing subcontractor for general contractors?',
+        description:
+          'Yes. General contractors are one of the client groups R&C serves.<br><br>The roofing scope depends on the project and R&C\'s current capabilities.',
+      },
+      {
+        title: 'What roofing work can R&C perform for a GC-led project?',
+        description:
+          'R&C provides roofing inspections, roof repair, roof replacement, new roof installation, and multiple roofing material options.',
+      },
+      {
+        title: 'Can R&C review roofing plans before construction?',
+        description:
+          'R&C can review roofing information related to a potential project and discuss the roofing scope.<br><br>Detailed design and specification responsibilities should remain with the appropriate licensed design professionals where applicable.',
+      },
+      {
+        title: 'Can R&C coordinate with mechanical and plumbing trades?',
+        description:
+          'R&C can coordinate roofing work where roof penetrations and other trade interfaces affect the roofing scope.<br><br>The GC should establish overall trade sequencing and project responsibilities.',
+      },
+      {
+        title: 'Can R&C meet our construction schedule?',
+        description:
+          'R&C can review the requested schedule and determine whether the roofing work can be coordinated within the proposed project requirements.<br><br>We would not promise schedule availability or a fixed completion date before reviewing the project.',
+      },
+      {
+        title: 'Does R&C provide a certificate of insurance and W-9?',
+        description:
+          '[Client confirmation required before publishing. Confirm R&C\'s current procurement-document process and identify the person responsible for providing qualification documents.]',
+      },
+      {
+        title: 'Does R&C provide roofing submittals?',
+        description:
+          '[Client confirmation required. If R&C regularly submits manufacturer data, samples, shop drawings, product literature, or other formal roofing submittals, those verified capabilities should be added here.]',
+      },
+      {
+        title: 'Can R&C help with material selection?',
+        description:
+          "Yes, within R&C's roofing scope.<br><br>For projects requiring architectural specifications or engineered assemblies, final design requirements should remain with the appropriate project professionals.",
+      },
+    ]}
+  />
+
+  <!-- P-12 Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Need a Roofing Subcontractor for an Oahu Project?
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>Send R&amp;C the project information and roofing scope.</p>
+          <p>We can review the roofing requirements, discuss schedule and site considerations, and determine whether the project fits R&amp;C's capabilities.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Discuss a Roofing Subcontract</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

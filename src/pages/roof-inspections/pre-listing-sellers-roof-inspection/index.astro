@@ -1,0 +1,312 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'Pre-Listing / Seller’s Roof Inspections Oahu | R&C Roofing',
+  description:
+    'Schedule a pre-listing roof inspection on Oahu with R&C Roofing Contractors. Identify visible roof conditions before you list, address concerns early, and document findings for your transaction.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Pre-Listing / Seller’s Roof Inspections on Oahu
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Identify Visible Roof Concerns Before They Become a Last-Minute Issue
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>Roof questions can come up at the most stressful part of a transaction—after a buyer’s inspection, during negotiations, or when timelines are tight.</p>
+        <p>A pre-listing roof inspection gives you a clearer understanding of the roof’s visible condition before the property goes on the market.</p>
+        <p>R&amp;C Roofing Contractors provides pre-listing roof inspections for Oahu properties. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, and R&amp;C is a licensed Hawaii roofing contractor, License C-33642.</p>
+      </div>
+      <a href="/contact" class="btn-primary">Schedule a Pre-Listing Roof Inspection</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Why pre-listing helps — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Why Schedule a Roof Inspection Before You List?"
+      subtitle="A seller-side roof inspection helps you plan instead of reacting. It can also reduce uncertainty when a buyer asks about the roof."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Know What Is Visible and Accessible',
+          description:
+            'A dedicated roof inspection focuses on the roofing system itself and documents what is observed at the time of inspection.',
+        },
+        {
+          title: 'Address Issues on Your Timeline',
+          description:
+            'If maintenance or repairs are recommended, you can decide whether to address them before listing or plan how to disclose and respond during the transaction.',
+        },
+        {
+          title: 'Reduce Last-Minute Surprises',
+          description:
+            'When roof concerns are discovered late, timelines can tighten quickly. An earlier inspection gives you more control over next steps.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What we evaluate — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="What We Evaluate During a Pre-Listing Roof Inspection"
+      subtitle="The inspection scope depends on the property, roofing system, accessibility, and visible conditions."
+    />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-3xl mx-auto text-center">
+      Where accessible, R&amp;C may evaluate:
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roofing Materials',
+          description:
+            'We look for visible deterioration, damage, displacement, and other conditions that may affect roof performance.',
+        },
+        {
+          title: 'Flashing and Roof Penetrations',
+          description:
+            'Areas around vents, pipes, skylights, transitions, and other penetrations can be important inspection points for visible deterioration or water-entry concerns.',
+        },
+        {
+          title: 'Roof Edges and Drainage Areas',
+          description:
+            'We review accessible roof edges, valleys, gutters, and other drainage areas involved in moving water away from the roof.',
+        },
+        {
+          title: 'Exposed Metal Components',
+          description:
+            'Fasteners, flashing, and other exposed metal components may show signs of corrosion, especially on properties with greater coastal exposure.',
+        },
+        {
+          title: 'Signs of Moisture or Previous Leaks',
+          description:
+            'When interior access is appropriate, visible signs of moisture or previous water intrusion may provide additional context about the roof.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- How sellers use findings — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="How Sellers and Real Estate Teams Use Inspection Findings"
+      subtitle="A roof inspection does not guarantee a transaction outcome, but it can provide clearer information about the roof’s visible condition."
+    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Plan Maintenance or Repairs',
+          description:
+            'If issues are identified, you can decide whether maintenance or repairs should be considered before listing.',
+        },
+        {
+          title: 'Prepare for Buyer Questions',
+          description:
+            'Having a documented inspection helps you respond more clearly when roof questions arise during due diligence.',
+        },
+        {
+          title: 'Understand Scope and Options',
+          description:
+            'If roofing work is recommended, R&amp;C can explain the contractor-side scope that may be appropriate based on the visible condition observed.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8">
+      <a href="/contact" class="btn-primary">Schedule a Pre-Listing Inspection</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Process — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+        What Happens During a Pre-Listing Roof Inspection?
+      </h2>
+      <a href="/contact" class="btn-primary shrink-0">Schedule a Pre-Listing Inspection</a>
+    </div>
+    <div class="flex flex-col gap-6 max-w-2xl">
+      {[
+        {
+          step: '1',
+          title: 'We Review the Property and Your Timeline',
+          description:
+            'We start by understanding the listing plan, what you have noticed about the roof, and any known concerns.',
+        },
+        {
+          step: '2',
+          title: 'We Inspect Accessible Roofing Areas',
+          description:
+            'Where access and site conditions allow, we evaluate relevant parts of the roofing system for visible damage or deterioration.',
+        },
+        {
+          step: '3',
+          title: 'We Document Relevant Findings',
+          description:
+            'Photos and notes provide a clearer record of the roof’s visible condition at the time of inspection.',
+        },
+        {
+          step: '4',
+          title: 'We Explain What the Findings Mean',
+          description:
+            'We discuss whether visible conditions appear to require maintenance, repair, further evaluation, or monitoring.',
+        },
+      ].map(({ step, title, description }) => (
+        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+            {step}
+          </div>
+          <div>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic max-w-3xl">
+      A roof inspection documents visible conditions at the time of inspection. The scope depends on access, roof type, and site conditions.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Explore other inspections — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline
+      title="Explore Other Roof Inspection Services"
+      subtitle="If your situation involves a purchase, storm event, or ongoing maintenance planning, these inspection types may fit better."
+    />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Pre-Purchase Roof Inspections',
+          description: 'Get a closer look at the roof’s condition before moving forward with a real estate transaction.',
+          href: '/roof-inspections/pre-purchase-roof-inspection',
+          linkText: 'View Pre-Purchase Inspections →',
+        },
+        {
+          title: 'Storm & Wind Damage Inspections',
+          description: 'Evaluate visible roof conditions after strong winds or severe weather.',
+          href: '/roof-inspections/storm-and-wind-damage-inspection',
+          linkText: 'View Storm Damage Inspections →',
+        },
+        {
+          title: 'Annual Maintenance Inspections',
+          description: 'Track roof conditions over time and identify areas that may need attention.',
+          href: '/roof-inspections/annual-maintenance-inspection',
+          linkText: 'View Maintenance Inspections →',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
+          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 text-center">
+      <a href="/roof-inspections" class="btn btn-secondary">View All Roof Inspection Services</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- FAQs — white -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Is a pre-listing roof inspection the same as a buyer’s roof inspection?',
+        description:
+          'The inspection process is similar, but a pre-listing inspection is scheduled on the seller’s timeline before a buyer’s due diligence begins.',
+      },
+      {
+        title: 'Can R&C provide a repair estimate if an issue is found?',
+        description:
+          'If roofing work is recommended, R&amp;C can explain the contractor-side scope that should be considered and provide repair or replacement services as a licensed Hawaii roofing contractor, License C-33642.',
+      },
+      {
+        title: 'Does a roof inspection guarantee the roof will pass a buyer’s inspection?',
+        description:
+          'No. A roof inspection documents visible conditions at the time of inspection and cannot control what another inspector observes or how a buyer uses that information.',
+      },
+      {
+        title: 'Can a newer roof still be worth inspecting before a sale?',
+        description:
+          'Yes. A newer roof can still have localized issues around flashing, penetrations, drainage areas, or previous repairs. If the roof will be a point of negotiation, an inspection can provide clearer information.',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- P-12 Final CTA — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Get Clearer Roof Information Before You List
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>A pre-listing roof inspection helps you understand visible roof conditions before a transaction timeline tightens.</p>
+          <p>R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain what those findings may mean for your property.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Pre-Listing Roof Inspection</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+</Layout>
+

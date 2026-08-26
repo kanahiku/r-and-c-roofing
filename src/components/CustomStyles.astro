@@ -1,0 +1,47 @@
+---
+// Sora for headings (via --font-sora), Inter for body (via --font-inter).
+// Both loaded by Astro Fonts API in astro.config.ts.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-sora);
+
+    --aw-color-primary: rgb(45 55 72);
+    --aw-color-secondary: rgb(74 85 104);
+    --aw-color-accent: rgb(237 217 116);
+
+    --aw-color-text-heading: rgb(26 32 44);
+    --aw-color-text-default: rgb(45 55 72);
+    --aw-color-text-muted: rgb(113 128 150);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    --aw-color-bg-page-dark: rgb(26 32 44);
+
+    ::selection {
+      background-color: rgb(237 217 116 / 30%);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-sora);
+
+    --aw-color-primary: rgb(237 217 116);
+    --aw-color-secondary: rgb(203 186 99);
+    --aw-color-accent: rgb(237 217 116);
+
+    --aw-color-text-heading: rgb(247 250 252);
+    --aw-color-text-default: rgb(226 232 240);
+    --aw-color-text-muted: rgb(160 174 192);
+    --aw-color-bg-page: rgb(26 32 44);
+
+    ::selection {
+      background-color: rgb(237 217 116 / 30%);
+      color: snow;
+    }
+  }
+</style>
