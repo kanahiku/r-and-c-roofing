@@ -56,10 +56,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     {...isSticky ? { 'data-aw-sticky-header': true } : {}}
     {...id ? { id } : {}}
   >
-    <div class="absolute inset-0"></div>
+    <div class="absolute inset-0 bg-black"></div>
     <div
       class:list={[
-        'relative text-default py-3 px-3 md:px-6 mx-auto w-full flex items-center justify-between',
+        'relative text-white py-3 px-3 md:px-6 mx-auto w-full flex items-center justify-between',
         {
           'max-w-[1400px]': !isFullWidth,
         },
@@ -87,7 +87,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   <>
                     <a
                       href={href}
-                      class="hover:text-link dark:hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap"
+                      class="text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap"
                     >
                       {text}{' '}
                       <Icon
@@ -95,12 +95,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
                       />
                     </a>
-                    <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
                       {links.map(({ text: text2, href: href2, links: links2 }) => (
                         <li class:list={[{ 'relative group/nested': links2?.length }]}>
                           <a
                             class:list={[
-                              'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-nowrap',
+                              'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
                               { 'aw-link-active': href2 === currentPath },
                               { 'flex items-center justify-between': links2?.length },
                             ]}
@@ -115,12 +115,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                             )}
                           </a>
                           {links2?.length && (
-                            <ul class="md:absolute md:left-full md:top-0 md:hidden group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md dark:md:bg-dark rounded font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
+                            <ul class="md:absolute md:left-full md:top-0 md:hidden group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md rounded font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
                               {links2.map(({ text: text3, href: href3 }) => (
                                 <li>
                                   <a
                                     class:list={[
-                                      'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-nowrap',
+                                      'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
                                       { 'aw-link-active': href3 === currentPath },
                                     ]}
                                     href={href3}
@@ -138,7 +138,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 ) : (
                   <a
                     class:list={[
-                      'hover:text-link dark:hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap',
+                      'text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap',
                       { 'aw-link-active': href === currentPath },
                     ]}
                     href={href}
@@ -218,7 +218,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         toggle?.classList.remove('expanded');
         toggle?.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('overflow-hidden');
-        header?.classList.remove('h-screen', 'expanded', 'bg-page');
+        header?.classList.remove('h-screen', 'expanded', 'bg-black');
         nav?.classList.add('hidden');
         lastChild?.classList.add('hidden');
       };
@@ -230,7 +230,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         document.body.classList.toggle('overflow-hidden');
         header?.classList.toggle('h-screen');
         header?.classList.toggle('expanded');
-        header?.classList.toggle('bg-page');
+        header?.classList.toggle('bg-black');
         nav?.classList.toggle('hidden');
         lastChild?.classList.toggle('hidden');
       });

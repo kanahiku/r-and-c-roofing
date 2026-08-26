@@ -83,7 +83,7 @@ Every section on every page must follow these rules. Do not deviate.
 | H3 | Card or item titles within a section |
 | No eyebrows/taglines | Never add eyebrow text above headings |
 | No icons on cards | Unless the pattern explicitly includes them |
-| Headline description alignment | When `<Headline>` is used (always center-aligned), any description immediately below it **must also be center-aligned**. Short descriptions (1–2 sentences): pass as the `subtitle` prop on `<Headline>` — it centers automatically and sits tight below the heading. Longer descriptions that must stay as a separate element: add `text-center max-w-3xl mx-auto` to the element and add `classes={{ container: 'mb-4 md:mb-6' }}` on the `<Headline>` to reduce the gap so the description reads as part of the heading block, with the description itself carrying `mb-8 md:mb-12` before the grid/list below. |
+| Headline description alignment | When `<Headline>` is used (always center-aligned), any description immediately below it **must also be center-aligned**. **Never pass body text as the `subtitle` prop on `<Headline>`.** The `subtitle` slot is only for true visual sub-headings (rarely used). All descriptive sentences belong as a separate `<p>` below the `<Headline>` with `text-center max-w-3xl mx-auto mb-8 md:mb-12`, and add `classes={{ container: 'mb-4 md:mb-6' }}` on the `<Headline>` to tighten the gap. For sections with left-aligned body paragraphs, prepend the sentence as the first `<p>` inside the existing body `<div>` — no centering needed. |
 
 Background snippets go inside `<Fragment slot="bg">` inside `WidgetWrapper`.
 

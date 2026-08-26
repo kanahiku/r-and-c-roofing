@@ -43,7 +43,10 @@ const yelpEmbeds = `
 
   <!-- How R&C Can Help — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How R&C Can Help With Your Roof Claim" subtitle="R&C supports the roofing portion of the claim process. We do not act as your insurance representative or public adjuster." />
+    <Headline title="How R&C Can Help With Your Roof Claim" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      R&C supports the roofing portion of the claim process. We do not act as your insurance representative or public adjuster.
+    </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-700 dark:text-green-400">R&amp;C Can Help With</h3>
@@ -277,7 +280,10 @@ const yelpEmbeds = `
 
   <!-- Real Client Experience — Yelp Embeds — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Real Client Experience" subtitle="R&C has worked with Oahu property owners whose roofing projects involved insurance claims." />
+    <Headline title="Real Client Experience" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8">
+      R&C has worked with Oahu property owners whose roofing projects involved insurance claims.
+    </p>
     <div class="flex flex-col sm:flex-row flex-wrap gap-6" set:html={yelpEmbeds} />
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
@@ -286,7 +292,10 @@ const yelpEmbeds = `
 
   <!-- P-05 Explore Resources — white -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Roof Claim Resources" subtitle="Use these resources to learn more about the part of the process that applies to your situation." />
+    <Headline title="Explore Our Roof Claim Resources" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Use these resources to learn more about the part of the process that applies to your situation.
+    </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {[
         {

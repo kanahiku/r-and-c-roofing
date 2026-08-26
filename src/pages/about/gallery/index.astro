@@ -217,8 +217,11 @@ const areaLinks = [
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline
       title="Before and After"
-      subtitle="Some roofing changes are easier to understand when you can see where the project started and where it finished."
+      classes={{ container: 'mb-4 md:mb-6' }}
     />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Some roofing changes are easier to understand when you can see where the project started and where it finished.
+    </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {beforeAfterProjects.map(({ name, neighborhood, summary }) => (
@@ -257,8 +260,11 @@ const areaLinks = [
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline
       title="Roofing Projects by Area"
-      subtitle="R&C works on properties in communities across its Oahu service area. Explore roofing services and completed projects closer to your property."
+      classes={{ container: 'mb-4 md:mb-6' }}
     />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      R&C works on properties in communities across its Oahu service area. Explore roofing services and completed projects closer to your property.
+    </p>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {areaLinks.map(({ area, href }) => (
