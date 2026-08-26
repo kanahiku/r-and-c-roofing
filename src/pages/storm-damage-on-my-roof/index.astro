@@ -1,0 +1,355 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+
+const metadata = {
+  title: 'Storm Damage on Your Roof? What to Do | R&C Roofing',
+  description:
+    'Think a storm damaged your roof on Oahu? Learn what to check safely, what storm damage can look like, and how R&C Roofing determines whether repair, replacement, or insurance documentation may be needed.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Storm Damage on My Roof. What Should I Do?
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Find Out What the Storm Actually Did to Your Roof
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>After strong wind or heavy rain, roof damage is not always obvious.</p>
+        <p>You may find roofing material in the yard or notice a new ceiling stain. In other cases, the roof may look normal from the ground and you are left wondering whether anything happened at all.</p>
+        <p>R&C Roofing Contractors evaluates storm-damaged roofs within its Oahu service area to determine what was affected and what roofing work, if any, should be considered.</p>
+        <p>If an insurance claim may be involved, R&C can also document physical roof conditions from the contractor side.</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Storm Damage Inspection</a>
+      </div>
+      <p class="mt-4 text-[15px] md:text-[16px] font-medium text-muted">(808) 888-2524</p>
+      <p class="mt-2 text-[13px] md:text-[14px] font-medium text-muted italic">Hawaii Contractor License C-33642</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What to do after a storm — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Should You Do After a Storm?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      You do not need to climb onto the roof or diagnose the damage yourself. Start with what you can safely observe.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+      {[
+        {
+          title: 'Stay Off the Roof',
+          description: 'Wet or damaged roofing can be unsafe. Look from the ground and from inside the property instead.',
+          link: null,
+        },
+        {
+          title: 'Photograph What Changed',
+          description: 'Take photos of roofing material on the ground, visible exterior damage, new ceiling stains, interior water, or anything else that appeared after the storm. Note when you first noticed the problem and what the weather was like at the time.',
+          link: null,
+        },
+        {
+          title: 'Protect the Interior if Water Is Coming In',
+          description: 'Move belongings away from the affected area where it is safe to do so. If water is actively entering the home, start with our My Roof Is Leaking guide.',
+          link: { text: 'My Roof Is Leaking →', href: '/my-roof-is-leaking' },
+        },
+        {
+          title: 'Have the Roof Evaluated',
+          description: 'An inspection can help determine whether the storm created a localized problem, affected several areas of the roof, or did not cause significant roofing damage.',
+          link: { text: 'Have R&C Check the Roof →', href: '/contact' },
+        },
+      ].map(({ title, description, link }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          {link && <a href={link.href} class="mt-3 text-primary font-medium text-[14px] hover:underline">{link.text}</a>}
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What storm damage looks like — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col lg:flex-row gap-8 md:gap-16">
+      <div class="lg:basis-1/2">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+          What Does Storm Damage Look Like?
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
+          <p>Some storm damage is easy to see. Other conditions can be difficult to identify from the driveway.</p>
+          <p>A roof does not have to be leaking for a storm-related condition to exist. At the same time, strong wind does not automatically mean your roof was damaged. An inspection is how you move from suspicion to an actual roofing assessment.</p>
+        </div>
+        <div class="mt-8">
+          <a href="/contact" class="btn-primary">Have R&C Check the Roof</a>
+        </div>
+      </div>
+      <div class="lg:basis-1/2">
+        <p class="text-[14px] md:text-[15px] font-semibold text-heading mb-4 uppercase tracking-wide">R&C may evaluate conditions such as:</p>
+        <ul class="space-y-3">
+          {[
+            'Missing or displaced shingles, tiles, panels, or other roofing material',
+            'Lifted or damaged roofing components',
+            'Damaged flashing around roof details and transitions',
+            'Debris impact',
+            'Damage around roof edges',
+            'New interior water or attic moisture',
+            'Changes in areas that were already showing wear',
+          ].map((item) => (
+            <li class="flex gap-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+              <span class="shrink-0 text-primary mt-0.5">—</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What R&C determines — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-4xl">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+        What Will R&C Determine During the Inspection?
+      </h2>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+        <p>The important question is not simply whether the storm was strong.</p>
+        <p>It is what happened to your roof.</p>
+        <p>R&C evaluates the roofing condition to help determine:</p>
+      </div>
+      <ul class="mt-4 space-y-3 mb-8">
+        {[
+          'Whether there is visible storm-related damage',
+          'Whether the problem is limited to one area or spread across the roof',
+          'Whether the roof also shows longer-term deterioration',
+          'Whether the affected area can reasonably be repaired',
+          'Whether broader replacement should be considered',
+        ].map((item) => (
+          <li class="flex gap-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+            <span class="shrink-0 text-primary mt-0.5">—</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
+        <p>R&C has HAAG Certified inspection expertise through Robert Pilato, certification #201408313.</p>
+        <p>HAAG Certified means a third-party credential in roof damage assessment. It can be especially useful when evaluating physical storm damage alongside normal wear or other roofing conditions.</p>
+      </div>
+      <div class="mt-6">
+        <a href="/roof-inspections/haag-certified-inspection" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Learn About HAAG Certified Roof Inspections →</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Repair or Replace — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Does the Roof Need Repair or Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      Storm damage does not automatically mean you need a new roof. The recommendation should depend on what the inspection finds.
+    </p>
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+      <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
+        <thead>
+          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">Inspection Finding</th>
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">Possible Next Step</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Damage is limited to one roof area', 'Targeted repair may make sense if surrounding roofing remains serviceable.'],
+            ['A specific roofing component was damaged', 'The affected component or area may be repairable.'],
+            ['Several parts of the roof were affected', 'A broader repair or replacement discussion may be appropriate.'],
+            ['The roof already had widespread deterioration before the storm', 'Existing roof condition and new storm damage should be evaluated separately.'],
+            ['No significant storm damage is found', 'Major roofing construction may not be necessary.'],
+            ['Damage is documented and insurance is involved', 'Continue through the carrier\'s claim process with contractor-side roofing information as applicable.'],
+          ].map(([finding, step], i) => (
+            <tr class:list={['border-b border-gray-100 dark:border-slate-800 last:border-b-0', i % 2 === 1 ? 'bg-gray-50/60 dark:bg-slate-800/30' : '']}>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-heading align-top">{finding}</td>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted align-top">{step}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto">
+      R&C does not assume every storm-damaged roof needs replacement.
+    </p>
+    <p class="mt-2 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto">
+      If the roof can reasonably be repaired, that option should be considered first.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mt-8">
+      <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair</a>
+      <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Explore Roof Replacement &amp; New Installation</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Insurance claim — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-4xl">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+        What If You Need to File an Insurance Claim?
+      </h2>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+        <p>Storm damage often overlaps with homeowners insurance, but roofing work and insurance adjusting are different roles.</p>
+        <p>R&C can inspect the roof and document physical roofing conditions. Depending on the project, we can also provide information about the proposed roofing work and contractor pricing. Your insurance carrier determines whether the damage is covered and how much is payable under your policy.</p>
+        <p class="italic text-[14px] md:text-[15px]">R&C Roofing Contractors is not a public adjuster. We do not negotiate insurance settlements, interpret policy coverage, represent policyholders in insurance disputes, or guarantee claim outcomes.</p>
+      </div>
+      <div class="flex flex-wrap gap-4 mt-8">
+        <a href="/insurance-claim-help" class="btn-primary">Insurance Claim Help</a>
+        <a href="/insurance-claim-help/how-the-claim-process-works" class="btn btn-secondary">How the Claim Process Works</a>
+      </div>
+      <p class="mt-4 text-[14px] md:text-[15px] font-medium text-muted">
+        Already received a denial? <a href="/my-insurance-claim-was-denied" class="text-primary hover:underline">My Insurance Claim Was Denied →</a>
+      </p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Testimonial — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-[24px] md:text-[28px] font-medium font-heading leading-[130%] tracking-tight text-heading mb-8">
+        A Homeowner Who Called R&C After Wind Damage
+      </h2>
+      <p class="text-[20px] md:text-[22px] font-medium leading-[160%] text-muted mb-6">
+        "I first called R &amp; C roofing because I had some roofing shingles blown off due to wind damage."
+      </p>
+      <p class="font-semibold text-heading text-[15px]">Ronald C.</p>
+      <p class="text-[13px] text-muted">Customer Review</p>
+    </div>
+    <div class="mt-8 text-center">
+      <a href="/about/reviews" class="btn btn-secondary">Read More Reviews</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Related Problems — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Is Your Roofing Problem Bigger Than the Storm?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      Sometimes a storm is what makes you notice a problem that was already developing. Choose the situation that best matches what is happening now.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {[
+        {
+          title: 'My Roof Is Leaking',
+          description: 'Water is entering the house.',
+          href: '/my-roof-is-leaking',
+        },
+        {
+          title: 'My Roof Is at End of Life',
+          description: 'The storm exposed problems on an older roof.',
+          href: '/my-roof-is-at-end-of-life',
+        },
+        {
+          title: 'My Insurance Claim Was Denied',
+          description: 'Your insurance claim was denied.',
+          href: '/my-insurance-claim-was-denied',
+        },
+        {
+          title: 'Buying or Selling a Home',
+          description: 'The roof issue came up during a property transaction.',
+          href: '/buying-or-selling-a-home',
+        },
+      ].map(({ title, description, href }) => (
+        <a href={href} class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <span class="mt-3 text-primary font-medium text-[14px]">Continue here →</span>
+        </a>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- FAQs — white -->
+  <FAQs
+    title="Frequently Asked Questions About Storm Damage"
+    items={[
+      {
+        title: 'How do I know if wind damaged my roof?',
+        description: 'You may notice missing or displaced roofing material, damaged flashing, debris impact, or a new leak. Other conditions can be harder to identify from the ground. A roof inspection can determine whether there is damage that needs attention.',
+      },
+      {
+        title: 'My roof is not leaking. Could it still be damaged?',
+        description: 'Possibly. Some roofing conditions do not immediately lead to an interior leak. An inspection can determine whether the roof was affected.',
+      },
+      {
+        title: 'Does storm damage mean I need a new roof?',
+        description: 'No. Localized damage may be repairable if the surrounding roofing system remains serviceable.',
+      },
+      {
+        title: 'Should I take photos after a storm?',
+        description: 'Yes, if you can do so safely. Photographs of visible damage, interior water, and other changes can help create a record of what you observed after the weather event.',
+      },
+      {
+        title: 'Can R&C tell me whether insurance will cover the damage?',
+        description: 'No. R&C can document roofing conditions and provide contractor-side project information. Your insurance carrier determines coverage and payment.',
+      },
+      {
+        title: 'Can R&C repair the damage it finds?',
+        description: 'Yes. R&C provides roof repair and roof replacement services. The appropriate roofing scope depends on the inspection findings.',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- P-12 Final CTA — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Think the Storm Damaged Your Roof?
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>You do not have to decide from the driveway whether the roof is fine, repairable, or ready for replacement.</p>
+          <p>Start by finding out what actually happened.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-1 text-[13px] md:text-[14px] italic">Hawaii Contractor License C-33642</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Storm Damage Inspection</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+</Layout>

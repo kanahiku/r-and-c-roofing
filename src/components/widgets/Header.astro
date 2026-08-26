@@ -85,6 +85,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               <li class={links?.length ? 'dropdown' : ''}>
                 {links?.length ? (
                   <>
+                    {href ? (
                     <a
                       href={href}
                       class="text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap"
@@ -95,6 +96,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
                       />
                     </a>
+                    ) : (
+                    <span class="text-white/80 cursor-default px-[8px] py-3 flex items-center whitespace-nowrap select-none">
+                      {text}{' '}
+                      <Icon
+                        name="tabler:chevron-down"
+                        class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
+                      />
+                    </span>
+                    )}
                     <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
                       {links.map(({ text: text2, href: href2, links: links2 }) => (
                         <li class:list={[{ 'relative group/nested': links2?.length }]}>

@@ -118,31 +118,30 @@ export const headerData = {
     },
     {
       text: 'Roof Problems We Solve',
-      href: getPermalink('/roof-problems-we-solve'),
       links: [
         {
           text: 'My Roof Is Leaking',
-          href: getPermalink('/roof-problems-we-solve/my-roof-is-leaking'),
+          href: getPermalink('/my-roof-is-leaking'),
         },
         {
           text: 'Storm Damage on My Roof',
-          href: getPermalink('/roof-problems-we-solve/storm-damage-on-my-roof'),
+          href: getPermalink('/storm-damage-on-my-roof'),
         },
         {
           text: 'My Roof Is at End of Life',
-          href: getPermalink('/roof-problems-we-solve/my-roof-is-at-end-of-life'),
+          href: getPermalink('/my-roof-is-at-end-of-life'),
         },
         {
           text: 'My Insurance Claim Was Denied',
-          href: getPermalink('/roof-problems-we-solve/my-insurance-claim-was-denied'),
+          href: getPermalink('/my-insurance-claim-was-denied'),
         },
         {
           text: 'Buying or Selling a Home',
-          href: getPermalink('/roof-problems-we-solve/buying-or-selling-a-home'),
+          href: getPermalink('/buying-or-selling-a-home'),
         },
         {
           text: 'Preparing for Hurricane Season',
-          href: getPermalink('/roof-problems-we-solve/preparing-for-hurricane-season'),
+          href: getPermalink('/preparing-for-hurricane-season'),
         },
       ],
     },

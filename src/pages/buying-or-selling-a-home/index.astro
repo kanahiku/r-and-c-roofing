@@ -1,0 +1,357 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+const metadata = {
+  title: 'Buying or Selling a Home on Oahu? Check the Roof | R&C Roofing',
+  description:
+    'Buying or selling a home on Oahu? Learn what roof problems to look into before closing and how a roof inspection can clarify repair or replacement needs.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 Hero — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="py-8 md:py-12 max-w-3xl">
+      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
+        Buying or Selling a Home? Do Not Guess About the Roof
+      </h1>
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Know the Roof Condition Before the Transaction Moves Forward
+      </p>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+        <p>A roof can become a major question during a home purchase or sale.</p>
+        <p>Maybe the home inspection flagged a roofing concern. Maybe the roof looks old and no one knows when it was installed. You may have noticed staining, previous repairs, damaged material, or signs that more work could be coming.</p>
+        <p>You do not need to guess whether the roof is fine, needs repair, or is approaching replacement.</p>
+        <p>R&C Roofing Contractors can evaluate the roof and help clarify its physical condition before you make the next decision.</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="/contact" class="btn-primary">Schedule a Roof Inspection</a>
+      </div>
+      <p class="mt-4 text-[15px] md:text-[16px] font-medium text-muted">(808) 888-2524</p>
+      <p class="mt-2 text-[13px] md:text-[14px] font-medium text-muted italic">Hawaii Contractor License C-33642</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Buying or Selling — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Are You Buying or Selling?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      The roofing questions are different depending on which side of the transaction you are on.
+    </p>
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+      <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
+        <thead>
+          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">If You Are Buying</th>
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">If You Are Selling</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['You want to understand the roof condition before taking ownership.', 'You want to understand potential roofing issues before they become a surprise during the transaction.'],
+            ['You need to know whether a visible problem appears localized or broader.', 'You may want to address a repair before listing or understand what a buyer\'s inspection could uncover.'],
+            ['You may need contractor pricing if roofing work is recommended.', 'You may need contractor pricing if you decide to complete roofing work before closing.'],
+            ['You want to know whether repair, replacement, or monitoring may be appropriate.', 'You want clear information about the roof so you can make decisions before the transaction advances.'],
+          ].map(([buying, selling], i) => (
+            <tr class:list={['border-b border-gray-100 dark:border-slate-800 last:border-b-0', i % 2 === 1 ? 'bg-gray-50/60 dark:bg-slate-800/30' : '']}>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted align-top">{buying}</td>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted align-top">{selling}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto">
+      If you are purchasing a property, R&C's Pre-Purchase Roof Inspection is the most direct next step.
+    </p>
+    <div class="mt-6 text-center">
+      <a href="/roof-inspections/pre-purchase-roof-inspection" class="btn-primary">Explore Pre-Purchase Roof Inspections</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Roofing questions before closing — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col lg:flex-row gap-8 md:gap-16">
+      <div class="lg:basis-1/2">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+          What Roofing Questions Should Be Answered Before Closing?
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
+          <p>A roof does not have to be actively leaking to deserve a closer look during a real estate transaction.</p>
+          <p>A roof inspection gives you roofing-specific information that can be considered alongside the rest of the property inspection and transaction documents.</p>
+        </div>
+      </div>
+      <div class="lg:basis-1/2">
+        <p class="text-[14px] md:text-[15px] font-semibold text-heading mb-4 uppercase tracking-wide">The useful questions are practical:</p>
+        <ul class="space-y-3">
+          {[
+            'Is there visible roofing damage?',
+            'Are there signs of previous or recurring leaks?',
+            'Does the roof show localized wear or broader deterioration?',
+            'Are flashing, penetrations, valleys, or transitions showing concerns?',
+            'Does the surrounding roofing material remain serviceable?',
+            'Is repair appropriate, or should replacement be considered?',
+            'If work is needed, what roofing scope should be evaluated?',
+          ].map((item) => (
+            <li class="flex gap-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+              <span class="shrink-0 text-primary mt-0.5">—</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Home inspection flagged — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-4xl">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+        What If the Home Inspection Already Flagged the Roof?
+      </h2>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+        <p>A general home inspection may identify a roofing concern and recommend further evaluation by a roofing contractor.</p>
+        <p>That does not automatically mean the roof needs replacement.</p>
+        <p>R&C can take a closer look at the roofing condition and determine whether the concern appears localized or part of a broader issue.</p>
+        <p>For example, an isolated flashing problem may point toward repair. Multiple leaks or widespread deterioration may lead to a different conversation.</p>
+        <p>The goal is to understand the roof before making assumptions about the scope of work.</p>
+      </div>
+      <div class="mt-8">
+        <a href="/roof-inspections/pre-purchase-roof-inspection" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Pre-Purchase Roof Inspection →</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What if R&C finds a problem — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Happens If R&C Finds a Roofing Problem?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      The next step should depend on what is actually found.
+    </p>
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+      <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
+        <thead>
+          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">Roof Finding</th>
+            <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">What May Make Sense Next</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['No significant roofing problem is identified', 'Major roofing work may not be necessary.'],
+            ['A localized problem is found', 'Roof repair may be appropriate if the surrounding roof remains serviceable.'],
+            ['Several roofing areas show deterioration', 'A broader evaluation may be needed before deciding whether continued repair makes sense.'],
+            ['The roof shows widespread deterioration', 'Roof replacement may need to be considered.'],
+            ['The roof is older but still serviceable', 'Monitoring may be appropriate rather than replacing it solely because of age.'],
+            ['Signs point to recent storm-related damage', 'A Storm & Wind Damage Roof Inspection may be the better next step.'],
+          ].map(([finding, action], i) => (
+            <tr class:list={['border-b border-gray-100 dark:border-slate-800 last:border-b-0', i % 2 === 1 ? 'bg-gray-50/60 dark:bg-slate-800/30' : '']}>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-heading align-top">{finding}</td>
+              <td class="px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted align-top">{action}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto">
+      R&C does not assume that every roof concern discovered during a real estate transaction requires replacement.
+    </p>
+    <p class="mt-2 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto">
+      The recommendation should follow the physical condition of the roof.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mt-8">
+      <a href="/services/roof-repair" class="btn-primary">Roof Repair</a>
+      <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Roof Replacement &amp; New Installation</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Buying a Home — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-4xl">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+        Buying a Home? Look Beyond the Age of the Roof
+      </h2>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+        <p>The age of a roof can be useful information, but it does not tell you everything about its current condition.</p>
+        <p>Roofing material, installation history, previous repairs, weather exposure, and maintenance can all affect how a roof performs.</p>
+        <p>On Oahu, sun exposure, wind-driven rain, and coastal conditions can also affect roofing components differently from one property to another.</p>
+        <p>That is why R&C evaluates the roof itself rather than relying only on a generic expected lifespan.</p>
+        <p>If you are purchasing the property, the Pre-Purchase Roof Inspection page explains the inspection in more detail.</p>
+      </div>
+      <div class="mt-8">
+        <a href="/roof-inspections/pre-purchase-roof-inspection" class="btn-primary">View Pre-Purchase Roof Inspection</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Selling a Home — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-4xl">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
+        Selling a Home? Find Out About Roof Problems Before They Become Closing Problems
+      </h2>
+      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+        <p>If you already suspect there is a roofing issue, finding out what it is before the transaction progresses gives you more information to work with.</p>
+        <p>A localized repair may be relatively straightforward.</p>
+        <p>A broader roofing problem may require more planning.</p>
+        <p>Either way, knowing the roof condition lets you decide how you want to address it rather than waiting for someone else to discover it later.</p>
+        <p>R&C can evaluate the roofing condition and provide project-specific roofing information when work is recommended.</p>
+      </div>
+      <div class="mt-8">
+        <a href="/roof-inspections/pre-listing-sellers-roof-inspection" class="btn-primary">View Pre-Listing Roof Inspection</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Related Problems — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Does Another Roofing Problem Better Match Your Situation?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
+      What is happening with the roof may match one of these situations more closely.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {[
+        {
+          title: 'My Roof Is Leaking',
+          description: 'Water is entering the property.',
+          href: '/my-roof-is-leaking',
+        },
+        {
+          title: 'Storm Damage on My Roof',
+          description: 'The roof appears to have changed after strong wind or severe weather.',
+          href: '/storm-damage-on-my-roof',
+        },
+        {
+          title: 'My Roof Is at End of Life',
+          description: 'The roof is older and you are unsure whether another repair makes sense.',
+          href: '/my-roof-is-at-end-of-life',
+        },
+        {
+          title: 'My Insurance Claim Was Denied',
+          description: 'An insurance claim involving the roof was denied.',
+          href: '/my-insurance-claim-was-denied',
+        },
+      ].map(({ title, description, href }) => (
+        <a href={href} class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <span class="mt-3 text-primary font-medium text-[14px]">Continue here →</span>
+        </a>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- FAQs — white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Frequently Asked Questions About Roofs When Buying or Selling a Home" classes={{ container: 'mb-8 md:mb-10' }} />
+    <div class="max-w-3xl mx-auto space-y-0 divide-y divide-gray-200 dark:divide-slate-700">
+      {[
+        {
+          q: 'Should I get a separate roof inspection when buying a home?',
+          a: 'If the roof condition is uncertain, the general inspection identifies a concern, or you want roofing-specific information before purchasing, a dedicated roof inspection may be useful. R&C offers Pre-Purchase Roof Inspections for this purpose.',
+          link: { text: 'Pre-Purchase Roof Inspections →', href: '/roof-inspections/pre-purchase-roof-inspection' },
+        },
+        {
+          q: 'Does an old roof automatically need to be replaced before a home is sold?',
+          a: 'No. Age alone does not determine whether a roof requires replacement. The physical condition of the roofing system matters.',
+          link: null,
+        },
+        {
+          q: 'What if the inspection finds a roof leak?',
+          a: 'The source and extent of the leak should be evaluated. A localized leak may be repairable. Multiple problem areas may point to a broader roofing condition.',
+          link: { text: 'My Roof Is Leaking →', href: '/my-roof-is-leaking' },
+        },
+        {
+          q: 'Can R&C provide pricing if roofing work is needed?',
+          a: 'R&C can provide project-specific contractor pricing for roofing work after the condition and proposed scope have been evaluated.',
+          link: null,
+        },
+        {
+          q: 'Can a buyer or seller use the roof findings during the transaction?',
+          a: 'The findings provide information about the physical condition of the roof and roofing work that may be needed. How that information is used in the transaction should be discussed with the buyer\'s or seller\'s real estate and other appropriate professionals.',
+          link: null,
+        },
+        {
+          q: 'Does R&C determine the value of the property?',
+          a: 'No. R&C evaluates roofing conditions and roofing work. We do not perform real estate appraisals or determine a property\'s market value.',
+          link: null,
+        },
+        {
+          q: 'What if storm damage is discovered during the inspection?',
+          a: 'If the roof condition appears related to a recent weather event, a Storm & Wind Damage Roof Inspection may be appropriate. If insurance becomes involved, R&C remains on the contractor side and does not determine coverage or act as a public adjuster.',
+          link: { text: 'Storm & Wind Damage Roof Inspection →', href: '/roof-inspections/storm-and-wind-damage-inspection' },
+        },
+      ].map(({ q, a, link }) => (
+        <details class="group py-5 first:pt-0 last:pb-0">
+          <summary class="flex cursor-pointer items-start justify-between gap-4 list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[16px] md:text-[17px] font-semibold font-heading leading-[140%] text-heading">{q}</span>
+            <span class="shrink-0 mt-0.5 text-primary text-xl font-light leading-none transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <div class="mt-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-2">
+            <p>{a}</p>
+            {link && <a href={link.href} class="text-primary font-medium hover:underline">{link.text}</a>}
+          </div>
+        </details>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-12 Final CTA — grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Get the Roof Facts Before You Move Forward
+        </h2>
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
+          <p>Whether you are buying or selling, you do not want to make a roofing decision based on an assumption.</p>
+          <p>Find out what condition the roof is in and what roofing work, if any, should be considered.</p>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-1 text-[13px] md:text-[14px] italic">Hawaii Contractor License C-33642</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Inspection</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+</Layout>
