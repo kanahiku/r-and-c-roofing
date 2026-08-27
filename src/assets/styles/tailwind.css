@@ -69,7 +69,7 @@
 }
 
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-md border-gray-400 border bg-transparent font-heading font-medium text-center text-[14px] md:text-[15px] text-page leading-[21px] transition py-2.5 px-5 md:px-6 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+  @apply inline-flex items-center justify-center rounded-md border-gray-400 border bg-transparent font-heading font-medium text-center text-[14px] md:text-[15px] text-page leading-[21px] transition py-2.5 px-5 md:px-6 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 dark:text-slate-300 dark:border-slate-500 cursor-pointer;
 }
 
 @utility btn-primary {
@@ -77,7 +77,7 @@
 }
 
 @utility btn-secondary {
-  @apply btn border-gray-900 text-gray-900 bg-transparent hover:bg-accent/10 hover:border-gray-900 hover:text-gray-900 dark:border-gray-100 dark:text-gray-100 dark:hover:bg-accent/10 dark:hover:border-gray-100 dark:hover:text-white;
+  @apply btn border-gray-900 text-gray-900 bg-transparent hover:bg-accent/30 dark:border-gray-100 dark:text-gray-100 dark:hover:bg-accent/30;
 }
 
 @utility btn-tertiary {
@@ -85,7 +85,7 @@
 }
 
 @utility tag-pill {
-  @apply inline-flex items-center rounded-full bg-accent/20 border border-accent px-3 py-1 font-heading font-medium text-[13px] md:text-[14px] leading-[21px] text-black dark:bg-accent/15 dark:border-accent dark:text-black;
+  @apply inline-flex items-center rounded-full bg-accent/20 border border-accent px-2.5 py-0.5 font-heading font-medium text-[11px] md:text-[12px] leading-[18px] text-black dark:bg-accent/15 dark:border-accent dark:text-black;
 }
 
 #header.scroll > div:first-child {
@@ -145,6 +145,14 @@ nav > ul > li > a.aw-link-active {
 }
 [data-aw-toggle-menu].expanded g > path:last-child {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
+}
+
+@utility gold-bar {
+  @apply block w-12 h-0.75 bg-accent rounded-full mt-3;
+}
+
+@utility card-hover {
+  @apply transition-all duration-200 ease-in-out hover:-translate-y-1 hover:border-accent hover:shadow-md;
 }
 
 .dd *:first-child {

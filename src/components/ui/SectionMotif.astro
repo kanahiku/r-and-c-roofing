@@ -1,0 +1,40 @@
+---
+interface Props {
+  bg?: 'grey' | 'white' | 'navy' | 'none';
+  pattern?: 'simple' | 'fancy-two' | 'roof' | 'none';
+  patternColor?: 'accent' | 'muted' | 'dark' | 'white' | 'heading';
+  patternOpacity?: number;
+  class?: string;
+}
+
+import RoofPattern from '~/components/ui/RoofPattern.astro';
+
+const {
+  bg = 'grey',
+  pattern = 'simple',
+  patternColor = 'muted',
+  patternOpacity = 0.03,
+  class: className = '',
+} = Astro.props;
+
+const bgClasses: Record<string, string> = {
+  grey: 'bg-gray-50 dark:bg-slate-900/30',
+  white: 'bg-white dark:bg-transparent',
+  navy: 'bg-[#082244]',
+  none: '',
+};
+---
+
+<div class:list={['absolute inset-0', bgClasses[bg], className]} aria-hidden="true"></div>
+{pattern === 'roof' && (
+  <RoofPattern color={patternColor} opacity={patternOpacity} />
+)}
+{pattern === 'simple' && (
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style={`opacity: ${patternOpacity};`}
+    aria-hidden="true"
+  >
+    <slot name="pattern-svg" />
+  </div>
+)}

@@ -2,17 +2,19 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero2 from '~/components/widgets/Hero2.astro';
-import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Timeline from '~/components/ui/Timeline.astro';
 import Image from '~/components/common/Image.astro';
+import HeroAccent from '~/components/ui/HeroAccent.astro';
+import RoofPattern from '~/components/ui/RoofPattern.astro';
+
+import simplePattern from '~/assets/images/patterns/simple.svg';
+import fancyTwoPattern from '~/assets/images/patterns/fancy-two-pattern.svg';
 
 const metadata = {
   title: "R&C Roofing Contractors | Hawaii's Roof Inspection Specialists",
@@ -60,49 +62,76 @@ const metadata = {
         </span>
       </div>
     </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
   </Hero2>
 
   <!-- Why Start With a Roof Inspection? -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    {/* Heading left + CTA right */}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        Why Start With a Roof Inspection?
-      </h2>
-      <a href="/roof-inspections" class="btn-primary shrink-0">View Roof Inspection Services</a>
-    </div>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading text-center mb-8 md:mb-12">
+      Why Start With a Roof Inspection?
+    </h2>
 
-    {/* Description paragraphs */}
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 mb-8 md:mb-12">
-      <p>Some roofing problems can be repaired. Others point to more extensive deterioration. Starting with an inspection gives you a clearer picture of the roof before you commit to the work.</p>
-      <p class="mt-4">R&C takes an inspection-first approach. We evaluate the roofing system, document relevant findings, and explain what the condition of the roof means for your property.</p>
-    </div>
-
-    {/* 3-column items */}
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'HAAG Certified Roof Damage Assessment',
-          description: 'Robert Pilato is a HAAG Certified Inspector, Certification #201408313. HAAG certification includes specialized training and testing in roof damage assessment.',
-        },
-        {
-          title: 'Roof Documentation',
-          description: 'When documentation is needed, R&C can record visible roof conditions and damage for repair planning or an insurance claim.',
-        },
-        {
-          title: 'One Contractor From Inspection Through Roofing Work',
-          description: 'R&C is a licensed Hawaii roofing contractor. If an inspection identifies work that needs to be completed, our team can handle the repair or replacement.',
-        },
-      ].map(({ title: cardTitle, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{cardTitle}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+    {/* Two-column: text + CTA (left) and compact vertical cards (right) */}
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+      <div class="md:col-span-6 flex flex-col gap-6 md:self-center">
+        <div class="w-full h-56 md:h-64 bg-gray-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-gray-300 dark:text-slate-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
         </div>
-      ))}
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          <p>
+            Some roofing problems can be repaired. Others point to more extensive deterioration. Starting with an inspection gives you a clearer picture of the roof before you commit to the work.
+          </p>
+          <p class="mt-4">
+            R&C takes an inspection-first approach. We evaluate the roofing system, document relevant findings, and explain what the condition of the roof means for your property.
+          </p>
+        </div>
+
+        <div>
+          <a href="/roof-inspections" class="btn-primary">View Roof Inspection Services</a>
+        </div>
+      </div>
+
+      <div class="md:col-span-6">
+        <div class="grid grid-cols-1 gap-3 md:gap-4">
+          {[
+            {
+              title: 'HAAG Certified Roof Damage Assessment',
+              description:
+                'Robert Pilato is a HAAG Certified Inspector, Certification #201408313. HAAG certification includes specialized training and testing in roof damage assessment.',
+            },
+            {
+              title: 'Roof Documentation',
+              description:
+                'When documentation is needed, R&C can record visible roof conditions and damage for repair planning or an insurance claim.',
+            },
+            {
+              title: 'One Contractor From Inspection Through Roofing Work',
+              description:
+                'R&C is a licensed Hawaii roofing contractor. If an inspection identifies work that needs to be completed, our team can handle the repair or replacement.',
+            },
+          ].map(({ title: cardTitle, description }) => (
+            <div class="rounded-lg bg-[#222222] p-4 md:p-5 flex flex-col shadow-none outline-none intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-2 text-white">{cardTitle}</h3>
+              <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
@@ -110,39 +139,52 @@ const metadata = {
   <Features2
     title="How Can We Help You Today?"
     subtitle="Choose the service that best matches your roofing needs."
+    isDark={true}
+    cardClass="border border-accent/60 bg-[#222]"
     items={[
       {
         title: 'Roof Inspections',
         description: 'Understand the condition of your roof with a HAAG Certified inspection and documented findings.',
-        callToAction: { variant: 'link', text: 'View Roof Inspections →', href: '/roof-inspections', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'View Roof Inspections →', href: '/roof-inspections', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
       {
         title: 'Roof Repair',
         description: 'Address leaks, damaged flashing, missing roofing materials, and other localized roof problems.',
-        callToAction: { variant: 'link', text: 'View Roof Repair →', href: '/services/roof-repair', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'View Roof Repair →', href: '/services/roof-repair', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
       {
         title: 'Insurance Claim Help',
         description: 'Get roof damage documentation and contractor-side support during the insurance repair process.',
-        callToAction: { variant: 'link', text: 'Explore Insurance Claim Help →', href: '/insurance-claim-help', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'Explore Insurance Claim Help →', href: '/insurance-claim-help', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
       {
         title: 'Roof Replacement & Installation',
         description: 'Replace an aging or extensively damaged roof with a system selected for your property and local conditions.',
-        callToAction: { variant: 'link', text: 'View Roof Replacement →', href: '/services/roof-replacement-and-new-installation', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'View Roof Replacement →', href: '/services/roof-replacement-and-new-installation', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
       {
         title: 'Commercial Roofing',
         description: 'Roofing services for commercial properties and the professionals responsible for managing roofing projects.',
-        callToAction: { variant: 'link', text: 'View Commercial Roofing →', href: '/services/commercial-roofing', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'View Commercial Roofing →', href: '/services/commercial-roofing', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
       {
         title: 'Gutter Installation',
         description: 'Install gutter systems that help manage rainfall and direct water away from your property.',
-        callToAction: { variant: 'link', text: 'View Gutter Services →', href: '/services/gutter-installation-and-repair', class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline' },
+        callToAction: { variant: 'link', text: 'View Gutter Services →', href: '/services/gutter-installation-and-repair', class: 'text-accent font-medium text-[14px] md:text-[15px] hover:underline' },
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </Features2>
 
   <!-- Oahu Roofing Conditions -->
   <Content
@@ -176,7 +218,11 @@ const metadata = {
 
   <!-- Why Property Owners Choose R&C -->
   <WidgetWrapper id="why-rc" containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Property Owners Choose R&C Roofing" />
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-0">
+        Why Property Owners Choose R&C Roofing
+      </h2>
+    </div>
 
     {/* Row 1: 3 equal cards */}
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
@@ -194,9 +240,9 @@ const metadata = {
           description: 'The R&C team brings more than 50 years of combined roofing experience to projects in Hawaii.',
         },
       ].map(({ title: cardTitle, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{cardTitle}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{cardTitle}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
@@ -213,31 +259,33 @@ const metadata = {
           description: 'R&C Roofing Contractors is a member of the Building Industry Association of Hawaii.',
         },
       ].map(({ title: cardTitle, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{cardTitle}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{cardTitle}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
   <!-- Insurance Claims Process -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        Roof Damage and Insurance Claims
-      </h2>
+      <div>
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
+          Roof Damage and Insurance Claims
+        </h2>
+      </div>
       <a href="/insurance-claim-help" class="btn-primary shrink-0">Learn About Insurance Claim Help</a>
     </div>
 
     <div class="flex flex-col md:flex-row gap-10 md:gap-16">
       {/* Left: description + image */}
       <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
           <p>If you believe your roof has been damaged by a storm or another covered event, documenting the condition of the roof can be an important part of the insurance process.</p>
           <p class="mt-4">R&C can inspect the roof and document relevant damage. We can also provide contractor-side information related to the roofing scope.</p>
         </div>
@@ -252,7 +300,7 @@ const metadata = {
           format="webp"
           layout="constrained"
         />
-        <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted dark:text-slate-500 mt-4">
+        <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/50 mt-4">
           R&amp;C Roofing Contractors is not a public adjuster. We do not adjust claims, negotiate insurance settlements, represent policyholders in claim negotiations, or guarantee claim outcomes.
         </p>
       </div>
@@ -260,6 +308,7 @@ const metadata = {
       {/* Right: timeline */}
       <div class="md:basis-1/2">
         <Timeline
+          classes={{ icon: 'text-accent border-accent bg-accent/10', title: 'text-white', description: 'text-white/60' }}
           items={[
             {
               title: 'Inspect the Roof',
@@ -292,16 +341,27 @@ const metadata = {
     </div>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
   <!-- Recent Projects -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline
-      title="Recent Roofing Projects on Oahu"
-      subtitle="See examples of roofing work completed by R&C for properties on Oahu."
-    />
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-3">
+        Recent Roofing Projects on Oahu
+      </h2>
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted max-w-3xl mx-auto">
+        See examples of roofing work completed by R&C for properties on Oahu.
+      </p>
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {[
@@ -309,7 +369,7 @@ const metadata = {
         { title: 'Project 2', description: 'Roofing project details coming soon.' },
         { title: 'Project 3', description: 'Roofing project details coming soon.' },
       ].map(({ title: cardTitle, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-4 card-hover intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -326,7 +386,7 @@ const metadata = {
     </div>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
@@ -334,6 +394,8 @@ const metadata = {
   <Testimonials
     title="What R&C Customers Say"
     subtitle="See what customers have shared about their experience working with R&C Roofing Contractors."
+    isDark={false}
+    cardClass="border border-accent/60 bg-[#222]"
     testimonials={[
       {
         testimonial: 'Review content coming soon. This section will display verified Google/Yelp reviews.',
@@ -355,15 +417,20 @@ const metadata = {
       text: 'Read More Reviews',
       href: '/about/reviews',
     }}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+    </Fragment>
+  </Testimonials>
 
   <!-- Service Areas -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline
-      title="Roofing Services Across Oahu"
-      classes={{ container: 'mb-4 md:mb-6' }}
-    />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <div class="text-center mb-4 md:mb-6">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-3">
+        Roofing Services Across Oahu
+      </h2>
+    </div>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
       R&C Roofing Contractors is based in Honolulu and serves properties within its Oahu service area.
     </p>
 
@@ -374,19 +441,26 @@ const metadata = {
         { title: 'Central Oahu', description: 'Aiea, Pearl City, Mililani, Waipahu' },
         { title: 'Leeward Oahu', description: 'Kapolei, Ewa Beach' },
       ].map(({ title: cardTitle, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-1">{cardTitle}</h3>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-1 text-white">{cardTitle}</h3>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
 
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/who-we-serve" class="btn btn-secondary">Explore Areas We Serve</a>
+      <a href="/who-we-serve" class="inline-flex items-center justify-center px-6 py-3 rounded-md border border-accent text-accent font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Areas We Serve</a>
     </div>
 
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -429,28 +503,39 @@ const metadata = {
 
   <!-- Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      {/* Centered heading + subtitle */}
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Find Out What Is Happening With Your Roof
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          If you have noticed a leak, storm damage, or another change in your roof, start with an inspection.<br />
-          R&C Roofing Contractors can evaluate the roof and explain what the findings mean for your property.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-
-      {/* Contact info left · CTA right */}
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      
+      {/* Content */}
+      <div class="relative z-10">
+        {/* Centered heading + subtitle */}
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Find Out What Is Happening With Your Roof
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If you have noticed a leak, storm damage, or another change in your roof, start with an inspection.<br />
+            R&C Roofing Contractors can evaluate the roof and explain what the findings mean for your property.
+          </p>
         </div>
-        <div class="shrink-0">
-          <a href="/contact" class="btn-primary">Schedule a Roof Inspection</a>
+
+        {/* Contact info left · CTA right */}
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+            <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+          </div>
+          <div class="shrink-0">
+            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200">Schedule a Roof Inspection</a>
+          </div>
         </div>
       </div>
     </div>

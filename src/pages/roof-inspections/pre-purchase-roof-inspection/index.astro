@@ -2,7 +2,10 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Pre-Purchase Roof Inspections Oahu | R&C Roofing',
@@ -13,28 +16,33 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        Pre-Purchase Roof Inspections on Oahu
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Understand the Roof Before You Close
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>A roof can represent a significant future expense, so it helps to understand its condition before a real estate transaction moves forward.</p>
-        <p>R&amp;C Roofing Contractors provides pre-purchase roof inspections for Oahu properties. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.</p>
-        <p>We evaluate accessible roofing areas, document relevant findings, and explain whether visible conditions may require maintenance, repair, or further evaluation.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Schedule a Pre-Purchase Roof Inspection</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
 
-  <!-- Why separate inspection — grey -->
+  <!-- P-01 Hero — white + motif -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Schedule a Pre-Purchase Roof Inspection', href: '/contact' }]}
+    image={{ src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=2070&q=80', alt: 'Pre-purchase roof inspection on Oahu' }}
+  >
+    <Fragment slot="title">Pre-Purchase Roof<br />Inspections on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Understand the Roof Before You Close
+      </span>
+      A roof can represent a significant future expense, so it helps to understand its condition before a real estate transaction moves forward.
+      <br /><br />
+      R&C Roofing Contractors provides pre-purchase roof inspections for Oahu properties. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </Hero2>
+
+  <!-- Why Separate Inspection — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Why Get a Separate Roof Inspection Before Buying?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-4 max-w-3xl">
@@ -58,21 +66,23 @@ const metadata = {
       ))}
     </ul>
     <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic max-w-3xl">
-      R&amp;C is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that should be considered, our team can explain the potential scope.
+      R&C is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that should be considered, our team can explain the potential scope.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What we evaluate — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What We Evaluate During a Pre-Purchase Roof Inspection" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3 max-w-3xl mx-auto text-center">
+  <!-- What We Evaluate — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
+      What We Evaluate During a Pre-Purchase Roof Inspection
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
       The inspection scope depends on the property, roofing system, accessibility, and visible conditions.
     </p>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-3xl mx-auto text-center">
-      Where accessible, R&amp;C may evaluate:
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Where accessible, R&C may evaluate:
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
       {[
@@ -102,18 +112,25 @@ const metadata = {
             'When interior access is appropriate, visible signs of moisture or previous water intrusion may help provide additional context about the roof.',
         },
       ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What findings can tell you — grey -->
+  <!-- What Findings Tell You — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="What the Inspection Findings Can Tell You" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -124,7 +141,7 @@ const metadata = {
         {
           title: 'For Buyers',
           description:
-            'Inspection findings can help you understand whether the roof appears to need immediate attention or whether there are conditions you should plan for after purchasing the property. If roofing work is recommended, R&amp;C can provide contractor-side information about the proposed scope.',
+            'Inspection findings can help you understand whether the roof appears to need immediate attention or whether there are conditions you should plan for after purchasing the property. If roofing work is recommended, R&C can provide contractor-side information about the proposed scope.',
         },
         {
           title: 'For Sellers',
@@ -134,11 +151,11 @@ const metadata = {
         {
           title: 'For Real Estate Professionals',
           description:
-            'When a client needs a closer look at the roof, R&amp;C can provide a roofing-specific inspection and explain the findings in practical terms.',
+            'When a client needs a closer look at the roof, R&C can provide a roofing-specific inspection and explain the findings in practical terms.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
       ))}
@@ -147,11 +164,11 @@ const metadata = {
       <a href="/contact" class="btn-primary">Schedule a Pre-Purchase Inspection</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Oahu conditions — white -->
+  <!-- Oahu Conditions — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Oahu Conditions Matter When Evaluating a Roof
@@ -159,17 +176,17 @@ const metadata = {
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
       <p>Two roofs of a similar age can show very different wear depending on where they are located.</p>
       <p>A coastal property may have greater exposure to salt air. A home in a wetter area may show different moisture-related conditions. Strong sun exposure can also affect roofing materials and exposed components over time.</p>
-      <p>R&amp;C considers the property location and visible roof conditions as part of the inspection rather than relying on roof age alone.</p>
+      <p>R&C considers the property location and visible roof conditions as part of the inspection rather than relying on roof age alone.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Process — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- Process — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         What Happens During a Pre-Purchase Roof Inspection?
       </h2>
       <a href="/contact" class="btn-primary shrink-0">Schedule a Pre-Purchase Inspection</a>
@@ -192,7 +209,7 @@ const metadata = {
           step: '3',
           title: 'We Document Relevant Findings',
           description:
-            'Photos and notes can help provide a clearer record of the roof’s condition at the time of the inspection.',
+            "Photos and notes can help provide a clearer record of the roof's condition at the time of the inspection.",
         },
         {
           step: '4',
@@ -202,43 +219,50 @@ const metadata = {
         },
       ].map(({ step, title, description }) => (
         <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[15px] text-black mt-0.5">
             {step}
           </div>
           <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-white">{title}</h3>
+            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
           </div>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- HAAG note — white -->
+  <!-- HAAG Note — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="HAAG Certified Roof Damage Assessment" />
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 max-w-4xl">
       <p>Specialized damage-assessment training can add helpful context when evaluating visible roofing damage and deterioration.</p>
       <p>Robert Pilato is a HAAG Certified Inspector, Certification #201408313.</p>
-      <p>HAAG certification includes specialized education and testing in roof damage assessment. This gives R&amp;C additional training when evaluating visible roofing damage and deterioration.</p>
-      <p>That inspection expertise is paired with R&amp;C’s work as a licensed Hawaii roofing contractor.</p>
+      <p>HAAG certification includes specialized education and testing in roof damage assessment. This gives R&C additional training when evaluating visible roofing damage and deterioration.</p>
+      <p>That inspection expertise is paired with R&C's work as a licensed Hawaii roofing contractor.</p>
     </div>
     <div class="mt-8">
-      <a href="/roof-inspections/haag-certified-inspection" class="btn btn-secondary">Learn About HAAG Certified Roof Inspections</a>
+      <a href="/roof-inspections/haag-certified-inspection" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Learn About HAAG Certified Roof Inspections</a>
     </div>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore other inspections — grey -->
+  <!-- Explore Other Inspections — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      A real estate transaction is one reason to take a closer look at a roof. R&amp;C also provides inspections for other property needs.
+      A real estate transaction is one reason to take a closer look at a roof. R&C also provides inspections for other property needs.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {[
@@ -261,22 +285,22 @@ const metadata = {
           linkText: 'View Maintenance Inspections',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
         </div>
       ))}
     </div>
     <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="btn btn-secondary">View All Roof Inspection Services</a>
+      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- FAQs — white -->
+  <!-- FAQs — White -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -293,7 +317,7 @@ const metadata = {
       {
         title: 'Can R&C tell me how many years the roof has left?',
         description:
-          'Roof condition cannot always be reduced to an exact remaining number of years. R&amp;C can evaluate visible deterioration and explain whether the current condition suggests maintenance, repair, or replacement should be considered.',
+          'Roof condition cannot always be reduced to an exact remaining number of years. R&C can evaluate visible deterioration and explain whether the current condition suggests maintenance, repair, or replacement should be considered.',
       },
       {
         title: 'Can the inspection findings be used during negotiations?',
@@ -313,7 +337,7 @@ const metadata = {
       {
         title: 'Can R&C complete repairs after the inspection?',
         description:
-          'Yes. R&amp;C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that needs to be considered, our team can provide the appropriate roofing services.',
+          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that needs to be considered, our team can provide the appropriate roofing services.',
       },
     ]}
   >
@@ -322,31 +346,36 @@ const metadata = {
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — grey -->
+  <!-- P-12 Final CTA — Yellow -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Know More About the Roof Before You Move Forward
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>A pre-purchase roof inspection can give you a clearer understanding of the roofing system before your real estate transaction moves ahead.</p>
-          <p>R&amp;C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what those findings may mean for the property.</p>
-        </div>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Know More About the Roof Before You Move Forward
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            A pre-purchase roof inspection can give you a clearer understanding of the roofing system before your real estate transaction moves ahead.<br />
+            R&C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what those findings may mean for the property.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Schedule a Pre-Purchase Roof Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Pre-Purchase Roof Inspection</a>
+        </div>
       </div>
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
-</Layout>
 
+</Layout>

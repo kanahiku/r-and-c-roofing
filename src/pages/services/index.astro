@@ -4,6 +4,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Roofing Services in Hawaii | Oahu Contractor | R&C Roofing',
@@ -15,7 +16,7 @@ const metadata = {
 
 <Layout metadata={metadata}>
 
-  <!-- P-01 · Hero -->
+  <!-- P-01 · Hero (White + motif) -->
   <Hero2
     actions={[{ variant: 'primary', text: 'Book Your Diagnostic Inspection', href: '/contact' }]}
     image={{
@@ -34,9 +35,18 @@ const metadata = {
       <br /><br />
       Our business model prioritizes forensic accuracy. Every repair, replacement, and commercial project we undertake is guided by a HAAG Certified Inspection. We pinpoint the exact cause of your roof failure before we ever recommend a physical solution. This ensures you only pay for the exact scope of work your property actually requires.
     </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
   </Hero2>
 
-  <!-- P-05 style · Core Services Grid (grey bg) -->
+  <!-- P-05 style · Core Services Grid (Grey #FAFAFA — black cards) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Our Core Roofing Services" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -87,24 +97,26 @@ const metadata = {
           href: '/services/roofing-materials',
         },
       ].map(({ title, description, href }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
-          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 flex-1">{description}</p>
+          <a href={href} class="mt-4 text-accent font-medium text-[14px] md:text-[15px] hover:underline">
             Learn More →
           </a>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-02 · Why Choose (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Choose R&C Roofing Contractors?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Why Choose R&C · Black section -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
+      Why Choose R&C Roofing Contractors?
+    </h2>
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       Hawaii roofs age differently than mainland roofs. You need a contractor who understands the specific environmental threats on Oahu.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
@@ -130,17 +142,24 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/70">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · FAQs (grey bg) -->
+  <!-- P-10 · FAQs (White bg) -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -172,34 +191,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </FAQs>
 
-  <!-- P-12 · Final CTA -->
+  <!-- P-12 · Final CTA (Yellow) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Start with the Facts
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Do not sign a construction contract without a documented structural assessment.<br />
-          Contact us today to schedule your initial evaluation.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
-      >
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">
-            After-hours roofing concern? Use the online chat to contact the team.
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Start with the Facts
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Do not sign a construction contract without a documented structural assessment.<br />
+            Contact us today to schedule your initial evaluation.
           </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Book Your Diagnostic Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Book Your Diagnostic Inspection</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

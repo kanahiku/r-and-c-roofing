@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Stone-Coated Steel Roofing Hawaii | R&C Roofing',
@@ -35,9 +36,18 @@ const metadata = {
       <br /><br />
       R&amp;C Roofing Contractors can help you determine whether stone-coated steel is appropriate for your roof, property location, project goals, and budget.
       <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-    </Fragment>
-  </Hero2>
+    R&amp;C operates under Hawaii contractor license C-33642.
+  </Fragment>
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
 
   <!-- Is Stone-Coated Steel Right for Your Property? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -46,8 +56,8 @@ const metadata = {
       Stone-coated steel may be worth considering when you want some of the characteristics of metal roofing with a different architectural appearance. The specific product, roof design, property exposure, installation requirements, and budget still need to be considered.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Stone-Coated Steel May Be Worth Considering If
         </h3>
         <ul class="space-y-4">
@@ -58,14 +68,14 @@ const metadata = {
             'The appearance of the roof is an important part of your decision.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Look Closely at Other Options If
         </h3>
         <ul class="space-y-4">
@@ -76,8 +86,8 @@ const metadata = {
             'Another roofing system better matches the building or project requirements.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
@@ -87,33 +97,40 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Is Stone-Coated Steel Roofing? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- What Is Stone-Coated Steel Roofing? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       What Is Stone-Coated Steel Roofing?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>Stone-coated steel is a type of metal roofing. The system starts with formed steel panels. An adhesive coating bonds stone granules to the prepared steel surface, with an additional protective coating applied over the granules. Those granules give the roof its textured appearance.</p>
       <p>Depending on the manufacturer and product line, stone-coated steel can be formed into profiles that resemble traditional shingles, clay or concrete tile, wood shake, and other dimensional roofing styles. The result is visually different from standing-seam and other exposed metal-panel roofing systems.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stone-Coated Steel vs. Traditional Metal Roofing · grey bg -->
+  <!-- Stone-Coated Steel vs. Traditional Metal Roofing · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Stone-Coated Steel vs. Traditional Metal Roofing" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       Both are metal roofing systems, but they can look and install very differently. The right choice depends on the appearance you want and the roofing system that fits the property.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Stone-Coated Steel</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Stone-Coated Steel</h3>
         <ul class="space-y-4">
           {[
             'Steel panels have a granular, textured surface.',
@@ -128,8 +145,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Other Metal Roofing Systems</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Other Metal Roofing Systems</h3>
         <ul class="space-y-4">
           {[
             'Metal surfaces may have a smooth painted, coated, or natural-metal finish.',
@@ -149,11 +166,11 @@ const metadata = {
       <a href="/services/roofing-materials/metal-roofing" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Explore Metal Roofing →</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stone-Coated Steel and Oahu Conditions · white bg -->
+  <!-- Stone-Coated Steel and Oahu Conditions · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
       Stone-Coated Steel and Oahu Conditions
@@ -194,19 +211,19 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Advantages and Tradeoffs · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Advantages and Tradeoffs of Stone-Coated Steel" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Advantages and Tradeoffs · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="Advantages and Tradeoffs of Stone-Coated Steel" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The goal is not to prove that stone-coated steel is better than every alternative — it is to determine whether its combination of roofing system and appearance makes sense for your property.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Potential Advantages</h3>
         <ul class="space-y-4">
           {[
             'Provides a metal roofing option with a textured appearance',
@@ -216,14 +233,14 @@ const metadata = {
             'Offers multiple architectural looks within the broader metal-roofing category',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Considerations</h3>
         <ul class="space-y-4">
           {[
             'Usually represents a larger roofing investment than some entry-level material options',
@@ -233,15 +250,22 @@ const metadata = {
             'Installation requirements differ from other roofing systems',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -296,23 +320,23 @@ const metadata = {
         { title: 'Roof Details', description: 'Flashing, penetrations, edges, drainage components, and other details also need to be considered.' },
         { title: 'Property Access', description: 'Building height and site access can affect how the project is staged and completed.' },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can Stone-Coated Steel Replace Asphalt Shingles? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- Can Stone-Coated Steel Replace Asphalt Shingles? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       Can Stone-Coated Steel Replace Asphalt Shingles?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>Potentially.</p>
       <p>If you currently have an asphalt shingle roof, a replacement project can be an opportunity to compare a different roofing system. Before making the change, R&amp;C can evaluate:</p>
     </div>
@@ -326,29 +350,36 @@ const metadata = {
         'Project requirements',
       ].map((item) => (
         <li class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{item}</span>
+          <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+          <span class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/60">{item}</span>
         </li>
       ))}
     </ul>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
       Changing materials should be treated as a roofing-system decision rather than simply choosing a different exterior appearance.
     </p>
-    <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; New Installation</a>
+    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Roof Replacement &amp; New Installation</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stone-Coated Steel or Traditional Tile? · grey bg -->
+  <!-- Stone-Coated Steel or Traditional Tile? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Stone-Coated Steel or Traditional Tile?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       Stone-coated steel can be manufactured in profiles that resemble traditional tile, but the two roofing systems are fundamentally different. If you like the appearance of tile, it may be useful to compare both systems before deciding.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Stone-Coated Steel Tile Profile</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Stone-Coated Steel Tile Profile</h3>
         <ul class="space-y-4">
           {[
             'Uses formed steel panels with a granular finish.',
@@ -363,8 +394,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Clay or Concrete Tile</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Clay or Concrete Tile</h3>
         <ul class="space-y-4">
           {[
             'Uses individual clay or concrete roofing units.',
@@ -384,11 +415,11 @@ const metadata = {
       <a href="/services/roofing-materials/tile-roofing-clay-and-concrete" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Explore Clay &amp; Concrete Tile Roofing →</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How R&C Approaches a Stone-Coated Steel Project · white bg -->
+  <!-- How R&C Approaches a Stone-Coated Steel Project · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
@@ -435,36 +466,43 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- See Stone-Coated Steel on Real Oahu Properties · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="See Stone-Coated Steel on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12' }} />
+  <!-- See Stone-Coated Steel on Real Oahu Properties · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="See Stone-Coated Steel on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {[
         { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified replacement or new installation]', description: '[Short verified description of the project.]' },
         { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified project scope]', description: '[Short verified description.]' },
         { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified project scope]', description: '[Short verified description.]' },
       ].map(({ neighborhood, profile, project, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
           <div class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-medium text-muted mb-1">{neighborhood} | {profile}</p>
-          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-heading mb-1">Project: {project}</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+          <p class="text-[13px] md:text-[14px] font-medium text-white/60 mb-1">{neighborhood} | {profile}</p>
+          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-white mb-1">Project: {project}</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/gallery" class="btn btn-secondary">View More Roofing Projects</a>
+      <a href="/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View More Roofing Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -549,30 +587,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          See if Stone-Coated Steel Fits Your Property
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Stone-coated steel gives you another way to consider metal roofing without committing to the appearance of a traditional metal-panel roof.<br />
-          The next step is determining whether the system fits your roof design, location, project requirements, and budget.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            See if Stone-Coated Steel Fits Your Property
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Stone-coated steel gives you another way to consider metal roofing without committing to the appearance of a traditional metal-panel roof.<br />
+            The next step is determining whether the system fits your roof design, location, project requirements, and budget.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss Stone-Coated Steel Roofing</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss Stone-Coated Steel Roofing</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

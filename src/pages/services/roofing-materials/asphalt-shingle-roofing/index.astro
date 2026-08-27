@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Asphalt Shingle Roofing Hawaii & Oahu | R&C Roofing',
@@ -35,9 +36,18 @@ const metadata = {
       <br /><br />
       R&amp;C Roofing Contractors installs asphalt shingle roofing for properties within its Oahu service area. Whether you are replacing an existing shingle roof or considering shingles for a new roofing project, we can help you evaluate the property and compare the available options.
       <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-    </Fragment>
-  </Hero2>
+    R&amp;C operates under Hawaii contractor license C-33642.
+  </Fragment>
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
 
   <!-- Is Asphalt Shingle Roofing Right for Your Home? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -46,8 +56,8 @@ const metadata = {
       Asphalt shingles may be worth considering when you want a traditional residential roofing appearance with multiple product and style choices. The right decision depends on the individual property, not simply which material is most popular.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Asphalt Shingles May Be Worth Considering If
         </h3>
         <ul class="space-y-4">
@@ -58,14 +68,14 @@ const metadata = {
             'You are replacing an existing asphalt shingle roof and want to evaluate similar or upgraded options.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Look Closely at Other Options If
         </h3>
         <ul class="space-y-4">
@@ -76,8 +86,8 @@ const metadata = {
             'Your priorities point toward a different roofing system or material.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
@@ -87,16 +97,16 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Are Asphalt Shingles? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- What Are Asphalt Shingles? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       What Are Asphalt Shingles?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
       <p>
         Modern asphalt shingles are typically made with a fiberglass mat coated with asphalt and surfaced with mineral granules. The shingles work as part of a larger roofing assembly that can also include underlayment, starter materials, flashing, and hip and ridge components.
       </p>
@@ -105,11 +115,18 @@ const metadata = {
       </p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Understanding Asphalt Shingle Options · grey bg -->
+  <!-- Understanding Asphalt Shingle Options · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Understanding Asphalt Shingle Options" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -140,11 +157,11 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Asphalt Shingles and Oahu Conditions · white bg -->
+  <!-- Asphalt Shingles and Oahu Conditions · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Asphalt Shingles and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -180,19 +197,19 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Advantages and Tradeoffs · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Advantages and Tradeoffs of Asphalt Shingle Roofing" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Advantages and Tradeoffs · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="Advantages and Tradeoffs of Asphalt Shingle Roofing" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       No roofing material is perfect for every property. R&amp;C can help you evaluate the shingle system in the context of the home rather than choosing from appearance alone.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Potential Advantages</h3>
         <ul class="space-y-4">
           {[
             'Wide range of colors, profiles, and styles',
@@ -202,14 +219,14 @@ const metadata = {
             'Straightforward material to compare visually',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Considerations</h3>
         <ul class="space-y-4">
           {[
             'Product quality and performance characteristics vary',
@@ -219,15 +236,22 @@ const metadata = {
             'The complete roofing assembly matters, not just the visible shingle',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -307,16 +331,16 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Replacing an Existing Shingle Roof? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- Replacing an Existing Shingle Roof? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       Replacing an Existing Shingle Roof?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>An existing asphalt shingle roof does not automatically mean the new roof has to use exactly the same type of shingle. A replacement project gives you an opportunity to look at several things.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8">
@@ -329,21 +353,28 @@ const metadata = {
         'Other roofing materials you may want to compare',
       ].map((item) => (
         <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+          <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
         </div>
       ))}
     </div>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
       <p>R&amp;C can inspect the existing roof and help you decide whether another asphalt shingle system or a different roofing material should be considered.</p>
     </div>
-    <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement</a>
+    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Roof Replacement</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can an Asphalt Shingle Roof Be Repaired? · grey bg -->
+  <!-- Can an Asphalt Shingle Roof Be Repaired? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Can an Asphalt Shingle Roof Be Repaired?
@@ -355,11 +386,11 @@ const metadata = {
     </div>
     <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How R&C Approaches an Asphalt Shingle Roofing Project · white bg -->
+  <!-- How R&C Approaches an Asphalt Shingle Roofing Project · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
@@ -416,22 +447,29 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Asphalt Shingles for Oahu Homes · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- Asphalt Shingles for Oahu Homes · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       Asphalt Shingles for Oahu Homes
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>Asphalt shingles are primarily associated with residential sloped roofing. For homeowners, one advantage of considering shingles is the range of available appearances. The roof can be selected to work with the architectural style and exterior colors of the home.</p>
       <p>R&amp;C can also help you compare asphalt shingles with metal, stone-coated steel, and tile before making the final material decision.</p>
     </div>
-    <a href="/services/residential-roofing" class="btn-primary">Explore Residential Roofing</a>
+    <a href="/services/residential-roofing" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Residential Roofing</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -520,12 +558,13 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · Frequently Asked Questions · white bg -->
+  <!-- P-10 · Frequently Asked Questions · black bg -->
   <FAQs
+    isDark={true}
     title="Frequently Asked Questions"
     items={[
       {
@@ -566,30 +605,45 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          See if Asphalt Shingles Fit Your Home
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Asphalt shingles give homeowners a range of roofing options, but the right product still needs to fit the property and the overall roofing project.<br />
-          R&amp;C Roofing Contractors can evaluate the roof, discuss the available shingle options, and help you determine whether asphalt shingles make sense for your home.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            See if Asphalt Shingles Fit Your Home
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Asphalt shingles give homeowners a range of roofing options, but the right product still needs to fit the property and the overall roofing project.<br />
+            R&amp;C Roofing Contractors can evaluate the roof, discuss the available shingle options, and help you determine whether asphalt shingles make sense for your home.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss an Asphalt Shingle Roof</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss an Asphalt Shingle Roof</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

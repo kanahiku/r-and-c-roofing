@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Gutter Installation Honolulu & Oahu | R&C Roofing',
@@ -37,6 +38,15 @@ const metadata = {
       <br /><br />
       R&amp;C operates under Hawaii contractor license C-33642.
       <span class="block mt-8"></span>
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </Hero2>
 
@@ -85,24 +95,26 @@ const metadata = {
           linkText: 'Explore Roof Replacement',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked divider rows · Installation, Repair, or Replacement? (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Gutter Installation, Repair, or Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Stacked divider rows · Installation, Repair, or Replacement? (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
+      Gutter Installation, Repair, or Replacement?
+    </h2>
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The right solution depends on the condition of the existing system.
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/10 border-t border-white/10">
       {[
         {
           title: 'New Gutter Installation',
@@ -118,23 +130,30 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">{description}</p>
         </div>
       ))}
     </div>
-    <p class="mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+    <p class="mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
       R&amp;C can review the current condition before recommending whether repair or replacement should be considered.
     </p>
     <div class="text-center">
-      <a href="/contact" class="btn-primary">Request a Gutter Estimate</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Request a Gutter Estimate</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- 4-col no-card · Why Gutters Matter on Oahu (grey bg) -->
+  <!-- 4-col no-card · Why Gutters Matter on Oahu (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Why Gutters Matter on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -165,12 +184,9 @@ const metadata = {
         </div>
       ))}
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Replacing Your Roof? Check the Gutters at the Same Time (white bg) -->
+  <!-- P-13 · Replacing Your Roof? Check the Gutters at the Same Time (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Replacing Your Roof? Check the Gutters at the Same Time
@@ -198,19 +214,19 @@ const metadata = {
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
       If you are already planning a new roof, ask R&amp;C to evaluate the gutters while developing the roofing scope.
     </p>
-    <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Explore Roof Replacement</a>
+    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Explore Roof Replacement</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked rows · Gutter Options for Your Property (grey bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Gutter Options for Your Property" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Stacked rows · Gutter Options for Your Property (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">Gutter Options for Your Property</h2>
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The appropriate gutter system depends on the roofline, property, and available product options. R&amp;C can review available gutter profiles, materials, finishes, and colors for the specific project. When choosing gutters, consider:
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/10 border-t border-white/10">
       {[
         {
           title: 'Size and Capacity',
@@ -230,13 +246,20 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -291,7 +314,7 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · What Affects Gutter Installation Cost? (grey bg) -->
+  <!-- P-13 · What Affects Gutter Installation Cost? (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6 md:mb-8">
       What Affects Gutter Installation Cost?
@@ -321,35 +344,44 @@ const metadata = {
     </p>
     <a href="/contact" class="btn-primary">Get a Gutter Estimate</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-09 · Recent Gutter Projects (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Recent Gutter Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+  <!-- P-09 · Recent Gutter Projects (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-12 text-center">
+      Recent Gutter Projects
+    </h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {[1, 2, 3].map(() => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
-          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
+          <div class="w-full h-36 bg-black/40 rounded mb-3 flex items-center justify-center text-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-heading mb-1">[Oahu Location] | [Gutter Project]</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">[Verified description of the gutter installation or replacement.]</p>
+          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-white mb-1">[Oahu Location] | [Gutter Project]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">[Verified description of the gutter installation or replacement.]</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/about/gallery" class="btn btn-secondary">View More Projects</a>
+      <a href="/about/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View More Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-05 style · Gutters and Roofing Work Better Together (grey bg) -->
+  <!-- P-05 style · Gutters and Roofing Work Better Together (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Gutters and Roofing Work Better Together" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -376,8 +408,8 @@ const metadata = {
           linkText: 'View Residential Roofing',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
           <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
             {linkText} →
@@ -385,12 +417,9 @@ const metadata = {
         </div>
       ))}
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · FAQs (white bg) -->
+  <!-- P-10 · FAQs (Grey #FAFAFA) -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -426,32 +455,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Get the Water Moving in the Right Direction
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          If your property needs new gutters or your existing gutter system is no longer working as intended,<br />
-          R&amp;C Roofing Contractors can evaluate the project and explain your options. You can also include gutter work when planning a larger roof repair or replacement project.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
-      >
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Get the Water Moving in the Right Direction
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If your property needs new gutters or your existing gutter system is no longer working as intended,<br />
+            R&amp;C Roofing Contractors can evaluate the project and explain your options.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Get a Gutter Estimate</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Get a Gutter Estimate</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

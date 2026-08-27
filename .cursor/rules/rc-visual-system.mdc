@@ -1,0 +1,314 @@
+---
+description: R&C Roofing — site-wide visual system. Section color flow, hero, grey, black, and CTA rules for every page on this site.
+alwaysApply: true
+---
+
+# R&C Roofing — Visual Design System
+
+> **Canonical reference:** `src/pages/index.astro` is the finished reference page. When in doubt, match it exactly.
+> This rule is **project-specific** and must not be applied to any other project.
+
+---
+
+## Required Import
+
+Every page that uses black sections or the CTA banner must import:
+
+```astro
+import simplePattern from '~/assets/images/patterns/simple.svg';
+```
+
+---
+
+## Section Color Flow
+
+Sections repeat in this order down every page. Never skip or reverse the order.
+
+```
+White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yellow (Final CTA)
+```
+
+---
+
+## 1 · Hero Section (always White bg)
+
+- Component: `Hero2` (left content / right image split)
+- Background: white (default — no bg div needed)
+- Motif: `simple.svg` accent yellow at **6% opacity**, top-to-bottom fade
+- Left side: H1, subtitle paragraphs, primary CTA button
+- Right side: hero image
+- No eyebrow text. No gold bar. No `isDark`.
+- **Do NOT add `tag-pill` badges unless they are explicitly listed in the content brief.** Omit `<Fragment slot="content">` entirely when badges are not provided.
+
+```astro
+<Hero2
+  actions={[{ variant: 'primary', text: 'CTA Text', href: '/contact' }]}
+  image={{ src: 'IMAGE_URL', alt: 'Alt text' }}
+>
+  <Fragment slot="title">Page H1<br />Line Two</Fragment>
+  <Fragment slot="subtitle">
+    First paragraph.
+    <br /><br />
+    Second paragraph.
+  </Fragment>
+  <!-- Only include the content slot when badges are explicitly given in the content brief -->
+  <!-- <Fragment slot="content">
+    <div class="flex flex-wrap gap-3 mt-6">
+      <span class="tag-pill">Badge One</span>
+    </div>
+  </Fragment> -->
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
+```
+
+---
+
+## 2 · Grey Section Rules (`bg-[#FAFAFA]`)
+
+- Background: always exactly `#FAFAFA`
+- Headings: `text-heading`
+- Body text: `text-muted`
+- No motif
+- **Cards are BLACK** — dark cards on a light grey background create intentional contrast
+
+### Grey section bg snippet
+```astro
+<Fragment slot="bg">
+  <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+</Fragment>
+```
+
+### Card on Grey bg
+```astro
+<div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col shadow-none outline-none">
+  <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
+  <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
+</div>
+```
+
+Optional left accent bar for compact cards: add `border-l-4 border-l-accent` to the card div.
+
+### Ghost button on Grey bg
+
+```astro
+<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">
+  Button Label
+</a>
+```
+
+- Border: `border-2 border-black`
+- Text: `text-black`
+- Hover: `hover:bg-black hover:text-white`
+
+### Step/numbered circle on Grey bg
+
+When a step or process uses a numbered circle indicator, the circle must be dark with yellow text:
+
+```astro
+<div class="shrink-0 w-9 h-9 rounded-full bg-[#222] flex items-center justify-center font-heading font-medium text-[15px] text-accent mt-0.5">
+  {step}
+</div>
+```
+
+- Circle bg: `bg-[#222]`
+- Number text: `text-accent` (yellow)
+- Never use `bg-primary`, `bg-white`, or any other colour for step circles on a grey background
+
+---
+
+## 3 · Black Section Rules (`bg-black` + motif)
+
+- Background: `bg-black`
+- Motif: `simple.svg` accent yellow at **8% opacity**, top-to-bottom fade
+- Headings: `text-white`
+- Body text: `text-white/70`
+- Disclaimer / secondary text: `text-white/50`
+- **Cards are dull black with yellow border**
+
+### Black section bg snippet
+```astro
+<Fragment slot="bg">
+  <div class="absolute inset-0 bg-black"></div>
+  <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+    <div
+      class="absolute inset-0 opacity-[8%]"
+      style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+      aria-hidden="true"
+    ></div>
+  </div>
+</Fragment>
+```
+
+### Card on Black bg
+```astro
+<div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col">
+  <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+  <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
+</div>
+```
+
+Use `isDark={true}` on `WidgetWrapper` for black sections. Pass `cardClass="border border-accent/60 bg-[#222]"` to `Features2` or `Testimonials` components.
+
+### Ghost button on Black bg
+
+```astro
+<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">
+  Button Label
+</a>
+```
+
+- Border: `border-2 border-accent` (yellow)
+- Text: `text-white`
+- Hover: `hover:bg-accent hover:text-black`
+
+---
+
+## 4 · White Section Rules (`bg-white`)
+
+- Background: white (no bg div needed, or explicit `bg-white`)
+- Headings: `text-heading`
+- Body text: `text-muted`
+- No motif
+
+### Card on White bg
+```astro
+<div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-4 md:p-5 flex flex-col">
+  <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-heading">{title}</h3>
+  <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+</div>
+```
+
+### Ghost button on White bg
+
+```astro
+<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">
+  Button Label
+</a>
+```
+
+- Border: `border-2 border-black`
+- Text: `text-black`
+- Hover: `hover:bg-black hover:text-white`
+
+---
+
+## 5 · Final CTA Banner (always last section on every page)
+
+- The `WidgetWrapper` section always sits on a **white background** (no bg override needed on the wrapper itself)
+- The inner card: `bg-accent` (yellow) — **no border on the card**
+- Motif: `simple.svg` **black** at **3% opacity**, top-to-bottom fade
+- Heading: `text-black`
+- Body text: `text-black/70`
+- Contact info: `text-black/70`, name bold `text-black`
+- Separator: `border-t-2 border-black`
+- CTA button: `bg-black text-white hover:bg-zinc-900`
+
+```astro
+<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+    <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[3%]"
+        style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+    <div class="relative z-10">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">CTA Heading</h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">Supporting sentence.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+          <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+        </div>
+        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Inspection</a>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
+```
+
+---
+
+## 6 · FAQ Section (follows the section color flow)
+
+FAQ sections are **not fixed to a specific background** — they take whatever background colour falls at their position in the page's colour flow (White → Grey → Black).
+
+- **No cards** — FAQ is an accordion with no card wrappers around items
+- The `FAQs` component (or equivalent accordion) is used directly
+- Text contrast must match the background:
+
+| Background | Section heading | Question text | Answer text |
+|---|---|---|---|
+| White | `text-heading` | `text-heading` | `text-muted` |
+| Grey (`#FAFAFA`) | `text-heading` | `text-heading` | `text-muted` |
+| Black | `text-white` | `text-white` | `text-accent` (yellow) |
+
+### FAQ on White or Grey bg
+```astro
+<Fragment slot="bg">
+  <!-- White: nothing needed -->
+  <!-- Grey: -->
+  <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+</Fragment>
+```
+
+### FAQ on Black bg — pass `isDark` and bg snippet
+
+When `isDark={true}` is set, the `FAQs` component automatically applies:
+- Section heading: `text-white`
+- Question text: `text-white`
+- Answer text: `text-accent` (yellow)
+- Dividers/borders: `white/20`
+- Toggle icon: `border-white/30 text-white/50`, open state `border-accent text-accent`
+
+```astro
+<FAQs
+  isDark={true}
+  title="Frequently Asked Questions"
+  items={[...]}
+>
+  <Fragment slot="bg">
+    <div class="absolute inset-0 bg-black"></div>
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[8%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</FAQs>
+```
+
+---
+
+## Hard Rules (never break these)
+
+| Rule | Detail |
+|---|-----|
+| No `card-hover` | Cards are always static — no lift/shadow on hover |
+| No gold bar | Never add `<span class="gold-bar">` under any heading |
+| No eyebrow text | No tagline/eyebrow above H2 headings |
+| Grey is always `#FAFAFA` | Never use `bg-gray-50` or any other grey value |
+| Black card bg is always `#222` | Use `bg-[#222]` — not `bg-zinc-800`, not `bg-black` |
+| Motif opacity: black sections `8%` | Use `opacity-[8%]` |
+| Motif opacity: CTA banner `3%` | Use `opacity-[3%]` |
+| Hero motif opacity `6%` | Use `opacity-[6%]` |
+| Hero badges only when explicit | Never add `tag-pill` badges unless the content brief lists them |
+| CTA card has no border | The yellow card uses `bg-accent` only — no `border` class |
+| FAQ has no cards | FAQ is a plain accordion — never wrap items in card divs |
+| FAQ on Black bg | `isDark={true}` — heading `text-white`, questions `text-white`, answers `text-accent` (yellow) |
+| Ghost button on Black | `border-2 border-accent text-white` — never `border-black` or `text-black` on black bg |
+| Ghost button on White/Grey | `border-2 border-black text-black` — never `border-accent` on light backgrounds |

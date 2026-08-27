@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Commercial Roofing Oahu | R&C Roofing Contractors',
@@ -38,9 +39,18 @@ const metadata = {
       R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined roofing experience to projects in Hawaii.
       <span class="block mt-8"></span>
     </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
   </Hero2>
 
-  <!-- P-05 style · Who We Work With (grey bg) -->
+  <!-- P-05 style · Who We Work With (Grey #FAFAFA — black cards) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Who We Work With" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -73,27 +83,29 @@ const metadata = {
           linkText: 'Explore Roofing for Property Decision-Makers',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
-          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 flex-1">{description}</p>
+          <a href={href} class="mt-4 text-accent font-medium text-[14px] md:text-[15px] hover:underline">
             {linkText} →
           </a>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked rows · What Does Your Commercial Roof Need? (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Does Your Commercial Roof Need?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Stacked rows · What Does Your Commercial Roof Need? (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
+      What Does Your Commercial Roof Need?
+    </h2>
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The right next step depends on the property and the condition of the roofing system.
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/10 border-t border-white/10">
       {[
         {
           title: 'A Roof Problem Needs Attention',
@@ -133,18 +145,25 @@ const metadata = {
         },
       ].map(({ title, description, href, linkText }) => (
         <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-3">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Commercial Roof Inspections (grey bg) -->
+  <!-- P-13 · Commercial Roof Inspections (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6 md:mb-8">
       Commercial Roof Inspections
@@ -175,11 +194,11 @@ const metadata = {
     </div>
     <a href="/roof-inspections" class="btn-primary">Explore Commercial Roof Inspections</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Commercial Roof Repair (white bg) -->
+  <!-- P-13 · Commercial Roof Repair (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6 md:mb-8">
       Commercial Roof Repair
@@ -211,16 +230,16 @@ const metadata = {
     </p>
     <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Commercial Roof Replacement & New Installation (grey bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6 md:mb-8">
+  <!-- P-13 · Commercial Roof Replacement & New Installation (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-6 md:mb-8">
       Commercial Roof Replacement &amp; New Installation
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>
         Replacement may need to be considered when the existing roofing system has broader deterioration or when localized repairs would not adequately address the overall condition.
       </p>
@@ -231,21 +250,28 @@ const metadata = {
         Depending on the project, the process may include evaluation of existing conditions, development of the roofing scope, material or system selection, project coordination, installation, and completion.
       </p>
     </div>
-    <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; Installation</a>
+    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Explore Roof Replacement &amp; Installation</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Comparison · Repair Now or Plan for Replacement? (white bg) -->
+  <!-- Comparison · Repair Now or Plan for Replacement? (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Repair Now or Plan for Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       Commercial roofing decisions often involve balancing the immediate condition of the roof with the property's longer-term needs.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">A Repair May Be Appropriate When</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5 text-heading">A Repair May Be Appropriate When</h3>
         <ul class="space-y-4">
           {[
             'The roofing problem is localized.',
@@ -260,8 +286,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Replacement May Need to Be Planned When</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5 text-heading">Replacement May Need to Be Planned When</h3>
         <ul class="space-y-4">
           {[
             'Problems occur across several areas of the roof.',
@@ -280,14 +306,13 @@ const metadata = {
     <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       R&amp;C evaluates the roof before recommending which path should be considered. For commercial properties, that information can also help decision-makers determine whether the work belongs in an immediate repair budget or a larger future roofing project.
     </p>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked rows · Roofing Information for Budgeting and Project Planning (grey bg) -->
+  <!-- Stacked rows · Roofing Information for Budgeting and Project Planning (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roofing Information for Budgeting and Project Planning" classes={{ container: 'mb-4 md:mb-6' }} />
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4 md:mb-6 text-center">
+      Roofing Information for Budgeting and Project Planning
+    </h2>
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       Commercial roofing decisions often require information that can be reviewed by people who may never visit the roof themselves. Depending on the project, R&amp;C can provide contractor-side information such as:
     </p>
@@ -315,32 +340,33 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
           <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-08 · A Clear Commercial Roofing Process (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- P-08 · A Clear Commercial Roofing Process (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         A Clear Commercial Roofing Process
       </h2>
-      <a href="/contact" class="btn-primary shrink-0">Start a Roofing Conversation</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200 shrink-0">Start a Roofing Conversation</a>
     </div>
     <div class="flex flex-col md:flex-row gap-10 md:gap-16">
       <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
           <p>R&amp;C coordinates commercial roofing projects from initial evaluation through completion, working with the appropriate property contacts and project stakeholders at each stage.</p>
         </div>
       </div>
       <div class="md:basis-1/2">
         <Timeline
+          isDark={true}
           items={[
             {
               title: 'Tell Us About the Property and Project',
@@ -377,11 +403,18 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- 4-col no-card · Commercial Roofing on Oahu (grey bg) -->
+  <!-- 4-col no-card · Commercial Roofing on Oahu (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Commercial Roofing on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -416,11 +449,11 @@ const metadata = {
       The appropriate roofing approach depends on the individual building rather than a one-size-fits-all recommendation.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Commercial Roofing and Insurance Claims (white bg) -->
+  <!-- P-13 · Commercial Roofing and Insurance Claims (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Commercial Roofing and Insurance Claims
@@ -440,37 +473,44 @@ const metadata = {
       <a href="/insurance-claim-help" class="btn btn-secondary">Explore Insurance Claim Help</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-09 · Recent Commercial Roofing Projects (grey bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Recent Commercial Roofing Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+  <!-- P-09 · Recent Commercial Roofing Projects (Black — black cards) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-12 text-center">Recent Commercial Roofing Projects</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
       {[1, 2].map(() => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
-          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
+          <div class="w-full h-36 bg-black/40 rounded mb-3 flex items-center justify-center text-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-heading mb-1">[Property Type] | [Oahu Location]</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted mb-1"><span class="font-semibold">Roofing Need:</span> [Verified description.]</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted mb-1"><span class="font-semibold">R&amp;C Scope:</span> [Verified work completed.]</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted"><span class="font-semibold">Project Considerations:</span> [Verified coordination or roofing considerations.]</p>
+          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-white mb-1">[Property Type] | [Oahu Location]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60 mb-1"><span class="font-semibold text-white/80">Roofing Need:</span> [Verified description.]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60 mb-1"><span class="font-semibold text-white/80">R&amp;C Scope:</span> [Verified work completed.]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60"><span class="font-semibold text-white/80">Project Considerations:</span> [Verified coordination or roofing considerations.]</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/about/gallery" class="btn btn-secondary">View Commercial Roofing Projects</a>
+      <a href="/about/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View Commercial Roofing Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Commercial Roofing for Different Decision-Makers (white bg) -->
+  <!-- Commercial Roofing for Different Decision-Makers (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Commercial Roofing for Different Decision-Makers" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -510,14 +550,13 @@ const metadata = {
         </div>
       ))}
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked rows · Why Work With R&C? (grey bg) -->
+  <!-- Stacked rows · Why Work With R&C? (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Work With R&C?" classes={{ container: 'mb-8 md:mb-12' }} />
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-12 text-center">
+      Why Work With R&C?
+    </h2>
     <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
       {[
         {
@@ -542,20 +581,20 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
           <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore Related Commercial Roofing Services (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Related Commercial Roofing Services" classes={{ container: 'mb-10 md:mb-14' }} />
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+  <!-- Explore Related Commercial Roofing Services (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-10 md:mb-14 text-center">Explore Related Commercial Roofing Services</h2>
+    <div class="divide-y divide-white/10 border-t border-white/10">
       {[
         {
           title: 'Roof Repair',
@@ -577,21 +616,28 @@ const metadata = {
         },
       ].map(({ title, description, href, linkText }) => (
         <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-3">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/services" class="btn btn-secondary">View All Roofing Services</a>
+      <a href="/services" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View All Roofing Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · FAQs (grey bg) -->
+  <!-- P-10 · FAQs (White bg) -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -638,32 +684,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </FAQs>
 
-  <!-- P-12 · Final CTA -->
+  <!-- P-12 · Final CTA (Yellow) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Talk to R&amp;C About Your Commercial Property
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Whether you are addressing an immediate roofing problem, evaluating an existing system, or planning a larger project,<br />
-          start with the needs of the property. R&amp;C can evaluate the concern, explain the proposed scope, and work with the people responsible for moving the project forward.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
-      >
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Talk to R&amp;C About Your Commercial Property
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Whether you are addressing an immediate roofing problem, evaluating an existing system, or planning a larger project,<br />
+            start with the needs of the property. R&amp;C can evaluate the concern, explain the proposed scope, and work with the people responsible for moving the project forward.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss Your Commercial Roofing Project</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss Your Commercial Roofing Project</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

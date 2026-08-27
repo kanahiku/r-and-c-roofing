@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Metal Roofing Hawaii & Oahu | R&C Roofing Contractors',
@@ -35,9 +36,18 @@ const metadata = {
       <br /><br />
       R&amp;C Roofing Contractors can evaluate your property and help you determine whether a metal roofing system fits the roof, project goals, and budget.
       <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-    </Fragment>
-  </Hero2>
+    R&amp;C operates under Hawaii contractor license C-33642.
+  </Fragment>
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
 
   <!-- Is Metal Roofing a Good Fit? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -46,8 +56,8 @@ const metadata = {
       Metal roofing may be worth considering when you are planning a larger roof investment and want to compare it carefully with other roofing systems. There is no roofing material that is automatically right for every home or commercial building.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Metal Roofing May Be Worth Considering If
         </h3>
         <ul class="space-y-4">
@@ -58,14 +68,14 @@ const metadata = {
             'You are willing to compare metal type, finish, and system details rather than choosing on appearance alone.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
           Look Closely at Other Options If
         </h3>
         <ul class="space-y-4">
@@ -76,8 +86,8 @@ const metadata = {
             'The specific metal system available is not appropriate for the property\'s exposure or roof design.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
@@ -87,26 +97,33 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Is Metal Roofing? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- What Is Metal Roofing? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       What Is Metal Roofing?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
       <p>"Metal roofing" describes a category of roofing systems rather than one single product. Metal roofs can differ in the metal used, panel profile, attachment method, finish, coating, and other system details. Those differences can affect appearance and how the roofing system performs in a particular environment.</p>
       <p>Industry guidance also treats material, coatings, and fastener compatibility as important parts of metal-roof selection. That is why it is important to evaluate the specific roofing system rather than assuming that all metal roofs are the same.</p>
       <p>R&amp;C can review the metal roofing options available for your project and explain the differences that matter for the property.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Metal Roofing and Oahu Conditions · grey bg -->
+  <!-- Metal Roofing and Oahu Conditions · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Metal Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -142,19 +159,19 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Advantages and Tradeoffs · white bg -->
+  <!-- Advantages and Tradeoffs · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Advantages and Tradeoffs of Metal Roofing" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       We would rather help you understand both sides of the decision than present metal as the perfect roof for every property.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Potential Advantages</h3>
         <ul class="space-y-4">
           {[
             'Available in a range of profiles and finishes',
@@ -164,14 +181,14 @@ const metadata = {
             'Creates a distinct architectural appearance',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Considerations</h3>
         <ul class="space-y-4">
           {[
             'Product and system selection can be more complex than simply choosing a color',
@@ -181,24 +198,24 @@ const metadata = {
             'Metal may not be the preferred aesthetic for every property',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How Long Does a Metal Roof Last? · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- How Long Does a Metal Roof Last? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       How Long Does a Metal Roof Last?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>There is no responsible single lifespan number that applies to every metal roof. Service life can vary based on several factors.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
@@ -213,13 +230,20 @@ const metadata = {
         'Condition of other components in the roofing assembly',
       ].map((item) => (
         <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+          <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -320,26 +344,33 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can You Replace Asphalt Shingles With Metal Roofing? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- Can You Replace Asphalt Shingles With Metal Roofing? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       Can You Replace Asphalt Shingles With Metal Roofing?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>Potentially. Changing from one roofing material to another should be evaluated as part of the entire replacement project. R&amp;C can look at the existing roof, structure, roof design, and proposed metal system before recommending whether the change is appropriate.</p>
       <p>Do not assume that because metal roofing can be installed on one property, the same approach applies to every roof.</p>
     </div>
-    <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; New Installation</a>
+    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Roof Replacement &amp; New Installation</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Metal Roofing for Homes and Commercial Properties · grey bg -->
+  <!-- Metal Roofing for Homes and Commercial Properties · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Metal Roofing for Homes and Commercial Properties" classes={{ container: 'mb-10 md:mb-14' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
@@ -365,11 +396,11 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- See Metal Roofing on Real Oahu Properties · white bg -->
+  <!-- See Metal Roofing on Real Oahu Properties · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="See Metal Roofing on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12' }} />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -396,30 +427,30 @@ const metadata = {
           description: '[Short verified project description.]',
         },
       ].map(({ neighborhood, system, project, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
           <div class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-medium text-muted mb-1">{neighborhood} | {system}</p>
-          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-heading mb-1">Project: {project}</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+          <p class="text-[13px] md:text-[14px] font-medium text-white/60 mb-1">{neighborhood} | {system}</p>
+          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-white mb-1">Project: {project}</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/gallery" class="btn btn-secondary">View More Roofing Projects</a>
+      <a href="/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View More Roofing Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How Does Metal Compare With Other Roofing Materials? · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Does Metal Compare With Other Roofing Materials?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- How Does Metal Compare With Other Roofing Materials? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="How Does Metal Compare With Other Roofing Materials?" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       If you are still deciding, use the Roofing Materials guide to compare the broader options available.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
@@ -444,17 +475,24 @@ const metadata = {
         },
       ].map(({ title, description, href, linkText }) => (
         <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
         </div>
       ))}
     </div>
     <div class="mt-10 md:mt-12 text-center">
-      <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
+      <a href="/services/roofing-materials" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Compare All Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -506,24 +544,32 @@ const metadata = {
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Find Out if Metal Roofing Fits Your Property
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Metal roofing can be a good option for the right property, but the decision should be based on more than the material name.<br />
-          R&amp;C Roofing Contractors can evaluate the project, discuss the available metal roofing options, and help you determine whether a metal system makes sense for your property.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Find Out if Metal Roofing Fits Your Property
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Metal roofing can be a good option for the right property, but the decision should be based on more than the material name.<br />
+            R&amp;C Roofing Contractors can evaluate the project, discuss the available metal roofing options, and help you determine whether a metal system makes sense for your property.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss a Metal Roofing Project</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss a Metal Roofing Project</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

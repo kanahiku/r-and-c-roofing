@@ -2,7 +2,10 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'How Roof Insurance Claims Work in Hawaii | R&C Roofing',
@@ -14,52 +17,58 @@ const metadata = {
 
 <Layout metadata={metadata}>
 
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        How the Roof Insurance Claim Process Works in Hawaii
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+  <!-- Hero — White + motif -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Schedule a Roof Damage Inspection', href: '/contact' }]}
+    image={{ src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2070&q=80', alt: 'Roof insurance claim process in Hawaii' }}
+  >
+    <Fragment slot="title">How the Roof Insurance<br />Claim Process Works</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
         Know What to Expect After Roof Damage
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>If your roof has been damaged by severe weather or another event, the insurance process can involve several steps before repair work begins.</p>
-        <p>Your insurance carrier handles the claim and determines coverage. Your roofing contractor evaluates the roof and provides information about the work that may be needed.</p>
-        <p>R&amp;C Roofing Contractors helps with the roofing side of that process. We inspect accessible roof areas, document relevant findings, provide contractor-side scope information when appropriate, and complete roofing work if the project moves forward.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Schedule a Roof Damage Inspection</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      </span>
+      If your roof has been damaged by severe weather or another event, the insurance process can involve several steps before repair work begins.
+      <br /><br />
+      Your insurance carrier handles the claim and determines coverage. Your roofing contractor evaluates the roof and provides information about the work that may be needed.
+      <br /><br />
+      R&C Roofing Contractors helps with the roofing side of that process. We inspect accessible roof areas, document relevant findings, provide contractor-side scope information when appropriate, and complete roofing work if the project moves forward.
     </Fragment>
-  </WidgetWrapper>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </Hero2>
 
-  <!-- Who Handles What — grey -->
+  <!-- Who Handles What — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Who Handles What During a Roof Insurance Claim?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Understanding each party’s role can make the process easier to follow.
+      Understanding each party's role can make the process easier to follow.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">You and Your Insurance Carrier</h3>
-        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
-          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Review your policy and claim requirements</li>
-          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>File and manage the insurance claim</li>
-          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Determine whether the loss is covered</li>
-          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Determine the amount payable under the policy</li>
-          <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Handle claim decisions and settlement questions</li>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-white">You and Your Insurance Carrier</h3>
+        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-white/70">
+          <li class="flex gap-3"><span class="shrink-0 text-white/40 mt-0.5">—</span>Review your policy and claim requirements</li>
+          <li class="flex gap-3"><span class="shrink-0 text-white/40 mt-0.5">—</span>File and manage the insurance claim</li>
+          <li class="flex gap-3"><span class="shrink-0 text-white/40 mt-0.5">—</span>Determine whether the loss is covered</li>
+          <li class="flex gap-3"><span class="shrink-0 text-white/40 mt-0.5">—</span>Determine the amount payable under the policy</li>
+          <li class="flex gap-3"><span class="shrink-0 text-white/40 mt-0.5">—</span>Handle claim decisions and settlement questions</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">R&amp;C Roofing Contractors</h3>
-        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect accessible roofing areas</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Document relevant visible roof conditions</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Explain the roofing work we recommend</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Provide a roofing estimate or scope when appropriate</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-400">R&amp;C Roofing Contractors</h3>
+        <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-white/70">
+          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Inspect accessible roofing areas</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Document relevant visible roof conditions</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Explain the roofing work we recommend</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Provide a roofing estimate or scope when appropriate</li>
+          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
         </ul>
       </div>
     </div>
@@ -67,40 +76,47 @@ const metadata = {
       R&amp;C is a licensed Hawaii roofing contractor, License C-33642. We are not a public adjuster and do not negotiate insurance settlements or determine coverage.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Step 1 — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- Step 1 — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex gap-5 mb-6">
-      <div class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[16px] text-white dark:text-slate-900">1</div>
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <div class="shrink-0 w-10 h-10 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[16px] text-black">1</div>
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         Document the Damage and Protect the Property
       </h2>
     </div>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
       <p>Once it is safe to do so, take photos or videos of visible damage.</p>
       <p>That may include roofing materials on the ground, interior ceiling stains, active water intrusion, or other changes you noticed after the event.</p>
       <p>If water is entering the property, take reasonable steps to prevent additional interior damage. Keep receipts for materials or services used to protect the property.</p>
       <p>Avoid climbing onto a wet or damaged roof yourself.</p>
       <p>Permanent roofing repairs generally should wait until the damage has been inspected or your insurer has authorized the work.</p>
     </div>
-    <div class="mt-6 rounded-lg border bg-gray-50 dark:bg-slate-800 p-5">
-      <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
-        <span class="font-semibold text-heading">Where R&amp;C Can Help:</span> If you need a closer assessment of the roof, R&amp;C can inspect accessible roofing areas and document relevant visible conditions.
+    <div class="mt-6 border border-accent/40 rounded-lg p-5">
+      <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/80">
+        <span class="font-semibold text-white">Where R&amp;C Can Help:</span> If you need a closer assessment of the roof, R&amp;C can inspect accessible roofing areas and document relevant visible conditions.
       </p>
-      <a href="/roof-inspections/storm-and-wind-damage-inspection" class="inline-block mt-3 text-primary font-medium text-[14px] md:text-[15px] hover:underline">View Storm &amp; Wind Damage Inspections →</a>
+      <a href="/roof-inspections/storm-and-wind-damage-inspection" class="inline-block mt-3 text-accent font-medium text-[14px] md:text-[15px] hover:underline">View Storm &amp; Wind Damage Inspections →</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Step 2 — grey -->
+  <!-- Step 2 — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex gap-5 mb-6">
-      <div class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[16px] text-white dark:text-slate-900">2</div>
+      <div class="shrink-0 w-10 h-10 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[16px] text-black">2</div>
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
         Review Your Policy and Contact Your Insurance Carrier
       </h2>
@@ -110,7 +126,7 @@ const metadata = {
       <p>Your carrier can tell you what information it needs, how the claim will be handled, and what deadlines apply to your policy.</p>
       <p>Provide factual information about what happened and the damage you observed. If your carrier asks for forms or additional documentation, follow its claim instructions.</p>
     </div>
-    <div class="mt-6 rounded-lg border bg-white dark:bg-slate-900 p-5">
+    <div class="mt-6 bg-[#FAFAFA] border border-black/10 rounded-lg p-5">
       <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
         <span class="font-semibold text-heading">Where R&amp;C Can Help:</span> R&amp;C can provide roofing-specific documentation when appropriate, including photos of relevant findings and information about the roofing work we recommend.
       </p>
@@ -119,14 +135,14 @@ const metadata = {
       </p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Step 3 — white -->
+  <!-- Step 3 — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex gap-5 mb-6">
-      <div class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[16px] text-white dark:text-slate-900">3</div>
+      <div class="shrink-0 w-10 h-10 rounded-full bg-[#222] flex items-center justify-center font-heading font-medium text-[16px] text-accent">3</div>
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
         The Roof and Claim Are Evaluated
       </h2>
@@ -136,7 +152,7 @@ const metadata = {
       <p>The adjuster evaluates the loss for the insurance company. R&amp;C evaluates the roofing system as a contractor.</p>
       <p>These are different roles.</p>
     </div>
-    <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">What R&amp;C Evaluates</h3>
+    <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">What R&amp;C Evaluates</h3>
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-5">Depending on the property and inspection conditions, we may look at:</p>
     <ul class="space-y-2 mb-8">
       {[
@@ -148,7 +164,7 @@ const metadata = {
         'Other visible conditions relevant to the roofing scope',
       ].map((item) => (
         <li class="flex gap-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-          <span class="shrink-0 text-primary mt-0.5">—</span>
+          <span class="shrink-0 text-accent mt-0.5">—</span>
           {item}
         </li>
       ))}
@@ -158,44 +174,51 @@ const metadata = {
     </p>
     <a href="/roof-inspections/haag-certified-inspection" class="inline-block mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">Learn About HAAG Certified Roof Inspections →</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Step 4 — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- Step 4 — Black + motif, dark cards -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex gap-5 mb-6">
-      <div class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[16px] text-white dark:text-slate-900">4</div>
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <div class="shrink-0 w-10 h-10 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[16px] text-black">4</div>
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         Review the Carrier's Decision and the Roofing Scope
       </h2>
     </div>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
       <p>After reviewing the claim, your insurance carrier will provide information about its decision and any covered work or payment.</p>
       <p>Read those documents carefully.</p>
       <p>R&amp;C can separately explain the roofing work we believe is appropriate based on the condition of the roof.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">If the Scopes Match</h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">If the carrier's approved scope and the roofing work being proposed align, the project can move toward scheduling once the necessary approvals and project details are in place.</p>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">If the Scopes Match</h3>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">If the carrier's approved scope and the roofing work being proposed align, the project can move toward scheduling once the necessary approvals and project details are in place.</p>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">If the Scopes Differ</h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-3">There may be situations where R&amp;C recommends work that is not reflected in the carrier's initial scope. When appropriate, we can provide additional contractor-side documentation explaining our roofing recommendation.</p>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-3">The insurance carrier determines whether additional work or cost will be covered.</p>
-        <a href="/insurance-claim-help/denied-or-underpaid-claims" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Learn About Denied or Underpaid Roof Claims →</a>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">If the Scopes Differ</h3>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-3">There may be situations where R&amp;C recommends work that is not reflected in the carrier's initial scope. When appropriate, we can provide additional contractor-side documentation explaining our roofing recommendation.</p>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-3">The insurance carrier determines whether additional work or cost will be covered.</p>
+        <a href="/insurance-claim-help/denied-or-underpaid-claims" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">Learn About Denied or Underpaid Roof Claims →</a>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Step 5 — white -->
+  <!-- Step 5 — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex gap-5 mb-6">
-      <div class="shrink-0 w-10 h-10 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[16px] text-white dark:text-slate-900">5</div>
+      <div class="shrink-0 w-10 h-10 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[16px] text-black">5</div>
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
         Complete the Roofing Work
       </h2>
@@ -214,7 +237,7 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Documents to Keep — grey -->
+  <!-- Documents to Keep — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="What Documents Should You Keep During the Claim?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-4">
@@ -227,14 +250,14 @@ const metadata = {
         'Your claim number',
         'Written communication from the carrier',
         'Carrier estimates or scope documents',
-        'R&C inspection documentation',
+        "R&C inspection documentation",
         'Contractor estimates',
         'Signed roofing contracts',
         'Receipts for temporary protective measures',
         'Final invoices and project records',
       ].map((item) => (
         <li class="flex gap-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-          <span class="shrink-0 text-primary mt-0.5">—</span>
+          <span class="shrink-0 text-accent mt-0.5">—</span>
           {item}
         </li>
       ))}
@@ -243,32 +266,39 @@ const metadata = {
       Your insurance carrier can tell you which documents it specifically requires.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What If Additional Damage Is Found — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <!-- What If Additional Damage — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
       What If Additional Damage Is Found?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 max-w-4xl">
       <p>Sometimes additional roofing conditions become visible only after work begins or materials are removed.</p>
       <p>If that happens, the next step depends on the project and your insurance claim.</p>
       <p>R&amp;C can document the roofing condition and explain any additional work we believe is needed. You should also contact your carrier and follow its process for reviewing work that was not included in the original claim scope.</p>
       <p>Do not assume additional work will automatically be covered.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What If Claim Is Denied — grey -->
+  <!-- What If Claim Is Denied — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       What If Your Claim Is Denied or the Approved Scope Seems Incomplete?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
       <p>Start by reviewing the carrier's written explanation.</p>
       <p>If you still have questions about the physical condition of the roof, R&amp;C can provide a roof inspection and additional contractor-side information about visible findings and the work we recommend.</p>
       <p>R&amp;C cannot overturn a denial or negotiate a settlement on your behalf.</p>
@@ -278,13 +308,13 @@ const metadata = {
       <a href="/insurance-claim-help/denied-or-underpaid-claims" class="btn-primary">Learn About Denied or Underpaid Roof Claims</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-05 Resource Cards — white -->
+  <!-- Resource Cards — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Insurance Claim Resources" />
+    <Headline title="Explore Our Insurance Claim Resources" classes={{ container: 'mb-4 md:mb-6' }} />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {[
         {
@@ -306,21 +336,22 @@ const metadata = {
           linkText: 'View Storm Damage Inspections →',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 FAQs -->
+  <!-- FAQ — Black + motif (follows Grey in color flow) -->
   <FAQs
     title="Frequently Asked Questions"
+    isDark={true}
     items={[
       {
         title: 'Should I call my insurance carrier before scheduling a roof inspection?',
@@ -363,28 +394,47 @@ const metadata = {
           "Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If the project moves forward, our team can complete the agreed roof repair or replacement.",
       },
     ]}
-  />
-
-  <!-- P-12 Final CTA -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Need Help With the Roofing Side of Your Claim?
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>If your roof has been damaged, R&amp;C can help you understand the condition of the roofing system and the work that may be needed.</p>
-          <p>We can inspect accessible roof areas, document relevant findings, and provide contractor-side information as your insurance claim moves forward.</p>
-        </div>
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+    </Fragment>
+  </FAQs>
+
+  <!-- Final CTA — Yellow -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Need Help With the Roofing Side of Your Claim?
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If your roof has been damaged, R&amp;C can help you understand the condition of the roofing system and the work that may be needed.<br />
+            We can inspect accessible roof areas, document relevant findings, and provide contractor-side information as your insurance claim moves forward.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Damage Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Damage Inspection</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

@@ -1,6 +1,17 @@
 ---
 // Sora for headings (via --font-sora), Inter for body (via --font-inter).
 // Both loaded by Astro Fonts API in astro.config.ts.
+// 
+// Color Palette (R&C Roofing):
+// #EDD974 - Gold/Yellow (Primary CTA, Accent)
+// #000000 - Black (Navbar, Footer)
+// #222222 - Charcoal (Headings)
+// #4F5E65 - Slate (Body text)
+// #A2AFB5 - Gray (Muted text)
+// #FFFFFF - White (Page bg)
+// #E3E6E7 - Light gray (Section bg)
+// #082244 - Navy (Dark sections)
+// #0787C9 - Blue (Links, optional)
 ---
 
 <style is:inline>
@@ -9,21 +20,21 @@
     --aw-font-serif: var(--font-inter);
     --aw-font-heading: var(--font-sora);
 
-    --aw-color-primary: rgb(45 55 72);
-    --aw-color-secondary: rgb(74 85 104);
+    --aw-color-primary: rgb(79 94 101);
+    --aw-color-secondary: rgb(162 175 181);
     --aw-color-accent: rgb(237 217 116);
     --aw-color-accent-hover: rgb(212 188 87);
 
-    --aw-color-text-heading: rgb(26 32 44);
-    --aw-color-text-default: rgb(45 55 72);
-    --aw-color-text-muted: rgb(113 128 150);
+    --aw-color-text-heading: rgb(34 34 34);
+    --aw-color-text-default: rgb(79 94 101);
+    --aw-color-text-muted: rgb(162 175 181);
     --aw-color-bg-page: rgb(255 255 255);
     --aw-color-bg-section-white: rgb(255 255 255);
-    --aw-color-bg-section-grey: rgb(249 250 251);
+    --aw-color-bg-section-grey: rgb(227 230 231);
 
-    --aw-color-bg-page-dark: rgb(26 32 44);
+    --aw-color-bg-page-dark: rgb(8 34 68);
 
-    --aw-shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
+    --aw-shadow-card: none;
     --aw-border-card: rgba(255, 255, 255, 0.16);
 
     ::selection {
@@ -43,10 +54,10 @@
 
     --aw-color-text-heading: rgb(247 250 252);
     --aw-color-text-default: rgb(226 232 240);
-    --aw-color-text-muted: rgb(160 174 192);
-    --aw-color-bg-page: rgb(26 32 44);
-    --aw-color-bg-section-white: rgb(26 32 44);
-    --aw-color-bg-section-grey: rgb(36 42 58);
+    --aw-color-text-muted: rgb(162 175 181);
+    --aw-color-bg-page: rgb(8 34 68);
+    --aw-color-bg-section-white: rgb(8 34 68);
+    --aw-color-bg-section-grey: rgb(12 45 90);
 
     ::selection {
       background-color: rgb(237 217 116 / 30%);

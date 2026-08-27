@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Slate Roofing Hawaii & Oahu | R&C Roofing Contractors',
@@ -35,9 +36,18 @@ const metadata = {
       <br /><br />
       R&amp;C Roofing Contractors can help you determine which option is appropriate for your property and roofing project.
       <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-    </Fragment>
-  </Hero2>
+    R&amp;C operates under Hawaii contractor license C-33642.
+  </Fragment>
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
 
   <!-- Natural Slate or Synthetic Slate? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -46,8 +56,8 @@ const metadata = {
       This is the first decision to make. Natural slate and synthetic slate should not be treated as interchangeable products. The Slate Roof Contractors Association specifically distinguishes natural quarried slate from manufactured alternatives.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Natural Slate</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Natural Slate</h3>
         <ul class="space-y-4">
           {[
             'Made from natural quarried stone.',
@@ -57,14 +67,14 @@ const metadata = {
             'Repair often involves working with individual slate units.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Synthetic / Rubber Slate</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Synthetic / Rubber Slate</h3>
         <ul class="space-y-4">
           {[
             'Manufactured roofing product designed to resemble natural slate.',
@@ -74,51 +84,58 @@ const metadata = {
             'Repair requirements depend on the specific manufactured system.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Is Natural Slate Roofing? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="About Natural and Synthetic Slate" classes={{ container: 'mb-10 md:mb-14' }} />
+  <!-- What Is Natural Slate Roofing? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="About Natural and Synthetic Slate" classes={{ container: 'mb-10 md:mb-14', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10">
       <div>
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">What Is Natural Slate Roofing?</h3>
-        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-4">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4 text-white">What Is Natural Slate Roofing?</h3>
+        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60 space-y-4">
           <p>Natural slate is stone that is quarried, split into roofing units, and installed individually. Because it is a natural material, color, texture, thickness, and other characteristics can vary based on the slate source.</p>
           <p>Natural slate roofing also has specialized installation requirements. Industry installation standards address details such as slate placement, headlap, nail positioning, flashing, and roof configuration. For that reason, natural slate should be evaluated as a complete roofing system rather than simply as an exterior finish.</p>
         </div>
       </div>
       <div>
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">What Is Rubber or Synthetic Slate?</h3>
-        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-4">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4 text-white">What Is Rubber or Synthetic Slate?</h3>
+        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60 space-y-4">
           <p>Synthetic slate is a manufactured roofing material designed to create the appearance of natural slate. The exact composition varies by manufacturer. Some products use recycled rubber and plastic materials.</p>
           <p>That distinction is important: composition, performance ratings, warranties, and environmental claims should come from the specific product R&amp;C installs rather than being assumed from the general category.</p>
         </div>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Is Slate Roofing Right for Your Property? · grey bg -->
+  <!-- Is Slate Roofing Right for Your Property? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Is Slate Roofing Right for Your Property?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       R&amp;C can evaluate the roof before recommending which material should be considered.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Slate May Be Worth Considering If</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Slate May Be Worth Considering If</h3>
         <ul class="space-y-4">
           {[
             'You specifically want the architectural appearance of slate.',
@@ -133,8 +150,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Another Material May Make More Sense If</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Another Material May Make More Sense If</h3>
         <ul class="space-y-4">
           {[
             'Slate does not fit the architecture or project goals.',
@@ -151,11 +168,11 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Should You Compare? · white bg -->
+  <!-- What Should You Compare? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Natural Slate vs. Synthetic Slate: What Should You Compare?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
@@ -187,14 +204,14 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Slate Roofing and Oahu Conditions · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Slate Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Slate Roofing and Oahu Conditions · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="Slate Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       Location-specific conditions should be part of every roofing conversation on Oahu.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -217,13 +234,20 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -231,8 +255,8 @@ const metadata = {
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Advantages and Tradeoffs of Slate Roofing" classes={{ container: 'mb-10 md:mb-14' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Potential Advantages</h3>
         <ul class="space-y-4">
           {[
             'Distinctive slate appearance',
@@ -248,8 +272,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Considerations</h3>
         <ul class="space-y-4">
           {[
             'Natural slate requires specialized installation knowledge',
@@ -281,22 +305,22 @@ const metadata = {
       <p>For synthetic slate, expected service life and warranty coverage depend on the actual manufacturer and product. We would not use one lifespan number for both materials.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Does Slate Roofing Cost on Oahu? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- What Does Slate Roofing Cost on Oahu? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         What Does Slate Roofing Cost on Oahu?
       </h2>
-      <a href="/contact" class="btn-primary shrink-0">Request an Estimate</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200 shrink-0">Request an Estimate</a>
     </div>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 md:mb-10">
       Pricing depends on the system and the property. R&amp;C can provide project-specific pricing after evaluating the property and proposed roofing system.
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/20 border-t border-white/20">
       {[
         { title: 'Natural Slate vs. Synthetic Slate', description: 'The two materials have different product costs and installation requirements.' },
         { title: 'Roof Size', description: 'Larger roofs require more material and labor.' },
@@ -307,17 +331,24 @@ const metadata = {
         { title: 'Access and Project Logistics', description: 'Building height and site access can affect how the project is staged.' },
       ].map(({ title, description }) => (
         <div class="py-6 md:py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Replacing Another Roof With Slate? · grey bg -->
+  <!-- Replacing Another Roof With Slate? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Replacing Another Roof With Slate?
@@ -344,11 +375,11 @@ const metadata = {
     </div>
     <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; New Installation</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can an Existing Slate Roof Be Repaired? · white bg -->
+  <!-- Can an Existing Slate Roof Be Repaired? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Can an Existing Slate Roof Be Repaired?
@@ -359,36 +390,43 @@ const metadata = {
     </div>
     <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- See Slate Roofing on Real Oahu Properties · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="See Slate Roofing on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12' }} />
+  <!-- See Slate Roofing on Real Oahu Properties · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="See Slate Roofing on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {[
         { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified replacement, installation, or repair]', description: '[Short verified project description.]' },
         { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified scope]', description: '[Short verified description.]' },
         { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified scope]', description: '[Short verified description.]' },
       ].map(({ neighborhood, material, project, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
           <div class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-medium text-muted mb-1">{neighborhood} | {material}</p>
-          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-heading mb-1">Project: {project}</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+          <p class="text-[13px] md:text-[14px] font-medium text-white/60 mb-1">{neighborhood} | {material}</p>
+          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-white mb-1">Project: {project}</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/gallery" class="btn btn-secondary">View More Roofing Projects</a>
+      <a href="/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View More Roofing Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -468,30 +506,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Find the Right Slate Option for Your Property
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          If you like the appearance of slate, the next question is whether natural slate or a manufactured slate alternative better fits the property.<br />
-          R&amp;C Roofing Contractors can evaluate the roof, discuss the available options, and develop a project-specific scope once the appropriate roofing system is identified.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Find the Right Slate Option for Your Property
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If you like the appearance of slate, the next question is whether natural slate or a manufactured slate alternative better fits the property.<br />
+            R&amp;C Roofing Contractors can evaluate the roof, discuss the available options, and develop a project-specific scope once the appropriate roofing system is identified.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss a Slate Roofing Project</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss a Slate Roofing Project</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

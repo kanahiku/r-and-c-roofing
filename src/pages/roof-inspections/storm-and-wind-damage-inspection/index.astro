@@ -2,7 +2,10 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Storm & Wind Damage Roof Inspections Oahu | R&C Roofing',
@@ -13,28 +16,33 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        Storm &amp; Wind Damage Roof Inspections on Oahu
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Find Out What the Storm Did to Your Roof
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>Wind damage is not always obvious from the ground. Roofing materials can shift, flashing can loosen, and other vulnerable areas can be affected even when the roof still looks intact from the driveway.</p>
-        <p>R&amp;C Roofing Contractors provides storm and wind damage roof inspections for properties on Oahu. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.</p>
-        <p>If you notice missing roofing materials, a new leak, damaged flashing, or another change after severe weather, an inspection can help document the roof’s condition and determine what should happen next.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Schedule a Storm Damage Roof Inspection</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
 
-  <!-- What to do after a storm — grey -->
+  <!-- P-01 Hero — white + motif -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Schedule a Storm Damage Roof Inspection', href: '/contact' }]}
+    image={{ src: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=2070&q=80', alt: 'Storm and wind damage roof inspection on Oahu' }}
+  >
+    <Fragment slot="title">Storm &amp; Wind Damage<br />Roof Inspections on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Find Out What the Storm Did to Your Roof
+      </span>
+      Wind damage is not always obvious from the ground. Roofing materials can shift, flashing can loosen, and other vulnerable areas can be affected even when the roof still looks intact from the driveway.
+      <br /><br />
+      R&C Roofing Contractors provides storm and wind damage roof inspections for properties on Oahu. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </Hero2>
+
+  <!-- What To Do After a Storm — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="What to Do After a Storm" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -63,9 +71,9 @@ const metadata = {
             'A professional inspection can provide a closer look at accessible roofing areas and document visible conditions that may not be apparent from the ground.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
@@ -73,18 +81,20 @@ const metadata = {
       <a href="/contact" class="btn-primary">Schedule a Storm Damage Inspection</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What we look for — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What We Look for During a Storm Damage Inspection" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3 max-w-3xl mx-auto text-center">
+  <!-- What We Look For — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
+      What We Look for During a Storm Damage Inspection
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
       The inspection scope depends on the property, roofing system, accessibility, and conditions after the storm.
     </p>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-3xl mx-auto text-center">
-      Where accessible, R&amp;C may evaluate:
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Where accessible, R&C may evaluate:
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
       {[
@@ -119,18 +129,25 @@ const metadata = {
             'Storm debris can collect around valleys, gutters, and other drainage areas. These areas may need attention after severe weather.',
         },
       ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Why not visible — grey -->
+  <!-- Why Not Visible From Ground — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Why Storm Damage Is Not Always Visible From the Ground
@@ -142,11 +159,11 @@ const metadata = {
       <p>That is why a closer inspection may be useful after severe weather, especially when you notice a new leak or another change in the roof.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Signs — white -->
+  <!-- Signs Your Roof May Have Damage — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Signs Your Roof May Have Wind or Storm Damage" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -185,9 +202,9 @@ const metadata = {
             'Changes around fascia, soffits, gutters, or roof edges can also indicate storm-related impact or wind exposure.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border bg-gray-50 dark:bg-slate-800 p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
@@ -195,17 +212,19 @@ const metadata = {
       <a href="/contact" class="btn-primary">Schedule a Storm Damage Roof Inspection</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Process — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Happens During a Storm Damage Roof Inspection?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-2xl">
-      Every property is different, but the inspection generally follows the same process used across R&amp;C’s roof inspection services.
+  <!-- Process — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6">
+      What Happens During a Storm Damage Roof Inspection?
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 max-w-2xl">
+      Every property is different, but the inspection generally follows the same process used across R&C's roof inspection services.
     </p>
-    <div class="flex flex-col gap-6 max-w-2xl">
+    <div class="flex flex-col gap-6 max-w-2xl mb-10">
       {[
         {
           step: '1',
@@ -223,7 +242,7 @@ const metadata = {
           step: '3',
           title: 'We Document Relevant Findings',
           description:
-            'Photos and notes help create a record of the roof’s condition after the weather event.',
+            "Photos and notes help create a record of the roof's condition after the weather event.",
         },
         {
           step: '4',
@@ -233,42 +252,49 @@ const metadata = {
         },
       ].map(({ step, title, description }) => (
         <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
+          <div class="shrink-0 w-9 h-9 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[15px] text-black mt-0.5">
             {step}
           </div>
           <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-white">{title}</h3>
+            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
           </div>
         </div>
       ))}
     </div>
-    <div class="mt-10 rounded-lg border bg-white dark:bg-slate-900 p-6 max-w-3xl">
-      <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">
+    <div class="rounded-lg border border-accent/60 bg-[#222] p-6 max-w-3xl">
+      <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">
         HAAG Certified Storm Damage Assessment
       </h3>
-      <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-3">
+      <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/70 space-y-3">
         <p>Robert Pilato is a HAAG Certified Inspector, Certification #201408313.</p>
-        <p>HAAG certification includes specialized education and testing focused on roof damage assessment. This gives R&amp;C additional training when evaluating roofing conditions following wind or storm events.</p>
-        <p>That expertise is paired with R&amp;C’s experience as a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can also provide the roofing services required for the project.</p>
+        <p>HAAG certification includes specialized education and testing focused on roof damage assessment. This gives R&C additional training when evaluating roofing conditions following wind or storm events.</p>
+        <p>That expertise is paired with R&C's experience as a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can also provide the roofing services required for the project.</p>
       </div>
-      <a href="/roof-inspections/haag-certified-inspection" class="btn btn-secondary inline-block mt-4">
+      <a href="/roof-inspections/haag-certified-inspection" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200 mt-4">
         Learn About HAAG Certified Roof Inspections
       </a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Insurance documentation — white -->
+  <!-- Insurance Documentation — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Storm Damage Documentation for Insurance Claims" />
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8 max-w-4xl">
-      <p>If you believe your roof was damaged by a covered weather event, documentation of the roof’s condition may be useful during the insurance process.</p>
-      <p>R&amp;C can inspect accessible roofing areas, photograph relevant findings, and provide contractor-side information related to the roofing scope.</p>
+      <p>If you believe your roof was damaged by a covered weather event, documentation of the roof's condition may be useful during the insurance process.</p>
+      <p>R&C can inspect accessible roofing areas, photograph relevant findings, and provide contractor-side information related to the roofing scope.</p>
       <p>Your insurance carrier determines coverage based on your policy and its claim review process.</p>
-      <p>R&amp;C Roofing Contractors is not a public adjuster. We do not adjust claims, negotiate insurance settlements, represent policyholders in claim negotiations, or guarantee claim outcomes.</p>
+      <p>R&C Roofing Contractors is not a public adjuster. We do not adjust claims, negotiate insurance settlements, represent policyholders in claim negotiations, or guarantee claim outcomes.</p>
     </div>
     <a href="/insurance-claim-help" class="btn-primary">Explore Insurance Claim Help</a>
     <Fragment slot="bg">
@@ -276,7 +302,7 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- If we find damage — grey -->
+  <!-- If We Find Damage — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="What Happens If We Find Damage?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
@@ -295,28 +321,30 @@ const metadata = {
             'If damage affects multiple areas or the surrounding roofing system is already deteriorated, a larger repair or replacement may need to be evaluated.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <p class="mt-6 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
-      R&amp;C explains what we find and why a particular scope of work is being recommended.
+      R&C explains what we find and why a particular scope of work is being recommended.
     </p>
     <div class="mt-8">
       <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore other inspections — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Storm damage is one reason to have your roof inspected. R&amp;C also provides inspections for other property needs.
+  <!-- Explore Other Inspections — Black + motif, dark cards -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
+      Explore Our Other Roof Inspection Services
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Storm damage is one reason to have your roof inspected. R&C also provides inspections for other property needs.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {[
@@ -339,40 +367,47 @@ const metadata = {
           linkText: 'View Maintenance Inspections',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
         </div>
       ))}
     </div>
     <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="btn btn-secondary">View All Roof Inspection Services</a>
+      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View All Roof Inspection Services</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Service Area — White -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Storm Damage Roof Inspections Within Our Oahu Service Area
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
+      <p>R&C Roofing Contractors is based in Honolulu and provides storm and wind damage roof inspections within its Oahu service area.</p>
+      <p>Conditions can vary across the island. Properties near exposed coastal areas may experience different wind and weather conditions than properties in sheltered valleys or other neighborhoods.</p>
+      <p>If your roof looks different after severe weather, contact R&C with your property location and roofing concern.</p>
+    </div>
+    <div class="mt-8">
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Explore Areas We Serve</a>
     </div>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Service area note — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Storm Damage Roof Inspections Within Our Oahu Service Area
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>R&amp;C Roofing Contractors is based in Honolulu and provides storm and wind damage roof inspections within its Oahu service area.</p>
-      <p>Conditions can vary across the island. Properties near exposed coastal areas may experience different wind and weather conditions than properties in sheltered valleys or other neighborhoods.</p>
-      <p>If your roof looks different after severe weather, contact R&amp;C with your property location and roofing concern.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn btn-secondary">Explore Areas We Serve</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- FAQs — white -->
+  <!-- FAQs — White -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -394,7 +429,7 @@ const metadata = {
       {
         title: 'Can R&C document storm damage for an insurance claim?',
         description:
-          'R&amp;C can inspect accessible roofing areas and document relevant visible findings. We can also provide contractor-side information related to the roofing scope. Coverage decisions are made by your insurance carrier.',
+          'R&C can inspect accessible roofing areas and document relevant visible findings. We can also provide contractor-side information related to the roofing scope. Coverage decisions are made by your insurance carrier.',
       },
       {
         title: 'Does homeowners insurance cover roof wind damage?',
@@ -404,7 +439,7 @@ const metadata = {
       {
         title: 'Can R&C repair the roof after the inspection?',
         description:
-          'Yes. R&amp;C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can provide roofing services for the project.',
+          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can provide roofing services for the project.',
       },
       {
         title: 'Should I have my roof inspected after every storm?',
@@ -418,31 +453,36 @@ const metadata = {
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — grey -->
+  <!-- P-12 Final CTA — Yellow -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Check Your Roof After Severe Weather
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>If you have noticed a leak, missing roofing materials, storm debris, or another change in your roof, an inspection can help determine what was affected.</p>
-          <p>R&amp;C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what the condition means for your property.</p>
-        </div>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Check Your Roof After Severe Weather
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If you have noticed a leak, missing roofing materials, storm debris, or another change in your roof, an inspection can help determine what was affected.<br />
+            R&C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what the condition means for your property.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Schedule a Storm Damage Roof Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Storm Damage Roof Inspection</a>
+        </div>
       </div>
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
-</Layout>
 
+</Layout>

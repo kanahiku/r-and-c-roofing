@@ -2,7 +2,10 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Annual Roof Maintenance Inspections Oahu | R&C Roofing',
@@ -13,28 +16,33 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        Annual Roof Maintenance Inspections on Oahu
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Keep a Closer Eye on Your Roof’s Condition
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>Roof problems do not always begin with an obvious leak. Wear around flashing, exposed metal components, roofing materials, and other vulnerable areas can develop before there is a visible problem inside the property.</p>
-        <p>An annual roof maintenance inspection gives you a regular opportunity to check the condition of the roofing system and identify areas that may need attention.</p>
-        <p>R&amp;C Roofing Contractors provides maintenance roof inspections for residential and commercial properties within its Oahu service area. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Schedule a Maintenance Roof Inspection</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
 
-  <!-- Why routine inspections matter — grey -->
+  <!-- P-01 Hero — white + motif -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Schedule a Maintenance Roof Inspection', href: '/contact' }]}
+    image={{ src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2070&q=80', alt: 'Annual roof maintenance inspection on Oahu' }}
+  >
+    <Fragment slot="title">Annual Roof Maintenance<br />Inspections on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Keep a Closer Eye on Your Roof's Condition
+      </span>
+      Roof problems do not always begin with an obvious leak. Wear around flashing, exposed metal components, roofing materials, and other vulnerable areas can develop before there is a visible problem inside the property.
+      <br /><br />
+      R&C Roofing Contractors provides maintenance roof inspections for residential and commercial properties within its Oahu service area. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </Fragment>
+  </Hero2>
+
+  <!-- Why Routine Inspections — Grey #FAFAFA, right-column black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Why Routine Roof Inspections Matter on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
     <div class="flex flex-col lg:flex-row gap-8 md:gap-12">
@@ -45,7 +53,6 @@ const metadata = {
           <p>A maintenance inspection helps identify visible changes before you have to rely on a ceiling stain or active leak to tell you something is wrong.</p>
         </div>
       </div>
-
       <div class="lg:basis-1/2">
         <div class="flex flex-col gap-4 md:gap-5">
           {[
@@ -69,29 +76,31 @@ const metadata = {
                 'Areas around vents, pipes, skylights, roof transitions, and other penetrations can be important inspection points because they create breaks in the roofing system.',
             },
           ].map(({ title, description }) => (
-            <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-5 md:p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
-              <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+            <div class="rounded-lg border border-accent/60 bg-[#222] p-5 md:p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
+              <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
             </div>
           ))}
         </div>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What we look for — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What We Look for During a Maintenance Roof Inspection" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3 max-w-3xl mx-auto text-center">
+  <!-- What We Look For — Black + motif -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
+      What We Look for During a Maintenance Roof Inspection
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
       The inspection scope depends on the property, roof type, accessibility, and existing conditions.
     </p>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-6 max-w-3xl mx-auto text-center">
-      Where accessible, R&amp;C may evaluate:
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-6">
+      Where accessible, R&C may evaluate:
     </p>
-    <ul class="space-y-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-3xl mx-auto">
+    <ul class="space-y-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 max-w-3xl mx-auto">
       {[
         'Roofing materials for visible wear or damage',
         'Flashing around roof transitions and penetrations',
@@ -103,22 +112,29 @@ const metadata = {
         'Other areas that may require maintenance or closer evaluation',
       ].map((item) => (
         <li class="flex gap-3">
-          <span class="shrink-0 text-primary mt-0.5">—</span>
+          <span class="shrink-0 text-accent mt-0.5">—</span>
           {item}
         </li>
       ))}
     </ul>
-    <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic max-w-3xl mx-auto">
+    <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/50 italic max-w-3xl mx-auto">
       If we identify a concern, we explain what we found and whether maintenance, repair, or additional evaluation should be considered.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Build a record — grey -->
+  <!-- Build a Record — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Build a Record of Your Roof’s Condition Over Time" />
+    <Headline title="Build a Record of Your Roof's Condition Over Time" />
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
       <p>One benefit of regular roof inspections is having a clearer record of how the roofing system changes from one inspection to the next.</p>
       <p>Documenting visible conditions can make it easier to identify new deterioration, monitor areas that were previously flagged, and plan future roofing work based on what is actually happening with the property.</p>
@@ -126,31 +142,33 @@ const metadata = {
       <p>For commercial property owners and managers, periodic inspections can also support longer-term maintenance planning across one or multiple buildings.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Property managers — white -->
+  <!-- Property Managers — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Maintenance Inspections for Property Managers and AOAO or HOA Boards" />
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
       <p>Managing roofing across a multi-unit or multi-building property requires a different approach than responding to a single residential leak.</p>
       <p>A regular inspection schedule can help property managers and boards keep a record of visible roofing conditions and identify maintenance needs before they become urgent projects.</p>
-      <p>R&amp;C can inspect accessible roofing areas and provide contractor-side recommendations when repair or replacement work should be considered.</p>
+      <p>R&C can inspect accessible roofing areas and provide contractor-side recommendations when repair or replacement work should be considered.</p>
       <p>For properties with multiple roofs or buildings, contact our team to discuss the property and determine an appropriate inspection approach.</p>
     </div>
     <div class="mt-8">
       <a href="/contact" class="btn-primary">Request a Property Roof Inspection</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What if we find a problem — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Happens If We Find a Problem?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+  <!-- What If We Find a Problem — Black + motif, dark cards -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
+      What Happens If We Find a Problem?
+    </h2>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
       Finding an issue during a maintenance inspection does not automatically mean you need a new roof.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -171,39 +189,46 @@ const metadata = {
             'If similar problems are appearing across multiple areas of the roof, we may recommend evaluating whether a larger repair or replacement project makes more sense.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
-    <div class="mt-8">
+    <div class="mt-8 text-center">
       <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Frequency — white -->
+  <!-- Frequency — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="How Often Should You Have Your Roof Inspected?" />
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
       <p>There is no single inspection schedule that applies to every property.</p>
       <p>The appropriate frequency can depend on the roof type, age, location, previous damage, and exposure to local conditions.</p>
       <p>An annual inspection provides a consistent way to track visible roof conditions over time. Additional evaluation may also make sense after severe weather or when you notice a change in the roof.</p>
-      <p>If you are unsure what schedule is appropriate for your property, R&amp;C can review your roofing situation and help you determine a practical approach.</p>
+      <p>If you are unsure what schedule is appropriate for your property, R&C can review your roofing situation and help you determine a practical approach.</p>
     </div>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore other inspections — grey -->
+  <!-- Explore Other Inspections — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Annual maintenance is one reason to have a roof inspected. R&amp;C also provides inspection services for other property needs.
+      Annual maintenance is one reason to have a roof inspected. R&C also provides inspection services for other property needs.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {[
@@ -226,22 +251,22 @@ const metadata = {
           linkText: 'View Storm Damage Inspections →',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
+          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
         </div>
       ))}
     </div>
     <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="btn btn-secondary">View All Roof Inspection Services</a>
+      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- FAQs — white -->
+  <!-- FAQs — White -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -258,12 +283,12 @@ const metadata = {
       {
         title: 'Can R&C inspect multiple buildings for an AOAO, HOA, or commercial property?',
         description:
-          'R&amp;C works with property professionals as well as homeowners. Contact our team with information about the property so we can discuss the appropriate inspection scope.',
+          'R&C works with property professionals as well as homeowners. Contact our team with information about the property so we can discuss the appropriate inspection scope.',
       },
       {
         title: 'What happens if the inspection finds damage?',
         description:
-          'We explain the condition we observed and whether maintenance, repair, or further evaluation should be considered. R&amp;C is also a licensed Hawaii roofing contractor, License C-33642, so our team can provide roofing services when work is needed.',
+          'We explain the condition we observed and whether maintenance, repair, or further evaluation should be considered. R&C is also a licensed Hawaii roofing contractor, License C-33642, so our team can provide roofing services when work is needed.',
       },
       {
         title: 'Can I inspect my own roof?',
@@ -282,31 +307,36 @@ const metadata = {
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — grey -->
+  <!-- P-12 Final CTA — Yellow -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Keep Track of Your Roof Before a Problem Becomes Urgent
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>A maintenance inspection can give you a clearer understanding of the roof’s current condition and identify areas that may need attention.</p>
-          <p>R&amp;C Roofing Contractors can evaluate the roofing system, explain what we find, and recommend the appropriate next step when work is needed.</p>
-        </div>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Keep Track of Your Roof Before a Problem Becomes Urgent
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            A maintenance inspection can give you a clearer understanding of the roof's current condition and identify areas that may need attention.<br />
+            R&C Roofing Contractors can evaluate the roofing system, explain what we find, and recommend the appropriate next step when work is needed.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Schedule a Maintenance Roof Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Maintenance Roof Inspection</a>
+        </div>
       </div>
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
-</Layout>
 
+</Layout>

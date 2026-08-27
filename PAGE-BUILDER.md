@@ -70,6 +70,8 @@ import Image from '~/components/common/Image.astro';
 
 Every section on every page must follow these rules. Do not deviate.
 
+> **Visual system rule:** See `.cursor/rules/rc-visual-system.mdc` for the section color flow (White → Grey → Black → Yellow CTA), card styles, black section motif, and CTA banner pattern. Apply these to every page.
+
 | Rule | Value |
 |------|-------|
 | Max content width | `max-w-[1400px] mx-auto` on every `WidgetWrapper` |
@@ -645,3 +647,42 @@ When a new layout is polished and approved in the browser:
    - Code snippet (complete, copy-pasteable)
    - **Variants:** common modifications
 4. If any global class or component was changed to support it, note it here too
+
+---
+
+## Decorative Components
+
+### HeroAccent
+
+Simple 1–2 chevron arrow shapes for hero section corners. Reinforces roofing brand identity as a subtle filler.
+
+**Import:**
+```astro
+import HeroAccent from '~/components/ui/HeroAccent.astro';
+```
+
+**Props:**
+
+| Prop | Values | Default | Description |
+|------|--------|---------|-------------|
+| `position` | `bottom-right`, `bottom-left`, `top-right`, `top-left` | `bottom-right` | Corner placement |
+| `color` | `accent`, `muted`, `dark`, `white` | `muted` | Design system color |
+| `opacity` | `0` – `1` | `0.12` | Visibility |
+| `size` | `sm`, `md`, `lg` | `md` | Chevron size |
+| `count` | `1`, `2` | `2` | Number of stacked chevrons |
+
+**Usage in Hero2 bg slot:**
+```astro
+<Hero2 ...>
+  <!-- other slots -->
+  <Fragment slot="bg">
+    <HeroAccent position="bottom-right" color="muted" opacity={0.1} size="lg" count={2} />
+  </Fragment>
+</Hero2>
+```
+
+**Variants:**
+- Single chevron: `count={1}` — one shape only
+- Gold accent: `color="accent"` — uses primary gold color
+- Large: `size="lg"` — bigger for prominent heroes
+- White on dark: `color="white"` — for dark hero backgrounds

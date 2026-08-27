@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Roof Repair Honolulu & Oahu | R&C Roofing Contractors',
@@ -37,6 +38,15 @@ const metadata = {
       <br /><br />
       R&C operates under Hawaii contractor license C-33642. If the damage is localized and the surrounding roofing system remains serviceable, a targeted repair may be all that is needed.
       <span class="block mt-8"></span>
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[6%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </Hero2>
 
@@ -85,27 +95,29 @@ const metadata = {
           linkText: 'Schedule a Roof Inspection',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
-          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 flex-1">{description}</p>
+          <a href={href} class="mt-4 text-accent font-medium text-[14px] md:text-[15px] hover:underline">
             {linkText} →
           </a>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Horizontal rows · Common Roof Repairs We Handle (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Common Roof Repairs We Handle" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Horizontal rows · Common Roof Repairs We Handle (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
+      Common Roof Repairs We Handle
+    </h2>
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The repair needed depends on the roofing material, location of the damage, and condition of the surrounding roof.
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/10 border-t border-white/10">
       {[
         {
           title: 'Roof Leak Repair',
@@ -147,21 +159,28 @@ const metadata = {
         },
       ].map(({ title, paragraphs }) => (
         <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
           <div class="space-y-3">
             {paragraphs.map((p) => (
-              <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{p}</p>
+              <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">{p}</p>
             ))}
           </div>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-08 · How R&C Approaches a Roof Repair (grey bg) -->
+  <!-- P-08 · How R&C Approaches a Roof Repair (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
       <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
@@ -202,20 +221,17 @@ const metadata = {
         />
       </div>
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- Custom · Roof Repair or Roof Replacement? (white bg) -->
+  <!-- Custom · Roof Repair or Roof Replacement? (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Roof Repair or Roof Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
       Not every leak requires a new roof. The right decision depends on the condition of the damaged area and the roofing system around it.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Repair May Make Sense When</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5 text-white">Repair May Make Sense When</h3>
         <ul class="space-y-4">
           {[
             'Damage is limited to a specific area.',
@@ -224,14 +240,14 @@ const metadata = {
             'A targeted repair addresses the roofing problem.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Replacement May Need to Be Considered When</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5 text-white">Replacement May Need to Be Considered When</h3>
         <ul class="space-y-4">
           {[
             'Similar problems appear across multiple areas.',
@@ -240,8 +256,8 @@ const metadata = {
             'A localized repair would not address the broader roof condition.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
@@ -251,21 +267,21 @@ const metadata = {
       R&C bases its recommendation on the roof we inspect. We do not assume that every roofing problem requires replacement.
     </p>
     <div class="text-center">
-      <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Explore Roof Replacement</a>
+      <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Explore Roof Replacement</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-06 · What Affects the Cost (grey bg, 5 items = 3+2) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Affects the Cost of Roof Repair on Oahu?" classes={{ container: 'mb-4 md:mb-6' }} />
+  <!-- P-06 · What Affects the Cost (Black, 5 items = 3+2) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">What Affects the Cost of Roof Repair on Oahu?</h2>
     <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
         There is no single price for roof repair because the scope can vary significantly from one property to another.
       </p>
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mt-2">
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mt-2">
         Several factors can affect the cost:
       </p>
     </div>
@@ -284,9 +300,9 @@ const metadata = {
           description: 'Some underlying conditions are not visible until roofing materials are removed.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
@@ -301,20 +317,27 @@ const metadata = {
           description: 'Roof slope, height, access, and surrounding property conditions can affect how the work is performed.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
-    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
       R&C can provide an estimate after evaluating the roofing problem and determining the proposed repair scope.
     </p>
     <div class="text-center">
-      <a href="/contact" class="btn-primary">Request a Roof Repair Estimate</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Request a Roof Repair Estimate</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -357,7 +380,7 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Insurance Claim Info (grey bg) -->
+  <!-- P-13 · Insurance Claim Info (Grey #FAFAFA) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       What If the Roof Damage May Be Related to an Insurance Claim?
@@ -377,35 +400,44 @@ const metadata = {
       <a href="/insurance-claim-help" class="btn btn-secondary">Explore Insurance Claim Help</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-09 · Recent Roof Repair Projects (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Recent Roof Repair Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+  <!-- P-09 · Recent Roof Repair Projects (Black) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-12 text-center">
+      Recent Roof Repair Projects
+    </h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {[1, 2, 3].map(() => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4">
-          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
+          <div class="w-full h-36 bg-black/40 rounded mb-3 flex items-center justify-center text-white/20">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-heading mb-1">[Neighborhood] | Roof Repair</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">[Short verified description of the roofing problem and repair.]</p>
+          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-white mb-1">[Neighborhood] | Roof Repair</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">[Short verified description of the roofing problem and repair.]</p>
         </div>
       ))}
     </div>
     <div class="mt-8 md:mt-10 text-center">
-      <a href="/about/gallery" class="btn btn-secondary">View Roofing Projects</a>
+      <a href="/about/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View Roofing Projects</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-05 style · Related Services (grey bg) -->
+  <!-- P-05 style · Related Services (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Explore Related Roofing Services" classes={{ container: 'mb-8 md:mb-12' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -447,8 +479,8 @@ const metadata = {
           linkText: 'Explore Roofing Materials',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
           <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
             {linkText} →
@@ -456,12 +488,9 @@ const metadata = {
         </div>
       ))}
     </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · FAQs (white bg) -->
+  <!-- P-10 · FAQs (Grey #FAFAFA) -->
   <FAQs
     title="Frequently Asked Questions"
     items={[
@@ -503,32 +532,38 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Get the Roof Problem Checked Before It Gets Worse
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          If you have noticed a leak, missing roofing materials, damaged flashing, or another change in your roof, start by finding out what needs attention.<br />
-          R&C Roofing Contractors can inspect the roofing problem, explain the recommended repair, and complete the agreed work if the roof is suitable for repair.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div
-        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
-      >
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            Get the Roof Problem Checked Before It Gets Worse
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            If you have noticed a leak, missing roofing materials, damaged flashing, or another change in your roof, start by finding out what needs attention.<br />
+            R&amp;C Roofing Contractors can inspect the roofing problem, explain the recommended repair, and complete the agreed work if the roof is suitable for repair.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Repair Inspection</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Repair Inspection</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>

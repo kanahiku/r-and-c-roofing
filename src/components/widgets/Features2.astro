@@ -16,6 +16,7 @@ const {
   id,
   isDark = false,
   classes = {},
+  cardClass,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
@@ -27,22 +28,33 @@ const columnsClass =
       : columns === 2
         ? 'sm:grid-cols-2'
         : '';
+
+const cardBg = cardClass ?? (isDark
+  ? 'border-white/15 bg-white/5 backdrop-blur-sm'
+  : 'border-accent/50 bg-white dark:bg-slate-900');
+
+const cardTitle = isDark ? 'text-white' : '';
+const cardDesc = isDark ? 'text-white/70' : 'text-muted';
+
+const headlineClasses = isDark
+  ? { title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70' }
+  : (classes?.headline as Record<string, string>);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-[1400px] mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={headlineClasses} />
 
   {
     items.length > 0 && (
       <div class:list={['grid gap-4 md:gap-6 gap-x-12', columnsClass]}>
         {items.map(({ title: itemTitle, description, icon, callToAction }) => (
-          <div class="relative flex flex-col rounded-lg shadow-[0_4px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-white/16 bg-white dark:bg-slate-900 p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <div class:list={['relative flex flex-col rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade', cardBg]}>
             {(icon || defaultIcon) && <Icon name={icon || defaultIcon} class="mb-6 w-12 h-12 text-primary" />}
-            <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%]">
+            <h3 class:list={['text-[22px] md:text-[26px] font-medium font-heading leading-[130%]', cardTitle]}>
               {itemTitle}
             </h3>
             {description && (
-              <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mt-2" set:html={description} />
+              <p class:list={['text-[14px] md:text-[15px] font-medium leading-[160%] mt-2', cardDesc]} set:html={description} />
             )}
             {callToAction && (
               <div class="mt-auto pt-4">

@@ -5,6 +5,7 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import simplePattern from '~/assets/images/patterns/simple.svg';
 
 const metadata = {
   title: 'Tile Roofing Honolulu & Oahu | Clay & Concrete | R&C Roofing',
@@ -35,9 +36,18 @@ const metadata = {
       <br /><br />
       R&amp;C Roofing Contractors installs tile roofing for qualifying properties within its Oahu service area. We can help you compare clay and concrete tile and determine whether a tile roofing system is appropriate for your replacement or new construction project.
       <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-    </Fragment>
-  </Hero2>
+    R&amp;C operates under Hawaii contractor license C-33642.
+  </Fragment>
+  <Fragment slot="bg">
+    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+      <div
+        class="absolute inset-0 opacity-[6%]"
+        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </Fragment>
+</Hero2>
 
   <!-- Is Tile Roofing a Good Fit? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -46,8 +56,8 @@ const metadata = {
       Tile may be worth considering when its appearance and roofing requirements fit the property. Roof loading is an important part of tile-roof planning — the Tile Roofing Industry Alliance includes roof loading among the technical topics addressed in its installation training.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Tile May Be Worth Considering If</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Tile May Be Worth Considering If</h3>
         <ul class="space-y-4">
           {[
             'You want the distinctive appearance of a tile roof.',
@@ -56,14 +66,14 @@ const metadata = {
             'You are willing to evaluate the complete roofing system rather than choosing tile based on appearance alone.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Look Closely at Other Options If</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Look Closely at Other Options If</h3>
         <ul class="space-y-4">
           {[
             'The existing structure is not suited to the proposed tile system without additional work.',
@@ -72,8 +82,8 @@ const metadata = {
             'The specific tile product is not appropriate for the property or project.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
@@ -83,19 +93,19 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Clay Tile or Concrete Tile? · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Clay Tile or Concrete Tile?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Clay Tile or Concrete Tile? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="Clay Tile or Concrete Tile?" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       Both create a tile roof, but they are different materials. Industry guidance treats clay and concrete as separate roofing materials with their own product standards and installation requirements.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Clay Tile</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Clay Tile</h3>
         <ul class="space-y-4">
           {[
             'Made from clay that is formed and fired at high temperatures.',
@@ -104,14 +114,14 @@ const metadata = {
             'May be selected when genuine clay is part of the architectural goal.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Concrete Tile</h3>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Concrete Tile</h3>
         <ul class="space-y-4">
           {[
             'Traditionally manufactured from cement, sand, and water, with pigments or finishes for different appearances.',
@@ -120,19 +130,26 @@ const metadata = {
             'May be considered when homeowners want a broader range of tile profiles and appearances.',
           ].map((item) => (
             <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
             </li>
           ))}
         </ul>
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Is Clay Tile Roofing? / What Is Concrete Tile Roofing? · grey bg -->
+  <!-- What Is Clay Tile Roofing? / What Is Concrete Tile Roofing? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="About Clay Tile and Concrete Tile" classes={{ container: 'mb-10 md:mb-14' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
@@ -154,11 +171,11 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Tile Roofing Is More Than the Tile You See · white bg -->
+  <!-- Tile Roofing Is More Than the Tile You See · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Tile Roofing Is More Than the Tile You See
@@ -185,14 +202,14 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Tile Roofing and Oahu Conditions · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Tile Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+  <!-- Tile Roofing and Oahu Conditions · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline title="Tile Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The right tile system for a property depends on more than appearance alone. Oahu's environmental conditions should be part of the evaluation.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -215,22 +232,29 @@ const metadata = {
         },
       ].map(({ title, description }) => (
         <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Advantages and Tradeoffs · white bg (comment only, bg set below) -->
+  <!-- Advantages and Tradeoffs · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Advantages and Tradeoffs of Tile Roofing" classes={{ container: 'mb-10 md:mb-14' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Potential Advantages</h3>
         <ul class="space-y-4">
           {[
             'Distinctive architectural appearance',
@@ -246,8 +270,8 @@ const metadata = {
           ))}
         </ul>
       </div>
-      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Considerations</h3>
         <ul class="space-y-4">
           {[
             'Structural and roof-loading requirements need to be considered',
@@ -269,7 +293,7 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How Long Does a Tile Roof Last? · grey bg (comment only) -->
+  <!-- How Long Does a Tile Roof Last? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       How Long Does a Tile Roof Last?
@@ -296,22 +320,22 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Does Tile Roofing Cost on Oahu? · white bg (comment only) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- What Does Tile Roofing Cost on Oahu? · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         What Does Tile Roofing Cost on Oahu?
       </h2>
-      <a href="/contact" class="btn-primary shrink-0">Request an Estimate</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200 shrink-0">Request an Estimate</a>
     </div>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 md:mb-10">
       Tile-roof pricing depends on the property and selected roofing system. R&amp;C provides project-specific pricing after evaluating the property and proposed tile system.
     </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <div class="divide-y divide-white/20 border-t border-white/20">
       {[
         { title: 'Clay or Concrete', description: 'The tile material and specific product can affect material pricing.' },
         { title: 'Roof Size and Design', description: 'Roof area, slope, hips, valleys, penetrations, and architectural complexity influence installation.' },
@@ -321,17 +345,24 @@ const metadata = {
         { title: 'Property Access', description: 'Building height and site access can also affect project logistics.' },
       ].map(({ title, description }) => (
         <div class="py-6 md:py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/60">{description}</p>
         </div>
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can You Replace Shingles or Metal With Tile? · grey bg -->
+  <!-- Can You Replace Shingles or Metal With Tile? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Can You Replace Shingles or Metal With Tile?
@@ -342,11 +373,11 @@ const metadata = {
     </div>
     <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; New Installation</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Can a Tile Roof Be Repaired? · white bg -->
+  <!-- Can a Tile Roof Be Repaired? · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
       Can a Tile Roof Be Repaired?
@@ -357,21 +388,21 @@ const metadata = {
     </div>
     <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How R&C Approaches a Tile Roofing Project · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- How R&C Approaches a Tile Roofing Project · black bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
         How R&amp;C Approaches a Tile Roofing Project
       </h2>
-      <a href="/contact" class="btn-primary shrink-0">Plan Your Tile Roof</a>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200 shrink-0">Plan Your Tile Roof</a>
     </div>
     <div class="flex flex-col md:flex-row gap-10 md:gap-16">
       <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
           <p>Every tile roofing project starts with evaluating whether tile is appropriate for the property. R&amp;C looks at the structure, conditions, and selected system before developing the roofing scope.</p>
         </div>
       </div>
@@ -408,7 +439,14 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </WidgetWrapper>
 
@@ -476,12 +514,13 @@ const metadata = {
       <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · Frequently Asked Questions · white bg -->
+  <!-- P-10 · Frequently Asked Questions · black bg -->
   <FAQs
+    isDark={true}
     title="Frequently Asked Questions"
     items={[
       {
@@ -522,30 +561,45 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[8%]"
+          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
+      </div>
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          See if Tile Roofing Fits Your Property
-        </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          Clay and concrete tile can create a distinctive roof, but the right decision starts with the building rather than the appearance alone.<br />
-          R&amp;C Roofing Contractors can evaluate the property, discuss available tile systems, and help you determine whether clay or concrete tile makes sense for your roofing project.
-        </p>
+    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
+        <div
+          class="absolute inset-0 opacity-[3%]"
+          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+          aria-hidden="true"
+        ></div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+      <div class="relative z-10">
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
+            See if Tile Roofing Fits Your Property
+          </h2>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
+            Clay and concrete tile can create a distinctive roof, but the right decision starts with the building rather than the appearance alone.<br />
+            R&amp;C Roofing Contractors can evaluate the property, discuss available tile systems, and help you determine whether clay or concrete tile makes sense for your roofing project.
+          </p>
         </div>
-        <a href="/contact" class="btn-primary shrink-0">Discuss a Tile Roofing Project</a>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
+          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
+            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+            <p>(808) 888-2524</p>
+          </div>
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss a Tile Roofing Project</a>
+        </div>
       </div>
     </div>
   </WidgetWrapper>
