@@ -42,7 +42,7 @@ const metadata = {
       Understanding each party’s role can make the process easier to follow.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">You and Your Insurance Carrier</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Review your policy and claim requirements</li>
@@ -52,7 +52,7 @@ const metadata = {
           <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Handle claim decisions and settlement questions</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4">R&amp;C Roofing Contractors</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect accessible roofing areas</li>
@@ -86,7 +86,7 @@ const metadata = {
       <p>Avoid climbing onto a wet or damaged roof yourself.</p>
       <p>Permanent roofing repairs generally should wait until the damage has been inspected or your insurer has authorized the work.</p>
     </div>
-    <div class="mt-6 rounded-lg border border-[#ffffff29] bg-gray-50 dark:bg-slate-800 p-5">
+    <div class="mt-6 rounded-lg border bg-gray-50 dark:bg-slate-800 p-5">
       <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
         <span class="font-semibold text-heading">Where R&amp;C Can Help:</span> If you need a closer assessment of the roof, R&amp;C can inspect accessible roofing areas and document relevant visible conditions.
       </p>
@@ -110,7 +110,7 @@ const metadata = {
       <p>Your carrier can tell you what information it needs, how the claim will be handled, and what deadlines apply to your policy.</p>
       <p>Provide factual information about what happened and the damage you observed. If your carrier asks for forms or additional documentation, follow its claim instructions.</p>
     </div>
-    <div class="mt-6 rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 p-5">
+    <div class="mt-6 rounded-lg border bg-white dark:bg-slate-900 p-5">
       <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
         <span class="font-semibold text-heading">Where R&amp;C Can Help:</span> R&amp;C can provide roofing-specific documentation when appropriate, including photos of relevant findings and information about the roofing work we recommend.
       </p>
@@ -176,11 +176,11 @@ const metadata = {
       <p>R&amp;C can separately explain the roofing work we believe is appropriate based on the condition of the roof.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">If the Scopes Match</h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">If the carrier's approved scope and the roofing work being proposed align, the project can move toward scheduling once the necessary approvals and project details are in place.</p>
       </div>
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">If the Scopes Differ</h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-3">There may be situations where R&amp;C recommends work that is not reflected in the carrier's initial scope. When appropriate, we can provide additional contractor-side documentation explaining our roofing recommendation.</p>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-3">The insurance carrier determines whether additional work or cost will be covered.</p>
@@ -306,7 +306,7 @@ const metadata = {
           linkText: 'View Storm Damage Inspections →',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
           <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>

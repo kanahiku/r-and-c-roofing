@@ -48,7 +48,7 @@ const yelpEmbeds = `
       R&C supports the roofing portion of the claim process. We do not act as your insurance representative or public adjuster.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-700 dark:text-green-400">R&amp;C Can Help With</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect accessible areas of the roof for visible damage</li>
@@ -59,7 +59,7 @@ const yelpEmbeds = `
           <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Complete roofing work when a project moves forward</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-muted">R&amp;C Does Not Do</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Act as a public adjuster or legal representative</li>
@@ -168,7 +168,7 @@ const yelpEmbeds = `
             'The findings may identify affected roofing materials, flashing, penetrations, fasteners, or other accessible roof components.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
@@ -187,7 +187,7 @@ const yelpEmbeds = `
             'When applicable, an estimate can outline the roofing work being proposed and the associated project cost.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
@@ -320,7 +320,7 @@ const yelpEmbeds = `
           linkText: 'View Storm Damage Inspections →',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
           <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>

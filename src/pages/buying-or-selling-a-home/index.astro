@@ -45,10 +45,10 @@ const metadata = {
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
       The roofing questions are different depending on which side of the transaction you are on.
     </p>
-    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-card">
       <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
         <thead>
-          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+          <tr class="bg-accent/20 border-b border-gray-200 dark:border-slate-700">
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">If You Are Buying</th>
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">If You Are Selling</th>
           </tr>
@@ -144,10 +144,10 @@ const metadata = {
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
       The next step should depend on what is actually found.
     </p>
-    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-card">
       <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
         <thead>
-          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+          <tr class="bg-accent/20 border-b border-gray-200 dark:border-slate-700">
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">Roof Finding</th>
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">What May Make Sense Next</th>
           </tr>
@@ -257,7 +257,7 @@ const metadata = {
           href: '/my-insurance-claim-was-denied',
         },
       ].map(({ title, description, href }) => (
-        <a href={href} class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <a href={href} class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
           <span class="mt-3 text-primary font-medium text-[14px]">Continue here →</span>

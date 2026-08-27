@@ -10,6 +10,7 @@
   --color-primary: var(--aw-color-primary);
   --color-secondary: var(--aw-color-secondary);
   --color-accent: var(--aw-color-accent);
+  --color-accent-hover: var(--aw-color-accent-hover);
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
 
@@ -18,6 +19,8 @@
     'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: var(--aw-font-serif, ui-serif), ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-heading: var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: var(--aw-shadow-card);
 
   --animate-fade: fadeInUp 1s both;
 
@@ -45,6 +48,14 @@
   background-color: var(--aw-color-bg-page);
 }
 
+@utility bg-section-white {
+  background-color: var(--aw-color-bg-section-white);
+}
+
+@utility bg-section-grey {
+  background-color: var(--aw-color-bg-section-grey);
+}
+
 @utility text-page {
   color: var(--aw-color-text-page);
 }
@@ -53,24 +64,28 @@
   color: var(--aw-color-text-muted);
 }
 
+@utility card {
+  @apply rounded-lg border border-white/16 shadow-card;
+}
+
 @utility btn {
   @apply inline-flex items-center justify-center rounded-md border-gray-400 border bg-transparent font-heading font-medium text-center text-[14px] md:text-[15px] text-page leading-[21px] transition py-2.5 px-5 md:px-6 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
 }
 
 @utility btn-primary {
-  @apply btn bg-[#EDD974] text-black border-[#EDD974] hover:bg-[#d4bc57] hover:border-[#d4bc57] hover:text-black dark:bg-[#EDD974] dark:text-black dark:border-[#EDD974] dark:hover:bg-[#d4bc57] dark:hover:border-[#d4bc57];
+  @apply btn bg-accent text-black border-accent hover:bg-accent-hover hover:border-accent-hover hover:text-black dark:bg-accent dark:text-black dark:border-accent dark:hover:bg-accent-hover dark:hover:border-accent-hover;
 }
 
 @utility btn-secondary {
-  @apply btn border-gray-900 text-gray-900 bg-transparent hover:bg-[#EDD974] hover:border-[#EDD974] hover:text-black dark:border-gray-100 dark:text-gray-100 dark:hover:bg-[#EDD974] dark:hover:border-[#EDD974] dark:hover:text-black;
+  @apply btn border-gray-900 text-gray-900 bg-transparent hover:bg-accent/10 hover:border-gray-900 hover:text-gray-900 dark:border-gray-100 dark:text-gray-100 dark:hover:bg-accent/10 dark:hover:border-gray-100 dark:hover:text-white;
 }
 
 @utility btn-tertiary {
-  @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
+  @apply btn-secondary;
 }
 
 @utility tag-pill {
-  @apply inline-flex items-center rounded-full bg-[#EDD974]/20 border border-[#EDD974] px-3 py-1 font-heading font-medium text-[13px] md:text-[14px] leading-[21px] text-black dark:bg-[#EDD974]/15 dark:border-[#EDD974] dark:text-black;
+  @apply inline-flex items-center rounded-full bg-accent/20 border border-accent px-3 py-1 font-heading font-medium text-[13px] md:text-[14px] leading-[21px] text-black dark:bg-accent/15 dark:border-accent dark:text-black;
 }
 
 #header.scroll > div:first-child {
@@ -100,18 +115,18 @@
 
 /* Active nav link — top-level */
 nav > ul > li > a.aw-link-active {
-  color: #EDD974;
+  color: var(--aw-color-accent);
 }
 
 /* Active nav link — inside dropdown */
 .dropdown-menu a.aw-link-active {
   background-color: rgb(255 255 255 / 8%);
-  color: #EDD974;
+  color: var(--aw-color-accent);
   font-weight: 600;
 }
 .dark .dropdown-menu a.aw-link-active {
   background-color: rgb(255 255 255 / 8%);
-  color: #EDD974;
+  color: var(--aw-color-accent);
 }
 
 [astro-icon].icon-light > * {

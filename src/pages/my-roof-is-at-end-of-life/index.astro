@@ -45,10 +45,10 @@ const metadata = {
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
       No single symptom automatically means a roof has reached the end of its useful life. The pattern of problems matters.
     </p>
-    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-card">
       <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
         <thead>
-          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+          <tr class="bg-accent/20 border-b border-gray-200 dark:border-slate-700">
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">What You Are Seeing</th>
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">What It May Mean</th>
           </tr>
@@ -105,10 +105,10 @@ const metadata = {
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-10">
       This is the main decision. A roof inspection should help determine which path makes the most sense based on the condition that actually exists.
     </p>
-    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-[0_4px_30px_rgba(0,0,0,0.08)]">
+    <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 shadow-card">
       <table class="w-full text-left border-collapse bg-white dark:bg-slate-900">
         <thead>
-          <tr class="bg-[#EDD974]/20 border-b border-gray-200 dark:border-slate-700">
+          <tr class="bg-accent/20 border-b border-gray-200 dark:border-slate-700">
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">Roof Condition</th>
             <th class="px-5 py-4 text-[13px] md:text-[14px] font-semibold font-heading text-heading uppercase tracking-wide w-1/2">What May Make Sense</th>
           </tr>
@@ -170,7 +170,7 @@ const metadata = {
             { title: 'Stone-Coated Steel Roofing', href: '/services/roofing-materials/stone-coated-steel-roofing' },
             { title: 'Clay and Concrete Tile Roofing', href: '/services/roofing-materials/tile-roofing-clay-and-concrete' },
           ].map(({ title, href }) => (
-            <a href={href} class="flex items-center justify-between rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4 hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+            <a href={href} class="flex items-center justify-between rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-4 hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
               <span class="text-[16px] md:text-[17px] font-medium font-heading leading-[130%]">{title}</span>
               <span class="text-primary font-medium text-[14px]">View →</span>
             </a>
@@ -238,7 +238,7 @@ const metadata = {
           href: '/buying-or-selling-a-home',
         },
       ].map(({ title, description, href }) => (
-        <a href={href} class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <a href={href} class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-5 md:p-6 flex flex-col hover:shadow-md transition-shadow intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
           <span class="mt-3 text-primary font-medium text-[14px]">Continue here →</span>

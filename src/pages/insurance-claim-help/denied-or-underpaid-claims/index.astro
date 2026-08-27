@@ -43,13 +43,13 @@ const metadata = {
       These situations are related, but they are not the same.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">Your Claim Was Denied</h3>
         <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted mb-4">Your carrier determined that the claimed loss is not covered under the policy. The denial should explain the reason for that decision.</p>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">R&amp;C can inspect the roof and provide contractor-side documentation about visible roofing conditions.</p>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">Questions about coverage or challenging a denial should be addressed with your carrier or an appropriately licensed insurance professional.</p>
       </div>
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">The Approved Roofing Scope Seems Incomplete</h3>
         <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted mb-4">Your carrier may recognize some damage but approve a different repair scope or amount than the roofing work being recommended.</p>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">R&amp;C can explain its recommended roofing scope and provide supporting contractor information when appropriate.</p>
@@ -197,7 +197,7 @@ const metadata = {
           description: "R&C can explain the roofing work it believes is appropriate based on the visible condition of the roof.",
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
@@ -214,7 +214,7 @@ const metadata = {
           description: 'If questions arise about materials or installation requirements, R&C can provide contractor-side information relevant to the proposed roofing work.',
         },
       ].map(({ title, description }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
         </div>
@@ -251,7 +251,7 @@ const metadata = {
       It is important to understand where R&C’s role ends.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-700 dark:text-green-400">R&amp;C Can</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect visible roofing conditions</li>
@@ -262,7 +262,7 @@ const metadata = {
           <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
         </ul>
       </div>
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6">
+      <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6">
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-muted">R&amp;C Cannot</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
           <li class="flex gap-3"><span class="shrink-0 mt-0.5">—</span>Decide whether your policy covers the damage</li>
@@ -341,7 +341,7 @@ const metadata = {
           linkText: 'View Storm Damage Inspections →',
         },
       ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
           <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>

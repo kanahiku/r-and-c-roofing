@@ -71,13 +71,13 @@ const metadata = {
           color: 'text-blue-800',
         },
       ].map(({ platform, description, href, cta, logo, color }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <div class="flex items-center gap-3">
             <span class={`text-[32px] font-bold font-heading ${color}`}>{logo}</span>
             <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%]">{platform}</h3>
           </div>
           <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
-          <div class="flex items-center gap-1 text-[#EDD974]">
+          <div class="flex items-center gap-1 text-accent">
             {'★★★★★'.split('').map((star) => (
               <span class="text-[18px]">{star}</span>
             ))}
@@ -164,9 +164,9 @@ const metadata = {
           linkText: 'Explore Commercial Roofing →',
         },
       ].map(({ category, description, href, linkText }) => (
-        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-3 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col gap-3 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
           <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{category}</h3>
-          <div class="flex gap-1 text-[#EDD974]">
+          <div class="flex gap-1 text-accent">
             {'★★★★★'.split('').map((star) => (
               <span class="text-[16px]">{star}</span>
             ))}
@@ -192,9 +192,9 @@ const metadata = {
 
     <div class="columns-1 sm:columns-2 gap-6 md:gap-8 space-y-6">
       {Array.from({ length: 6 }).map(() => (
-        <div class="break-inside-avoid rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col gap-3">
+        <div class="break-inside-avoid rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col gap-3">
           <div class="flex items-center justify-between">
-            <div class="flex gap-1 text-[#EDD974]">
+            <div class="flex gap-1 text-accent">
               {'★★★★★'.split('').map((star) => (
                 <span class="text-[16px]">{star}</span>
               ))}
