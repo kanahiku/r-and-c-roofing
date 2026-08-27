@@ -1,0 +1,499 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+
+const metadata = {
+  title: 'Slate Roofing Hawaii & Oahu | R&C Roofing Contractors',
+  description:
+    'Explore natural slate and synthetic rubber slate roofing for Oahu properties. Compare appearance, weight, installation considerations, costs, and roofing options with R&C Roofing.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 · Hero -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Discuss a Slate Roofing Project', href: '/contact' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
+      alt: 'Slate roofing on an Oahu property',
+    }}
+  >
+    <Fragment slot="title">
+      Slate &amp; Rubber Slate<br />Roofing on Oahu
+    </Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Compare Natural Slate With a Slate-Look Alternative
+      </span>
+      Slate roofing can mean two very different things. Natural slate is quarried stone installed as individual roofing units. Synthetic or rubber slate is manufactured to create a similar appearance using engineered materials. Both can produce the distinctive look associated with slate, but their weight, composition, installation requirements, and product characteristics are different.
+      <br /><br />
+      R&amp;C Roofing Contractors can help you determine which option is appropriate for your property and roofing project.
+      <br /><br />
+      R&amp;C operates under Hawaii contractor license C-33642.
+    </Fragment>
+  </Hero2>
+
+  <!-- Natural Slate or Synthetic Slate? · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Natural Slate or Synthetic Slate?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      This is the first decision to make. Natural slate and synthetic slate should not be treated as interchangeable products. The Slate Roof Contractors Association specifically distinguishes natural quarried slate from manufactured alternatives.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Natural Slate</h3>
+        <ul class="space-y-4">
+          {[
+            'Made from natural quarried stone.',
+            'Each slate has natural variation in texture and appearance.',
+            'Requires a roof and installation approach appropriate for the selected slate.',
+            'May appeal to owners who specifically want genuine natural stone.',
+            'Repair often involves working with individual slate units.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Synthetic / Rubber Slate</h3>
+        <ul class="space-y-4">
+          {[
+            'Manufactured roofing product designed to resemble natural slate.',
+            'Appearance and profile are controlled by the manufacturer.',
+            'Weight and installation requirements vary by product.',
+            'May appeal to owners who want a slate-like appearance with different material characteristics.',
+            'Repair requirements depend on the specific manufactured system.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What Is Natural Slate Roofing? · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="About Natural and Synthetic Slate" classes={{ container: 'mb-10 md:mb-14' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10">
+      <div>
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">What Is Natural Slate Roofing?</h3>
+        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-4">
+          <p>Natural slate is stone that is quarried, split into roofing units, and installed individually. Because it is a natural material, color, texture, thickness, and other characteristics can vary based on the slate source.</p>
+          <p>Natural slate roofing also has specialized installation requirements. Industry installation standards address details such as slate placement, headlap, nail positioning, flashing, and roof configuration. For that reason, natural slate should be evaluated as a complete roofing system rather than simply as an exterior finish.</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">What Is Rubber or Synthetic Slate?</h3>
+        <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted space-y-4">
+          <p>Synthetic slate is a manufactured roofing material designed to create the appearance of natural slate. The exact composition varies by manufacturer. Some products use recycled rubber and plastic materials.</p>
+          <p>That distinction is important: composition, performance ratings, warranties, and environmental claims should come from the specific product R&amp;C installs rather than being assumed from the general category.</p>
+        </div>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Is Slate Roofing Right for Your Property? · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Is Slate Roofing Right for Your Property?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      R&amp;C can evaluate the roof before recommending which material should be considered.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Slate May Be Worth Considering If</h3>
+        <ul class="space-y-4">
+          {[
+            'You specifically want the architectural appearance of slate.',
+            'You are planning a substantial roof replacement or new construction project.',
+            'You are willing to compare natural and manufactured slate options.',
+            'You want to evaluate slate alongside tile, metal, and stone-coated steel.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Another Material May Make More Sense If</h3>
+        <ul class="space-y-4">
+          {[
+            'Slate does not fit the architecture or project goals.',
+            'The roof or structure is not appropriate for the proposed system.',
+            'Project budget makes another roofing material a better fit.',
+            'Another system better matches the requirements of the property.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What Should You Compare? · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Natural Slate vs. Synthetic Slate: What Should You Compare?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      These four areas are the most important distinctions when evaluating the two options side by side.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Weight and Structure',
+          description: 'Roofing weight should be considered whenever you are changing materials. Natural slate and manufactured slate products can have very different weights. Product-specific structural requirements should be reviewed before a roofing system is selected.',
+        },
+        {
+          title: 'Appearance',
+          description: 'Natural slate has variations created by the stone itself. Synthetic slate is manufactured to reproduce a slate-like profile, with available colors and textures depending on the product.',
+        },
+        {
+          title: 'Installation',
+          description: 'Natural slate has established installation methods specific to quarried stone roofing. Synthetic products have their own manufacturer installation requirements.',
+        },
+        {
+          title: 'Repair and Material Matching',
+          description: 'An existing slate roof may require matching replacement pieces when individual units are damaged. With natural slate, matching depends on the original slate type, size, and appearance. With synthetic slate, matching may depend on whether the original manufacturer, profile, and color remain available.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Slate Roofing and Oahu Conditions · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Slate Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Location-specific conditions should be part of every roofing conversation on Oahu.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Rain and Water Management',
+          description: 'Slate is the visible roof covering, but flashing, underlayment, valleys, penetrations, and other details remain part of the overall water-management system.',
+        },
+        {
+          title: 'Coastal Exposure',
+          description: 'For properties near the ocean, metal components such as flashing and fasteners deserve attention along with the slate itself. The appropriate materials should be selected for the specific property and roofing system.',
+        },
+        {
+          title: 'Wind Exposure',
+          description: 'Wind performance depends on the actual roofing system, roof design, attachment requirements, building conditions, and installation. For synthetic slate, any published wind rating should come from the exact product R&C installs.',
+        },
+        {
+          title: 'Sun Exposure',
+          description: 'Synthetic products can use different polymers, additives, and manufacturing methods. Any UV-resistance or weathering claim should be tied to the specific manufacturer\'s documentation.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Advantages and Tradeoffs · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Advantages and Tradeoffs of Slate Roofing" classes={{ container: 'mb-10 md:mb-14' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Potential Advantages</h3>
+        <ul class="space-y-4">
+          {[
+            'Distinctive slate appearance',
+            'Natural and manufactured options provide two different paths to the look',
+            'Individual roofing units may allow localized repair in some situations',
+            'Natural slate has a documented history of very long service life when properly maintained',
+            'Synthetic slate can offer a slate-like appearance with different product characteristics',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6">Considerations</h3>
+        <ul class="space-y-4">
+          {[
+            'Natural slate requires specialized installation knowledge',
+            'Natural slate and synthetic slate should not be treated as equivalent materials',
+            'Matching older materials can be difficult',
+            'The condition of flashing, fasteners, decking, and other roofing components still matters',
+            'Performance depends heavily on the specific manufacturer and product',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- How Long Does Slate Roofing Last? · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      How Long Does Slate Roofing Last?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>For natural slate, service life depends on the particular slate, installation, flashing, fastening system, maintenance, previous repairs, and overall roof condition. The Slate Roof Contractors Association notes that some properly maintained natural slate roofs can remain serviceable for well over a century, depending on the slate — but that should not be converted into a blanket lifespan promise for every slate roof.</p>
+      <p>For synthetic slate, expected service life and warranty coverage depend on the actual manufacturer and product. We would not use one lifespan number for both materials.</p>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- What Does Slate Roofing Cost on Oahu? · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+        What Does Slate Roofing Cost on Oahu?
+      </h2>
+      <a href="/contact" class="btn-primary shrink-0">Request an Estimate</a>
+    </div>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
+      Pricing depends on the system and the property. R&amp;C can provide project-specific pricing after evaluating the property and proposed roofing system.
+    </p>
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+      {[
+        { title: 'Natural Slate vs. Synthetic Slate', description: 'The two materials have different product costs and installation requirements.' },
+        { title: 'Roof Size', description: 'Larger roofs require more material and labor.' },
+        { title: 'Roof Slope and Design', description: 'Slope, valleys, and design complexity affect installation scope.' },
+        { title: 'Existing Roofing Material', description: 'The material being replaced and its current condition affect preparation requirements.' },
+        { title: 'Structural Considerations', description: 'The roof structure needs to be appropriate for the proposed slate system.' },
+        { title: 'Flashing and Roofing Details', description: 'Penetrations, valleys, and other details add to the project scope.' },
+        { title: 'Access and Project Logistics', description: 'Building height and site access can affect how the project is staged.' },
+      ].map(({ title, description }) => (
+        <div class="py-6 md:py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-2">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Replacing Another Roof With Slate? · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Replacing Another Roof With Slate?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+      <p>Changing from asphalt shingles, metal, tile, or another material to slate requires more than selecting a new appearance.</p>
+      <p>R&amp;C can evaluate the existing roof and consider:</p>
+      <ul class="space-y-3 pl-2">
+        {[
+          'Roof structure',
+          'Existing roofing conditions',
+          'Proposed material',
+          'Roof design',
+          'Installation requirements',
+          'Associated roofing components',
+        ].map((item) => (
+          <li class="flex items-start gap-3">
+            <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p>Natural slate and synthetic slate may create very different project requirements.</p>
+    </div>
+    <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Replacement &amp; New Installation</a>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Can an Existing Slate Roof Be Repaired? · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Can an Existing Slate Roof Be Repaired?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+      <p>Possibly. Natural slate roofs can sometimes be repaired by replacing damaged individual slates while retaining serviceable surrounding material. The Slate Roof Contractors Association publishes dedicated guidance for slate roof repair and restoration.</p>
+      <p>The right recommendation depends on the condition of the slate and the rest of the roofing system. Synthetic slate repairs depend on the product installed and whether compatible replacement material is available.</p>
+    </div>
+    <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair</a>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- See Slate Roofing on Real Oahu Properties · grey bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="See Slate Roofing on Real Oahu Properties" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {[
+        { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified replacement, installation, or repair]', description: '[Short verified project description.]' },
+        { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified scope]', description: '[Short verified description.]' },
+        { neighborhood: '[Neighborhood]', material: '[Natural or Synthetic Slate]', project: '[Verified scope]', description: '[Short verified description.]' },
+      ].map(({ neighborhood, material, project, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4">
+          <div class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p class="text-[13px] md:text-[14px] font-medium text-muted mb-1">{neighborhood} | {material}</p>
+          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-heading mb-1">Project: {project}</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/gallery" class="btn btn-secondary">View More Roofing Projects</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Compare Slate With Other Roofing Materials · white bg -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Compare Slate With Other Roofing Materials" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Stone-Coated Steel',
+          description: 'Consider a steel roofing system available in textured architectural profiles.',
+          href: '/services/roofing-materials/stone-coated-steel-roofing',
+          linkText: 'Explore Stone-Coated Steel',
+        },
+        {
+          title: 'Clay & Concrete Tile',
+          description: 'Compare slate with another distinctive roofing material that has its own structural requirements.',
+          href: '/services/roofing-materials/tile-roofing-clay-and-concrete',
+          linkText: 'Explore Tile Roofing',
+        },
+        {
+          title: 'Metal Roofing',
+          description: 'Explore metal-panel systems and the range of available finishes and profiles.',
+          href: '/services/roofing-materials/metal-roofing',
+          linkText: 'Explore Metal Roofing',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">{description}</p>
+          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
+        </div>
+      ))}
+    </div>
+    <div class="mt-10 md:mt-12 text-center">
+      <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 · Frequently Asked Questions · grey bg -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Is rubber slate the same as natural slate?',
+        description:
+          'No. Natural slate is quarried stone. Rubber or synthetic slate is a manufactured roofing product designed to create a similar appearance. Composition varies by manufacturer.',
+      },
+      {
+        title: 'What is rubber slate made from?',
+        description:
+          'That depends on the product. Some synthetic slate manufacturers use recycled rubber and plastics. The specific composition should come from the manufacturer R&C installs rather than a general category claim.',
+      },
+      {
+        title: 'Is synthetic slate lighter than natural slate?',
+        description:
+          'Some synthetic slate systems are substantially lighter than natural slate, but the exact difference depends on the products being compared. The project should use product-specific weight information.',
+      },
+      {
+        title: 'Does natural slate last longer than synthetic slate?',
+        description:
+          'Natural slate has a documented history of very long service life, with some slate types remaining serviceable for well over a century when properly installed and maintained. Synthetic slate lifespan depends on the manufacturer and specific product, so the two should not be compared using a universal number.',
+      },
+      {
+        title: 'Can individual slate tiles be repaired?',
+        description:
+          'Individual natural slates can often be replaced as part of a properly planned repair when the surrounding roof remains serviceable. Synthetic-slate repairs depend on the installed system and availability of compatible replacement material.',
+      },
+      {
+        title: 'Does R&C install natural slate and rubber slate?',
+        description:
+          'Contact R&C to confirm the current slate and synthetic slate services and products available for your project.',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- P-12 · Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Find the Right Slate Option for Your Property
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          If you like the appearance of slate, the next question is whether natural slate or a manufactured slate alternative better fits the property.<br />
+          R&amp;C Roofing Contractors can evaluate the roof, discuss the available options, and develop a project-specific scope once the appropriate roofing system is identified.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Discuss a Slate Roofing Project</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

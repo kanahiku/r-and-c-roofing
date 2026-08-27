@@ -1,0 +1,681 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+
+const metadata = {
+  title: 'Roof Replacement Oahu | New Roof Installation | R&C Roofing',
+  description:
+    'Planning a roof replacement or new roof installation on Oahu? R&C Roofing Contractors installs residential and commercial roofing systems for Hawaii properties.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 · Hero -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Schedule a Roof Replacement Consultation', href: '/contact' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
+      alt: 'New roof installation on an Oahu residential property',
+    }}
+  >
+    <Fragment slot="title">
+      Roof Replacement &amp; New Roof Installation on Oahu
+    </Fragment>
+    <Fragment slot="subtitle">
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Plan the Right Roofing System for Your Property
+      </p>
+      A roof replacement is a larger decision than repairing one damaged area. You are choosing the roofing system that will protect the property for years to come.
+      <br /><br />
+      R&amp;C Roofing Contractors provides roof replacement and new roof installation services for residential and commercial properties within its Oahu service area. We evaluate the existing roof when applicable, discuss material options, develop the proposed roofing scope, and complete the installation when the project moves forward.
+      <br /><br />
+      R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined roofing experience to projects in Hawaii.
+      <span class="block mt-8"></span>
+    </Fragment>
+  </Hero2>
+
+  <!-- Two-column split · Are You Replacing or Installing New? (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Are You Replacing an Existing Roof or Installing a New One?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Both projects result in a new roofing system, but the starting point is different.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Roof Replacement</h3>
+        <ul class="space-y-4">
+          {[
+            'Designed for a property with an existing roof that needs to be removed, replaced, or substantially rebuilt.',
+            'The existing roof condition helps determine the scope of work.',
+            'Existing materials and underlying components may need evaluation before the new system is installed.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6">
+          <a href="/contact" class="btn-primary">Schedule a Replacement Consultation</a>
+        </div>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">New Roof Installation</h3>
+        <ul class="space-y-4">
+          {[
+            'Designed for new construction, additions, or other projects where a new roofing system is being planned.',
+            'Roofing decisions are coordinated with the building design and project requirements.',
+            'Material, drainage, flashing, penetrations, and other roofing details are considered as part of the new installation.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6">
+          <a href="/contact" class="btn btn-secondary">Discuss a New Roof Installation</a>
+        </div>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Stacked divider rows · When Should You Consider Roof Replacement? (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="When Should You Consider Roof Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Not every roof problem requires replacement. R&amp;C looks at the condition of the roofing system before recommending a larger project. Replacement may need to be considered when:
+    </p>
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+      {[
+        {
+          title: 'Problems Are Appearing in Multiple Areas',
+          description: 'Recurring leaks or deterioration across different sections of the roof may indicate that localized repairs are no longer addressing the broader condition.',
+        },
+        {
+          title: 'Roofing Materials Show Widespread Deterioration',
+          description: 'Materials that are extensively worn, damaged, corroded, or no longer performing as intended may be difficult to repair effectively.',
+        },
+        {
+          title: 'Previous Repairs Are No Longer Solving the Problem',
+          description: 'Repeated repairs can sometimes indicate that the issue is no longer limited to one isolated area.',
+        },
+        {
+          title: 'Underlying Components Need More Extensive Work',
+          description: 'If deterioration beneath the roofing materials affects a larger portion of the system, the project scope may extend beyond a targeted repair.',
+        },
+        {
+          title: 'The Property Owner Is Planning a Larger Upgrade',
+          description: 'Some owners choose replacement as part of a renovation, property improvement, sale preparation, or long-term maintenance plan.',
+        },
+      ].map(({ title, description }) => (
+        <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Two-column comparison · Repair or Replace? (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Repair or Replace?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      If you are not sure which option makes sense, start with the condition of the roof.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Repair May Be Appropriate When</h3>
+        <ul class="space-y-4">
+          {[
+            'Damage is limited to one area.',
+            'Surrounding materials remain serviceable.',
+            'Compatible repair materials are available.',
+            'The repair addresses the underlying roofing problem.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-5">Replacement May Be Appropriate When</h3>
+        <ul class="space-y-4">
+          {[
+            'Problems affect several areas of the roof.',
+            'Surrounding materials show widespread deterioration.',
+            'Existing materials cannot be repaired effectively.',
+            'Repairing one section would leave broader roofing issues unresolved.',
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+      R&amp;C does not assume that an older roof automatically needs replacement. We evaluate what is happening with the roofing system before recommending the scope that should be considered.
+    </p>
+    <div class="text-center">
+      <a href="/contact" class="btn btn-secondary">Schedule a Roof Inspection</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Component breakdown · What Goes Into a Roof Replacement? (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Goes Into a Roof Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      A roof is more than the exterior material you see from the ground. Depending on the existing roof and proposed system, a replacement project may involve several roofing components.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Existing Roofing Materials',
+          description: 'The condition and configuration of the existing roofing system help determine how the replacement project should be approached.',
+        },
+        {
+          title: 'Roof Deck',
+          description: 'When accessible during the project, underlying decking can be evaluated for visible deterioration that may need to be addressed before new roofing materials are installed.',
+        },
+        {
+          title: 'Underlayment',
+          description: 'Underlayment forms part of the roofing assembly beneath the exterior roof covering. The appropriate product and installation method depend on the roofing system and project requirements.',
+        },
+        {
+          title: 'Flashing',
+          description: 'Roof transitions, valleys, walls, edges, penetrations, and other vulnerable areas may require flashing as part of the overall roofing system.',
+        },
+        {
+          title: 'Roofing Material',
+          description: 'The exterior material is selected based on the property, roof design, project requirements, appearance preferences, and budget.',
+        },
+        {
+          title: 'Ventilation and Other Components',
+          description: 'Certain roofing projects may also involve ventilation, drainage, penetrations, or other system-specific components.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 md:mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      R&amp;C develops the roofing scope based on the property and the system being installed.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Material cards · Choose the Right Roofing Material (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Choose the Right Roofing Material" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Material selection is one of the biggest decisions in a replacement or new roof project. R&amp;C works with several roofing options used on Hawaii properties.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Asphalt Shingle Roofing',
+          description: 'Asphalt shingles are commonly used on residential properties and are available in a range of styles. They can be a practical option for homeowners looking for a familiar roofing appearance and a variety of product choices.',
+          href: '/services/roofing-materials/asphalt-shingles',
+          linkText: 'Explore Asphalt Shingle Roofing',
+        },
+        {
+          title: 'Metal Roofing',
+          description: 'Metal roofing is available in different profiles, finishes, and system configurations. Material selection should consider the property, roof design, exposure, and project requirements.',
+          href: '/services/roofing-materials/metal-roofing',
+          linkText: 'Explore Metal Roofing',
+        },
+        {
+          title: 'Stone-Coated Steel Roofing',
+          description: 'Stone-coated steel combines a steel roofing base with a textured exterior finish and is available in profiles that resemble other roofing materials.',
+          href: '/services/roofing-materials/stone-coated-steel',
+          linkText: 'Explore Stone-Coated Steel Roofing',
+        },
+        {
+          title: 'Clay & Concrete Tile Roofing',
+          description: 'Tile roofing offers a distinctive appearance and may be appropriate when the structure and roof design are suitable for the selected system.',
+          href: '/services/roofing-materials/tile-roofing',
+          linkText: 'Explore Tile Roofing',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+            {linkText} →
+          </a>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/services/roofing-materials" class="btn btn-secondary">Compare Roofing Materials</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-08 · How the Roof Replacement Process Works (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+        How the Roof Replacement Process Works
+      </h2>
+      <a href="/contact" class="btn-primary shrink-0">Request a Replacement Consultation</a>
+    </div>
+    <div class="flex flex-col md:flex-row gap-10 md:gap-16">
+      <div class="md:basis-1/2 flex flex-col gap-6">
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          <p>Every roofing project is different, but a replacement generally moves through several stages. R&amp;C coordinates the full project from the initial evaluation through to final completion.</p>
+        </div>
+      </div>
+      <div class="md:basis-1/2">
+        <Timeline
+          items={[
+            {
+              title: 'Evaluate the Property',
+              description: 'We start by reviewing the existing roof, your concerns, and what you want from the replacement. For new construction, the starting point is the project itself and the roofing system being planned.',
+              icon: 'tabler:search',
+            },
+            {
+              title: 'Develop the Roofing Scope',
+              description: 'R&C determines the proposed work based on the existing conditions, roofing material, property design, and other project requirements.',
+              icon: 'tabler:clipboard-list',
+            },
+            {
+              title: 'Select the Roofing Material',
+              description: 'We discuss available roofing materials and the options that may be appropriate for the property.',
+              icon: 'tabler:template',
+            },
+            {
+              title: 'Prepare for Construction',
+              description: 'Before work begins, the project scope, scheduling, site considerations, and applicable project requirements are reviewed. Permit requirements, when applicable, depend on the specific project and jurisdiction.',
+              icon: 'tabler:file-description',
+            },
+            {
+              title: 'Remove or Prepare the Existing System',
+              description: 'For replacement projects, the existing roofing assembly is addressed according to the agreed project scope. Conditions that become visible during this phase may affect the work required.',
+              icon: 'tabler:settings',
+            },
+            {
+              title: 'Install the New Roofing System',
+              description: 'R&C installs the agreed roofing materials and associated components according to the project specifications and applicable requirements.',
+              icon: 'tabler:hammer',
+            },
+            {
+              title: 'Complete the Project',
+              description: 'Once roofing work is finished, the project moves through the applicable completion and cleanup steps outlined for the job.',
+              icon: 'tabler:file-description',
+            },
+          ]}
+        />
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-06 · What Affects Roof Replacement Cost (grey bg, 7 items) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Affects Roof Replacement Cost on Oahu?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+        There is no meaningful one-price estimate for a roof replacement. The final cost depends on the property and the roofing system being installed.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
+      {[
+        {
+          title: 'Roof Size',
+          description: 'Larger roofing areas generally require more material and labor.',
+        },
+        {
+          title: 'Roof Design and Slope',
+          description: 'Complex rooflines, multiple transitions, steep slopes, or difficult-to-access sections can affect the scope of work.',
+        },
+        {
+          title: 'Roofing Material',
+          description: 'Asphalt shingles, metal, stone-coated steel, tile, and other materials have different product and installation requirements.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-10">
+      {[
+        {
+          title: 'Existing Roof Condition',
+          description: 'The amount of work required to address the existing system can affect the project.',
+        },
+        {
+          title: 'Underlying Conditions',
+          description: 'Additional deterioration may sometimes become visible after existing roofing materials are removed.',
+        },
+        {
+          title: 'Flashing and Roofing Details',
+          description: 'Penetrations, walls, valleys, edges, drainage areas, and other roof details can affect labor and material needs.',
+        },
+        {
+          title: 'Access and Site Conditions',
+          description: 'Property access and construction logistics can also influence the project scope.',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+      R&amp;C provides project-specific pricing after evaluating the property and developing the proposed roofing scope.
+    </p>
+    <div class="text-center">
+      <a href="/contact" class="btn-primary">Request a Roof Replacement Estimate</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- 4-col no-card · Roofing Systems for Oahu Conditions (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Roofing Systems for Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Roofing decisions in Hawaii should account for the conditions surrounding the property.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Coastal Exposure',
+          description: 'Properties closer to the ocean may experience more salt exposure, which can be relevant when selecting metal components, finishes, and roofing materials.',
+        },
+        {
+          title: 'Wind Exposure',
+          description: 'Roof shape, location, height, and surrounding terrain can influence how a property is exposed to wind.',
+        },
+        {
+          title: 'Rainfall',
+          description: 'Oahu rainfall conditions vary significantly by location. Roofing and drainage details should be appropriate for the property and system.',
+        },
+        {
+          title: 'Sun and Heat',
+          description: 'Roofing materials are exposed to strong UV and heat throughout the year, which can contribute to material aging over time.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-8 md:mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      R&amp;C considers the property and roofing system when discussing material and installation options.
+    </p>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 · Replacing a Roof After Storm Damage? (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Replacing a Roof After Storm Damage?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>
+        Sometimes a replacement project begins after severe weather rather than normal roof deterioration.
+      </p>
+      <p>
+        If storm damage may be involved, R&amp;C can inspect accessible roofing areas and document relevant visible conditions. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.
+      </p>
+      <p>
+        If the project involves an insurance claim, R&amp;C can provide contractor-side information about the proposed roofing work. Your insurance carrier determines coverage and claim payment.
+      </p>
+    </div>
+    <div class="mt-8 md:mt-10">
+      <a href="/insurance-claim-help" class="btn btn-secondary">Explore Insurance Claim Help</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Two-col editorial · Residential & Commercial Roof Replacement (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8 flex flex-col">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Residential Roof Replacement</h3>
+        <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted flex-1 mb-6">
+          R&amp;C works with homeowners planning roof replacement and new roofing projects within its Oahu service area. We can help evaluate the existing roof, discuss material options, and develop the proposed installation scope.
+        </p>
+        <a href="/services/residential-roofing" class="btn-primary self-start">Explore Residential Roofing</a>
+      </div>
+      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 md:p-8 flex flex-col">
+        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Commercial Roof Replacement &amp; Installation</h3>
+        <p class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted flex-1 mb-6">
+          Commercial roofing projects may involve property owners, managers, general contractors, architects, trustees, or association boards. R&amp;C can provide roofing information for planning, budgeting, and construction based on the project and roofing system involved.
+        </p>
+        <a href="/services/commercial-roofing" class="btn btn-secondary self-start">Explore Commercial Roofing</a>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-09 · Recent Roof Replacement Projects (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Recent Roof Replacement Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {[1, 2, 3].map(() => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4">
+          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-heading mb-1">[Neighborhood] | [Roofing Material]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">[Verified description of the existing roof condition and completed replacement.]</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/about/gallery" class="btn btn-secondary">View Roofing Projects</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Stacked rows · Why Choose R&C (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Choose R&C for a Roof Replacement?" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+      {[
+        {
+          title: 'Licensed Hawaii Roofing Contractor',
+          description: 'R&C Roofing Contractors operates under Hawaii contractor license C-33642.',
+        },
+        {
+          title: '50+ Years of Combined Roofing Experience',
+          description: 'The R&C team brings more than 50 years of combined roofing experience.',
+        },
+        {
+          title: 'Inspection-First Approach',
+          description: 'When replacing an existing roof, understanding its condition helps define the work that should be considered.',
+        },
+        {
+          title: 'Multiple Roofing Material Options',
+          description: 'R&C works with several roofing systems so property owners can evaluate options based on the project rather than being pushed toward one material.',
+        },
+        {
+          title: 'Roofing Work From One Contractor',
+          description: 'R&C can evaluate the roof and complete the roofing construction when the project moves forward.',
+        },
+      ].map(({ title, description }) => (
+        <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-05 style · Explore Related Roofing Services (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Related Roofing Services" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roof Repair',
+          description: 'Find out whether a targeted repair may solve the problem without replacing the entire roofing system.',
+          href: '/services/roof-repair',
+          linkText: 'View Roof Repair',
+        },
+        {
+          title: 'Residential Roofing',
+          description: 'Explore roofing services and material options for Oahu homes.',
+          href: '/services/residential-roofing',
+          linkText: 'View Residential Roofing',
+        },
+        {
+          title: 'Commercial Roofing',
+          description: 'Roofing services for commercial buildings and managed properties.',
+          href: '/services/commercial-roofing',
+          linkText: 'View Commercial Roofing',
+        },
+        {
+          title: 'Roof Inspections',
+          description: 'Start with an inspection when you are not sure whether repair or replacement is appropriate.',
+          href: '/roof-inspections',
+          linkText: 'View Roof Inspections',
+        },
+        {
+          title: 'Roofing Materials',
+          description: 'Compare available roofing materials before planning your replacement.',
+          href: '/services/roofing-materials',
+          linkText: 'Compare Roofing Materials',
+        },
+        {
+          title: 'Gutter Installation & Repair',
+          description: 'Review gutter and drainage services that may be considered alongside a roofing project.',
+          href: '/services/gutter-installation-and-repair',
+          linkText: 'View Gutter Services',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+            {linkText} →
+          </a>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 · FAQs (white bg) -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'How do I know when my roof needs to be replaced?',
+        description:
+          'Replacement may need to be considered when deterioration is widespread, roofing problems keep returning, materials can no longer be repaired effectively, or the condition beneath the roofing requires a larger project. An inspection can help determine whether repair or replacement is the better path.',
+      },
+      {
+        title: 'How much does a roof replacement cost on Oahu?',
+        description:
+          'Cost depends on roof size, material, design, accessibility, existing conditions, and the work required beneath the roofing system. R&C provides project-specific pricing after evaluating the property and proposed scope.',
+      },
+      {
+        title: 'What roofing material is best for an Oahu home?',
+        description:
+          'There is no single material that is best for every home. The right choice depends on the roof design, property location, budget, appearance preferences, and project requirements. R&C can help you compare the available options.',
+      },
+      {
+        title: 'Does an older roof always need to be replaced?',
+        description:
+          'No. Age is only one part of the decision. The condition of the roofing materials, surrounding components, previous repairs, and the extent of any deterioration should also be considered.',
+      },
+      {
+        title: 'Can R&C install a roof on new construction?',
+        description:
+          'R&C provides new roof installation in addition to replacement work. Contact the team with information about your project so the roofing scope and coordination requirements can be reviewed.',
+      },
+      {
+        title: 'Does a roof replacement require a permit?',
+        description:
+          'Permit requirements depend on the scope and location of the project. R&C can identify applicable project requirements as part of the planning process.',
+      },
+      {
+        title: 'Will homeowners insurance pay for my roof replacement?',
+        description:
+          'Coverage depends on your policy and the circumstances surrounding the damage. Your insurance carrier determines whether replacement is covered. R&C can inspect the roof and provide contractor-side documentation related to the roofing work.',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- P-12 · Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Plan Your New Roof With R&amp;C
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          If your existing roof is showing widespread deterioration or you are planning a new roofing system,<br />
+          R&amp;C Roofing Contractors can help you evaluate the project and determine the next step.
+        </p>
+      </div>
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
+      >
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Replacement Consultation</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>

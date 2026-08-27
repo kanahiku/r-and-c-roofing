@@ -1,0 +1,459 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+
+const metadata = {
+  title: 'Gutter Installation Honolulu & Oahu | R&C Roofing',
+  description:
+    'Need new gutters on Oahu? R&C Roofing Contractors provides gutter installation and gutter services for Hawaii homes and properties. Request an estimate.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- P-01 · Hero -->
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Get a Gutter Estimate', href: '/contact' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80',
+      alt: 'Gutter installation on an Oahu residential property',
+    }}
+  >
+    <Fragment slot="title">
+      Gutter Installation &amp; Repair on Oahu
+    </Fragment>
+    <Fragment slot="subtitle">
+      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
+        Help Rainwater Move Where It Should
+      </p>
+      Your roof sheds the water. Your gutter system helps control where that water goes next. When gutters are damaged, poorly positioned, or no longer working as intended, rainfall can spill over roof edges or collect where you do not want it.
+      <br /><br />
+      R&amp;C Roofing Contractors provides gutter installation and related gutter services within its Oahu service area. Whether you are adding gutters to a property, replacing an existing system, or addressing a problem with current gutters, we can evaluate the project and recommend the appropriate next step.
+      <br /><br />
+      R&amp;C operates under Hawaii contractor license C-33642.
+      <span class="block mt-8"></span>
+    </Fragment>
+  </Hero2>
+
+  <!-- P-05 style · What Is Happening With Your Gutters? (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Is Happening With Your Gutters?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Start with the problem you are seeing.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Water Spills Over the Edge',
+          description: 'Overflow may point to a drainage, capacity, positioning, or blockage issue that needs to be evaluated.',
+          href: '/contact',
+          linkText: 'Schedule a Gutter Evaluation',
+        },
+        {
+          title: 'Gutters Are Pulling Away',
+          description: 'Loose or separated gutter sections may no longer direct water properly along the roof edge.',
+          href: '/contact',
+          linkText: 'Schedule a Gutter Evaluation',
+        },
+        {
+          title: 'Sections Are Damaged',
+          description: 'Bent, deteriorated, or damaged sections may require repair or replacement depending on their condition.',
+          href: '/contact',
+          linkText: 'Schedule a Gutter Evaluation',
+        },
+        {
+          title: 'Water Is Going to the Wrong Place',
+          description: 'Downspout placement and discharge direction can affect where roof runoff reaches the property.',
+          href: '/contact',
+          linkText: 'Schedule a Gutter Evaluation',
+        },
+        {
+          title: 'My Home Does Not Have Gutters',
+          description: 'A new gutter system can be planned around the roofline and drainage needs of the home.',
+          href: '/contact',
+          linkText: 'Get a Gutter Estimate',
+        },
+        {
+          title: 'I Am Replacing My Roof',
+          description: 'A reroof is a good time to evaluate whether the existing gutter system still works with the property and new roofing project.',
+          href: '/services/roof-replacement-and-new-installation',
+          linkText: 'Explore Roof Replacement',
+        },
+      ].map(({ title, description }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Stacked divider rows · Installation, Repair, or Replacement? (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Gutter Installation, Repair, or Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      The right solution depends on the condition of the existing system.
+    </p>
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+      {[
+        {
+          title: 'New Gutter Installation',
+          description: 'For properties without an existing gutter system, R&C can evaluate the roofline and plan a gutter installation based on the property.',
+        },
+        {
+          title: 'Gutter Repair',
+          description: 'Some gutter problems may be limited to a particular section or component. If the existing system remains usable, repair may be worth considering rather than replacing everything.',
+        },
+        {
+          title: 'Gutter Replacement',
+          description: 'Replacement may make more sense when damage affects larger portions of the system or the existing gutters no longer function as intended.',
+        },
+      ].map(({ title, description }) => (
+        <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <p class="mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+      R&amp;C can review the current condition before recommending whether repair or replacement should be considered.
+    </p>
+    <div class="text-center">
+      <a href="/contact" class="btn-primary">Request a Gutter Estimate</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- 4-col no-card · Why Gutters Matter on Oahu (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Gutters Matter on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Rainfall is not the same across every part of Oahu. Homes in wetter neighborhoods and windward areas may experience different drainage demands than properties in drier parts of the island. A gutter system needs to work with the roof and property rather than simply run along the edge of the house.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roof Runoff',
+          description: 'The amount and direction of water leaving the roof affect where gutters are needed and how the system should be planned.',
+        },
+        {
+          title: 'Downspout Placement',
+          description: 'Downspouts should move collected water toward an appropriate discharge location for the property.',
+        },
+        {
+          title: 'Roof Design',
+          description: 'Roof size, shape, slope, valleys, and transitions can influence how water reaches the gutter system.',
+        },
+        {
+          title: 'Property Conditions',
+          description: 'Where water goes after leaving the downspout matters too. The surrounding grade and drainage conditions should be considered as part of the overall project.',
+        },
+      ].map(({ title, description }) => (
+        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 · Replacing Your Roof? Check the Gutters at the Same Time (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+      Replacing Your Roof? Check the Gutters at the Same Time
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
+      <p>
+        A roof replacement is a natural time to look at the gutter system. The existing gutters may still be serviceable, or the roofing project may create an opportunity to address damaged or aging sections at the same time.
+      </p>
+      <p>Evaluating both systems together can help identify:</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8">
+      {[
+        'Existing gutter damage',
+        'Areas where gutters are separating from the roof edge',
+        'Downspout locations that should be reviewed',
+        'Sections affected by the roofing project',
+        'Whether the existing gutters should remain, be repaired, or be replaced',
+      ].map((item) => (
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+        </div>
+      ))}
+    </div>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+      If you are already planning a new roof, ask R&amp;C to evaluate the gutters while developing the roofing scope.
+    </p>
+    <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Explore Roof Replacement</a>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Stacked rows · Gutter Options for Your Property (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Gutter Options for Your Property" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      The appropriate gutter system depends on the roofline, property, and available product options. R&amp;C can review available gutter profiles, materials, finishes, and colors for the specific project. When choosing gutters, consider:
+    </p>
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
+      {[
+        {
+          title: 'Size and Capacity',
+          description: 'The system should be appropriate for the roof area and expected water flow.',
+        },
+        {
+          title: 'Appearance',
+          description: 'Gutters are visible from many areas around the home, so profile and finish may be part of the decision.',
+        },
+        {
+          title: 'Roof and Fascia Conditions',
+          description: 'The condition and configuration of the roof edge can affect how a gutter system is installed.',
+        },
+        {
+          title: 'Downspout Locations',
+          description: "Downspouts need to be positioned with the property's drainage needs in mind.",
+        },
+      ].map(({ title, description }) => (
+        <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{description}</p>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-08 · How the Gutter Installation Process Works (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+        How the Gutter Installation Process Works
+      </h2>
+      <a href="/contact" class="btn-primary shrink-0">Get a Gutter Estimate</a>
+    </div>
+    <div class="flex flex-col md:flex-row gap-10 md:gap-16">
+      <div class="md:basis-1/2 flex flex-col gap-6">
+        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          <p>R&amp;C reviews the property and project before recommending the appropriate gutter work. Once we understand the scope and you are ready to move forward, our team completes the installation or repair.</p>
+        </div>
+      </div>
+      <div class="md:basis-1/2">
+        <Timeline
+          items={[
+            {
+              title: 'Evaluate the Property',
+              description: 'We review the roofline, existing gutters if present, and the drainage concern you want to address.',
+              icon: 'tabler:search',
+            },
+            {
+              title: 'Determine the Scope',
+              description: 'R&C identifies whether the project involves new installation, repair, replacement, or a combination of gutter work.',
+              icon: 'tabler:clipboard-list',
+            },
+            {
+              title: 'Review the Gutter Options',
+              description: 'Available system and finish options can be discussed based on the project.',
+              icon: 'tabler:template',
+            },
+            {
+              title: 'Provide an Estimate',
+              description: 'Once the proposed scope is established, R&C can provide project-specific pricing.',
+              icon: 'tabler:file-description',
+            },
+            {
+              title: 'Complete the Gutter Work',
+              description: 'If you move forward, our team completes the agreed gutter installation or repair work.',
+              icon: 'tabler:hammer',
+            },
+          ]}
+        />
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-13 · What Affects Gutter Installation Cost? (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6 md:mb-8">
+      What Affects Gutter Installation Cost?
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
+      <p>Gutter pricing depends on the individual property and proposed system. Factors can include:</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8">
+      {[
+        'Length of gutter required',
+        'Number of roof sections',
+        'Roofline configuration',
+        'Number and placement of downspouts',
+        'Property access',
+        'Existing gutter removal, when applicable',
+        'Selected gutter system and finish',
+        'Additional work needed around the roof edge',
+      ].map((item) => (
+        <div class="flex items-start gap-3">
+          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
+          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
+        </div>
+      ))}
+    </div>
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8">
+      R&amp;C can provide pricing after reviewing the property and determining the proposed scope.
+    </p>
+    <a href="/contact" class="btn-primary">Get a Gutter Estimate</a>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-09 · Recent Gutter Projects (white bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Recent Gutter Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {[1, 2, 3].map(() => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4">
+          <div class="w-full h-36 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-heading mb-1">[Oahu Location] | [Gutter Project]</p>
+          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">[Verified description of the gutter installation or replacement.]</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <a href="/about/gallery" class="btn btn-secondary">View More Projects</a>
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-05 style · Gutters and Roofing Work Better Together (grey bg) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Gutters and Roofing Work Better Together" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+      Gutters are connected to the way water moves off the roofing system, so gutter concerns can sometimes appear alongside other roofing needs.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      {[
+        {
+          title: 'Roof Repair',
+          description: 'Address leaks, damaged materials, flashing concerns, and localized roofing problems.',
+          href: '/services/roof-repair',
+          linkText: 'View Roof Repair',
+        },
+        {
+          title: 'Roof Replacement',
+          description: 'Plan a new roofing system and evaluate the existing gutters as part of the project.',
+          href: '/services/roof-replacement-and-new-installation',
+          linkText: 'View Roof Replacement',
+        },
+        {
+          title: 'Residential Roofing',
+          description: 'Explore roofing services for Oahu homes — from minor repairs to full replacements.',
+          href: '/services/residential-roofing',
+          linkText: 'View Residential Roofing',
+        },
+      ].map(({ title, description, href, linkText }) => (
+        <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
+          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
+            {linkText} →
+          </a>
+        </div>
+      ))}
+    </div>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- P-10 · FAQs (white bg) -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Does R&C install new gutters?',
+        description: 'Yes. Gutter installation is part of R&C Roofing Contractors\' service offering.',
+      },
+      {
+        title: 'Does R&C repair existing gutters?',
+        description:
+          'R&C can evaluate an existing gutter system to determine what work may be appropriate.',
+      },
+      {
+        title: 'How do I know if I need new gutters?',
+        description:
+          'Replacement may be worth considering if the existing system has widespread damage, sections are pulling away, or the gutters no longer direct water properly. A localized problem may require a smaller scope.',
+      },
+      {
+        title: 'Can gutters be installed when I replace my roof?',
+        description:
+          'Yes, gutter needs can be evaluated as part of a roof replacement project. R&C can review the existing gutter condition while the roofing scope is being planned.',
+      },
+      {
+        title: 'How much does gutter installation cost on Oahu?',
+        description:
+          'Cost depends on the length and configuration of the system, number of downspouts, selected product, property access, and other project conditions. R&C can provide a project-specific estimate after evaluating the property.',
+      },
+      {
+        title: 'What gutter material or color should I choose?',
+        description:
+          'Available options should be selected based on the property, roofline, appearance preferences, and products available for the project. R&C can review the current options with you.',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- P-12 · Final CTA -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
+      <div class="text-center mb-8 md:mb-10">
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          Get the Water Moving in the Right Direction
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+          If your property needs new gutters or your existing gutter system is no longer working as intended,<br />
+          R&amp;C Roofing Contractors can evaluate the project and explain your options. You can also include gutter work when planning a larger roof repair or replacement project.
+        </p>
+      </div>
+      <div
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8"
+      >
+        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
+          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
+          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
+          <p>(808) 888-2524</p>
+          <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
+        </div>
+        <a href="/contact" class="btn-primary shrink-0">Get a Gutter Estimate</a>
+      </div>
+    </div>
+  </WidgetWrapper>
+
+</Layout>
