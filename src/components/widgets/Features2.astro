@@ -47,22 +47,30 @@ const headlineClasses = isDark
   {
     items.length > 0 && (
       <div class:list={['grid gap-4 md:gap-6 gap-x-12', columnsClass]}>
-        {items.map(({ title: itemTitle, description, icon, callToAction }) => (
-          <div class:list={['relative flex flex-col rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade', cardBg]}>
-            {(icon || defaultIcon) && <Icon name={icon || defaultIcon} class="mb-6 w-12 h-12 text-primary" />}
-            <h3 class:list={['text-[22px] md:text-[26px] font-medium font-heading leading-[130%]', cardTitle]}>
-              {itemTitle}
-            </h3>
-            {description && (
-              <p class:list={['text-[14px] md:text-[15px] font-medium leading-[160%] mt-2', cardDesc]} set:html={description} />
-            )}
-            {callToAction && (
-              <div class="mt-auto pt-4">
-                <Button {...callToAction} />
-              </div>
-            )}
-          </div>
-        ))}
+        {items.map(({ title: itemTitle, description, icon, callToAction }) => {
+          const cardHref = callToAction?.href;
+          const CardWrapper = cardHref ? 'a' : 'div';
+          const cardLinkProps = cardHref ? { href: cardHref } : {};
+          
+          return (
+            <CardWrapper
+              {...cardLinkProps}
+              class:list={[
+                'relative flex flex-col rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+                cardBg,
+                cardHref && 'card-hover cursor-pointer'
+              ]}
+            >
+              {(icon || defaultIcon) && <Icon name={icon || defaultIcon} class="mb-6 w-12 h-12 text-primary" />}
+              <h3 class:list={['text-[22px] md:text-[26px] font-medium font-heading leading-[130%]', cardTitle]}>
+                {itemTitle}
+              </h3>
+              {description && (
+                <p class:list={['text-[14px] md:text-[15px] font-medium leading-[160%] mt-2', cardDesc]} set:html={description} />
+              )}
+            </CardWrapper>
+          );
+        })}
       </div>
     )
   }

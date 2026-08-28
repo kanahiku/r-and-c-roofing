@@ -5,7 +5,8 @@ import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Timeline from '~/components/ui/Timeline.astro';
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'Tile Roofing Honolulu & Oahu | Clay & Concrete | R&C Roofing',
@@ -39,13 +40,7 @@ const metadata = {
     R&amp;C operates under Hawaii contractor license C-33642.
   </Fragment>
   <Fragment slot="bg">
-    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-      <div
-        class="absolute inset-0 opacity-[6%]"
-        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
+    <SectionBg variant="hero" />
   </Fragment>
 </Hero2>
 
@@ -99,7 +94,7 @@ const metadata = {
 
   <!-- Clay Tile or Concrete Tile? · black bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline title="Clay Tile or Concrete Tile?" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <Headline title="Clay Tile or Concrete Tile?" isDark={true} classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       Both create a tile roof, but they are different materials. Industry guidance treats clay and concrete as separate roofing materials with their own product standards and installation requirements.
     </p>
@@ -138,14 +133,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -208,7 +196,7 @@ const metadata = {
 
   <!-- Tile Roofing and Oahu Conditions · black bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline title="Tile Roofing and Oahu Conditions" classes={{ container: 'mb-4 md:mb-6', title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white' }} />
+    <Headline title="Tile Roofing and Oahu Conditions" isDark={true} classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
       The right tile system for a property depends on more than appearance alone. Oahu's environmental conditions should be part of the evaluation.
     </p>
@@ -238,14 +226,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -351,14 +332,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -408,6 +382,7 @@ const metadata = {
       </div>
       <div class="md:basis-1/2">
         <Timeline
+          isDark={true}
           items={[
             {
               title: 'Evaluate the Property',
@@ -439,14 +414,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -561,47 +529,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </FAQs>
 
   <!-- P-12 · Final CTA -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            See if Tile Roofing Fits Your Property
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            Clay and concrete tile can create a distinctive roof, but the right decision starts with the building rather than the appearance alone.<br />
-            R&amp;C Roofing Contractors can evaluate the property, discuss available tile systems, and help you determine whether clay or concrete tile makes sense for your roofing project.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Discuss a Tile Roofing Project</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <CTABanner
+    title="See if Tile Roofing Fits Your Property"
+    subtitle="Clay and concrete tile can create a distinctive roof, but the right decision starts with the building rather than the appearance alone.<br />R&amp;C Roofing Contractors can evaluate the property, discuss available tile systems, and help you determine whether clay or concrete tile makes sense for your roofing project."
+    ctaText="Discuss a Tile Roofing Project"
+  />
 
 </Layout>

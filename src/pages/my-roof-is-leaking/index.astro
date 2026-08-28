@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'Roof Leaking on Oahu? Get It Checked | R&C Roofing',
@@ -38,7 +40,7 @@ const metadata = {
       <p class="mt-2 text-[13px] md:text-[14px] font-medium text-muted italic">Hawaii Contractor License C-33642</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -83,7 +85,7 @@ const metadata = {
       <a href="/contact" class="btn-primary">Get the Leak Checked</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -128,7 +130,7 @@ const metadata = {
       The visible symptom provides a clue. It does not replace an inspection.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -167,7 +169,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -212,7 +214,7 @@ const metadata = {
       <a href="/services/roof-replacement-and-new-installation" class="btn btn-secondary">Explore Roof Replacement &amp; New Installation</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -245,7 +247,7 @@ const metadata = {
       <a href="/about/reviews" class="btn btn-secondary">Read More Google Reviews</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -286,7 +288,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -321,35 +323,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Your Roof Is Leaking. Start With the Source.
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>If water is entering your home, do not wait for another storm to find out whether it happens again.</p>
-          <p>Find out where the water is getting in and what roofing work actually makes sense.</p>
-        </div>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-1 text-[13px] md:text-[14px] italic">Hawaii Contractor License C-33642</p>
-        </div>
-        <a href="/contact" class="btn-primary shrink-0">Call About Your Roof Leak</a>
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
+  <!-- Final CTA -->
+  <CTABanner
+    title="Your Roof Is Leaking. Start With the Source."
+    subtitle="If water is entering your home, do not wait for another storm to find out whether it happens again.<br /><br />Find out where the water is getting in and what roofing work actually makes sense."
+    ctaText="Call About Your Roof Leak"
+  />
 
 </Layout>

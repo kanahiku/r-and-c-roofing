@@ -4,8 +4,8 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'Denied or Underpaid Roof Claims Hawaii | R&C Roofing',
@@ -34,13 +34,7 @@ const metadata = {
       R&C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and provide contractor-side information about recommended repair or replacement work. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313. R&C is also a licensed Hawaii roofing contractor, License C-33642.
     </Fragment>
     <Fragment slot="bg">
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[6%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
@@ -68,7 +62,7 @@ const metadata = {
       R&amp;C does not determine coverage or negotiate insurance settlements.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -111,14 +105,7 @@ const metadata = {
       Understanding the specific point of disagreement gives R&amp;C a clearer starting point when evaluating the roof.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -184,7 +171,7 @@ const metadata = {
       Your carrier remains responsible for coverage decisions and the handling of the insurance claim.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -236,7 +223,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -255,14 +242,7 @@ const metadata = {
       <a href="/roof-inspections/haag-certified-inspection" class="btn-primary">Learn About HAAG Certified Roof Inspections</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -274,14 +254,14 @@ const metadata = {
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-700 dark:text-green-400">R&amp;C Can</h3>
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-accent">R&amp;C Can</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Inspect visible roofing conditions</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Document relevant findings</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Explain the roofing work we recommend</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Provide a roofing scope or estimate when appropriate</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Respond to contractor-specific questions about the proposed project</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-600 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Inspect visible roofing conditions</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Document relevant findings</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Explain the roofing work we recommend</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Provide a roofing scope or estimate when appropriate</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Respond to contractor-specific questions about the proposed project</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
         </ul>
       </div>
       <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6">
@@ -300,7 +280,7 @@ const metadata = {
       If you want to challenge a coverage decision or need help interpreting your insurance policy, contact your carrier or an appropriately licensed insurance professional.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -316,7 +296,7 @@ const metadata = {
       <p>Your carrier determines whether additional work or cost is covered.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -335,14 +315,7 @@ const metadata = {
       <a href="/services/roof-repair" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Roof Repair Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -378,7 +351,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -429,40 +402,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
   <!-- Final CTA — Yellow -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            Need Another Look at the Roof?
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            If your claim was denied or the approved roofing scope does not match the work you believe is needed, start by getting clearer information about the roof itself.<br />
-            R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain the roofing work we recommend.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Inspection</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <CTABanner
+    title="Need Another Look at the Roof?"
+    subtitle="If your claim was denied or the approved roofing scope does not match the work you believe is needed, start by getting clearer information about the roof itself.<br />R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain the roofing work we recommend."
+    ctaText="Schedule a Roof Inspection"
+  />
 
 </Layout>

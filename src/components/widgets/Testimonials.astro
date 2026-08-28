@@ -19,28 +19,25 @@ const {
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
+// Use CSS variable-based classes unless cardClass is explicitly provided
 const cardBg = cardClass ?? (isDark
-  ? 'border-white/15 bg-white/5 backdrop-blur-sm'
-  : 'border-accent/50 bg-white dark:bg-slate-800 dark:border-accent/30');
-const textColor = (cardClass || isDark) ? 'text-white/70' : 'text-muted';
-const nameColor = (cardClass || isDark) ? 'text-white' : '';
-const jobColor = (cardClass || isDark) ? 'text-white/50' : 'text-muted';
-const hrColor = (cardClass || isDark) ? 'border-white/10' : 'border-slate-200 dark:border-slate-600';
-
-const headlineClasses = isDark
-  ? { title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-white', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70' }
-  : undefined;
+  ? 'border border-testimonial-card-dark bg-testimonial-card-dark backdrop-blur-sm'
+  : 'border border-testimonial-card-light bg-testimonial-card-light');
+const textColor = isDark ? 'text-testimonial-dark' : 'text-testimonial-light';
+const nameColor = isDark ? 'text-testimonial-name-dark' : 'text-testimonial-name-light';
+const jobColor = isDark ? 'text-testimonial-job-dark' : 'text-testimonial-job-light';
+const hrColor = isDark ? 'border-testimonial-hr-dark' : 'border-testimonial-hr-light';
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-[1400px] mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={headlineClasses} />
+  <Headline title={title} subtitle={subtitle} tagline={tagline} isDark={isDark} classes={classes?.headline} />
 
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {
       testimonials &&
         testimonials.map(({ title, testimonial, name, job, image }) => (
           <div class="flex h-auto intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
-            <div class:list={['flex flex-col p-4 md:p-6 rounded-md card-hover', cardBg]}>
+            <div class:list={['flex flex-col p-4 md:p-6 rounded-md', cardBg]}>
               {title && <h2 class="text-lg font-medium leading-6 pb-4">{title}</h2>}
               {testimonial && (
                 <blockquote class="flex-auto">

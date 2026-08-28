@@ -4,8 +4,10 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
 import Timeline from '~/components/ui/Timeline.astro';
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
 
 const metadata = {
   title: 'Roof Replacement Oahu | New Roof Installation | R&C Roofing',
@@ -40,13 +42,7 @@ const metadata = {
       <span class="block mt-8"></span>
     </Fragment>
     <Fragment slot="bg">
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[6%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
@@ -137,14 +133,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -289,14 +278,7 @@ const metadata = {
       <a href="/services/roofing-materials" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Compare Roofing Materials</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -461,14 +443,7 @@ const metadata = {
       R&amp;C considers the property and roofing system when discussing material and installation options.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -517,35 +492,20 @@ const metadata = {
   </WidgetWrapper>
 
   <!-- P-09 · Recent Roof Replacement Projects (Black — black cards) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-12 text-center">Recent Roof Replacement Projects</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-      {[1, 2, 3].map(() => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
-          <div class="w-full h-36 bg-black/40 rounded mb-3 flex items-center justify-center text-white/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <p class="text-[13px] md:text-[14px] font-semibold font-heading text-white mb-1">[Neighborhood] | [Roofing Material]</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">[Verified description of the existing roof condition and completed replacement.]</p>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8 md:mt-10 text-center">
-      <a href="/about/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View Roofing Projects</a>
-    </div>
+  <ProjectsSection
+    title="Recent Roof Replacement Projects"
+    isDark={true}
+    ctaText="View Roofing Projects"
+    projects={[
+      { title: 'Roof Replacement Project 1', description: 'Details coming soon.' },
+      { title: 'Roof Replacement Project 2', description: 'Details coming soon.' },
+      { title: 'Roof Replacement Project 3', description: 'Details coming soon.' },
+    ]}
+  >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
-  </WidgetWrapper>
+  </ProjectsSection>
 
   <!-- Stacked rows · Why Choose R&C (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -682,47 +642,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 · Final CTA -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            Plan Your New Roof With R&amp;C
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            If your existing roof is showing widespread deterioration or you are planning a new roofing system,<br />
-            R&amp;C Roofing Contractors can help you evaluate the project and determine the next step.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Replacement Consultation</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <!-- Final CTA -->
+  <CTABanner
+    title="Plan Your New Roof With R&C"
+    subtitle="If your existing roof is showing widespread deterioration or you are planning a new roofing system,<br />R&amp;C Roofing Contractors can help you evaluate the project and determine the next step."
+    ctaText="Schedule a Roof Replacement Consultation"
+  />
 
 </Layout>

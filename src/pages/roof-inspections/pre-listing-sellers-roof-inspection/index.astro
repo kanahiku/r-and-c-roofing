@@ -4,8 +4,8 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: "Pre-Listing / Seller's Roof Inspections Oahu | R&C Roofing",
@@ -32,13 +32,7 @@ const metadata = {
       A pre-listing roof inspection gives you a clearer understanding of the roof's visible condition before the property goes on the market. R&C Roofing Contractors includes HAAG Certified Inspector Robert Pilato, Certification #201408313, and is a licensed Hawaii roofing contractor, License C-33642.
     </Fragment>
     <Fragment slot="bg">
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[6%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
@@ -76,7 +70,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -126,14 +120,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -174,7 +161,7 @@ const metadata = {
       <a href="/contact" class="btn-primary">Schedule a Pre-Listing Inspection</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -228,7 +215,7 @@ const metadata = {
       A roof inspection documents visible conditions at the time of inspection. The scope depends on access, roof type, and site conditions.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -272,14 +259,7 @@ const metadata = {
       <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View All Roof Inspection Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -310,40 +290,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </FAQs>
 
   <!-- P-12 Final CTA — Yellow -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            Get Clearer Roof Information Before You List
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            A pre-listing roof inspection helps you understand visible roof conditions before a transaction timeline tightens.<br />
-            R&C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain what those findings may mean for your property.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Pre-Listing Roof Inspection</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <CTABanner
+    title="Get Clearer Roof Information Before You List"
+    subtitle="A pre-listing roof inspection helps you understand visible roof conditions before a transaction timeline tightens.<br />R&amp;C Roofing Contractors can inspect accessible roofing areas, document relevant findings, and explain what those findings may mean for your property."
+    ctaText="Schedule a Pre-Listing Roof Inspection"
+  />
 
 </Layout>

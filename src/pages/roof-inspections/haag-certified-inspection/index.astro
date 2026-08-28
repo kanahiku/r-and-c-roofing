@@ -4,8 +4,8 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'HAAG Certified Roof Inspector Hawaii | R&C Roofing',
@@ -32,13 +32,7 @@ const metadata = {
       R&C Roofing Contractors has a HAAG Certified Inspector on staff. Robert Pilato, Certification #201408313, brings specialized roof damage assessment training to inspections for Oahu property owners.
     </Fragment>
     <Fragment slot="bg">
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[6%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
@@ -55,7 +49,7 @@ const metadata = {
       <p>Robert Pilato holds HAAG Certification #201408313, bringing that specialized training directly into R&C's roof inspection process.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -94,14 +88,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -148,7 +135,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -195,7 +182,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -214,14 +201,7 @@ const metadata = {
       <a href="/insurance-claim-help" class="btn-primary">Learn About Insurance Claim Help</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -236,7 +216,7 @@ const metadata = {
       <p>Our HAAG inspection expertise is paired with R&C Roofing Contractors' Hawaii contractor license C-33642.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -278,7 +258,7 @@ const metadata = {
       <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -319,40 +299,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </FAQs>
 
   <!-- P-12 Final CTA — Yellow -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            Get a Closer Look at Your Roof Damage
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            If you are dealing with storm damage or another roofing concern, a HAAG Certified inspection can provide a closer assessment of the roof's visible condition.<br />
-            R&C Roofing Contractors can inspect the roofing system, document relevant findings, and explain what those findings may mean for your property.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a HAAG Certified Roof Inspection</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <CTABanner
+    title="Get a Closer Look at Your Roof Damage"
+    subtitle="If you are dealing with storm damage or another roofing concern, a HAAG Certified inspection can provide a closer assessment of the roof's visible condition.<br />R&amp;C Roofing Contractors can inspect the roofing system, document relevant findings, and explain what those findings may mean for your property."
+    ctaText="Schedule a HAAG Certified Roof Inspection"
+  />
 
 </Layout>

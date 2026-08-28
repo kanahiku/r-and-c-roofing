@@ -12,11 +12,13 @@ alwaysApply: true
 
 ## Required Import
 
-Every page that uses black sections or the CTA banner must import:
+Every page should import `SectionBg` for consistent section backgrounds:
 
 ```astro
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import SectionBg from '~/components/ui/SectionBg.astro';
 ```
+
+The `SectionBg` component handles all background patterns internally — no need to import `simplePattern` directly.
 
 ---
 
@@ -33,8 +35,7 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 ## 1 · Hero Section (always White bg)
 
 - Component: `Hero2` (left content / right image split)
-- Background: white (default — no bg div needed)
-- Motif: `simple.svg` accent yellow at **6% opacity**, top-to-bottom fade
+- Background: white with yellow accent motif at **10% opacity**, top-to-bottom fade
 - Left side: H1, subtitle paragraphs, primary CTA button
 - Right side: hero image
 - No eyebrow text. No gold bar. No `isDark`.
@@ -58,13 +59,7 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
     </div>
   </Fragment> -->
   <Fragment slot="bg">
-    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-      <div
-        class="absolute inset-0 opacity-[6%]"
-        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
+    <SectionBg variant="hero" />
   </Fragment>
 </Hero2>
 ```
@@ -82,7 +77,7 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 ### Grey section bg snippet
 ```astro
 <Fragment slot="bg">
-  <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+  <SectionBg variant="grey" />
 </Fragment>
 ```
 
@@ -99,14 +94,13 @@ Optional left accent bar for compact cards: add `border-l-4 border-l-accent` to 
 ### Ghost button on Grey bg
 
 ```astro
-<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">
-  Button Label
-</a>
+<a href="/path" class="btn-ghost-light">Button Label</a>
 ```
 
-- Border: `border-2 border-black`
-- Text: `text-black`
-- Hover: `hover:bg-black hover:text-white`
+Or use the Button component:
+```astro
+<Button variant="ghost-light" text="Button Label" href="/path" />
+```
 
 ### Step/numbered circle on Grey bg
 
@@ -127,7 +121,7 @@ When a step or process uses a numbered circle indicator, the circle must be dark
 ## 3 · Black Section Rules (`bg-black` + motif)
 
 - Background: `bg-black`
-- Motif: `simple.svg` accent yellow at **8% opacity**, top-to-bottom fade
+- Motif: `simple.svg` accent yellow at **12% opacity**, top-to-bottom fade
 - Headings: `text-white`
 - Body text: `text-white/70`
 - Disclaimer / secondary text: `text-white/50`
@@ -136,14 +130,7 @@ When a step or process uses a numbered circle indicator, the circle must be dark
 ### Black section bg snippet
 ```astro
 <Fragment slot="bg">
-  <div class="absolute inset-0 bg-black"></div>
-  <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-    <div
-      class="absolute inset-0 opacity-[8%]"
-      style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-      aria-hidden="true"
-    ></div>
-  </div>
+  <SectionBg variant="dark" />
 </Fragment>
 ```
 
@@ -160,14 +147,13 @@ Use `isDark={true}` on `WidgetWrapper` for black sections. Pass `cardClass="bord
 ### Ghost button on Black bg
 
 ```astro
-<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">
-  Button Label
-</a>
+<a href="/path" class="btn-ghost-dark">Button Label</a>
 ```
 
-- Border: `border-2 border-accent` (yellow)
-- Text: `text-white`
-- Hover: `hover:bg-accent hover:text-black`
+Or use the Button component:
+```astro
+<Button variant="ghost-dark" text="Button Label" href="/path" />
+```
 
 ---
 
@@ -178,25 +164,34 @@ Use `isDark={true}` on `WidgetWrapper` for black sections. Pass `cardClass="bord
 - Body text: `text-muted`
 - No motif
 
+### White section bg snippet
+```astro
+<Fragment slot="bg">
+  <SectionBg variant="white" />
+</Fragment>
+```
+
 ### Card on White bg
 ```astro
-<div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-4 md:p-5 flex flex-col">
+<div class="rounded-lg bg-card-light p-4 md:p-5 flex flex-col">
   <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-heading">{title}</h3>
   <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
 </div>
 ```
 
+- Background: yellow tint (`rgb(237 217 116 / 50%)`) — same as CTA banner style
+- No border on light cards
+
 ### Ghost button on White bg
 
 ```astro
-<a href="/path" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">
-  Button Label
-</a>
+<a href="/path" class="btn-ghost-light">Button Label</a>
 ```
 
-- Border: `border-2 border-black`
-- Text: `text-black`
-- Hover: `hover:bg-black hover:text-white`
+Or use the Button component:
+```astro
+<Button variant="ghost-light" text="Button Label" href="/path" />
+```
 
 ---
 
@@ -241,7 +236,43 @@ Use `isDark={true}` on `WidgetWrapper` for black sections. Pass `cardClass="bord
 
 ---
 
-## 6 · FAQ Section (follows the section color flow)
+## 6 · Testimonials Section
+
+Testimonials follow the section color flow but have special rules when using black cards on grey backgrounds:
+
+### Testimonials on Grey bg with black cards
+When placing Testimonials on a grey section with black cards (`cardClass="border border-accent/60 bg-[#222]"`):
+- Set `isDark={true}` — this makes card text (name, job, testimonial) white
+- Override the headline with explicit dark text classes to keep the section title dark
+
+```astro
+<Testimonials
+  title="Section Title"
+  subtitle="Subtitle text"
+  isDark={true}
+  cardClass="border border-accent/60 bg-[#222]"
+  classes={{ headline: { title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-[#111111]', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444]' } }}
+  testimonials={[...]}
+  callToAction={{
+    variant: 'ghost-light',
+    text: 'Button Text',
+    href: '/path',
+  }}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="grey" />
+  </Fragment>
+</Testimonials>
+```
+
+**Key rules:**
+- `isDark={true}` for white text on black cards
+- Explicit headline classes for dark section title on grey bg
+- CTA button uses `variant: 'ghost-light'` (black text/border on grey)
+
+---
+
+## 7 · FAQ Section (follows the section color flow)
 
 FAQ sections are **not fixed to a specific background** — they take whatever background colour falls at their position in the page's colour flow (White → Grey → Black).
 
@@ -280,14 +311,7 @@ When `isDark={true}` is set, the `FAQs` component automatically applies:
   items={[...]}
 >
   <Fragment slot="bg">
-    <div class="absolute inset-0 bg-black"></div>
-    <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-      <div
-        class="absolute inset-0 opacity-[8%]"
-        style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
+    <SectionBg variant="dark" />
   </Fragment>
 </FAQs>
 ```
@@ -303,12 +327,15 @@ When `isDark={true}` is set, the `FAQs` component automatically applies:
 | No eyebrow text | No tagline/eyebrow above H2 headings |
 | Grey is always `#FAFAFA` | Never use `bg-gray-50` or any other grey value |
 | Black card bg is always `#222` | Use `bg-[#222]` — not `bg-zinc-800`, not `bg-black` |
-| Motif opacity: black sections `8%` | Use `opacity-[8%]` |
-| Motif opacity: CTA banner `3%` | Use `opacity-[3%]` |
-| Hero motif opacity `6%` | Use `opacity-[6%]` |
+| Use SectionBg component | Always use `<SectionBg variant="..." />` for section backgrounds — never manual pattern code |
+| Motif opacity: hero `10%`, dark `12%` | SectionBg defaults: hero=10%, dark=12% |
+| Motif opacity: CTA banner `3%` | CTABanner component uses `3%` internally |
 | Hero badges only when explicit | Never add `tag-pill` badges unless the content brief lists them |
 | CTA card has no border | The yellow card uses `bg-accent` only — no `border` class |
 | FAQ has no cards | FAQ is a plain accordion — never wrap items in card divs |
 | FAQ on Black bg | `isDark={true}` — heading `text-white`, questions `text-white`, answers `text-accent` (yellow) |
-| Ghost button on Black | `border-2 border-accent text-white` — never `border-black` or `text-black` on black bg |
-| Ghost button on White/Grey | `border-2 border-black text-black` — never `border-accent` on light backgrounds |
+| Ghost button on Black | Use `btn-ghost-dark` class or `variant="ghost-dark"` |
+| Ghost button on White/Grey | Use `btn-ghost-light` class or `variant="ghost-light"` |
+| Testimonials on Grey with black cards | Set `isDark={true}` for white text on cards, override headline with explicit dark text classes |
+| Card on White section | Yellow tint background (`50%`), no border |
+| Card on Grey section | Black background (`bg-[#222]`), yellow border, white text |

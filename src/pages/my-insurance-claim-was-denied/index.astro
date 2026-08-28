@@ -3,6 +3,8 @@ import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'Roof Insurance Claim Denied in Hawaii? | R&C Roofing',
@@ -34,7 +36,7 @@ const metadata = {
       <p class="mt-4 text-[14px] md:text-[15px] font-medium text-muted">(808) 888-2524 &nbsp;·&nbsp; Hawaii Contractor License C-33642</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -103,7 +105,7 @@ const metadata = {
       The goal is to separate two questions: What does the insurance policy cover? And what is physically happening with the roof? R&C works on the second question.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -153,7 +155,7 @@ const metadata = {
       <a href="/insurance-claim-help/how-the-claim-process-works" class="btn btn-secondary">How the Claim Process Works</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -174,7 +176,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -194,7 +196,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -215,7 +217,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -253,7 +255,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -292,35 +294,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-          Your Claim Was Denied. Start With the Roof Facts.
-        </h2>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400 space-y-3">
-          <p>A denial letter tells you the carrier's current position. A roof inspection tells you what is physically happening with the roof.</p>
-          <p>If you need clearer contractor-side information about the damage, deterioration, or roofing work that may be required, R&C can help establish those facts.</p>
-        </div>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-          <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-          <p class="mt-1 text-[13px] md:text-[14px] italic">Hawaii Contractor License C-33642</p>
-        </div>
-        <a href="/contact" class="btn-primary shrink-0">Have R&C Evaluate the Roof</a>
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
+  <!-- Final CTA -->
+  <CTABanner
+    title="Your Claim Was Denied. Start With the Roof Facts."
+    subtitle="A denial letter tells you the carrier's current position. A roof inspection tells you what is physically happening with the roof.<br /><br />If you need clearer contractor-side information about the damage, deterioration, or roofing work that may be required, R&amp;C can help establish those facts."
+    ctaText="Have R&C Evaluate the Roof"
+  />
 
 </Layout>

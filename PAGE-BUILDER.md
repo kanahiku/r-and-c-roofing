@@ -54,11 +54,20 @@ Copy this at the top of every new page. Remove the imports you don't use.
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import CardWrapper from '~/components/ui/CardWrapper.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import ProjectCard from '~/components/ui/ProjectCard.astro';
+import BulletCard from '~/components/ui/BulletCard.astro';
+import BenefitItem from '~/components/ui/BenefitItem.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
+import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
 import Timeline from '~/components/ui/Timeline.astro';
 import Image from '~/components/common/Image.astro';
 ---
@@ -85,7 +94,83 @@ Every section on every page must follow these rules. Do not deviate.
 | H3 | Card or item titles within a section |
 | No eyebrows/taglines | Never add eyebrow text above headings |
 | No icons on cards | Unless the pattern explicitly includes them |
+| One CTA type per section | Use **either** Primary **or** Ghost buttons in a section — never mix both styles in the same section |
 | Headline description alignment | When `<Headline>` is used (always center-aligned), any description immediately below it **must also be center-aligned**. **Never pass body text as the `subtitle` prop on `<Headline>`.** The `subtitle` slot is only for true visual sub-headings (rarely used). All descriptive sentences belong as a separate `<p>` below the `<Headline>` with `text-center max-w-3xl mx-auto mb-8 md:mb-12`, and add `classes={{ container: 'mb-4 md:mb-6' }}` on the `<Headline>` to tighten the gap. For sections with left-aligned body paragraphs, prepend the sentence as the first `<p>` inside the existing body `<div>` — no centering needed. |
+
+### CTA Button Consistency Rule
+
+**Each section must use only ONE type of CTA button.** Do not mix Primary and Ghost buttons within the same section.
+
+| Section has... | Use this CTA style |
+|----------------|-------------------|
+| Main conversion action (Schedule, Contact, Get Started) | **Primary** (`btn-primary`) |
+| Secondary/exploratory action (Learn More, View Gallery, Explore) | **Ghost** (`btn btn-secondary`) |
+| Header row CTA (P-04 pattern) | Match the section's primary intent |
+| Multiple CTAs in one section | ❌ **Not allowed** — pick the most important action |
+
+**Choosing between Primary and Ghost:**
+- **Primary:** Use when the section's goal is conversion (contact, schedule, buy)
+- **Ghost:** Use when the section's goal is exploration (view more, learn about, browse)
+- **Per-card links:** Text links (`text-primary hover:underline`) are allowed alongside a section CTA — they don't count as a second button style
+
+### Grid Card Decision Rule
+
+**Only use card grids when the item count fits cleanly into standard layouts.** Analyze the content before choosing a pattern.
+
+| Item Count | Use Cards? | Pattern | Grid Layout |
+|------------|------------|---------|-------------|
+| 1 | ❌ No | P-03 or P-13 | Present as text/paragraph, not a card |
+| 2 | ✅ Yes | P-02, P-05 | `sm:grid-cols-2` |
+| 3 | ✅ Yes | P-02, P-05, P-09 | `sm:grid-cols-3` |
+| 4 | ✅ Yes | P-02, P-05, P-07 | `sm:grid-cols-4` or `sm:grid-cols-2` (2×2) |
+| 5 | ⚠️ Special | **P-06 only** | 3+2 split rows — never a single grid |
+| 6 | ✅ Yes | P-05, P-09 | `sm:grid-cols-3` (2 rows) or `sm:grid-cols-2` (3 rows) |
+| 7+ | ⚠️ Caution | Split sections | Consider breaking into multiple sections or use a different format |
+
+**When NOT to use cards:**
+- Content has 5 items → use **P-06** (3+2 split layout)
+- Content has 7+ items → split into logical groups or use **P-08** (timeline) / **P-13** (editorial)
+- Content is primarily narrative/explanatory → use **P-03** (text + image) or **P-13** (full-width editorial)
+- Items are not parallel in structure (different lengths, some have links, some don't) → use prose format instead
+
+### Card Clickability Rule
+
+**Cards with links must be fully clickable. Cards without links must NOT be clickable.**
+
+| Card has a link? | Behavior | Implementation |
+|------------------|----------|----------------|
+| ✅ Yes (href provided) | Entire card is clickable | Wrap card in `<a href="...">` tag |
+| ❌ No link | Card is static, not clickable | No `<a>` wrapper, no `card-hover` class |
+
+**Clickable card implementation:**
+```astro
+<a href="/target-page" class="block rounded-lg border ... card-hover">
+  <h3>Card Title</h3>
+  <p>Card description</p>
+</a>
+```
+
+**Static card implementation (no link):**
+```astro
+<div class="rounded-lg border ...">
+  <h3>Card Title</h3>
+  <p>Card description</p>
+</div>
+```
+
+**Examples by card type:**
+| Card Type | Has Link? | Clickable? |
+|-----------|-----------|------------|
+| Service cards (P-05) | ✅ Yes — links to service page | ✅ Fully clickable |
+| Project/gallery cards (P-09) | ✅ Yes — links to project detail | ✅ Fully clickable |
+| Benefit/feature cards (P-02, P-06) | ❌ No link | ❌ Static |
+| Testimonial cards (P-11) | ❌ No link | ❌ Static |
+| Info cards (P-07) | Depends on content | Match the link presence |
+
+**Do NOT:**
+- Add `card-hover` to cards without links
+- Use text links inside a fully clickable card (redundant)
+- Mix clickable and non-clickable cards in the same grid
 
 Background snippets go inside `<Fragment slot="bg">` inside `WidgetWrapper`.
 
@@ -116,14 +201,16 @@ Use these exact classes everywhere. Do not invent new sizes.
 
 Read each section of the content doc → find its shape below → use that pattern number.
 
+> **Important:** Before selecting a card-based pattern, count the items. See the **Grid Card Decision Rule** above. If the count doesn't fit cleanly (e.g., 5 items), use the designated pattern (P-06) or restructure the content.
+
 | What the doc section looks like | Pattern |
 |---------------------------------|---------|
 | Page title (H1) + 1–2 paragraphs + primary CTA + optional image + optional badges | **P-01** |
 | H2 + 1–2 intro paragraphs + 2–4 feature/benefit points, no image | **P-02** |
 | H2 + paragraphs + image on one side + CTA | **P-03** |
 | H2 title that should share a row with a CTA button | **P-04** *(composable — combine with P-02, P-08, etc.)* |
-| 4–6 cards each with title, description, and a link to its own page | **P-05** |
-| Exactly 5 benefit/feature points, no per-card links | **P-06** |
+| 2, 3, 4, or 6 cards each with title, description, and a link to its own page | **P-05** |
+| Exactly 5 benefit/feature points (use 3+2 split — never a single grid) | **P-06** |
 | 4 compact info items (areas served, credentials, quick specs) | **P-07** |
 | H2 + 1–2 paragraphs + 3–6 ordered steps + optional image + optional disclaimer | **P-08** |
 | Grid of project/portfolio cards with optional image placeholders | **P-09** |
@@ -177,7 +264,8 @@ Read each section of the content doc → find its shape below → use that patte
 ### P-02 · Intro + N-Column Items
 
 **Content shape:** H2 title, 1–2 intro paragraphs, 2–4 feature/benefit points (no image, no per-item links)  
-**Pattern:** Inline `WidgetWrapper`
+**Pattern:** Inline `WidgetWrapper`  
+**⚠️ Item count:** Works best with 2, 3, or 4 items. For 5 items, use **P-06** instead.
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -279,8 +367,9 @@ Read each section of the content doc → find its shape below → use that patte
 
 ### P-05 · Service Cards Grid (Per-Card Links)
 
-**Content shape:** 4–6 cards, each with title, description, and a link to its own page  
-**Component:** `Features2.astro`
+**Content shape:** 2, 3, 4, or 6 cards (NOT 5), each with title, description, and a link to its own page  
+**Component:** `Features2.astro`  
+**⚠️ Item count:** Only use when you have 2, 3, 4, or 6 items. For 5 items, use **P-06** instead.
 
 ```astro
 <Features2
@@ -312,7 +401,8 @@ Read each section of the content doc → find its shape below → use that patte
 ### P-06 · Uneven Card Grid (3 + 2)
 
 **Content shape:** Exactly 5 benefit/feature points, no per-card links  
-**Pattern:** Two stacked grids — 3-col row then 2-col row
+**Pattern:** Two stacked grids — 3-col row then 2-col row  
+**⚠️ This is the ONLY pattern for 5 items.** Never use a single grid for 5 items — it creates awkward spacing.
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -471,7 +561,8 @@ Read each section of the content doc → find its shape below → use that patte
 ### P-09 · Gallery / Project Cards
 
 **Content shape:** H2 title, subtitle, 3+ cards (photo + title + description), ghost CTA below  
-**Note:** Use the SVG placeholder when real images are not yet available — it will be replaced later.
+**Note:** Use the SVG placeholder when real images are not yet available — it will be replaced later.  
+**⚠️ Item count:** Works best with 3, 6, or 9 items (multiples of 3). For 5 items, use **P-06** layout instead.
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -556,41 +647,62 @@ Read each section of the content doc → find its shape below → use that patte
 ### P-12 · Final CTA (Page Ender)
 
 **Content shape:** H2 closing headline, 1–2 supporting sentences, contact info block, primary CTA  
-**Pattern:** Shadowed card — heading + subtitle centered at top, contact left + button right below a divider  
-**Every page ends with this section.**
+**Pattern:** Yellow card with pattern motif — heading + subtitle centered at top, contact left + button right below a black divider  
+**Every page ends with this section.** Use the reusable `CTABanner` component.
 
+**Import:**
 ```astro
-<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
-
-    <!-- Centered heading + subtitle -->
-    <div class="text-center mb-8 md:mb-10">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
-        Closing Headline from Doc
-      </h2>
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-        Supporting sentence from doc.<br />Second sentence if present.
-      </p>
-    </div>
-
-    <!-- Contact info left · Primary CTA right -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t border-gray-200 dark:border-gray-700 pt-8">
-      <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-muted dark:text-slate-400">
-        <p class="font-semibold text-heading text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-        <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-        <p>(808) 888-2524</p>
-        <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
-      </div>
-      <a href="/contact" class="btn-primary shrink-0">Schedule a Roof Inspection</a>
-    </div>
-
-  </div>
-</WidgetWrapper>
+import CTABanner from '~/components/widgets/CTABanner.astro';
 ```
 
-**Variants:**
-- Ghost CTA → `class="btn btn-secondary shrink-0"`
-- No contact info → remove the flex split and just center the button
+**Basic usage:**
+```astro
+<CTABanner
+  title="Find Out What Is Happening With Your Roof"
+  subtitle="If you have noticed a leak, storm damage, or another change in your roof, start with an inspection.<br />R&C Roofing Contractors can evaluate the roof and explain what the findings mean for your property."
+/>
+```
+
+**Props:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | (required) | H2 heading text |
+| `subtitle` | `string` | (required) | Supporting text, can include `<br />` for line breaks |
+| `ctaText` | `string` | `"Schedule a Roof Inspection"` | Button text |
+| `ctaHref` | `string` | `"/contact"` | Button link |
+| `showAfterHoursNote` | `boolean` | `false` | Show after-hours contact note (homepage only) |
+
+**Examples:**
+
+```astro
+<!-- Default CTA (most pages) -->
+<CTABanner
+  title="Start With the Condition of Your Roof"
+  subtitle="If you are not sure whether you need maintenance, a repair, or a larger roofing project, start with an inspection."
+/>
+
+<!-- Custom button text -->
+<CTABanner
+  title="Get the Roof Problem Checked Before It Gets Worse"
+  subtitle="R&amp;C Roofing Contractors can inspect the roofing problem and explain the recommended repair."
+  ctaText="Schedule a Roof Repair Inspection"
+/>
+
+<!-- Homepage with after-hours note -->
+<CTABanner
+  title="Find Out What Is Happening With Your Roof"
+  subtitle="If you have noticed a leak, storm damage, or another change in your roof, start with an inspection."
+  showAfterHoursNote={true}
+/>
+```
+
+**Note:** The component automatically includes:
+- Yellow (`bg-accent`) background
+- Black pattern motif at 3% opacity with fade
+- R&C contact info (address, phone)
+- Black divider line
+- Black CTA button with hover state
 
 ---
 
@@ -686,3 +798,679 @@ import HeroAccent from '~/components/ui/HeroAccent.astro';
 - Gold accent: `color="accent"` — uses primary gold color
 - Large: `size="lg"` — bigger for prominent heroes
 - White on dark: `color="white"` — for dark hero backgrounds
+
+---
+
+### SectionBg
+
+Reusable background component for section `<Fragment slot="bg">` slots. Handles solid colors and pattern motifs with proper dark mode support.
+
+**Import:**
+```astro
+import SectionBg from '~/components/ui/SectionBg.astro';
+```
+
+**Props:**
+
+| Prop | Values | Default | Description |
+|------|--------|---------|-------------|
+| `variant` | `hero`, `dark`, `grey`, `white` | (required) | Background preset |
+| `motifOpacity` | String like `"10%"`, `"8%"` | Per variant | Override default opacity |
+| `motifColor` | `accent`, `black` | Per variant | Override motif color |
+| `fadeDirection` | `top-to-bottom`, `bottom-to-top`, `none` | `top-to-bottom` | Gradient fade direction |
+| `pattern` | `ImageMetadata` | `simple.svg` | Custom pattern SVG |
+
+**Variant defaults:**
+
+| Variant | Background | Motif | Opacity |
+|---------|------------|-------|---------|
+| `hero` | transparent (white) | yellow accent | 10% |
+| `dark` | black | yellow accent | 12% |
+| `grey` | #FAFAFA | none | — |
+| `white` | white | none | — |
+
+**Usage:**
+```astro
+<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <!-- section content -->
+  <Fragment slot="bg">
+    <SectionBg variant="dark" />
+  </Fragment>
+</WidgetWrapper>
+```
+
+**Custom opacity example:**
+```astro
+<Fragment slot="bg">
+  <SectionBg variant="hero" motifOpacity="15%" />
+</Fragment>
+```
+
+---
+
+## Button System
+
+Standardized button components with CSS variable-based colors for easy theming.
+
+### Button Component
+
+**Import:**
+```astro
+import Button from '~/components/ui/Button.astro';
+```
+
+**Props:**
+
+| Prop | Values | Default | Description |
+|------|--------|---------|-------------|
+| `variant` | `primary`, `secondary`, `ghost-light`, `ghost-dark`, `link` | `secondary` | Button style |
+| `text` | string | slot content | Button label |
+| `href` | string | — | Link destination |
+| `icon` | string | — | Tabler icon name (appears after text) |
+| `target` | `_blank`, etc. | — | Link target |
+| `type` | `button`, `submit`, `reset` | — | Renders as `<button>` instead of `<a>` |
+
+### Button Variants
+
+| Variant | Use Case | Background |
+|---------|----------|------------|
+| `primary` | Main CTA actions | Yellow (accent) on any bg |
+| `secondary` | Secondary actions | Transparent with black border (light bg) |
+| `ghost-light` | Outline button on white/grey sections | Black border, inverts on hover |
+| `ghost-dark` | Outline button on black sections | Yellow border, fills yellow on hover |
+| `link` | Text-only link style | Yellow text with underline on hover |
+
+### Usage Examples
+
+**Primary button (main CTA):**
+```astro
+<Button variant="primary" text="Schedule a Roof Inspection" href="/contact" />
+```
+Or as a plain anchor:
+```astro
+<a href="/contact" class="btn-primary">Schedule a Roof Inspection</a>
+```
+
+**Secondary button (on white/grey background):**
+```astro
+<a href="/services" class="btn-secondary">View All Services</a>
+```
+
+**Ghost button on white/grey section:**
+```astro
+<a href="/services" class="btn-ghost-light">Explore Services</a>
+```
+
+**Ghost button on black section:**
+```astro
+<a href="/services" class="btn-ghost-dark">Explore Services</a>
+```
+
+**Link style:**
+```astro
+<Button variant="link" text="Learn more →" href="/about" />
+```
+
+### Button CSS Classes
+
+Can be used directly on `<a>` or `<button>` elements:
+
+| Class | Description |
+|-------|-------------|
+| `btn-primary` | Solid yellow button |
+| `btn-secondary` | Outline button (black border on light bg) |
+| `btn-ghost-light` | For white/grey sections |
+| `btn-ghost-dark` | For black sections |
+| `btn-link` | Text link style |
+
+### Button Color Variables
+
+All button colors are controlled by CSS variables in `CustomStyles.astro`:
+
+```css
+--aw-color-btn-primary-bg
+--aw-color-btn-primary-text
+--aw-color-btn-primary-border
+--aw-color-btn-primary-bg-hover
+--aw-color-btn-primary-text-hover
+--aw-color-btn-primary-border-hover
+
+--aw-color-btn-secondary-bg
+--aw-color-btn-secondary-text
+--aw-color-btn-secondary-border
+/* ... hover variants */
+
+--aw-color-btn-ghost-light-*
+--aw-color-btn-ghost-dark-*
+--aw-color-btn-link
+--aw-color-btn-link-hover
+```
+
+---
+
+## Headline Component
+
+Standardized section heading component with consistent typography and dark mode support.
+
+### Import
+
+```astro
+import Headline from '~/components/ui/Headline.astro';
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | slot | Main heading text (H2) |
+| `subtitle` | string | slot | Supporting text below title |
+| `tagline` | string | — | Eyebrow text (rarely used per design rules) |
+| `isDark` | boolean | `false` | Set `true` for black sections |
+| `classes` | object | — | Override container, title, or subtitle classes |
+
+### Usage
+
+**Standard usage (light sections):**
+```astro
+<Headline title="Section Title" subtitle="Optional supporting text." />
+```
+
+**Dark section:**
+```astro
+<Headline 
+  title="Section Title" 
+  subtitle="Supporting text on dark background." 
+  isDark={true}
+/>
+```
+
+**Custom spacing:**
+```astro
+<Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6' }} />
+```
+
+**Using slots:**
+```astro
+<Headline>
+  <Fragment slot="title">Complex <span class="text-accent">Title</span></Fragment>
+  <Fragment slot="subtitle">Subtitle with formatting.</Fragment>
+</Headline>
+```
+
+### Typography
+
+The Headline component uses consistent typography:
+
+- **Title (H2):** 30px mobile / 40px desktop, Sora Regular, tight tracking
+- **Subtitle:** 16px mobile / 17px desktop, Inter Medium, 160% line height
+
+### Color Variables
+
+```css
+--aw-color-headline-light       /* Title on white/grey sections */
+--aw-color-headline-dark        /* Title on black sections */
+--aw-color-headline-subtitle-light
+--aw-color-headline-subtitle-dark
+```
+
+---
+
+## Timeline Component
+
+Process/steps visualization with numbered or icon-based steps and connecting lines.
+
+### Import
+
+```astro
+import Timeline from '~/components/ui/Timeline.astro';
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | Array | `[]` | Array of step objects |
+| `defaultIcon` | string | — | Tabler icon name for all steps |
+| `isDark` | boolean | `false` | Set `true` for black sections |
+| `classes` | object | — | Override container, panel, title, description, icon styles |
+
+### Item Object
+
+Each item in the `items` array can have:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | string | Step heading |
+| `description` | string | Step description |
+| `icon` | string | Tabler icon name (overrides defaultIcon) |
+| `classes` | object | Per-item style overrides |
+
+### Usage
+
+**Basic usage (light section):**
+```astro
+<Timeline
+  items={[
+    { title: 'Step 1', description: 'First step description.', icon: 'tabler:search' },
+    { title: 'Step 2', description: 'Second step description.', icon: 'tabler:file' },
+    { title: 'Step 3', description: 'Third step description.', icon: 'tabler:check' },
+  ]}
+/>
+```
+
+**Dark section:**
+```astro
+<Timeline
+  isDark={true}
+  items={[
+    { title: 'Step 1', description: 'Description.', icon: 'tabler:search' },
+    { title: 'Step 2', description: 'Description.', icon: 'tabler:check' },
+  ]}
+/>
+```
+
+**With default icon:**
+```astro
+<Timeline
+  defaultIcon="tabler:circle-check"
+  items={[
+    { title: 'Step 1', description: 'Description.' },
+    { title: 'Step 2', description: 'Description.' },
+  ]}
+/>
+```
+
+### Color Variables
+
+```css
+/* Light mode */
+--aw-color-timeline-icon-light
+--aw-color-timeline-icon-border-light
+--aw-color-timeline-icon-bg-light
+--aw-color-timeline-title-light
+--aw-color-timeline-desc-light
+
+/* Dark mode */
+--aw-color-timeline-icon-dark
+--aw-color-timeline-icon-border-dark
+--aw-color-timeline-icon-bg-dark
+--aw-color-timeline-title-dark
+--aw-color-timeline-desc-dark
+```
+
+---
+
+## Testimonials Component
+
+Display customer reviews/testimonials in a responsive grid layout.
+
+### Import
+
+```astro
+import Testimonials from '~/components/widgets/Testimonials.astro';
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | — | Section heading |
+| `subtitle` | string | — | Supporting text below title |
+| `testimonials` | Array | `[]` | Array of testimonial objects |
+| `isDark` | boolean | `false` | Set `true` for black sections |
+| `callToAction` | object | — | Optional CTA button |
+| `classes` | object | — | Override container, headline styles |
+
+### Testimonial Object
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `testimonial` | string | The review/quote text |
+| `name` | string | Customer name |
+| `job` | string | Job title or company |
+| `image` | object | Customer avatar image |
+
+### Usage
+
+**Light section:**
+```astro
+<Testimonials
+  title="What Our Customers Say"
+  testimonials={[
+    {
+      testimonial: 'Great service and professional team.',
+      name: 'John Doe',
+      job: 'Homeowner, Honolulu',
+      image: { src: '/images/avatar.jpg', alt: 'John' },
+    },
+    // ... more testimonials
+  ]}
+/>
+```
+
+**Dark section:**
+```astro
+<Testimonials
+  title="Customer Reviews"
+  isDark={true}
+  testimonials={[...]}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="dark" />
+  </Fragment>
+</Testimonials>
+```
+
+### Color Variables
+
+```css
+/* Light mode */
+--aw-color-testimonial-card-bg-light
+--aw-color-testimonial-card-border-light
+--aw-color-testimonial-text-light
+--aw-color-testimonial-name-light
+--aw-color-testimonial-job-light
+--aw-color-testimonial-hr-light
+
+/* Dark mode */
+--aw-color-testimonial-card-bg-dark
+--aw-color-testimonial-card-border-dark
+--aw-color-testimonial-text-dark
+--aw-color-testimonial-name-dark
+--aw-color-testimonial-job-dark
+--aw-color-testimonial-hr-dark
+```
+
+---
+
+## FAQs Component
+
+Accordion-style frequently asked questions section.
+
+### Import
+
+```astro
+import FAQs from '~/components/widgets/FAQs.astro';
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | — | Section heading |
+| `subtitle` | string | — | Supporting text below title |
+| `items` | Array | `[]` | Array of FAQ objects |
+| `isDark` | boolean | `false` | Set `true` for black sections |
+| `classes` | object | — | Override container, headline, question, answer styles |
+
+### FAQ Item Object
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | string | The question |
+| `description` | string | The answer (supports HTML) |
+
+### Usage
+
+**Light section:**
+```astro
+<FAQs
+  title="Frequently Asked Questions"
+  items={[
+    {
+      title: 'What services do you offer?',
+      description: 'We offer roof inspections, repair, replacement, and more.',
+    },
+    {
+      title: 'How long does a roof inspection take?',
+      description: 'Most inspections are completed within 1-2 hours.',
+    },
+  ]}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="grey" />
+  </Fragment>
+</FAQs>
+```
+
+**Dark section:**
+```astro
+<FAQs
+  title="Common Questions"
+  isDark={true}
+  items={[...]}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="dark" />
+  </Fragment>
+</FAQs>
+```
+
+### Color Variables
+
+```css
+/* Light mode */
+--aw-color-faq-border-light
+--aw-color-faq-question-light
+--aw-color-faq-answer-light
+--aw-color-faq-toggle-border-light
+--aw-color-faq-toggle-text-light
+--aw-color-faq-toggle-active-light
+
+/* Dark mode */
+--aw-color-faq-border-dark
+--aw-color-faq-question-dark
+--aw-color-faq-answer-dark
+--aw-color-faq-toggle-border-dark
+--aw-color-faq-toggle-text-dark
+--aw-color-faq-toggle-active-dark
+```
+
+---
+
+## ProjectsSection Component
+
+Display a grid of project cards with consistent styling and optional CTA button.
+
+### Import
+
+```astro
+import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | string | — | Section heading |
+| `subtitle` | string | — | Supporting text below title |
+| `projects` | Array | `[]` | Array of project objects |
+| `columns` | 2 \| 3 | `3` | Grid columns |
+| `isDark` | boolean | `false` | Set `true` for black sections |
+| `showCta` | boolean | `true` | Show CTA button |
+| `ctaText` | string | "View Our Project Gallery" | CTA button text |
+| `ctaHref` | string | "/about/gallery" | CTA button link |
+
+### Project Object
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | string | Project title |
+| `description` | string | Project description |
+| `location` | string | Optional location (e.g., "Honolulu, HI") |
+| `material` | string | Optional material type |
+| `image` | object | Optional `{ src, alt }` for project image |
+
+### Usage
+
+**Light section (3 columns):**
+```astro
+<ProjectsSection
+  title="Recent Roofing Projects"
+  subtitle="See examples of roofing work completed by R&C."
+  projects={[
+    { title: 'Project 1', description: 'Roof replacement in Honolulu.' },
+    { title: 'Project 2', description: 'Commercial roof repair.' },
+    { title: 'Project 3', description: 'Residential installation.' },
+  ]}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="white" />
+  </Fragment>
+</ProjectsSection>
+```
+
+**Dark section (2 columns):**
+```astro
+<ProjectsSection
+  title="Recent Commercial Projects"
+  isDark={true}
+  columns={2}
+  projects={[
+    { title: 'Project 1', location: 'Downtown Honolulu', description: 'Details.' },
+    { title: 'Project 2', location: 'Waikiki', description: 'Details.' },
+  ]}
+>
+  <Fragment slot="bg">
+    <SectionBg variant="dark" />
+  </Fragment>
+</ProjectsSection>
+```
+
+**With images:**
+```astro
+<ProjectsSection
+  title="Featured Projects"
+  projects={[
+    {
+      title: 'Kailua Residence',
+      description: 'Complete roof replacement.',
+      image: { src: '/images/project1.jpg', alt: 'Kailua roof project' },
+    },
+  ]}
+/>
+```
+
+### Color Variables
+
+```css
+/* Light mode */
+--aw-color-projects-card-bg-light
+--aw-color-projects-card-border-light
+--aw-color-projects-title-light
+--aw-color-projects-desc-light
+
+/* Dark mode */
+--aw-color-projects-card-bg-dark
+--aw-color-projects-card-border-dark
+--aw-color-projects-title-dark
+--aw-color-projects-desc-dark
+```
+
+---
+
+## Card Components
+
+A family of card components built on a shared `CardWrapper` base for consistent styling.
+
+### CardWrapper (Base)
+
+Low-level wrapper for custom cards. Use the specialized components below for common patterns.
+
+**Props:**
+
+| Prop | Values | Default | Description |
+|------|--------|---------|-------------|
+| `variant` | `dark`, `light` | `dark` | Color scheme |
+| `size` | `sm`, `md`, `lg` | `md` | Padding size |
+| `border` | `true`, `false` | `true` | Show accent border |
+| `href` | string | — | Makes card clickable link |
+
+---
+
+### InfoCard
+
+Simple title + description card. Use for service areas, feature lists, compact info.
+
+```astro
+<InfoCard
+  title="Card Title"
+  description="Card description text."
+  variant="dark"
+  size="md"
+  border={true}
+/>
+```
+
+**Props:** `title`, `description`, `variant`, `size`, `border`
+
+---
+
+### ServiceCard
+
+Card with title, description, and link. Entire card is clickable.
+
+```astro
+<ServiceCard
+  title="Roof Inspections"
+  description="Understand the condition of your roof with a HAAG Certified inspection."
+  href="/roof-inspections"
+  linkText="View Roof Inspections →"
+/>
+```
+
+**Props:** `title`, `description`, `href`, `linkText`, `variant`, `size`
+
+---
+
+### ProjectCard
+
+Card with image placeholder, title, and optional description. Good for galleries/portfolios.
+
+```astro
+<ProjectCard
+  title="Project Name"
+  description="Project details."
+  image={{ src: '/image.jpg', alt: 'Description' }}
+  href="/projects/1"
+  variant="light"
+/>
+```
+
+**Props:** `title`, `description`, `image`, `href`, `variant`, `size`
+
+---
+
+### BulletCard
+
+Card with heading and bullet point list. Good for comparison cards, criteria lists.
+
+```astro
+<BulletCard
+  title="Repair May Make Sense When"
+  items={[
+    'Damage is limited to a specific area.',
+    'Surrounding materials remain serviceable.',
+    'A targeted repair addresses the problem.',
+  ]}
+  variant="dark"
+/>
+```
+
+**Props:** `title`, `items` (string array), `variant`, `size`
+
+---
+
+### BenefitItem
+
+Left accent bar + title + description. Not a card — used for benefit/feature lists.
+
+```astro
+<BenefitItem
+  title="HAAG Certified"
+  description="Specialized roof damage assessment training."
+  variant="light"
+/>
+```
+
+**Props:** `title`, `description`, `variant` (`light` or `dark`)

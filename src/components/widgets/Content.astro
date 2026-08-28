@@ -61,7 +61,7 @@ const hasImage = Boolean(image);
         {/* When there's a side image, render title inline above the content */}
         {hasImage && title && (
           <h2
-            class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-4 font-heading text-heading"
+            class={`text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-4 font-heading ${classes?.title ?? 'text-heading'}`}
             set:html={title}
           />
         )}
@@ -81,7 +81,7 @@ const hasImage = Boolean(image);
                     <div class="flex justify-center">
                       <Icon
                         name={icon || 'tabler:check'}
-                        class="flex h-7 w-7 items-center justify-center rounded-full bg-green-600 dark:bg-green-700 text-gray-50 p-1 mr-2 rtl:mr-0 rtl:ml-2"
+                        class="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-black p-1 mr-2 rtl:mr-0 rtl:ml-2"
                       />
                     </div>
                     <div class="mt-0.5">

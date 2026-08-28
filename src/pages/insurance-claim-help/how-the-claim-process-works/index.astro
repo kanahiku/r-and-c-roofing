@@ -4,8 +4,8 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 
 const metadata = {
   title: 'How Roof Insurance Claims Work in Hawaii | R&C Roofing',
@@ -34,13 +34,7 @@ const metadata = {
       R&C Roofing Contractors helps with the roofing side of that process. We inspect accessible roof areas, document relevant findings, provide contractor-side scope information when appropriate, and complete roofing work if the project moves forward.
     </Fragment>
     <Fragment slot="bg">
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[6%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
@@ -62,13 +56,13 @@ const metadata = {
         </ul>
       </div>
       <div class="rounded-lg border border-accent/60 bg-[#222] p-6">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-green-400">R&amp;C Roofing Contractors</h3>
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-accent">R&amp;C Roofing Contractors</h3>
         <ul class="space-y-3 text-[15px] md:text-[16px] font-medium leading-[160%] text-white/70">
-          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Inspect accessible roofing areas</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Document relevant visible roof conditions</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Explain the roofing work we recommend</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Provide a roofing estimate or scope when appropriate</li>
-          <li class="flex gap-3"><span class="shrink-0 text-green-500 mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Inspect accessible roofing areas</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Document relevant visible roof conditions</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Explain the roofing work we recommend</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Provide a roofing estimate or scope when appropriate</li>
+          <li class="flex gap-3"><span class="shrink-0 text-accent mt-0.5">✓</span>Complete the roofing work if the project moves forward</li>
         </ul>
       </div>
     </div>
@@ -76,7 +70,7 @@ const metadata = {
       R&amp;C is a licensed Hawaii roofing contractor, License C-33642. We are not a public adjuster and do not negotiate insurance settlements or determine coverage.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -102,14 +96,7 @@ const metadata = {
       <a href="/roof-inspections/storm-and-wind-damage-inspection" class="inline-block mt-3 text-accent font-medium text-[14px] md:text-[15px] hover:underline">View Storm &amp; Wind Damage Inspections →</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -135,7 +122,7 @@ const metadata = {
       </p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -174,7 +161,7 @@ const metadata = {
     </p>
     <a href="/roof-inspections/haag-certified-inspection" class="inline-block mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">Learn About HAAG Certified Roof Inspections →</a>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -204,14 +191,7 @@ const metadata = {
       </div>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -233,7 +213,7 @@ const metadata = {
       <a href="/services/roof-replacement-and-new-installation" class="btn-primary">Explore Roof Repair and Replacement Services</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -266,7 +246,7 @@ const metadata = {
       Your insurance carrier can tell you which documents it specifically requires.
     </p>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -282,14 +262,7 @@ const metadata = {
       <p>Do not assume additional work will automatically be covered.</p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
@@ -308,7 +281,7 @@ const metadata = {
       <a href="/insurance-claim-help/denied-or-underpaid-claims" class="btn-primary">Learn About Denied or Underpaid Roof Claims</a>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
@@ -344,7 +317,7 @@ const metadata = {
       ))}
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
@@ -396,47 +369,15 @@ const metadata = {
     ]}
   >
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-black"></div>
-      <div class="absolute inset-0" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[8%]"
-          style={`background-color: var(--aw-color-accent); -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
+      <SectionBg variant="dark" />
     </Fragment>
   </FAQs>
 
   <!-- Final CTA — Yellow -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-      <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-        <div
-          class="absolute inset-0 opacity-[3%]"
-          style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-          aria-hidden="true"
-        ></div>
-      </div>
-      <div class="relative z-10">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">
-            Need Help With the Roofing Side of Your Claim?
-          </h2>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">
-            If your roof has been damaged, R&amp;C can help you understand the condition of the roofing system and the work that may be needed.<br />
-            We can inspect accessible roof areas, document relevant findings, and provide contractor-side information as your insurance claim moves forward.
-          </p>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-          <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-            <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-            <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-            <p>(808) 888-2524</p>
-          </div>
-          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Damage Inspection</a>
-        </div>
-      </div>
-    </div>
-  </WidgetWrapper>
+  <CTABanner
+    title="Need Help With the Roofing Side of Your Claim?"
+    subtitle="If your roof has been damaged, R&amp;C can help you understand the condition of the roofing system and the work that may be needed.<br />We can inspect accessible roof areas, document relevant findings, and provide contractor-side information as your insurance claim moves forward."
+    ctaText="Schedule a Roof Damage Inspection"
+  />
 
 </Layout>

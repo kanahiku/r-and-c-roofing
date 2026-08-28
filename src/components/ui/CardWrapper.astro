@@ -1,0 +1,56 @@
+---
+export interface Props {
+  variant?: 'dark' | 'light';
+  size?: 'sm' | 'md' | 'lg';
+  border?: boolean;
+  href?: string;
+  class?: string;
+}
+
+const {
+  variant = 'dark',
+  size = 'md',
+  border = true,
+  href,
+  class: className = '',
+} = Astro.props;
+
+const isClickable = !!href;
+
+const sizeClasses = {
+  sm: 'p-3 md:p-4',
+  md: 'p-4 md:p-5',
+  lg: 'p-5 md:p-6',
+};
+
+const variantClasses = {
+  dark: 'bg-card-dark',
+  light: 'bg-card-light',
+};
+
+const borderClasses = {
+  dark: border ? 'border border-card-dark' : '',
+  light: border ? 'border border-card-light' : '',
+};
+
+const baseClasses = [
+  'rounded-lg',
+  'flex flex-col',
+  variantClasses[variant],
+  borderClasses[variant],
+  sizeClasses[size],
+  isClickable ? 'cursor-pointer transition-all duration-200 hover:border-accent' : '',
+  'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+  className,
+].filter(Boolean).join(' ');
+---
+
+{isClickable ? (
+  <a href={href} class={baseClasses} data-card-variant={variant}>
+    <slot />
+  </a>
+) : (
+  <div class={baseClasses} data-card-variant={variant}>
+    <slot />
+  </div>
+)}

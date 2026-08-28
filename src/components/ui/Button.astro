@@ -13,11 +13,13 @@ const {
   ...rest
 } = Astro.props;
 
-const variants = {
+const variants: Record<string, string> = {
   primary: 'btn-primary',
   secondary: 'btn-secondary',
   tertiary: 'btn-secondary',
-  link: 'cursor-pointer hover:text-primary',
+  'ghost-light': 'btn-ghost-light',
+  'ghost-dark': 'btn-ghost-dark',
+  link: 'btn-link',
 };
 ---
 

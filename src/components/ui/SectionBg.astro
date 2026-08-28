@@ -1,0 +1,72 @@
+---
+import simplePattern from '~/assets/images/patterns/simple.svg';
+
+export interface Props {
+  variant: 'hero' | 'dark' | 'grey' | 'white';
+  motifOpacity?: number;
+  fadeDirection?: 'top-to-bottom' | 'bottom-to-top' | 'none';
+  pattern?: ImageMetadata;
+}
+
+const {
+  variant,
+  motifOpacity,
+  fadeDirection = 'top-to-bottom',
+  pattern = simplePattern,
+} = Astro.props;
+
+const variantConfig = {
+  hero: {
+    bgClass: '',
+    motifColorVar: 'var(--aw-color-motif-hero)',
+    opacityVar: 'var(--aw-opacity-motif-hero)',
+    hasMotif: true,
+  },
+  dark: {
+    bgClass: 'bg-section-dark',
+    motifColorVar: 'var(--aw-color-motif-dark)',
+    opacityVar: 'var(--aw-opacity-motif-dark)',
+    hasMotif: true,
+  },
+  grey: {
+    bgClass: 'bg-section-grey',
+    motifColorVar: '',
+    opacityVar: '',
+    hasMotif: false,
+  },
+  white: {
+    bgClass: 'bg-section-white',
+    motifColorVar: '',
+    opacityVar: '',
+    hasMotif: false,
+  },
+};
+
+const config = variantConfig[variant];
+const opacity = motifOpacity !== undefined ? motifOpacity : config.opacityVar;
+
+const fadeStyles = {
+  'top-to-bottom': 'linear-gradient(to bottom, black 0%, transparent 100%)',
+  'bottom-to-top': 'linear-gradient(to top, black 0%, transparent 100%)',
+  'none': 'none',
+};
+const fadeStyle = fadeStyles[fadeDirection];
+---
+
+{config.hasMotif ? (
+  <>
+    {config.bgClass && <div class={`absolute inset-0 ${config.bgClass}`}></div>}
+    <div 
+      class="absolute inset-0" 
+      style={fadeStyle !== 'none' ? `-webkit-mask-image: ${fadeStyle}; mask-image: ${fadeStyle};` : ''}
+    >
+      <div
+        class="absolute inset-0"
+        style={`opacity: ${opacity}; background-color: ${config.motifColorVar}; -webkit-mask-image: url('${pattern.src}'); mask-image: url('${pattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
+        aria-hidden="true"
+      ></div>
+    </div>
+  </>
+) : (
+  <div class={`absolute inset-0 ${config.bgClass}`}></div>
+)}
