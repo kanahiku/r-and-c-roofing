@@ -218,7 +218,7 @@ Or use the Button component:
     </div>
     <div class="relative z-10">
       <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">CTA Heading</h2>
+        <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">CTA Heading</h2>
         <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">Supporting sentence.</p>
       </div>
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
@@ -251,7 +251,7 @@ When placing Testimonials on a grey section with black cards (`cardClass="border
   subtitle="Subtitle text"
   isDark={true}
   cardClass="border border-accent/60 bg-[#222]"
-  classes={{ headline: { title: 'text-[30px] md:text-[40px] font-normal leading-[120%] text-[#111111]', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444]' } }}
+  classes={{ headline: { title: 'text-[26px] md:text-[40px] font-normal leading-[120%] text-[#111111]', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444]' } }}
   testimonials={[...]}
   callToAction={{
     variant: 'ghost-light',

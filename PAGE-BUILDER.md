@@ -183,7 +183,7 @@ Use these exact classes everywhere. Do not invent new sizes.
 | Role | Tailwind classes |
 |------|-----------------|
 | **H1** (hero only) | `text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading` |
-| **H2** (section title) | `text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
+| **H2** (section title) | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
 | **H3 standard** | `text-[22px] md:text-[26px] font-medium font-heading leading-[130%]` |
 | **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
 | **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
@@ -352,7 +352,7 @@ Read each section of the content doc → find its shape below → use that patte
 
 ```astro
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-  <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+  <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
     Section Title
   </h2>
   <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -498,7 +498,7 @@ Read each section of the content doc → find its shape below → use that patte
 
   <!-- Header row with CTA — or swap for <Headline> if no CTA needed -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+    <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
       Section Title
     </h2>
     <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -712,7 +712,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
     Section Title
   </h2>
   <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
@@ -1001,7 +1001,7 @@ import Headline from '~/components/ui/Headline.astro';
 
 The Headline component uses consistent typography:
 
-- **Title (H2):** 30px mobile / 40px desktop, Sora Regular, tight tracking
+- **Title (H2):** 26px mobile / 40px desktop, Sora Regular, tight tracking
 - **Subtitle:** 16px mobile / 17px desktop, Inter Medium, 160% line height
 
 ### Color Variables

@@ -478,7 +478,7 @@ A living reference. When a new content doc arrives, use the **Pattern Selector**
 | Role | Classes |
 |------|---------|
 | **H1** | `text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading` |
-| **H2** | `text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
+| **H2** | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
 | **H3 standard** | `text-[22px] md:text-[26px] font-medium font-heading leading-[130%]` |
 | **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
 | **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
@@ -635,7 +635,7 @@ Read the doc section → find its **content shape** below → jump to that patte
 
 ```astro
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-  <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+  <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
     Section Title
   </h2>
   <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -773,7 +773,7 @@ Read the doc section → find its **content shape** below → jump to that patte
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <!-- P-04 header row -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+    <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
       Section Title
     </h2>
     <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -913,7 +913,7 @@ Read the doc section → find its **content shape** below → jump to that patte
 
     <!-- Centered heading + subtitle -->
     <div class="text-center mb-8 md:mb-10">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+      <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
         Closing Headline
       </h2>
       <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
