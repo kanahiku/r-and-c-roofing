@@ -1,20 +1,120 @@
 ---
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const {
+  inputs,
+  textarea,
+  disclaimer,
+  button = 'Send Message',
+  description = '',
+  tone = 'light',
+} = Astro.props;
+
+const formEndpoint = FORM_ENDPOINT;
+const turnstileSiteKey = TURNSTILE_SITE_KEY;
+const siteSlug = SITE_SLUG;
+const isDarkTone = tone === 'dark';
+
+const rowNames = new Set(['name', 'email']);
+const rowInputs = inputs?.filter((input) => input.name && rowNames.has(input.name)) ?? [];
+const restInputs = inputs?.filter((input) => input.name && !rowNames.has(input.name)) ?? [];
+
+const labelClass = isDarkTone
+  ? 'block text-[14px] md:text-[15px] font-medium text-white mb-2'
+  : 'block text-[14px] md:text-[15px] font-medium text-heading mb-2';
+
+const fieldClass = isDarkTone
+  ? 'py-3 px-4 block w-full text-[15px] md:text-[16px] font-medium rounded-md border border-white/20 bg-white text-heading placeholder:text-muted/80 focus:outline-none focus:border-accent'
+  : 'py-3 px-4 block w-full text-[15px] md:text-[16px] font-medium rounded-md border border-black/15 bg-white text-heading placeholder:text-muted/80 focus:outline-none focus:border-black';
+
+const hintClass = isDarkTone
+  ? 'text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60'
+  : 'text-[13px] md:text-[14px] font-medium leading-[160%] text-muted';
+
+const errorClass = 'mt-1.5 text-[13px] md:text-[14px] font-medium leading-[160%] text-red-400';
 ---
 
-<form>
-  {
-    inputs &&
-      inputs.map(
-        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
+<form
+  class="relative w-full"
+  method="POST"
+  action={formEndpoint || undefined}
+  novalidate
+  data-contact-form
+  data-endpoint={formEndpoint}
+  data-tone={tone}
+>
+  <input type="hidden" name="site" value={siteSlug} />
+
+  <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+    <label for="website">Website</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div data-form-success class="hidden text-center py-4 md:py-6" role="status" aria-live="polite">
+    <h3 class:list={['text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3', isDarkTone ? 'text-white' : 'text-heading']}>
+      Message sent
+    </h3>
+    <p class:list={['text-[15px] md:text-[16px] font-medium leading-[160%] mb-4', isDarkTone ? 'text-white/70' : 'text-muted']}>
+      We received your inquiry and will follow up within one business day.
+    </p>
+    <p class:list={['text-[15px] md:text-[16px] font-medium leading-[160%]', isDarkTone ? 'text-white/70' : 'text-muted']}>
+      Prefer to talk now? <a href="tel:8088882524" class:list={['underline underline-offset-2', isDarkTone ? 'text-accent hover:text-white' : 'text-heading hover:text-black']}>Call (808) 888-2524</a>
+    </p>
+  </div>
+
+  <div data-form-body>
+    {
+      rowInputs.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+          {rowInputs.map(({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required = true, inputmode }) =>
+            name ? (
+              <div>
+                {label && (
+                  <label for={name} class={labelClass}>
+                    {label}
+                    {required && (
+                      <span class="text-accent" aria-hidden="true">
+                        {' '}
+                        *
+                      </span>
+                    )}
+                  </label>
+                )}
+                <input
+                  type={type}
+                  name={name}
+                  id={name}
+                  autocomplete={autocomplete}
+                  placeholder={placeholder}
+                  required={required}
+                  inputmode={inputmode}
+                  aria-required={required}
+                  class={fieldClass}
+                />
+                <p data-error-for={name} class:list={[errorClass, 'hidden']}></p>
+              </div>
+            ) : null
+          )}
+        </div>
+      )
+    }
+
+    {
+      restInputs.map(
+        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required = true, inputmode }) =>
           name && (
-            <div class="mb-6">
+            <div class="mb-5">
               {label && (
-                <label for={name} class="block text-sm font-medium">
+                <label for={name} class={labelClass}>
                   {label}
+                  {required && (
+                    <span class="text-accent" aria-hidden="true">
+                      {' '}
+                      *
+                    </span>
+                  )}
                 </label>
               )}
               <input
@@ -23,65 +123,301 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                required={required}
+                inputmode={inputmode}
+                aria-required={required}
+                class={fieldClass}
               />
+              <p data-error-for={name} class:list={[errorClass, 'hidden']}></p>
             </div>
           )
       )
-  }
+    }
 
-  {
-    textarea && (
-      <div>
-        <label for="textarea" class="block text-sm font-medium">
-          {textarea.label}
-        </label>
-        <textarea
-          id="textarea"
-          name={textarea.name ? textarea.name : 'message'}
-          rows={textarea.rows ? textarea.rows : 4}
-          placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-        />
-      </div>
-    )
-  }
+    {
+      textarea && (
+        <div class="mb-5">
+          <label for="message" class={labelClass}>
+            {textarea.label}
+            <span class="text-accent" aria-hidden="true">
+              {' '}
+              *
+            </span>
+          </label>
+          <textarea
+            id="message"
+            name={textarea.name ? textarea.name : 'message'}
+            rows={textarea.rows ? textarea.rows : 6}
+            placeholder={textarea.placeholder}
+            required
+            aria-required="true"
+            class={fieldClass}
+          />
+          <p data-error-for="message" class:list={[errorClass, 'hidden']}></p>
+        </div>
+      )
+    }
 
-  {
-    disclaimer && (
-      <div class="mt-3 flex items-start">
-        <div class="flex mt-0.5">
+    {
+      disclaimer && (
+        <div class="mt-3 flex items-start">
           <input
             id="disclaimer"
             name="disclaimer"
             type="checkbox"
-            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            required
+            class:list={['cursor-pointer mt-1 h-4 w-4 rounded shrink-0', isDarkTone ? 'border-white/30' : 'border-black/30']}
           />
-        </div>
-        <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+          <label for="disclaimer" class:list={['cursor-pointer select-none ml-3', hintClass]}>
             {disclaimer.label}
           </label>
         </div>
-      </div>
-    )
-  }
+      )
+    }
+    <p data-error-for="disclaimer" class:list={[errorClass, 'hidden ml-7']}></p>
 
-  {
-    button && (
-      <div class="mt-10 grid">
-        <Button variant="primary" type="submit">
-          {button}
-        </Button>
-      </div>
-    )
-  }
+    {
+      turnstileSiteKey && (
+        <div class="mt-6">
+          <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme={isDarkTone ? 'dark' : 'light'}></div>
+          <p data-error-for="turnstile" class:list={[errorClass, 'hidden']}></p>
+        </div>
+      )
+    }
 
-  {
-    description && (
-      <div class="mt-3 text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
-      </div>
-    )
-  }
+    <p data-form-status class="hidden mt-4 text-[14px] md:text-[15px] font-medium leading-[160%]" role="status" aria-live="polite"></p>
+
+    {
+      button && (
+        <div class="mt-8">
+          <Button variant="primary" type="submit" class="w-full sm:w-auto min-w-[180px]">
+            {button}
+          </Button>
+        </div>
+      )
+    }
+
+    {
+      description && (
+        <p class:list={['mt-4', hintClass]}>{description}</p>
+      )
+    }
+  </div>
 </form>
+
+<script>
+  type TurnstileApi = {
+    render: (el: HTMLElement, opts: { sitekey: string; theme?: string }) => string;
+    reset: (id?: string) => void;
+  };
+
+  declare global {
+    interface Window {
+      turnstile?: TurnstileApi;
+    }
+  }
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function loadTurnstile(): Promise<TurnstileApi | undefined> {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (document.querySelector('script[data-turnstile-script]')) {
+      return new Promise((resolve) => {
+        const check = () => (window.turnstile ? resolve(window.turnstile) : setTimeout(check, 50));
+        check();
+      });
+    }
+
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.dataset.turnstileScript = 'true';
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = () => resolve(undefined);
+      document.head.appendChild(script);
+    });
+  }
+
+  function phoneDigits(value: string): string {
+    return value.replace(/\D/g, '');
+  }
+
+  function isValidPhone(value: string): boolean {
+    const digits = phoneDigits(value);
+    if (digits.length === 11 && digits.startsWith('1')) return true;
+    return digits.length >= 10 && digits.length <= 15;
+  }
+
+  async function bindForm(form: HTMLFormElement) {
+    if (form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const widget = form.querySelector<HTMLElement>('.cf-turnstile');
+    const sitekey = widget?.dataset.sitekey;
+    const theme = (widget?.dataset.theme as 'light' | 'dark' | undefined) || 'light';
+    if (widget && sitekey && !widget.dataset.widgetId) {
+      const turnstile = await loadTurnstile();
+      if (turnstile) {
+        widget.dataset.widgetId = turnstile.render(widget, { sitekey, theme });
+      }
+    }
+
+    const status = form.querySelector<HTMLElement>('[data-form-status]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const endpoint = form.dataset.endpoint || form.action;
+    const body = form.querySelector<HTMLElement>('[data-form-body]');
+    const success = form.querySelector<HTMLElement>('[data-form-success]');
+    const originalLabel = submit?.innerHTML ?? '';
+
+    const setFieldError = (name: string, message: string) => {
+      const errorEl = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      const field = form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${name}"]`);
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.toggle('hidden', !message);
+      }
+      if (field && name !== 'disclaimer') {
+        field.setAttribute('aria-invalid', message ? 'true' : 'false');
+        field.classList.toggle('border-red-500', Boolean(message));
+      }
+    };
+
+    const clearErrors = () => {
+      form.querySelectorAll<HTMLElement>('[data-error-for]').forEach((el) => {
+        el.textContent = '';
+        el.classList.add('hidden');
+      });
+      form.querySelectorAll<HTMLElement>('[aria-invalid]').forEach((el) => {
+        el.setAttribute('aria-invalid', 'false');
+        el.classList.remove('border-red-500');
+      });
+      if (status) {
+        status.textContent = '';
+        status.classList.add('hidden');
+      }
+    };
+
+    const setStatus = (message: string, ok: boolean) => {
+      if (!status) return;
+      status.textContent = message;
+      status.classList.remove('hidden', 'text-white', 'text-heading', 'text-red-400');
+      status.classList.add(ok ? (form.dataset.tone === 'dark' ? 'text-white' : 'text-heading') : 'text-red-400');
+    };
+
+    const validateFields = (): boolean => {
+      clearErrors();
+      let valid = true;
+
+      const name = (form.querySelector<HTMLInputElement>('[name="name"]')?.value || '').trim();
+      const email = (form.querySelector<HTMLInputElement>('[name="email"]')?.value || '').trim();
+      const phone = (form.querySelector<HTMLInputElement>('[name="phone"]')?.value || '').trim();
+      const message = (form.querySelector<HTMLTextAreaElement>('[name="message"]')?.value || '').trim();
+      const disclaimer = form.querySelector<HTMLInputElement>('[name="disclaimer"]');
+      const turnstileInput = form.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]');
+
+      if (!name) {
+        setFieldError('name', 'Enter your name');
+        valid = false;
+      }
+      if (!EMAIL_RE.test(email)) {
+        setFieldError('email', 'Enter a valid email');
+        valid = false;
+      }
+      if (form.querySelector('[name="phone"]') && !isValidPhone(phone)) {
+        setFieldError('phone', 'Enter a valid phone number');
+        valid = false;
+      }
+      if (!message) {
+        setFieldError('message', 'Enter a message');
+        valid = false;
+      }
+      if (disclaimer && !disclaimer.checked) {
+        setFieldError('disclaimer', 'Please confirm before sending');
+        valid = false;
+      }
+      if (sitekey && !turnstileInput?.value) {
+        setFieldError('turnstile', 'Complete the spam check');
+        valid = false;
+      }
+
+      return valid;
+    };
+
+    form.querySelectorAll('input, textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        const name = (field as HTMLInputElement).name;
+        if (name) setFieldError(name, '');
+      });
+    });
+
+    const showReceived = () => {
+      form.dataset.submitted = 'true';
+      if (body) body.classList.add('hidden');
+      if (success) success.classList.remove('hidden');
+      if (submit) {
+        submit.disabled = true;
+        submit.classList.add('opacity-70');
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (form.dataset.submitted === 'true') return;
+      if (form.dataset.submitting === 'true') return;
+
+      if (!endpoint) {
+        setStatus('The form is not configured yet. Please call (808) 888-2524.', false);
+        return;
+      }
+
+      if (!validateFields()) return;
+
+      form.dataset.submitting = 'true';
+      if (submit) {
+        submit.disabled = true;
+        submit.classList.add('opacity-70');
+        submit.innerHTML = 'Sending…';
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const data = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+        if (response.ok && data.ok) {
+          showReceived();
+          form.reset();
+          const widgetId = widget?.dataset.widgetId;
+          if (widgetId && window.turnstile) window.turnstile.reset(widgetId);
+          return;
+        }
+
+        setStatus(data.error || 'Unable to send right now. Please call (808) 888-2524.', false);
+        const widgetId = widget?.dataset.widgetId;
+        if (widgetId && window.turnstile) window.turnstile.reset(widgetId);
+      } catch {
+        setStatus('Unable to send right now. Please call (808) 888-2524.', false);
+      } finally {
+        form.dataset.submitting = 'false';
+        if (form.dataset.submitted !== 'true' && submit) {
+          submit.disabled = false;
+          submit.classList.remove('opacity-70');
+          submit.innerHTML = originalLabel;
+        }
+      }
+    });
+  }
+
+  const bindAll = () => {
+    document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+      void bindForm(form);
+    });
+  };
+
+  document.addEventListener('astro:page-load', bindAll);
+  bindAll();
+</script>

@@ -150,6 +150,8 @@ export interface Input {
   label?: string;
   autocomplete?: string;
   placeholder?: string;
+  required?: boolean;
+  inputmode?: string;
 }
 
 export interface Textarea {
@@ -186,6 +188,7 @@ export interface Form {
   disclaimer?: Disclaimer;
   button?: string;
   description?: string;
+  tone?: 'light' | 'dark';
 }
 
 // WIDGETS

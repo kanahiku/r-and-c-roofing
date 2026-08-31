@@ -1,0 +1,75 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+
+const metadata = {
+  title: 'Contact R&C Roofing Contractors | Honolulu, HI',
+  description:
+    'Contact R&C Roofing Contractors in Honolulu to schedule a roof inspection or ask about repairs, replacement, and insurance-related roofing work on Oahu.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero2
+    actions={[{ variant: 'primary', text: 'Call (808) 888-2524', href: 'tel:8088882524' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=1200&q=80',
+      alt: 'R&C Roofing Contractors on Oahu',
+    }}
+  >
+    <Fragment slot="title">
+      Get in Touch<br />With R&C Roofing
+    </Fragment>
+    <Fragment slot="subtitle">
+      Tell us what is happening with the roof. We will review your message and follow up to discuss an inspection or the next step that makes sense for the property.
+      <br /><br />
+      R&amp;C Roofing Contractors · 3302 Campbell Ave, Honolulu, HI 96815 · (808) 888-2524
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <ContactUs
+    id="form"
+    title="Send a Message"
+    subtitle="Include your name, email, phone, and a short note about the roof. We typically respond within one business day."
+    button="Send Message"
+    inputs={[
+      { type: 'text', name: 'name', label: 'Name', autocomplete: 'name', placeholder: 'Your name' },
+      { type: 'email', name: 'email', label: 'Email', autocomplete: 'email', placeholder: 'you@email.com' },
+      {
+        type: 'tel',
+        name: 'phone',
+        label: 'Phone',
+        autocomplete: 'tel',
+        placeholder: '(808) 555-0123',
+        inputmode: 'tel',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+      name: 'message',
+      placeholder: 'Property address and what you have noticed on the roof.',
+    }}
+    disclaimer={{
+      label: 'By submitting this form, you agree to be contacted about your roofing inquiry. We do not sell your information.',
+    }}
+    description="Prefer to call? (808) 888-2524"
+  >
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </ContactUs>
+
+  <CTABanner
+    title="Need a Roof Inspection?"
+    subtitle="If you have a leak, storm damage, or another change in the roof, we can evaluate the condition and explain what the findings mean for your property."
+    ctaText="Call (808) 888-2524"
+    ctaHref="tel:8088882524"
+  />
+</Layout>

@@ -105,12 +105,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       />
                     </span>
                     )}
-                    <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[220px] md:max-w-[280px] drop-shadow-xl">
                       {links.map(({ text: text2, href: href2, links: links2 }) => (
                         <li class:list={[{ 'relative group/nested': links2?.length }]}>
                           <a
                             class:list={[
-                              'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
+                              'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block',
                               { 'aw-link-active': href2 === currentPath },
                               { 'flex items-center justify-between': links2?.length },
                             ]}
@@ -125,12 +125,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                             )}
                           </a>
                           {links2?.length && (
-                            <ul class="md:absolute md:left-full md:top-0 md:hidden group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md rounded font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
+                            <ul class="md:absolute md:left-full md:top-0 md:hidden group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md rounded font-medium md:bg-[#111111] md:min-w-[220px] md:max-w-[280px] drop-shadow-xl">
                               {links2.map(({ text: text3, href: href3 }) => (
                                 <li>
                                   <a
                                     class:list={[
-                                      'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
+                                      'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 block',
                                       { 'aw-link-active': href3 === currentPath },
                                     ]}
                                     href={href3}

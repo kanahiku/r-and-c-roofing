@@ -28,7 +28,7 @@ const toggleActive = 'group-open:border-accent group-open:text-accent';
 
   {
     items.length > 0 && (
-      <div class={`divide-y border-t border-b intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${borderColor}`}>
+      <div class={`divide-y border-b intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${borderColor}`}>
         {items.map(({ title: itemTitle, description }) => (
           <details class="group py-1" name="faq-accordion">
             <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
