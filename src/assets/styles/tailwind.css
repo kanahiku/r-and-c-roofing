@@ -21,6 +21,7 @@
   --font-heading: var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
 
   --shadow-card: var(--aw-shadow-card);
+  --shadow-header: var(--aw-shadow-header);
 
   --animate-fade: fadeInUp 1s both;
 
@@ -362,12 +363,12 @@
 
 #header.scroll > div:first-child {
   @apply bg-black md:bg-black/90 md:backdrop-blur-md;
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(0 0 0 / 50%);
+  box-shadow: var(--aw-shadow-header);
 }
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
   @apply bg-black md:bg-black/90 border-b border-white/10;
-  box-shadow: none;
+  box-shadow: var(--aw-shadow-header);
 }
 
 #header.expanded nav {

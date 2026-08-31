@@ -699,7 +699,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 **Note:** The component automatically includes:
 - Yellow (`bg-accent`) background
-- Black pattern motif at 3% opacity with fade
+- Motif from `src/config/motif.ts` (R&C: black pattern at 3% opacity with fade)
 - R&C contact info (address, phone)
 - Black divider line
 - Black CTA button with hover state
@@ -803,7 +803,9 @@ import HeroAccent from '~/components/ui/HeroAccent.astro';
 
 ### SectionBg
 
-Reusable background component for section `<Fragment slot="bg">` slots. Handles solid colors and pattern motifs with proper dark mode support.
+Reusable background component for section `<Fragment slot="bg">` slots. Solid colors plus the site motif from `src/config/motif.ts`.
+
+**Do not import pattern SVGs on pages.** Pages only pass `variant`. Motif shape, fade, tile size, and which sections show it are site config. Colors/opacity live in `CustomStyles.astro` (`--aw-color-motif-*`, `--aw-opacity-motif-*`).
 
 **Import:**
 ```astro
@@ -815,19 +817,21 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 | Prop | Values | Default | Description |
 |------|--------|---------|-------------|
 | `variant` | `hero`, `dark`, `grey`, `white` | (required) | Background preset |
-| `motifOpacity` | String like `"10%"`, `"8%"` | Per variant | Override default opacity |
-| `motifColor` | `accent`, `black` | Per variant | Override motif color |
-| `fadeDirection` | `top-to-bottom`, `bottom-to-top`, `none` | `top-to-bottom` | Gradient fade direction |
-| `pattern` | `ImageMetadata` | `simple.svg` | Custom pattern SVG |
+| `motifOpacity` | `0.15` or `"15%"` | Token for that variant | Override this section only |
+| `motifColor` | CSS color | Token for that variant | Override this section only |
+| `fadeDirection` | `top-to-bottom`, `bottom-to-top`, `none` | `MOTIF.fade` | Override fade |
+| `pattern` | `ImageMetadata` | `MOTIF.pattern` | Override SVG |
+| `showMotif` | boolean | `MOTIF.sections[variant]` | Force motif on/off |
 
-**Variant defaults:**
+**R&C variant defaults** (other sites change `src/config/motif.ts`):
 
-| Variant | Background | Motif | Opacity |
-|---------|------------|-------|---------|
-| `hero` | transparent (white) | yellow accent | 10% |
-| `dark` | black | yellow accent | 12% |
-| `grey` | #FAFAFA | none | — |
-| `white` | white | none | — |
+| Variant | Background | Motif |
+|---------|------------|-------|
+| `hero` | transparent (white) | on — accent at 10% |
+| `dark` | black | on — accent at 12% |
+| `grey` | #FAFAFA | off |
+| `white` | white | off |
+| CTA banner | yellow card | on — black at 3% (`CTABanner` reads the same config) |
 
 **Usage:**
 ```astro
@@ -839,7 +843,7 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 </WidgetWrapper>
 ```
 
-**Custom opacity example:**
+**One-off override (rare):**
 ```astro
 <Fragment slot="bg">
   <SectionBg variant="hero" motifOpacity="15%" />

@@ -1,0 +1,48 @@
+---
+import type { ImageMetadata } from 'astro';
+import { MOTIF, motifFadeMask, parseMotifOpacity } from '~/config/motif';
+
+interface Props {
+  color: string;
+  opacity?: number | string;
+  opacityFallback?: string;
+  fade?: typeof MOTIF.fade;
+  pattern?: ImageMetadata;
+  size?: string;
+  repeat?: string;
+  class?: string;
+}
+
+const {
+  color,
+  opacity,
+  opacityFallback = '0.1',
+  fade = MOTIF.fade,
+  pattern = MOTIF.pattern,
+  size = MOTIF.size,
+  repeat = MOTIF.repeat,
+  class: className = '',
+} = Astro.props;
+
+const fadeMask = motifFadeMask(fade);
+const opacityValue = parseMotifOpacity(opacity, opacityFallback);
+const fadeStyle = fadeMask
+  ? `-webkit-mask-image: ${fadeMask}; mask-image: ${fadeMask};`
+  : '';
+const motifStyle = [
+  `opacity: ${opacityValue}`,
+  `background-color: ${color}`,
+  `-webkit-mask-image: url('${pattern.src}')`,
+  `mask-image: url('${pattern.src}')`,
+  `-webkit-mask-size: ${size}`,
+  `mask-size: ${size}`,
+  `-webkit-mask-repeat: ${repeat}`,
+  `mask-repeat: ${repeat}`,
+  `-webkit-mask-mode: luminance`,
+  `mask-mode: luminance`,
+].join('; ');
+---
+
+<div class:list={['absolute inset-0 overflow-hidden pointer-events-none', className]} style={fadeStyle} aria-hidden="true">
+  <div class="absolute inset-0" style={motifStyle}></div>
+</div>

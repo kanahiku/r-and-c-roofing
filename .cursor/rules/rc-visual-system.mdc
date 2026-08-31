@@ -20,6 +20,8 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 
 The `SectionBg` component handles all background patterns internally — no need to import `simplePattern` directly.
 
+Site-wide motif (shape, which sections, fade, tile size) lives in `src/config/motif.ts`. Colors and opacity live in `CustomStyles.astro`. Do not hardcode pattern SVGs on pages.
+
 ---
 
 ## Section Color Flow
@@ -199,7 +201,7 @@ Or use the Button component:
 
 - The `WidgetWrapper` section always sits on a **white background** (no bg override needed on the wrapper itself)
 - The inner card: `bg-accent` (yellow) — **no border on the card**
-- Motif: `simple.svg` **black** at **3% opacity**, top-to-bottom fade
+- Motif: from `src/config/motif.ts` + `--aw-color-motif-cta` / `--aw-opacity-motif-cta` (R&C: black chevron at 3%). `CTABanner` applies it — do not paste mask CSS.
 - Heading: `text-black`
 - Body text: `text-black/70`
 - Contact info: `text-black/70`, name bold `text-black`
@@ -207,31 +209,7 @@ Or use the Button component:
 - CTA button: `bg-black text-white hover:bg-zinc-900`
 
 ```astro
-<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-    <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-      <div
-        class="absolute inset-0 opacity-[3%]"
-        style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
-    <div class="relative z-10">
-      <div class="text-center mb-8 md:mb-10">
-        <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-4">CTA Heading</h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70">Supporting sentence.</p>
-      </div>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">
-        <div class="text-[15px] md:text-[16px] font-medium leading-[180%] text-black/70">
-          <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
-          <p>3302 Campbell Ave, Honolulu, HI 96815</p>
-          <p>(808) 888-2524</p>
-        </div>
-        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200 shrink-0">Schedule a Roof Inspection</a>
-      </div>
-    </div>
-  </div>
-</WidgetWrapper>
+<CTABanner title="CTA Heading" subtitle="Supporting sentence." />
 ```
 
 ---
@@ -328,8 +306,7 @@ When `isDark={true}` is set, the `FAQs` component automatically applies:
 | Grey is always `#FAFAFA` | Never use `bg-gray-50` or any other grey value |
 | Black card bg is always `#222` | Use `bg-[#222]` — not `bg-zinc-800`, not `bg-black` |
 | Use SectionBg component | Always use `<SectionBg variant="..." />` for section backgrounds — never manual pattern code |
-| Motif opacity: hero `10%`, dark `12%` | SectionBg defaults: hero=10%, dark=12% |
-| Motif opacity: CTA banner `3%` | CTABanner component uses `3%` internally |
+| Motif is site config | Shape / fade / tile / which sections: `src/config/motif.ts`. Color / opacity: `CustomStyles.astro`. R&C: hero 10%, dark 12%, CTA 3% |
 | Hero badges only when explicit | Never add `tag-pill` badges unless the content brief lists them |
 | CTA card has no border | The yellow card uses `bg-accent` only — no `border` class |
 | FAQ has no cards | FAQ is a plain accordion — never wrap items in card divs |

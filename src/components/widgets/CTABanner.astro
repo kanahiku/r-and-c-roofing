@@ -1,6 +1,7 @@
 ---
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import MotifLayer from '~/components/ui/MotifLayer.astro';
+import { MOTIF, MOTIF_COLOR_VARS, MOTIF_OPACITY_VARS } from '~/config/motif';
 
 export interface Props {
   title: string;
@@ -21,13 +22,13 @@ const {
 
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
-    <div class="absolute inset-0 rounded-md overflow-hidden" style="-webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%); mask-image: linear-gradient(to bottom, black 0%, transparent 100%);">
-      <div
-        class="absolute inset-0 opacity-[3%]"
-        style={`background-color: #000; -webkit-mask-image: url('${simplePattern.src}'); mask-image: url('${simplePattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
+    {MOTIF.sections.cta && (
+      <MotifLayer
+        color={MOTIF_COLOR_VARS.cta}
+        opacityFallback={MOTIF_OPACITY_VARS.cta}
+        class="rounded-md"
+      />
+    )}
     
     <div class="relative z-10">
       <div class="text-center mb-8 md:mb-10">
