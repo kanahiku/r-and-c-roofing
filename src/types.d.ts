@@ -195,6 +195,8 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   content?: string;
   actions?: string | CallToAction[];
   image?: string | unknown;
+  /** `split` = left text / right image. `overlay` = full-width pattern, text left. */
+  variant?: 'split' | 'overlay';
 }
 
 export interface Team extends Omit<Headline, 'classes'>, Widget {

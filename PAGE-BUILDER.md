@@ -10,7 +10,7 @@
 - **Framework:** Astro v7 + Tailwind CSS v4
 - **Template:** AstroWind (customised for R&C Roofing)
 - **Path alias:** `~/` maps to `src/`
-- **Fonts:** Sora (headings, `font-heading`) · Inter (body)
+- **Fonts:** Didact Gothic (H1/H2, `font-heading`) · Manrope (body, UI, and item titles)
 - **Primary colour:** `#EDD974` (CTA yellow)
 - **Dev server:** `npm run dev` → http://localhost:4321
 
@@ -105,6 +105,7 @@ Every section on every page must follow these rules. Do not deviate.
 | Adjacent section variety | Neighboring sections cannot share a structure. Never stack card grid → card grid, list → list, timeline → timeline, or P-13 → P-13. Break them with a different pattern. |
 | Five items | Never a 5-card grid (no 3+2). Use **P-06** `IconPointBand` (horizontal) or a `ServiceDirectory` if each item links. |
 | Icon points | H2 + 3 or 5 icon points, no links: `IconPointBand` — one row, icon above title, left-aligned. H2 + 4 icon points as text: `IconPointGrid` — 2 × 2, left-aligned. No boxes, no timeline line. |
+| Corner radius | Sharp by default. Change `--aw-radius` and `--aw-radius-full` in `CustomStyles.astro` — do not hardcode pixel radii on pages. |
 
 ### CTA Button Consistency Rule
 
@@ -171,13 +172,14 @@ If this is the first split on the page, start with image **right**, then alterna
 | Card has a link? | Behavior | Implementation |
 |------------------|----------|----------------|
 | ✅ Yes (href provided) | Entire card is clickable | Wrap card in `<a href="...">` tag |
-| ❌ No link | Card is static, not clickable | No `<a>` wrapper, no `card-hover` class |
+| ❌ No link | Card is static, not clickable | No `<a>` wrapper, no hover motion |
 
 **Clickable card implementation:**
 ```astro
-<a href="/target-page" class="block rounded-lg border ... card-hover">
+<a href="/target-page" class="group block rounded-lg border ...">
   <h3>Card Title</h3>
   <p>Card description</p>
+  <span class="card-link">View page</span>
 </a>
 ```
 
@@ -199,7 +201,7 @@ If this is the first split on the page, start with image **right**, then alterna
 | Info cards (P-07) | Depends on content | Match the link presence |
 
 **Do NOT:**
-- Add `card-hover` to cards without links
+- Add lift, bounce, or shadow hover on cards — hover only underlines the card URL (`card-link` on a `group`)
 - Use text links inside a fully clickable card (redundant)
 - Mix clickable and non-clickable cards in the same grid
 
@@ -211,25 +213,43 @@ Background snippets go inside `<Fragment slot="bg">` inside `WidgetWrapper`.
 
 Use these exact classes everywhere. Do not invent new sizes.
 
+**Fonts:** Didact Gothic (`font-heading`) for H1 and H2 · Manrope (`font-sans`) for body, UI, and item titles.
+
+Didact Gothic ships a **single Regular (400) face**. Never put `font-medium`, `font-semibold`, or `font-bold` on an H1/H2 — the browser will fake a bold that looks muddy. H1/H2 hierarchy is **size**, not weight. Item titles (icon, image, or card heading + description) use Manrope Medium. Manrope is variable (200–800).
+
+### Weight rules
+
+| Element | Font | Weight | Class |
+|---------|------|--------|-------|
+| H1, H2 | Didact Gothic | 400 | `font-heading font-normal` |
+| Item titles (icon/image/card + heading + description), FAQ questions | Manrope | 500 | `font-medium` |
+| Body paragraphs, card descriptions, FAQ answers, disclaimers | Manrope | 400 | `font-normal` |
+| Nav, text links, uppercase labels | Manrope | 500 | `font-medium` |
+| Buttons, company name in the CTA banner | Manrope | 600 | `font-semibold` |
+
+### Size scale
+
 | Role | Tailwind classes |
 |------|-----------------|
-| **H1** (hero only) | `text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading` |
+| **H1** (hero only) | `text-[42px] md:text-[56px] font-normal leading-[115%] tracking-tighter font-heading` |
+| **Hero visual subheading** | `text-[20px] md:text-[24px] font-normal font-heading leading-[130%] tracking-tight` |
 | **H2** (section title) | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
-| **H3 standard** | `text-[22px] md:text-[26px] font-medium font-heading leading-[130%]` |
-| **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
-| **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
-| **Body large** (main paragraphs) | `text-[16px] md:text-[17px] font-medium leading-[160%] text-muted` |
+| **H3 standard** | `text-[22px] md:text-[26px] font-medium leading-[130%]` |
+| **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium leading-[130%]` |
+| **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium leading-[130%]` |
+| **Body large** (main paragraphs) | `text-[16px] md:text-[17px] font-normal leading-[160%] text-muted` |
 | **Body small** (card descriptions) | `text-[14px] md:text-[15px] font-normal leading-[160%] text-muted` |
-| **Body xs** (disclaimers, labels) | `text-[13px] md:text-[14px] font-medium leading-[160%] text-muted` |
-
-Card body copy is `font-normal`. Card headings and links stay `font-medium`.
-
-On white / grey / yellow-tint sections, `text-muted` is subtle black `#444444` — not washed-out grey, not pure `#000`. On dark sections use `text-white/70` (or `text-white/60` on dark cards).
+| **Body xs** (disclaimers) | `text-[13px] md:text-[14px] font-normal leading-[160%] text-muted` |
+| **Label xs** (uppercase meta) | `text-[13px] md:text-[14px] font-medium uppercase tracking-wider` |
 | **Primary button** | `btn-primary` |
 | **Ghost / outline button** | `btn btn-secondary` |
 | **Text link** | `text-primary font-medium text-[14px] md:text-[15px] hover:underline` |
 | **Text link on yellow / accent card** | `text-heading font-medium text-[14px] md:text-[15px] hover:underline` (or `text-card-link-light`) — never `text-primary` or `text-accent` |
 | **Trust badge / tag** | `tag-pill` |
+
+Card titles, icon-point titles, and any heading sitting with a description (cards, galleries, directories, timelines) are `font-medium` (Manrope). Body copy is `font-normal` (Manrope). Links stay `font-medium` (Manrope).
+
+On white / grey / yellow-tint sections, `text-muted` is subtle black `#444444` — not washed-out grey, not pure `#000`. On dark sections use `text-white/70` (or `text-white/60` on dark cards).
 
 ---
 
@@ -294,8 +314,10 @@ Read each section of the content doc → find its shape below → use that patte
 Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cover`). Same size on every page.
 
 **Variants:**
+- Default split (`variant="split"` or omit) → left text / right image
+- Full-width pattern (`variant="overlay"`) → homepage-only: the `fancy-two.svg` artwork covers the whole hero, text left, no side image. A left-to-right black scrim keeps the copy readable — no motif tile on top
 - No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
-- No image → use `Hero.astro` instead (left-aligned layout)
+- No image → use `Hero.astro` instead (left-aligned layout), or `variant="overlay"` on the homepage
 - No badges → omit `<Fragment slot="content">`
 - Single heading line → remove `<br />`
 
@@ -315,7 +337,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
   <Headline title="Section Title" />
 
   <!-- Intro paragraphs — omit div if no paragraphs in doc -->
-  <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+  <div class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted mb-8 md:mb-12">
     <p>First paragraph from doc.</p>
     <p class="mt-4">Second paragraph from doc.</p>
   </div>
@@ -328,7 +350,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
       { title: 'Point Three', description: 'Description from doc.' },
     ].map(({ title, description }) => (
       <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <h3 class="text-[22px] md:text-[26px] font-medium leading-[130%] mb-3">{title}</h3>
         <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -451,7 +473,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6' }} />
-  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-8 md:mb-12">
+  <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-8 md:mb-12">
     Intro sentence from the brief.
   </p>
 
@@ -531,7 +553,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 
     <!-- Left column: paragraphs + optional image + optional disclaimer -->
     <div class="md:basis-1/2 flex flex-col gap-6">
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+      <div class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted dark:text-slate-400">
         <p>First intro paragraph from doc.</p>
         <p class="mt-4">Second intro paragraph from doc.</p>
       </div>
@@ -550,7 +572,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
       />
 
       <!-- Disclaimer — remove if not in doc -->
-      <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted italic">
+      <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted italic">
         Disclaimer or legal note text from doc.
       </p>
     </div>
@@ -611,7 +633,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
             </svg>
           </div>
         )}
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-1">{title}</h3>
         <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -723,8 +745,8 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 ```
 
 **Note:** The component automatically includes:
-- Yellow (`bg-accent`) background
-- Motif from `src/config/motif.ts` (R&C: black pattern at 3% opacity with fade)
+- Yellow (`bg-cta` / `#F5ECBD`) background
+- Motif from `src/config/motif.ts` (R&C: black pattern at 2% opacity with fade)
 - R&C contact info (address, phone)
 - Black divider line
 - Black CTA button with hover state
@@ -740,7 +762,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
   <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
     Section Title
   </h2>
-  <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+  <div class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted space-y-5">
     <p>First paragraph from doc.</p>
     <p>Second paragraph from doc.</p>
     <p>Third paragraph from doc — add as many as needed.</p>
@@ -767,7 +789,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
-  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+  <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted mb-8 md:mb-12">
     Intro sentence from the brief.
   </p>
 
@@ -885,7 +907,7 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 | `dark` | black | on — accent at 12% |
 | `grey` | #FAFAFA | off |
 | `white` | white | off |
-| CTA banner | yellow card | on — black at 3% (`CTABanner` reads the same config) |
+| CTA banner | yellow card | on — black at 2% (`CTABanner` reads the same config) |
 
 **Usage:**
 ```astro
@@ -1059,8 +1081,8 @@ import Headline from '~/components/ui/Headline.astro';
 
 The Headline component uses consistent typography:
 
-- **Title (H2):** 26px mobile / 40px desktop, Sora Regular, tight tracking
-- **Subtitle:** 16px mobile / 17px desktop, Inter Medium, 160% line height
+- **Title (H2):** 26px mobile / 40px desktop, Didact Gothic Regular, tight tracking
+- **Subtitle:** 16px mobile / 17px desktop, Manrope Regular, 160% line height
 
 ### Color Variables
 

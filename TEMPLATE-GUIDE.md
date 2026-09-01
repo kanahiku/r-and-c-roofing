@@ -475,16 +475,18 @@ A living reference. When a new content doc arrives, use the **Pattern Selector**
 
 ### Typography Classes (Copy-Paste)
 
+Didact Gothic H1/H2 are Regular (400) only — never medium/bold on `font-heading`. Item titles (icon, image, or card heading + description) and FAQ questions use Manrope Medium. Body is Regular; nav/links Medium; buttons Semibold. Canonical table: `PAGE-BUILDER.md` → Typography Classes.
+
 | Role | Classes |
 |------|---------|
-| **H1** | `text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading` |
+| **H1** | `text-[42px] md:text-[56px] font-normal leading-[115%] tracking-tighter font-heading` |
 | **H2** | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
-| **H3 standard** | `text-[22px] md:text-[26px] font-medium font-heading leading-[130%]` |
-| **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
-| **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
-| **Body large** | `text-[16px] md:text-[17px] font-medium leading-[160%] text-muted` |
-| **Body small** | `text-[14px] md:text-[15px] font-medium leading-[160%] text-muted` |
-| **Body xs** (disclaimers) | `text-[13px] md:text-[14px] font-medium leading-[160%] text-muted` |
+| **H3 standard** | `text-[22px] md:text-[26px] font-medium leading-[130%]` |
+| **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium leading-[130%]` |
+| **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium leading-[130%]` |
+| **Body large** | `text-[16px] md:text-[17px] font-normal leading-[160%] text-muted` |
+| **Body small** | `text-[14px] md:text-[15px] font-normal leading-[160%] text-muted` |
+| **Body xs** (disclaimers) | `text-[13px] md:text-[14px] font-normal leading-[160%] text-muted` |
 | **Primary button** | `btn-primary` |
 | **Ghost/outline button** | `btn btn-secondary` |
 | **Text link** | `text-primary font-medium text-[14px] md:text-[15px] hover:underline` |
@@ -561,7 +563,7 @@ Read the doc section → find its **content shape** below → jump to that patte
   <!-- Use P-04 header row if a CTA belongs in the title row, otherwise: -->
   <Headline title="Section Title" />
 
-  <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+  <div class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted mb-8 md:mb-12">
     <p>First paragraph from doc.</p>
     <p class="mt-4">Second paragraph from doc.</p>
   </div>
@@ -574,7 +576,7 @@ Read the doc section → find its **content shape** below → jump to that patte
       { title: 'Point Three', description: 'Description from doc.' },
     ].map(({ title, description }) => (
       <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <h3 class="text-[22px] md:text-[26px] font-medium leading-[130%] mb-3">{title}</h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -695,7 +697,7 @@ Read the doc section → find its **content shape** below → jump to that patte
       { title: '...', description: '...' },
     ].map(({ title, description }) => (
       <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <h3 class="text-[22px] md:text-[26px] font-medium leading-[130%] mb-3">{title}</h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -708,7 +710,7 @@ Read the doc section → find its **content shape** below → jump to that patte
       { title: '...', description: '...' },
     ].map(({ title, description }) => (
       <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
+        <h3 class="text-[22px] md:text-[26px] font-medium leading-[130%] mb-3">{title}</h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -742,7 +744,7 @@ Read the doc section → find its **content shape** below → jump to that patte
       { title: 'Item Four', description: 'Short detail.' },
     ].map(({ title, description }) => (
       <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+        <h3 class="text-[16px] md:text-[18px] font-medium leading-[130%] mb-1">{title}</h3>
         <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -782,7 +784,7 @@ Read the doc section → find its **content shape** below → jump to that patte
   <div class="flex flex-col md:flex-row gap-10 md:gap-16">
     <!-- Left: intro + optional image + optional disclaimer -->
     <div class="md:basis-1/2 flex flex-col gap-6">
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+      <div class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted dark:text-slate-400">
         <p>First intro paragraph.</p>
         <p class="mt-4">Second intro paragraph.</p>
       </div>
@@ -795,7 +797,7 @@ Read the doc section → find its **content shape** below → jump to that patte
         format="webp" layout="constrained"
       />
       <!-- Disclaimer — omit if not needed -->
-      <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted italic">
+      <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted italic">
         Disclaimer or legal note text.
       </p>
     </div>
@@ -847,7 +849,7 @@ Read the doc section → find its **content shape** below → jump to that patte
             </svg>
           </div>
         )}
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
+        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-1">{title}</h3>
         <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
       </div>
     ))}
@@ -916,7 +918,7 @@ Read the doc section → find its **content shape** below → jump to that patte
       <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
         Closing Headline
       </h2>
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
+      <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted dark:text-slate-400">
         Supporting sentence.<br />Second sentence.
       </p>
     </div>

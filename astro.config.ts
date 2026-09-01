@@ -43,7 +43,9 @@ export default defineConfig({
     '/services/roofing-materials/tile-roofing-clay-and-concrete': '/services/roofing-materials/tile-roofing',
     '/services/roofing-materials/slate-and-rubber-slate-roofing': '/services/roofing-materials/slate-roofing',
     '/privacy': '/privacy-policy',
-    '/terms': '/terms-of-service',
+    '/terms': '/privacy-policy',
+    '/terms-of-service': '/privacy-policy',
+    '/accessibility-statement': '/privacy-policy',
     '/about/reviews': '/reviews',
   },
 
@@ -55,22 +57,23 @@ export default defineConfig({
   },
 
   // Native Fonts API: self-hosts + subsets + preloads fonts and generates
-  // metric-adjusted fallbacks. Sora for headings, Inter for body text.
+  // metric-adjusted fallbacks. Didact Gothic for headings, Manrope for body text.
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Sora',
-      cssVariable: '--font-sora',
-      weights: ['100 800'],
+      // Didact Gothic ships a single 400 face — no bolder weights exist upstream.
+      name: 'Didact Gothic',
+      cssVariable: '--font-didact-gothic',
+      weights: ['400'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
     },
     {
       provider: fontProviders.google(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
+      name: 'Manrope',
+      cssVariable: '--font-manrope',
+      weights: ['200 800'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],

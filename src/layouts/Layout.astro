@@ -32,8 +32,8 @@ const { language, textDirection } = I18N;
   <head>
     <CommonMeta />
     <Favicons />
-    <Font cssVariable="--font-sora" preload />
-    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-didact-gothic" preload />
+    <Font cssVariable="--font-manrope" preload />
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
@@ -46,7 +46,7 @@ const { language, textDirection } = I18N;
     <ClientRouter fallback="swap" />
   </head>
 
-  <body class="antialiased text-default bg-page tracking-tight font-medium text-[16px] md:text-[17px] leading-[160%]">
+  <body class="antialiased text-default bg-page tracking-tight font-normal text-[16px] md:text-[17px] leading-[160%]">
     <slot />
 
     <Intersect />

@@ -25,7 +25,7 @@ const {
 ---
 
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-accent">
+  <div class="relative w-full p-8 md:p-12 rounded-md overflow-hidden bg-cta">
     {MOTIF.sections.cta && (
       <MotifLayer
         color={MOTIF_COLOR_VARS.cta}
@@ -39,7 +39,7 @@ const {
         <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-black mb-[20px]">
           {title}
         </h2>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-black/70" set:html={subtitle} />
+        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-black/70" set:html={subtitle} />
       </div>
 
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-t-2 border-black pt-8">

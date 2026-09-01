@@ -7,6 +7,7 @@ export interface Props {
   items?: Array<Item>;
   defaultIcon?: string;
   isDark?: boolean;
+  surface?: 'white' | 'grey';
   variant?: 'vertical' | 'horizontal';
   classes?: Record<string, string>;
 }
@@ -16,6 +17,7 @@ const {
   classes = {},
   defaultIcon,
   isDark = false,
+  surface = 'grey',
   variant = 'horizontal',
 } = Astro.props as Props;
 
@@ -54,28 +56,26 @@ const copyMaxCh = contentScores.map((score) => {
 
 const desktopGapRem = stepCount >= 6 ? 1.25 : stepCount === 5 ? 1.5 : stepCount <= 2 ? 3 : stepCount === 3 ? 2.5 : 2;
 const trackList = columnWeights.map((weight) => `minmax(0, ${weight}fr)`).join(' ');
-const railLeft =
+const iconCenter = '1.25rem';
+const lastColumnWidth =
   stepCount > 1
-    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[0]} / ${weightSum} / 2)`
+    ? `(100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[stepCount - 1]} / ${weightSum}`
     : '0';
-const railRight =
-  stepCount > 1
-    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[stepCount - 1]} / ${weightSum} / 2)`
-    : '0';
+const railLeft = stepCount > 1 ? iconCenter : '0';
+const railRight = stepCount > 1 ? `calc(${lastColumnWidth} - ${iconCenter})` : '0';
 
-const iconColors = isDark
-  ? 'text-timeline-icon-dark border-timeline-icon-border-dark bg-timeline-icon-bg-dark'
-  : 'text-timeline-icon-light border-timeline-icon-border-light bg-white';
+const iconBoxClass = isDark
+  ? 'bg-timeline-icon-bg-dark shadow-[0_0_0_8px_var(--aw-color-bg-section-dark)]'
+  : surface === 'white'
+    ? 'bg-timeline-icon-bg-light shadow-[0_0_0_8px_var(--aw-color-bg-section-white)]'
+    : 'bg-timeline-icon-bg-light shadow-[0_0_0_8px_var(--aw-color-bg-section-grey)]';
+const iconGlyphClass = isDark ? 'text-timeline-icon-dark' : 'text-timeline-icon-light';
 const titleColors = isDark ? 'text-timeline-title-dark' : 'text-timeline-title-light';
 const descColors = isDark ? 'text-timeline-desc-dark' : 'text-timeline-desc-light';
 const lineColors = isDark ? 'bg-white/20' : 'bg-black/15';
 
-const titleTypography = isHorizontal
-  ? 'text-[18px] md:text-[20px] font-medium font-heading leading-[130%]'
-  : 'text-[18px] md:text-[20px] font-medium font-heading leading-[130%]';
-const descTypography = isHorizontal
-  ? 'text-[14px] md:text-[15px] font-medium leading-[160%] mt-2'
-  : 'text-[14px] md:text-[15px] font-medium leading-[160%] mt-2';
+const titleTypography = 'text-[18px] font-sans font-medium leading-[130%]';
+const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt-2';
 ---
 
 {
@@ -91,7 +91,7 @@ const descTypography = isHorizontal
       <div class={isHorizontal ? 'rc-tl-track relative' : undefined}>
         {isHorizontal && stepCount > 1 && (
           <div
-            class:list={['rc-tl-rail absolute h-px pointer-events-none', lineColors]}
+            class:list={['rc-tl-rail absolute z-0 h-px pointer-events-none', lineColors]}
             style={`top: 1.25rem; left: ${railLeft}; right: ${railRight};`}
             aria-hidden="true"
           />
@@ -113,20 +113,21 @@ const descTypography = isHorizontal
             >
               <div
                 class:list={[
-                  'rc-tl-mark flex shrink-0 flex-col items-center',
+                  'rc-tl-mark relative z-10 flex shrink-0 flex-col items-center',
                   !isHorizontal && 'mr-4 rtl:mr-0 rtl:ml-4',
                 ]}
               >
                 {iconName && (
-                  <Icon
-                    name={iconName}
+                  <div
                     class={twMerge(
-                      'w-10 h-10 p-2 rounded-full border-2 shrink-0 relative z-10',
-                      iconColors,
+                      'w-10 h-10 rounded-md flex items-center justify-center shrink-0 relative z-10',
+                      iconBoxClass,
                       iconClass,
                       itemClasses?.icon
                     )}
-                  />
+                  >
+                    <Icon name={iconName} class:list={['w-5 h-5', iconGlyphClass]} />
+                  </div>
                 )}
                 {!isLast && (
                   <div class={twMerge('rc-tl-connector w-px flex-1 min-h-8', lineColors)} />
@@ -145,7 +146,7 @@ const descTypography = isHorizontal
                   <p
                     class:list={[
                       'rc-tl-step text-[13px] md:text-[14px] font-medium leading-[160%] mb-2',
-                      isDark ? 'text-accent' : 'text-timeline-step-light',
+                      isDark ? 'text-white/50' : 'text-timeline-step-light',
                     ]}
                   >
                     {stepLabel}
@@ -207,7 +208,7 @@ const descTypography = isHorizontal
     .rc-tl-item {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       min-width: 0;
     }
 
@@ -225,7 +226,7 @@ const descTypography = isHorizontal
       padding-bottom: 0;
       width: 100%;
       max-width: min(100%, var(--timeline-copy, 30ch));
-      text-align: center;
+      text-align: left;
     }
 
     .rc-tl-step {

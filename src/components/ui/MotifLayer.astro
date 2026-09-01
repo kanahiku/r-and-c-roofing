@@ -10,6 +10,9 @@ interface Props {
   pattern?: ImageMetadata;
   size?: string;
   repeat?: string;
+  position?: string;
+  /** `luminance` for black-on-white tiles. `alpha` for black paths on transparent. */
+  maskMode?: 'luminance' | 'alpha';
   class?: string;
 }
 
@@ -21,6 +24,8 @@ const {
   pattern = MOTIF.pattern,
   size = MOTIF.size,
   repeat = MOTIF.repeat,
+  position = 'center',
+  maskMode = 'luminance',
   class: className = '',
 } = Astro.props;
 
@@ -38,8 +43,10 @@ const motifStyle = [
   `mask-size: ${size}`,
   `-webkit-mask-repeat: ${repeat}`,
   `mask-repeat: ${repeat}`,
-  `-webkit-mask-mode: luminance`,
-  `mask-mode: luminance`,
+  `-webkit-mask-position: ${position}`,
+  `mask-position: ${position}`,
+  `-webkit-mask-mode: ${maskMode}`,
+  `mask-mode: ${maskMode}`,
 ].join('; ');
 ---
 

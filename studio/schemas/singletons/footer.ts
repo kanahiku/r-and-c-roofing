@@ -15,7 +15,7 @@ export const siteFooter = defineType({
     }),
     defineField({
       name: 'secondaryLinks',
-      title: 'Bottom Links (Privacy Policy, Terms, etc.)',
+      title: 'Bottom Links (Privacy Policy, etc.)',
       type: 'array',
       of: [{ type: 'footerLink' }],
     }),

@@ -23,7 +23,7 @@ const nav = await getNavigationContent();
   <slot name="header">
     <Header links={nav.header.links} actions={nav.header.actions} phone={nav.header.phone} isSticky />
   </slot>
-  <div class:list={[{ 'pb-[70px] md:pb-0': Boolean(nav.header.phone) }]}>
+  <div>
     <main>
       <slot />
     </main>

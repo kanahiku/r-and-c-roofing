@@ -37,7 +37,7 @@ const cardTitle = isDark ? 'text-white' : '';
 const cardDesc = isDark ? 'text-white/70' : 'text-muted';
 
 const headlineClasses = isDark
-  ? { title: 'text-[26px] md:text-[40px] font-normal leading-[120%] text-white', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70' }
+  ? { title: 'text-[26px] md:text-[40px] font-normal leading-[120%] text-white', subtitle: 'text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70' }
   : (classes?.headline as Record<string, string>);
 ---
 
@@ -58,11 +58,11 @@ const headlineClasses = isDark
               class:list={[
                 'relative flex flex-col h-full rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
                 cardBg,
-                cardHref && 'card-hover cursor-pointer'
+                cardHref && 'group cursor-pointer'
               ]}
             >
               {(icon || defaultIcon) && <Icon name={icon || defaultIcon} class="mb-6 w-12 h-12 text-primary" />}
-              <h3 class:list={['text-[18px] md:text-[26px] font-medium font-heading leading-[130%]', cardTitle]}>
+              <h3 class:list={['text-[18px] md:text-[20px] font-sans font-medium leading-[130%]', cardTitle]}>
                 {itemTitle}
               </h3>
               {description && (
@@ -71,7 +71,7 @@ const headlineClasses = isDark
               {callToAction?.text && (
                 <span
                   class:list={[
-                    'mt-auto pt-4 font-medium text-[14px] md:text-[15px]',
+                    'mt-auto pt-4 font-medium text-[14px] md:text-[15px] card-link',
                     callToAction.class || (isDark ? 'text-accent' : 'text-heading'),
                   ]}
                 >

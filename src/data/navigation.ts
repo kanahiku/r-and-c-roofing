@@ -80,13 +80,7 @@ export const navigationData: NavigationContent = {
       },
       { text: 'Contact', href: '/contact' },
     ],
-    actions: [
-      {
-        variant: 'primary',
-        text: '(808) 888-2524',
-        href: 'tel:+18088882524',
-      },
-    ],
+    actions: [] as NavigationContent['header']['actions'],
     phone: {
       text: '(808) 888-2524',
       href: 'tel:+18088882524',
@@ -137,16 +131,18 @@ export const navigationData: NavigationContent = {
         ],
       },
     ],
-    secondaryLinks: [
-      { text: 'Privacy Policy', href: '/privacy-policy' },
-      { text: 'Terms of Service', href: '/terms-of-service' },
-      { text: 'Accessibility', href: '/accessibility-statement' },
-    ],
+    secondaryLinks: [{ text: 'Privacy Policy', href: '/privacy-policy' }],
     socialLinks: [
-      { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-      { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-      { ariaLabel: 'Google', icon: 'tabler:brand-google', href: '#' },
-      { ariaLabel: 'Yelp', icon: 'tabler:star', href: '#' },
+      {
+        ariaLabel: 'Facebook',
+        icon: 'tabler:brand-facebook',
+        href: 'https://www.facebook.com/RCEnterprises808/',
+      },
+      {
+        ariaLabel: 'Yelp',
+        icon: 'tabler:star',
+        href: 'https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu',
+      },
     ],
     footNote: `&copy; ${new Date().getFullYear()} R&C Roofing. All rights reserved.`,
   },

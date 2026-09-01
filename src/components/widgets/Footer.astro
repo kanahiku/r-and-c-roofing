@@ -104,9 +104,11 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
             {socialLinks.map(({ ariaLabel, href, text, icon }) => (
               <li>
                 <a
-                  class="text-white/60 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-4 focus:ring-white/20 rounded-lg text-sm p-2.5 inline-flex items-center transition duration-150 ease-in-out"
+                  class="text-white/60 hover:text-white focus:outline-none focus:ring-4 focus:ring-white/20 rounded-lg text-sm p-2.5 inline-flex items-center transition duration-150 ease-in-out"
                   aria-label={ariaLabel}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {icon && <Icon name={icon} class="w-5 h-5" />}
                   <Fragment set:html={text} />

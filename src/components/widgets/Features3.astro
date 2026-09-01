@@ -80,7 +80,7 @@ const columnsClass =
                 </div>
               )}
               <div class="mt-0.5">
-                {itemTitle && <h3 class="text-lg font-semibold">{itemTitle}</h3>}
+                {itemTitle && <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%]">{itemTitle}</h3>}
                 {description && <p class:list={[{ 'mt-0.5': itemTitle }, 'text-muted']} set:html={description} />}
                 {callToAction && (
                   <div class:list={[{ 'mt-3': itemTitle || description }]}>

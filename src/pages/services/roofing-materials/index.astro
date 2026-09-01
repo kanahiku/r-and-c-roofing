@@ -124,7 +124,7 @@ const faqs = [
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Choose Your Roofing Material" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Every material performs differently under island conditions. Select a category below to explore specific styles,
       benefits, and considerations:
     </p>
@@ -148,23 +148,23 @@ const faqs = [
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <Headline isDark={true} title="Compare Your Options at a Glance" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Use this matrix to understand how different roofing materials match various property goals:
     </p>
     <div class="overflow-x-auto">
-      <table class="w-full min-w-[720px] border-separate border-spacing-0 text-left">
+      <table class="w-full min-w-[720px] border-separate border-spacing-0 text-left font-sans">
         <thead>
           <tr>
-            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-bold leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg border-r border-accent">
+            <th class="bg-[#222] text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg border-r border-accent">
               Roofing Material
             </th>
-            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-bold leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
+            <th class="bg-[#222] text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
               Good Starting Point For
             </th>
-            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-bold leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
+            <th class="bg-[#222] text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
               Appearance
             </th>
-            <th class="bg-[#222] text-accent text-[13px] md:text-[14px] font-bold leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg">
+            <th class="bg-[#222] text-accent font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg">
               Key Considerations
             </th>
           </tr>
@@ -177,21 +177,21 @@ const faqs = [
                 <tr>
                   <th
                     class:list={[
-                      'align-top bg-white text-heading text-[14px] md:text-[15px] font-medium font-heading leading-[130%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
+                      'align-top bg-white text-heading font-sans font-medium text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
                       isLast && 'rounded-bl-lg',
                     ]}
                   >
                     {row.material}
                   </th>
-                  <td class="align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
+                  <td class="align-top bg-white text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
                     {row.goodFor}
                   </td>
-                  <td class="align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
+                  <td class="align-top bg-white text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
                     {row.appearance}
                   </td>
                   <td
                     class:list={[
-                      'align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5',
+                      'align-top bg-white text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5',
                       isLast && 'rounded-br-lg',
                     ]}
                   >
@@ -211,7 +211,7 @@ const faqs = [
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="How to Choose the Right Roofing Material on Oahu" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Choosing a roof involves looking beyond a product photo. Every material performs differently based on your specific
       property:
     </p>

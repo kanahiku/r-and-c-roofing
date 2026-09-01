@@ -54,7 +54,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
     <Fragment slot="title">R&amp;C Roofing Contractors Reviews</Fragment>
     <Fragment slot="subtitle">
       <span
-        class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight"
+        class="block text-[20px] md:text-[24px] font-normal font-heading text-heading mb-6 leading-[130%] tracking-tight"
       >
         What Customers Say About Working With R&amp;C
       </span>
@@ -76,7 +76,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Reviews From Across the Web" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Customer feedback about R&amp;C Roofing Contractors can be found on multiple independent review platforms.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -86,7 +86,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
             <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
               <Icon name={card.icon} class="w-5 h-5 text-accent" aria-hidden="true" />
             </div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2 text-white">
+            <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-2 text-white">
               {card.title}
             </h3>
             <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60 flex-1">{card.ratingNote}</p>
@@ -104,14 +104,14 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <Headline isDark={true} title="Featured Customer Reviews" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Verified Yelp reviews, shown with their original wording and a link back to the source.
     </p>
     <div class="columns-1 md:columns-2 gap-x-8 md:gap-x-12">
       {
         featuredYelpReviews.map((review) => (
           <div class="break-inside-avoid mb-8 md:mb-10">
-            <p class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-white">{review.name}</p>
+            <p class="text-[18px] md:text-[20px] font-medium leading-[130%] text-white">{review.name}</p>
             <p class="mt-1 text-[13px] md:text-[14px] font-medium uppercase tracking-wider text-accent">{review.source}</p>
             <div class="mt-4 yelp-review-grid" set:html={review.embed} />
             <a
@@ -133,7 +133,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Reviews From Different Roofing Projects" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Customers come to R&amp;C for different reasons. Some are dealing with an active leak. Others need a roof replaced,
       have questions after strong weather, or simply want to understand what condition their roof is in.
     </p>
@@ -169,9 +169,9 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
       {
         archiveQuotes.map((item) => (
           <blockquote class="break-inside-avoid mb-8 md:mb-10">
-            <p class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-heading">{item.name}</p>
+            <p class="text-[18px] md:text-[20px] font-medium leading-[130%] text-heading">{item.name}</p>
             <p class="mt-1 text-[13px] md:text-[14px] font-medium uppercase tracking-wider text-muted">{item.source}</p>
-            <p class="mt-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">“{item.quote}”</p>
+            <p class="mt-3 text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">“{item.quote}”</p>
             <a
               href={item.originalUrl}
               target="_blank"

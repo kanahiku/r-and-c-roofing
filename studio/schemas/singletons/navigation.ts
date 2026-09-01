@@ -17,7 +17,7 @@ export const siteNavigation = defineType({
     defineField({
       name: 'phone',
       title: 'Header phone',
-      description: 'Persistent tel: link in the header and sticky call bar on mobile.',
+      description: 'Persistent tel: link in the header as a call-icon button.',
       type: 'object',
       fields: [
         defineField({ name: 'text', title: 'Display number', type: 'string' }),

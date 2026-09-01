@@ -49,7 +49,7 @@ const hasImage = Boolean(image);
       tagline={tagline}
       classes={{
       title: 'text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading',
-      subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400',
+      subtitle: 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted dark:text-slate-400',
       }}
     />
   )}
@@ -65,7 +65,7 @@ const hasImage = Boolean(image);
         )}
         {content && (
           <div
-            class="text-[16px] md:text-[17px] font-medium leading-[160%] dark:text-slate-400 mb-[30px] last:mb-0"
+            class="text-[16px] md:text-[17px] font-normal leading-[160%] dark:text-slate-400 mb-[30px] last:mb-0"
             set:html={content}
           />
         )}
@@ -84,7 +84,7 @@ const hasImage = Boolean(image);
                     </div>
                     <div class="mt-0.5">
                       {itemTitle && (
-                        <h3 class="text-lg font-medium leading-6 dark:text-white ml-2 rtl:ml-0 rtl:mr-2">
+                        <h3 class="text-[18px] md:text-[20px] font-sans font-medium leading-[130%] ml-2 rtl:ml-0 rtl:mr-2">
                           {itemTitle}
                         </h3>
                       )}

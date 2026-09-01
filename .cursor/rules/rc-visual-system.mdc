@@ -36,10 +36,10 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 
 ## 1 · Hero Section (always White bg)
 
-- Component: `Hero2` (left content / right image split)
-- Background: white with yellow accent motif at **10% opacity**, top-to-bottom fade
+- Component: `Hero2`
+- **Default (`variant="split"`):** left content / right image. White with yellow accent motif at **10% opacity**, top-to-bottom fade
+- **Homepage only (`variant="overlay"`):** the `fancy-two.svg` artwork covers the full hero, text left, no side image. Readability comes from a left-to-right black scrim — never lay a yellow motif tile over it
 - Left side: H1, subtitle paragraphs, primary CTA button
-- Right side: hero image
 - No eyebrow text. No gold bar. No `isDark`.
 - **Do NOT add `tag-pill` badges unless they are explicitly listed in the content brief.** Omit `<Fragment slot="content">` entirely when badges are not provided.
 
@@ -89,8 +89,8 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
   <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
     <Icon name="tabler:icon-name" class="w-5 h-5 text-accent" />
   </div>
-  <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
-  <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-white/60">{description}</p>
+  <h3 class="text-[16px] md:text-[18px] font-medium leading-[130%] mb-2 text-white">{title}</h3>
+  <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">{description}</p>
 </div>
 ```
 
@@ -114,7 +114,7 @@ Or use the Button component:
 When a step or process uses a numbered circle indicator, the circle must be dark with yellow text:
 
 ```astro
-<div class="shrink-0 w-9 h-9 rounded-full bg-[#222] flex items-center justify-center font-heading font-medium text-[15px] text-accent mt-0.5">
+<div class="shrink-0 w-9 h-9 rounded-full bg-[#222] flex items-center justify-center font-heading font-normal text-[15px] text-accent mt-0.5">
   {step}
 </div>
 ```
@@ -144,7 +144,7 @@ When a step or process uses a numbered circle indicator, the circle must be dark
 ### Card on Black bg
 ```astro
 <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col">
-  <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
+  <h3 class="text-[22px] md:text-[26px] font-medium leading-[130%] mb-3 text-white">{title}</h3>
   <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">{description}</p>
 </div>
 ```
@@ -184,8 +184,8 @@ Or use the Button component:
   <div class="mb-4 w-10 h-10 rounded-md bg-[#222] flex items-center justify-center">
     <Icon name="tabler:icon-name" class="w-5 h-5 text-accent" />
   </div>
-  <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-heading">{title}</h3>
-  <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted">{description}</p>
+  <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-1 text-heading">{title}</h3>
+  <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">{description}</p>
 </div>
 ```
 
@@ -211,8 +211,8 @@ Or use the Button component:
 ## 5 · Final CTA Banner (always last section on every page)
 
 - The `WidgetWrapper` section always sits on a **white background** (no bg override needed on the wrapper itself)
-- The inner card: `bg-accent` (yellow) — **no border on the card**
-- Motif: from `src/config/motif.ts` + `--aw-color-motif-cta` / `--aw-opacity-motif-cta` (R&C: black chevron at 3%). `CTABanner` applies it — do not paste mask CSS.
+- The inner card: `bg-cta` (`#F5ECBD` / `--aw-color-bg-cta`) — **no border on the card**
+- Motif: from `src/config/motif.ts` + `--aw-color-motif-cta` / `--aw-opacity-motif-cta` (R&C: black chevron at 2%). `CTABanner` applies it — do not paste mask CSS.
 - Heading: `text-black`
 - Body text: `text-black/70`
 - Contact info: `text-black/70`, name bold `text-black`
@@ -240,7 +240,7 @@ When placing Testimonials on a grey section with black cards (`cardClass="border
   subtitle="Subtitle text"
   isDark={true}
   cardClass="border border-accent/60 bg-[#222]"
-  classes={{ headline: { title: 'text-[26px] md:text-[40px] font-normal leading-[120%] text-[#111111]', subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444]' } }}
+  classes={{ headline: { title: 'text-[26px] md:text-[40px] font-normal leading-[120%] text-[#111111]', subtitle: 'text-[16px] md:text-[17px] font-normal leading-[160%] text-[#444444]' } }}
   testimonials={[...]}
   callToAction={{
     variant: 'ghost-light',
@@ -317,9 +317,9 @@ When `isDark={true}` is set, the `FAQs` component automatically applies:
 | Grey is always `#FAFAFA` | Never use `bg-gray-50` or any other grey value |
 | Black card bg is always `#222` | Use `bg-[#222]` — not `bg-zinc-800`, not `bg-black` |
 | Use SectionBg component | Always use `<SectionBg variant="..." />` for section backgrounds — never manual pattern code |
-| Motif is site config | Shape / fade / tile / which sections: `src/config/motif.ts`. Color / opacity: `CustomStyles.astro`. R&C: hero 10%, dark 12%, CTA 3% |
+| Motif is site config | Shape / fade / tile / which sections: `src/config/motif.ts`. Color / opacity: `CustomStyles.astro`. R&C: hero 10%, dark 12%, CTA 2% |
 | Hero badges only when explicit | Never add `tag-pill` badges unless the content brief lists them |
-| CTA card has no border | The yellow card uses `bg-accent` only — no `border` class |
+| CTA card has no border | The yellow card uses `bg-cta` (`#F5ECBD`) only — no `border` class |
 | FAQ has no cards | FAQ is a plain accordion — never wrap items in card divs |
 | FAQ on Black bg | `isDark={true}` — heading `text-white`, questions `text-white`, answers `text-accent` (yellow) |
 | Ghost button on Black | Use `btn-ghost-dark` class or `variant="ghost-dark"` |

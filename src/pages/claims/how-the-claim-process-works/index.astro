@@ -7,6 +7,7 @@ import IconPointGrid from '~/components/ui/IconPointGrid.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import ServiceCard from '~/components/ui/ServiceCard.astro';
 import { Icon } from 'astro-icon/components';
+import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import { processClaimResources } from '~/data/pages/claims';
@@ -23,26 +24,31 @@ const roadmap = [
     title: 'Document the Damage and Protect the Property',
     description:
       'Once the severe weather has passed and it is safe, take photos or videos of visible damage from the ground (e.g., shingles in the yard, ceiling stains). If water is entering the home, take reasonable steps to prevent further interior damage and save all receipts for protective materials. Never climb onto a wet or damaged roof yourself.',
+    icon: 'tabler:camera',
   },
   {
     title: 'Contact Your Insurance Carrier',
     description:
       'Review your policy’s claim procedures and contact your agent to report the damage. They will explain their required information, deductible rules, and deadlines. Provide them with factual information about what you observed.',
+    icon: 'tabler:phone',
   },
   {
     title: 'Property Evaluation (Adjuster and Contractor)',
     description:
       'Your insurance carrier will likely assign an adjuster to inspect the property to evaluate the financial loss. Separately, R&C evaluates the roofing system as a contractor. Robert Pilato (Certification #201408313) brings specialized HAAG-certified training to document displaced materials, flashing failures, and impact zones that an adjuster might miss.',
+    icon: 'tabler:search',
   },
   {
     title: 'Review the Carrier’s Decision and Scope',
     description:
       'After reviewing the claim, your carrier will provide their decision and approved payout. We will separately explain the roofing work we believe is necessary based on the physical facts. If the scopes match, the project moves directly into scheduling. If the scopes differ, we provide additional contractor-side documentation to help you explain to your carrier why further structural work is required to properly fix the home.',
+    icon: 'tabler:file-text',
   },
   {
     title: 'Complete the Roofing Work',
     description:
       'Once the project is approved and you select R&C (Hawaii License C-33642), we execute the agreed-upon repair or replacement according to Hawaii building standards.',
+    icon: 'tabler:hammer',
   },
 ];
 
@@ -88,12 +94,12 @@ const roadblocks = [
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Defining the Roles: Who Handles What?" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Understanding each party’s role early on will save you time and frustration.
     </p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
       <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col h-full">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-white">
+        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-4 text-white">
           Your Insurance Carrier’s Role
         </h3>
         <ul class="space-y-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">
@@ -104,7 +110,7 @@ const roadblocks = [
         </ul>
       </div>
       <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col h-full">
-        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-white">
+        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-4 text-white">
           R&amp;C Roofing’s Role
         </h3>
         <ul class="space-y-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">
@@ -126,33 +132,17 @@ const roadblocks = [
       title="The Step-by-Step Claim Roadmap"
       classes={{ container: 'mb-[30px] text-left md:mx-0' }}
     />
-    <ol class="flex flex-col gap-10 md:gap-14 w-full">
-      {
-        roadmap.map((step, index) => (
-          <li class="flex items-start gap-5 md:gap-8 w-full">
-            <div class="shrink-0 w-10 h-10 rounded-full border border-accent/60 flex items-center justify-center font-heading font-medium text-[15px] text-accent mt-0.5">
-              {String(index + 1).padStart(2, '0')}
-            </div>
-            <div class="min-w-0 flex-1">
-              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-white mb-2">
-                {step.title}
-              </h3>
-              <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/70">{step.description}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
+    <Timeline isDark={true} variant="horizontal" items={roadmap} />
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-[20px]">
+    <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-[20px]">
       The Claim Documentation Checklist
     </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted mb-[30px]">
       Keeping your records organized makes it much easier to track what happened throughout the process. Your carrier may
       require specific documents, but you should generally keep copies of:
     </p>
@@ -161,7 +151,7 @@ const roadblocks = [
         checklist.map((item) => (
           <li class="flex items-start gap-3">
             <Icon name="tabler:check" class="mt-0.5 shrink-0 w-5 h-5 text-primary" aria-hidden="true" />
-            <span class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{item}</span>
+            <span class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">{item}</span>
           </li>
         ))
       }
@@ -181,7 +171,7 @@ const roadblocks = [
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
     <Headline isDark={true} title="Explore Our Claim Resources" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       If you hit a specific roadblock or need to start the process, review our dedicated guides:
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">

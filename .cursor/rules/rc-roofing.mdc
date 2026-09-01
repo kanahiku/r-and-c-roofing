@@ -34,7 +34,7 @@ Before writing or editing any page, always read:
 
 - Omit `actions` and `<Fragment slot="content">` from `Hero2` on content-heavy or informational pages (Our Story, Reviews, Gallery, etc.)
 - Only include CTA + badges on conversion-focused heroes (service pages, homepage)
-- To add a visual subheading between H1 and body copy inside `Hero2`, use a styled `<span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">` as the first element inside `<Fragment slot="subtitle">`
+- To add a visual subheading between H1 and body copy inside `Hero2`, use a styled `<span class="block text-[20px] md:text-[24px] font-normal font-heading text-heading mb-6 leading-[130%] tracking-tight">` as the first element inside `<Fragment slot="subtitle">`
 
 ## Pattern Quick Reference
 
