@@ -1,0 +1,184 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import { Icon } from 'astro-icon/components';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { exploreFromStorm, problemHrefs, serviceHeroActions } from '~/data/pages/roofProblems';
+
+const metadata = {
+  title: 'Storm Damage on Your Roof? What to Do | R&C Roofing',
+  description:
+    'Think a storm damaged your roof on Oahu? Learn what to check safely, what storm damage can look like, and how R&C Roofing determines whether repair, replacement, or insurance documentation may be needed.',
+  ignoreTitleTemplate: true,
+};
+
+const checklist = [
+  {
+    title: 'Stay Off the Roof',
+    description: 'Wet or damaged roofing can be unsafe. Look from the ground and from inside the property instead.',
+  },
+  {
+    title: 'Photograph What Changed',
+    description:
+      'Take photos of roofing material on the ground, visible exterior damage, new ceiling stains, or interior water. Note when the problem started.',
+  },
+  {
+    title: 'Protect the Interior',
+    description: 'Move belongings away from active drips where safe. If water is entering the home, refer to our',
+    linkHref: problemHrefs.leak,
+    linkText: 'My Roof Is Leaking',
+    afterLink: ' guide.',
+  },
+  {
+    title: 'Have the Roof Evaluated',
+    description:
+      'Schedule an inspection to determine whether the storm created a localized problem, affected several areas, or left the roof intact.',
+  },
+];
+
+const looksLike = [
+  {
+    title: 'Missing or Displaced Materials',
+    description: 'Missing or displaced shingles, tiles, panels, or other roofing material.',
+    icon: 'tabler:layers-off',
+  },
+  {
+    title: 'Lifted Components and Flashing',
+    description: 'Lifted or damaged roofing components and flashing around transitions.',
+    icon: 'tabler:arrow-bar-up',
+  },
+  {
+    title: 'Impact and Edge Damage',
+    description: 'Debris impact marks and damage around roof edges.',
+    icon: 'tabler:target',
+  },
+  {
+    title: 'New Interior Moisture',
+    description: 'New interior water intrusion or attic moisture.',
+    icon: 'tabler:droplet',
+  },
+];
+
+const nextSteps = [
+  {
+    title: 'Report the Storm Impact',
+    description: 'Call or schedule online to share what you observed during or after the severe weather.',
+    icon: 'tabler:phone',
+  },
+  {
+    title: 'Professional Assessment',
+    description:
+      'We inspect your roof exterior, flashing, and attic space to document the full scope of storm-related wear.',
+    icon: 'tabler:search',
+  },
+  {
+    title: 'Clear Next Steps',
+    description:
+      'We provide an objective report and outline the most practical repair or restoration options for your property.',
+    icon: 'tabler:clipboard-list',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={serviceHeroActions('Schedule a Storm Damage Inspection')}>
+    <Fragment slot="title">Storm Damage on My Roof. What Should I Do?</Fragment>
+    <Fragment slot="subtitle">
+      After strong wind or heavy rain, roof damage is not always obvious. You may find roofing material in the yard or
+      notice a new ceiling stain, or the roof may look normal from the ground while you are left wondering what
+      happened. Find out what the storm actually did to your roof with expert local evaluation, backed by Hawaii License
+      C-33642.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Storm damage photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Happens When You Call Us?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Getting your storm-damaged roof evaluated shouldn't add to your stress:
+    </p>
+    <IconPointBand items={nextSteps} />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Immediate Checklist: What to Do After a Storm" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      You do not need to climb onto the roof or diagnose the damage yourself. Start with what you can safely observe:
+    </p>
+    <ul class="space-y-4 max-w-4xl mx-auto">
+      {
+        checklist.map((item) => (
+          <li class="flex items-start gap-3">
+            <Icon name="tabler:check" class="mt-0.5 shrink-0 w-5 h-5 text-accent" aria-hidden="true" />
+            <span class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
+              <span class="text-white">{item.title}: </span>
+              {item.description}
+              {item.linkHref && (
+                <>
+                  {' '}
+                  <a href={item.linkHref} class="text-accent font-medium hover:underline">
+                    {item.linkText}
+                  </a>
+                  {item.afterLink}
+                </>
+              )}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Does Storm Damage Look Like?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Some storm damage is easy to see, while other conditions require a professional eye. R&amp;C evaluates issues such
+      as:
+    </p>
+    <IconPointGrid items={looksLike} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mt-10 md:mt-12">
+      HAAG Certified Inspection Expertise: R&amp;C brings HAAG Certified inspection expertise through Robert Pilato,
+      certification #201408313. This credential provides trusted third-party assessment when evaluating physical storm
+      damage alongside normal wear.
+    </p>
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Other Roof Problem Solutions" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      If your storm concerns are tied to other property situations or specific challenges, explore our other dedicated
+      problem-solving resources:
+    </p>
+    <ServiceDirectory items={exploreFromStorm} variant="light" />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title="Think the Storm Damaged Your Roof?"
+    subtitle="You do not have to decide from the driveway whether the roof is fine, repairable, or ready for replacement. Start by finding out what actually happened."
+    ctaText="Schedule a Storm Damage Inspection"
+  />
+</Layout>

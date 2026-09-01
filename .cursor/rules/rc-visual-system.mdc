@@ -69,8 +69,8 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 ## 2 · Grey Section Rules (`bg-[#FAFAFA]`)
 
 - Background: always exactly `#FAFAFA`
-- Headings: `text-heading`
-- Body text: `text-muted`
+- Headings: `text-heading` (`#222`)
+- Body text: `text-muted` (`#444` — subtle black; never washed-out grey, never pure `#000`)
 - No motif
 - **Cards are BLACK** — dark cards on a light grey background create intentional contrast
 
@@ -84,10 +84,15 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 ### Card on Grey bg
 ```astro
 <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col shadow-none outline-none">
+  <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
+    <Icon name="tabler:icon-name" class="w-5 h-5 text-accent" />
+  </div>
   <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
-  <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
+  <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-white/60">{description}</p>
 </div>
 ```
+
+Prefer `<InfoCard title description icon variant="dark" />` over handmade markup.
 
 Optional left accent bar for compact cards: add `border-l-4 border-l-accent` to the card div.
 
@@ -138,7 +143,7 @@ When a step or process uses a numbered circle indicator, the circle must be dark
 ```astro
 <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col">
   <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-  <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
+  <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">{description}</p>
 </div>
 ```
 
@@ -160,8 +165,8 @@ Or use the Button component:
 ## 4 · White Section Rules (`bg-white`)
 
 - Background: white (no bg div needed, or explicit `bg-white`)
-- Headings: `text-heading`
-- Body text: `text-muted`
+- Headings: `text-heading` (`#222`)
+- Body text: `text-muted` (`#444` — subtle black; never washed-out grey, never pure `#000`)
 - No motif
 
 ### White section bg snippet
@@ -174,13 +179,19 @@ Or use the Button component:
 ### Card on White bg
 ```astro
 <div class="rounded-lg bg-card-light p-4 md:p-5 flex flex-col">
+  <div class="mb-4 w-10 h-10 rounded-md bg-[#222] flex items-center justify-center">
+    <Icon name="tabler:icon-name" class="w-5 h-5 text-accent" />
+  </div>
   <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-heading">{title}</h3>
-  <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+  <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted">{description}</p>
 </div>
 ```
 
+Prefer `<InfoCard title description icon variant="light" border={false} />` over handmade markup.
+
 - Background: yellow tint (`rgb(237 217 116 / 50%)`) — same as CTA banner style
 - No border on light cards
+- **Links on yellow cards:** `text-heading` (`#222`) / `text-card-link-light`. Never `text-primary` or `text-accent` — gold and slate both blend into the wash. Same rule if a yellow card sits on a grey section.
 
 ### Ghost button on White bg
 
@@ -282,8 +293,8 @@ FAQ sections are **not fixed to a specific background** — they take whatever b
 
 | Background | Section heading | Question text | Answer text |
 |---|---|---|---|
-| White | `text-heading` | `text-heading` | `text-muted` |
-| Grey (`#FAFAFA`) | `text-heading` | `text-heading` | `text-muted` |
+| White | `text-heading` | `text-heading` | `text-muted` (`#444`) |
+| Grey (`#FAFAFA`) | `text-heading` | `text-heading` | `text-muted` (`#444`) |
 | Black | `text-white` | `text-white` | `text-accent` (yellow) |
 
 ### FAQ on White or Grey bg
@@ -339,3 +350,7 @@ When `isDark={true}` is set, the `FAQs` component automatically applies:
 | Testimonials on Grey with black cards | Set `isDark={true}` for white text on cards, override headline with explicit dark text classes |
 | Card on White section | Yellow tint background (`50%`), no border |
 | Card on Grey section | Black background (`bg-[#222]`), yellow border, white text |
+| Simple heading+description cards | Tabler icon mark above the title — light cards `bg-[#222]` square, dark cards gold-border square, icon `text-accent` |
+| Light-section body text | On white / grey / yellow-tint: `text-muted` = `#444`. Never `#A2AFB5`, `text-gray-400`, or `text-black` |
+| Links on yellow cards | `text-heading` / `text-card-link-light` (`#222`). Never `text-primary` or `text-accent` — they blend into the yellow |
+| Card link / button | Always bottom-aligned: card `flex flex-col h-full`, description `flex-1`, CTA `mt-auto` |

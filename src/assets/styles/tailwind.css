@@ -13,6 +13,7 @@
   --color-accent-hover: var(--aw-color-accent-hover);
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
+  --color-heading: var(--aw-color-text-heading);
 
   --font-sans:
     var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -102,6 +103,10 @@
 
 @utility text-page {
   color: var(--aw-color-text-page);
+}
+
+@utility text-heading {
+  color: var(--aw-color-text-heading);
 }
 
 @utility text-muted {
@@ -386,7 +391,9 @@
 }
 
 /* Active nav link — top-level */
-nav > ul > li > a.aw-link-active {
+nav > ul > li > a.aw-link-active,
+nav > ul > li > a.aw-link-active:hover,
+nav > ul > li > span.aw-link-active {
   color: var(--aw-color-accent);
 }
 

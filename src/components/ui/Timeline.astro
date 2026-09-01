@@ -7,10 +7,17 @@ export interface Props {
   items?: Array<Item>;
   defaultIcon?: string;
   isDark?: boolean;
+  variant?: 'vertical' | 'horizontal';
   classes?: Record<string, string>;
 }
 
-const { items = [], classes = {}, defaultIcon, isDark = false } = Astro.props as Props;
+const {
+  items = [],
+  classes = {},
+  defaultIcon,
+  isDark = false,
+  variant = 'horizontal',
+} = Astro.props as Props;
 
 const {
   container: containerClass = '',
@@ -20,50 +27,216 @@ const {
   icon: iconClass = '',
 } = classes;
 
-// Color classes based on isDark
-const iconColors = isDark 
-  ? 'text-timeline-icon-dark border-timeline-icon-border-dark bg-timeline-icon-bg-dark' 
-  : 'text-timeline-icon-light border-timeline-icon-border-light bg-timeline-icon-bg-light';
+const isHorizontal = variant === 'horizontal';
+const stepCount = items.length;
+
+const plainText = (value?: string) => String(value ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+
+const contentScores = items.map((item) => {
+  const title = plainText(item.title);
+  const description = plainText(item.description);
+  return title.length * 1.6 + description.length;
+});
+const averageScore = contentScores.reduce((sum, score) => sum + score, 0) / Math.max(contentScores.length, 1);
+
+const columnWeights = contentScores.map((score) => {
+  const ratio = averageScore > 0 ? score / averageScore : 1;
+  return Math.round(Math.min(1.5, Math.max(0.72, ratio)) * 100);
+});
+const weightSum = columnWeights.reduce((sum, weight) => sum + weight, 0) || 1;
+
+const baseCopyCh = stepCount <= 2 ? 40 : stepCount === 3 ? 34 : stepCount === 4 ? 30 : stepCount === 5 ? 24 : 20;
+const copyMaxCh = contentScores.map((score) => {
+  const ratio = averageScore > 0 ? score / averageScore : 1;
+  const bump = ratio > 1.2 ? 5 : ratio < 0.8 ? -3 : 0;
+  return Math.max(16, baseCopyCh + bump);
+});
+
+const desktopGapRem = stepCount >= 6 ? 1.25 : stepCount === 5 ? 1.5 : stepCount <= 2 ? 3 : stepCount === 3 ? 2.5 : 2;
+const trackList = columnWeights.map((weight) => `minmax(0, ${weight}fr)`).join(' ');
+const railLeft =
+  stepCount > 1
+    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[0]} / ${weightSum} / 2)`
+    : '0';
+const railRight =
+  stepCount > 1
+    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[stepCount - 1]} / ${weightSum} / 2)`
+    : '0';
+
+const iconColors = isDark
+  ? 'text-timeline-icon-dark border-timeline-icon-border-dark bg-timeline-icon-bg-dark'
+  : 'text-timeline-icon-light border-timeline-icon-border-light bg-white';
 const titleColors = isDark ? 'text-timeline-title-dark' : 'text-timeline-title-light';
 const descColors = isDark ? 'text-timeline-desc-dark' : 'text-timeline-desc-light';
-const lineColors = isDark ? 'bg-white/20' : 'bg-black/10';
+const lineColors = isDark ? 'bg-white/20' : 'bg-black/15';
+
+const titleTypography = isHorizontal
+  ? 'text-[18px] md:text-[20px] font-medium font-heading leading-[130%]'
+  : 'text-[18px] md:text-[20px] font-medium font-heading leading-[130%]';
+const descTypography = isHorizontal
+  ? 'text-[14px] md:text-[15px] font-medium leading-[160%] mt-2'
+  : 'text-[14px] md:text-[15px] font-medium leading-[160%] mt-2';
 ---
 
 {
   items && items.length > 0 && (
-    <div class={containerClass}>
-      {items.map(({ title, description, icon, classes: itemClasses = {} }, index = 0) => (
-        <div
-          class={twMerge(
-            'flex intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
-            panelClass,
-            itemClasses?.panel
-          )}
-        >
-          <div class="flex flex-col items-center mr-4 rtl:mr-0 rtl:ml-4">
-            <div>
-              <div class="flex items-center justify-center">
-                {(icon || defaultIcon) && (
+    <div
+      class={twMerge(isHorizontal ? 'rc-tl w-full' : 'flex flex-col', containerClass)}
+      style={
+        isHorizontal
+          ? `--timeline-tracks: ${trackList}; --timeline-gap: ${desktopGapRem}rem`
+          : undefined
+      }
+    >
+      <div class={isHorizontal ? 'rc-tl-track relative' : undefined}>
+        {isHorizontal && stepCount > 1 && (
+          <div
+            class:list={['rc-tl-rail absolute h-px pointer-events-none', lineColors]}
+            style={`top: 1.25rem; left: ${railLeft}; right: ${railRight};`}
+            aria-hidden="true"
+          />
+        )}
+
+        {items.map(({ title, description, icon, classes: itemClasses = {} }, index = 0) => {
+          const isLast = index === items.length - 1;
+          const iconName = icon || defaultIcon;
+          const stepLabel = String(index + 1).padStart(2, '0');
+
+          return (
+            <div
+              class={twMerge(
+                isHorizontal ? 'rc-tl-item relative' : 'flex',
+                'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+                panelClass,
+                itemClasses?.panel
+              )}
+            >
+              <div
+                class:list={[
+                  'rc-tl-mark flex shrink-0 flex-col items-center',
+                  !isHorizontal && 'mr-4 rtl:mr-0 rtl:ml-4',
+                ]}
+              >
+                {iconName && (
                   <Icon
-                    name={icon || defaultIcon}
-                    class={twMerge('w-10 h-10 p-2 rounded-full border-2', iconColors, iconClass, itemClasses?.icon)}
+                    name={iconName}
+                    class={twMerge(
+                      'w-10 h-10 p-2 rounded-full border-2 shrink-0 relative z-10',
+                      iconColors,
+                      iconClass,
+                      itemClasses?.icon
+                    )}
+                  />
+                )}
+                {!isLast && (
+                  <div class={twMerge('rc-tl-connector w-px flex-1 min-h-8', lineColors)} />
+                )}
+              </div>
+
+              <div
+                class:list={[
+                  'rc-tl-copy min-w-0 pt-1',
+                  !isLast && !isHorizontal && 'pb-8',
+                  !isLast && isHorizontal && 'rc-tl-copy-pad',
+                ]}
+                style={isHorizontal ? `--timeline-copy: ${copyMaxCh[index]}ch` : undefined}
+              >
+                {isHorizontal && (
+                  <p class="rc-tl-step text-[13px] md:text-[14px] font-medium leading-[160%] text-accent mb-2">
+                    {stepLabel}
+                  </p>
+                )}
+                {title && (
+                  <p
+                    class={twMerge(titleTypography, titleColors, titleClass, itemClasses?.title)}
+                    set:html={title}
+                  />
+                )}
+                {description && (
+                  <p
+                    class={twMerge(descTypography, descColors, descriptionClass, itemClasses?.description)}
+                    set:html={description}
                   />
                 )}
               </div>
             </div>
-            {index !== items.length - 1 && <div class={twMerge('w-px h-full', lineColors)} />}
-          </div>
-          <div class={`pt-1 ${index !== items.length - 1 ? 'pb-8' : ''}`}>
-            {title && <p class={twMerge('text-xl font-bold', titleColors, titleClass, itemClasses?.title)} set:html={title} />}
-            {description && (
-              <p
-                class={twMerge('mt-2', descColors, descriptionClass, itemClasses?.description)}
-                set:html={description}
-              />
-            )}
-          </div>
-        </div>
-      ))}
+          );
+        })}
+      </div>
     </div>
   )
 }
+
+<style is:global>
+  .rc-tl {
+    container-type: inline-size;
+    container-name: rc-tl;
+  }
+
+  .rc-tl-track {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rc-tl-item {
+    display: flex;
+  }
+
+  .rc-tl-mark {
+    margin-right: 1rem;
+  }
+
+  .rc-tl-rail,
+  .rc-tl-step {
+    display: none;
+  }
+
+  @container rc-tl (min-width: 420px) {
+    .rc-tl-track {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+      row-gap: 2.5rem;
+    }
+
+    .rc-tl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .rc-tl-mark {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+
+    .rc-tl-connector {
+      display: none;
+    }
+
+    .rc-tl-copy {
+      padding-top: 0;
+      padding-bottom: 0;
+      width: 100%;
+      max-width: min(100%, var(--timeline-copy, 30ch));
+      text-align: center;
+    }
+
+    .rc-tl-step {
+      display: block;
+    }
+  }
+
+  @container rc-tl (min-width: 900px) {
+    .rc-tl-track {
+      grid-template-columns: var(--timeline-tracks);
+      column-gap: var(--timeline-gap, 2rem);
+      row-gap: 0;
+    }
+
+    .rc-tl-rail {
+      display: block;
+    }
+  }
+</style>

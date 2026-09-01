@@ -2,11 +2,15 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Timeline from '~/components/ui/Timeline.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { exploreFromStone, serviceHeroActions } from '~/data/pages/materials';
 
 const metadata = {
   title: 'Stone-Coated Steel Roofing Hawaii | R&C Roofing',
@@ -14,555 +18,165 @@ const metadata = {
     'Explore stone-coated steel roofing for Oahu homes. Learn how it differs from other metal roofing, what to consider in Hawaii, and whether it fits your property.',
   ignoreTitleTemplate: true,
 };
+
+const microclimates = [
+  {
+    title: 'Coastal Salt-Air Exposure',
+    description:
+      'Oceanfront properties require careful evaluation of the underlying steel alloy, protective coatings, flashing, and fasteners to ensure long-term corrosion resistance.',
+    icon: 'tabler:ripple',
+  },
+  {
+    title: 'Wind & Storm Resistance',
+    description:
+      'Interlocking panel designs and corrosion-resistant fasteners provide exceptional resistance against high winds and severe weather.',
+    icon: 'tabler:wind',
+  },
+  {
+    title: 'Thermal & Granule Performance',
+    description:
+      'High-quality stone coatings help deflect intense tropical sunlight, maintaining color stability and reducing heat absorption over time.',
+    icon: 'tabler:sun',
+  },
+];
+
+const whyTrust = [
+  {
+    title: 'Licensed Hawaii Contractor',
+    description: "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+    icon: 'tabler:certificate',
+  },
+  {
+    title: '50+ Years Combined Experience',
+    description: 'Decades of specialized island roofing knowledge across residential and commercial buildings.',
+    icon: 'tabler:clock',
+  },
+  {
+    title: 'Product-Specific Expertise',
+    description:
+      "We match the exact manufacturer profile, fastening method, and coating specification to your neighborhood's environment.",
+    icon: 'tabler:settings',
+  },
+  {
+    title: 'Inspection-First Philosophy',
+    description: 'We base our recommendations on physical facts to ensure your investment is sound.',
+    icon: 'tabler:search',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 · Hero -->
-  <Hero2
-    actions={[{ variant: 'primary', text: 'Discuss Stone-Coated Steel Roofing', href: '/contact' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=1200&q=80',
-      alt: 'Stone-coated steel roofing on an Oahu property',
-    }}
-  >
-    <Fragment slot="title">
-      Stone-Coated Steel<br />Roofing on Oahu
-    </Fragment>
+  <Hero2 actions={serviceHeroActions('Discuss Stone-Coated Steel Roofing')}>
+    <Fragment slot="title">Stone-Coated Steel Roofing on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        The Strength of Steel With a More Traditional Roof Profile
-      </span>
-      You may like the idea of a metal roofing system without wanting the appearance of traditional metal panels. Stone-coated steel gives property owners another option. These roofing systems use steel panels finished with stone granules and are available in profiles that can resemble tile, shingles, or shake.
-      <br /><br />
-      R&amp;C Roofing Contractors can help you determine whether stone-coated steel is appropriate for your roof, property location, project goals, and budget.
-      <br /><br />
-    R&amp;C operates under Hawaii contractor license C-33642.
-  </Fragment>
-  <Fragment slot="bg">
-    <SectionBg variant="hero" />
-  </Fragment>
-</Hero2>
-
-  <!-- Is Stone-Coated Steel Right for Your Property? · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Is Stone-Coated Steel Right for Your Property?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Stone-coated steel may be worth considering when you want some of the characteristics of metal roofing with a different architectural appearance. The specific product, roof design, property exposure, installation requirements, and budget still need to be considered.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
-          Stone-Coated Steel May Be Worth Considering If
-        </h3>
-        <ul class="space-y-4">
-          {[
-            'You want a steel roofing system with a tile, shingle, or shake-like appearance.',
-            'You are comparing roofing options for a larger replacement or new installation.',
-            'You want to explore alternatives to asphalt shingles or traditional tile.',
-            'The appearance of the roof is an important part of your decision.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">
-          Look Closely at Other Options If
-        </h3>
-        <ul class="space-y-4">
-          {[
-            'You prefer the clean panel appearance of another metal roofing system.',
-            'Your project budget points toward a different roofing material.',
-            'The specific stone-coated steel system is not appropriate for the roof design or property conditions.',
-            'Another roofing system better matches the building or project requirements.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      Get the durability of steel with a traditional residential profile. Explore stone-coated steel systems engineered
+      for Oahu properties—backed by Hawaii License C-33642.
     </Fragment>
-  </WidgetWrapper>
-
-  <!-- What Is Stone-Coated Steel Roofing? · black bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      What Is Stone-Coated Steel Roofing?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
-      <p>Stone-coated steel is a type of metal roofing. The system starts with formed steel panels. An adhesive coating bonds stone granules to the prepared steel surface, with an additional protective coating applied over the granules. Those granules give the roof its textured appearance.</p>
-      <p>Depending on the manufacturer and product line, stone-coated steel can be formed into profiles that resemble traditional shingles, clay or concrete tile, wood shake, and other dimensional roofing styles. The result is visually different from standing-seam and other exposed metal-panel roofing systems.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Stone-coated steel roofing photo placeholder" />
     </Fragment>
-  </WidgetWrapper>
-
-  <!-- Stone-Coated Steel vs. Traditional Metal Roofing · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Stone-Coated Steel vs. Traditional Metal Roofing" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Both are metal roofing systems, but they can look and install very differently. The right choice depends on the appearance you want and the roofing system that fits the property.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Stone-Coated Steel</h3>
-        <ul class="space-y-4">
-          {[
-            'Steel panels have a granular, textured surface.',
-            'Available in profiles that can resemble shingles, tile, or shake.',
-            'Can provide a more traditional residential look.',
-            'Product specifications vary by manufacturer.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Other Metal Roofing Systems</h3>
-        <ul class="space-y-4">
-          {[
-            'Metal surfaces may have a smooth painted, coated, or natural-metal finish.',
-            'Often selected for a more recognizable metal-panel appearance.',
-            'Can suit contemporary, traditional, commercial, and other architectural styles depending on the system.',
-            'Metal type, panel profile, coating, attachment method, and other specifications vary considerably.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/services/roofing-materials/metal-roofing" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Explore Metal Roofing →</a>
-    </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="hero" />
     </Fragment>
-  </WidgetWrapper>
+  </Hero2>
 
-  <!-- Stone-Coated Steel and Oahu Conditions · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-6">
-      Stone-Coated Steel and Oahu Conditions
-    </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
-      The material name alone does not tell you whether a roofing product is appropriate for a particular Oahu property.
-    </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
-      <div class="py-8 md:py-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Coastal Exposure</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
-          <p>Coastal properties deserve particular attention when any steel roofing system is being considered.</p>
-          <p>Metal type, protective coatings, cut edges, fasteners, flashing, and other components can all be relevant to corrosion performance.</p>
-          <p>Manufacturers may have their own coastal installation requirements, exclusions, or warranty conditions. For example, DECRA specifies a particular aluminum-zinc alloy coating on its steel products for environmental protection, but that specification should not be assumed to apply to every stone-coated steel product.</p>
-          <p>R&amp;C should evaluate the specific product being proposed for the property's exposure.</p>
-        </div>
-      </div>
-      <div class="py-8 md:py-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Wind Exposure</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
-          <p>The performance of a roofing system in wind depends on the actual product, attachment method, roof configuration, building conditions, and installation requirements.</p>
-          <p>We would not recommend choosing stone-coated steel based on a generic "high-wind" statement.</p>
-          <p>Any wind ratings should come from the exact manufacturer and product R&amp;C installs rather than a category-level claim.</p>
-        </div>
-      </div>
-      <div class="py-8 md:py-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Rainfall</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
-          <p>The exterior panels are only one part of the roofing system.</p>
-          <p>Flashing, penetrations, valleys, roof transitions, edges, and drainage details still need to manage water correctly.</p>
-        </div>
-      </div>
-      <div class="py-8 md:py-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">Sun Exposure</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4">
-          <p>Stone-coated systems use a granular exterior finish. Product composition, coating, and finish characteristics vary by manufacturer, so any claims about fading, reflectivity, or heat performance should be tied to the specific product rather than applied to the category as a whole.</p>
-        </div>
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Advantages and Tradeoffs · black bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline title="Advantages and Tradeoffs of Stone-Coated Steel" isDark={true} classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
-      The goal is not to prove that stone-coated steel is better than every alternative — it is to determine whether its combination of roofing system and appearance makes sense for your property.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Potential Advantages</h3>
-        <ul class="space-y-4">
-          {[
-            'Provides a metal roofing option with a textured appearance',
-            'Profiles can resemble shingles, tile, or shake',
-            'Gives homeowners another alternative to traditional metal-panel aesthetics',
-            'Can be considered for replacement or new roofing projects',
-            'Offers multiple architectural looks within the broader metal-roofing category',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-white">Considerations</h3>
-        <ul class="space-y-4">
-          {[
-            'Usually represents a larger roofing investment than some entry-level material options',
-            'Product availability and profiles vary by manufacturer',
-            'Coastal suitability should be evaluated for the specific product and property',
-            'Repair and replacement matching may depend on continued availability of the original profile and color',
-            'Installation requirements differ from other roofing systems',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/60">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- How Long Does Stone-Coated Steel Last? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      How Long Does Stone-Coated Steel Roofing Last?
+      Is Stone-Coated Steel Right for Your Property?
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
-      <p>There is no single responsible lifespan number that we would apply to every stone-coated steel roof. Some manufacturers advertise long service lives for their individual systems, but those claims apply to their specific products and installation requirements — not every roof within the category.</p>
-      <p>Service life can be affected by several factors.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-      {[
-        'Manufacturer and product',
-        'Steel and protective coating',
-        'Property exposure',
-        'Roof design',
-        'Installation',
-        'Fasteners and other roofing components',
-        'Maintenance',
-        'Damage over time',
-      ].map((item) => (
-        <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-        </div>
-      ))}
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
+      <p>
+        Stone-coated steel combines a heavy-duty steel base with a textured stone-granule exterior, allowing you to
+        achieve the appearance of traditional tile, shingle, or wood shake without sacrificing metal-grade durability.
+      </p>
+      <p>
+        Because every property experiences unique environmental exposure—from coastal salt air to high wind zones—we
+        evaluate your building's design and local microclimate to determine if stone-coated steel is the ideal fit.
+      </p>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Does Stone-Coated Steel Cost on Oahu? · grey bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        What Does Stone-Coated Steel Roofing Cost on Oahu?
-      </h2>
-      <a href="/contact" class="btn-primary shrink-0">Request an Estimate</a>
-    </div>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
-      The cost of a stone-coated steel roofing project depends on the property and the actual system being installed. R&amp;C can provide project-specific pricing after evaluating the property and proposed roofing system.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-      {[
-        { title: 'Roof Size', description: 'Larger roofs require more material and labor.' },
-        { title: 'Roof Design', description: 'Valleys, hips, transitions, penetrations, and complex roof sections can increase the installation scope.' },
-        { title: 'Product and Profile', description: 'Different stone-coated steel profiles and manufacturers can have different product costs and installation requirements.' },
-        { title: 'Existing Roof Condition', description: 'For replacement projects, the existing roofing system and conditions discovered during the project can affect the final scope.' },
-        { title: 'Roof Details', description: 'Flashing, penetrations, edges, drainage components, and other details also need to be considered.' },
-        { title: 'Property Access', description: 'Building height and site access can affect how the project is staged and completed.' },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Can Stone-Coated Steel Replace Asphalt Shingles? · black bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      Can Stone-Coated Steel Replace Asphalt Shingles?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
-      <p>Potentially.</p>
-      <p>If you currently have an asphalt shingle roof, a replacement project can be an opportunity to compare a different roofing system. Before making the change, R&amp;C can evaluate:</p>
-    </div>
-    <ul class="space-y-3 mb-8">
-      {[
-        'Existing roof condition',
-        'Roof design',
-        'Structural considerations',
-        'Proposed stone-coated steel system',
-        'Flashing and roof details',
-        'Project requirements',
-      ].map((item) => (
-        <li class="flex items-start gap-3">
-          <span class="mt-0.5 text-accent font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/60">{item}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
-      Changing materials should be treated as a roofing-system decision rather than simply choosing a different exterior appearance.
+    <Headline isDark={true} title="Comparing Stone-Coated Steel to Other Options" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      To decide if stone-coated steel is right for your project, it helps to see how it compares against alternative
+      materials across key decision factors:
     </p>
-    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">Explore Roof Replacement &amp; New Installation</a>
+    <ComparisonTable
+      featureLabel="Material Comparison"
+      columns={['When to Choose Stone-Coated Steel', 'When to Consider Alternatives']}
+      rows={[
+        {
+          feature: 'vs. Traditional Metal',
+          left: 'You want the heavy-duty strength and longevity of steel, but prefer a textured residential look (like tile, shingle, or shake) over sleek, modern metal panels.',
+          right:
+            'You prefer a contemporary, smooth-surface architectural aesthetic like standing seam metal panels.',
+        },
+        {
+          feature: 'vs. Asphalt Shingles',
+          left: 'You want significantly higher wind uplift resistance, impact durability, and a longer overall service life.',
+          right: 'Your immediate priority is a lower initial project budget.',
+        },
+        {
+          feature: 'vs. Real Tile',
+          left: 'You want the classic look of a tile roof without the heavy structural weight that requires building load reinforcements.',
+          right: 'You want genuine, traditional clay or concrete materials for historical or architectural alignment.',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stone-Coated Steel or Traditional Tile? · white bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Stone-Coated Steel or Traditional Tile?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Stone-coated steel can be manufactured in profiles that resemble traditional tile, but the two roofing systems are fundamentally different. If you like the appearance of tile, it may be useful to compare both systems before deciding.
+    <Headline title="Stone-Coated Steel and Oahu’s Microclimates" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      A stone-coated steel roof must be selected and installed with island conditions in mind:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Stone-Coated Steel Tile Profile</h3>
-        <ul class="space-y-4">
-          {[
-            'Uses formed steel panels with a granular finish.',
-            'Designed to create a tile-like appearance.',
-            'Has its own installation and structural requirements.',
-            'Available styles depend on manufacturer.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 md:p-8">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-6 text-heading">Clay or Concrete Tile</h3>
-        <ul class="space-y-4">
-          {[
-            'Uses individual clay or concrete roofing units.',
-            'Provides the appearance and material characteristics of actual tile.',
-            'Has different structural and installation considerations.',
-            'Tile profiles, materials, and products vary.',
-          ].map((item) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-              <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/services/roofing-materials/tile-roofing-clay-and-concrete" class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Explore Clay &amp; Concrete Tile Roofing →</a>
-    </div>
+    <IconPointBand items={microclimates} />
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- How R&C Approaches a Stone-Coated Steel Project · grey bg -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        How R&amp;C Approaches a Stone-Coated Steel Project
-      </h2>
-      <a href="/contact" class="btn-primary shrink-0">Plan Your Stone-Coated Steel Roof</a>
-    </div>
-    <div class="flex flex-col md:flex-row gap-10 md:gap-16">
-      <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          <p>Every project starts with the property. R&amp;C evaluates the existing conditions, reviews whether stone-coated steel is the right fit, and develops a scope based on what the project actually requires.</p>
-        </div>
-      </div>
-      <div class="md:basis-1/2">
-        <Timeline
-          items={[
-            {
-              title: 'Evaluate the Property',
-              description: 'We review the existing roof when applicable and discuss what you want from the new roofing system.',
-              icon: 'tabler:search',
-            },
-            {
-              title: 'Determine Whether Stone-Coated Steel Fits',
-              description: 'The roof design, property conditions, proposed system, appearance preferences, and project requirements are considered.',
-              icon: 'tabler:checklist',
-            },
-            {
-              title: 'Review Available Options',
-              description: 'R&C can discuss the stone-coated steel products currently available for the project.',
-              icon: 'tabler:template',
-            },
-            {
-              title: 'Develop the Roofing Scope',
-              description: 'Once the roofing direction is established, we develop the proposed scope based on the property and selected system.',
-              icon: 'tabler:file-description',
-            },
-            {
-              title: 'Complete the Installation',
-              description: 'If you choose to move forward, R&C installs the agreed roofing system according to the project specifications and applicable requirements.',
-              icon: 'tabler:home-check',
-            },
-          ]}
-        />
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- See Stone-Coated Steel on Real Oahu Properties · black bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline title="See Stone-Coated Steel on Real Oahu Properties" isDark={true} classes={{ container: 'mb-8 md:mb-12' }} />
+    <Headline title="Explore Other Roofing Materials" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Compare stone-coated steel side-by-side with other available material options for your Oahu property:
+    </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-      {[
-        { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified replacement or new installation]', description: '[Short verified description of the project.]' },
-        { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified project scope]', description: '[Short verified description.]' },
-        { neighborhood: '[Neighborhood]', profile: '[Profile / Product]', project: '[Verified project scope]', description: '[Short verified description.]' },
-      ].map(({ neighborhood, profile, project, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
-          <div class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded mb-3 flex items-center justify-center text-gray-300 dark:text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <p class="text-[13px] md:text-[14px] font-medium text-white/60 mb-1">{neighborhood} | {profile}</p>
-          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-white mb-1">Project: {project}</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
+      {
+        exploreFromStone.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="dark"
+          />
+        ))
+      }
     </div>
-    <div class="mt-8 md:mt-10 text-center">
-      <a href="/gallery" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View More Roofing Projects</a>
-    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Why Oahu Property Owners Trust R&C Roofing" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <IconPointGrid items={whyTrust} variant="dark" />
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Compare Stone-Coated Steel With Other Roofing Materials · white bg -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Compare Stone-Coated Steel With Other Roofing Materials" classes={{ container: 'mb-8 md:mb-12' }} />
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Metal Roofing',
-          description: 'Explore other metal roofing systems, panel profiles, and finishes.',
-          href: '/services/roofing-materials/metal-roofing',
-          linkText: 'Explore Metal Roofing',
-        },
-        {
-          title: 'Asphalt Shingles',
-          description: 'Consider a familiar residential roofing option with a wide range of styles.',
-          href: '/services/roofing-materials/asphalt-shingle-roofing',
-          linkText: 'Explore Asphalt Shingles',
-        },
-        {
-          title: 'Clay & Concrete Tile',
-          description: 'Compare stone-coated tile profiles with traditional clay and concrete tile systems.',
-          href: '/services/roofing-materials/tile-roofing-clay-and-concrete',
-          linkText: 'Explore Tile Roofing',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
-        </div>
-      ))}
-    </div>
-    <div class="mt-10 md:mt-12 text-center">
-      <a href="/services/roofing-materials" class="btn btn-secondary">Compare All Roofing Materials</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-10 · Frequently Asked Questions · grey bg -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Is stone-coated steel the same as metal roofing?',
-        description:
-          'Stone-coated steel is one type of metal roofing. It uses steel panels with a stone-granule finish, while other metal roofing systems may use different metals, panel profiles, coatings, and finishes.',
-      },
-      {
-        title: 'Does stone-coated steel look like a metal roof?',
-        description:
-          'Not necessarily. One of the main differences is appearance. Stone-coated steel products are available in textured profiles designed to resemble traditional roofing materials such as shingles, tile, and shake.',
-      },
-      {
-        title: 'Is stone-coated steel good for homes near the ocean?',
-        description:
-          'It may be appropriate for some coastal properties, but the exact product needs to be evaluated. Steel coating, fasteners, flashing, installation requirements, property exposure, and manufacturer warranty terms should all be considered.',
-      },
-      {
-        title: 'Does stone-coated steel rust?',
-        description:
-          'Stone-coated steel products use protective coatings intended to protect the underlying steel, but corrosion performance depends on the actual product, installation, environmental exposure, and condition of the roofing system. We would not describe any steel roofing product as universally rust-proof.',
-      },
-      {
-        title: 'How long does stone-coated steel roofing last?',
-        description:
-          'There is no single lifespan that applies to every product. Manufacturer, coating, property exposure, installation, and maintenance can all affect service life.',
-      },
-      {
-        title: 'Can stone-coated steel look like tile?',
-        description:
-          'Yes. Manufacturers offer stone-coated steel panels formed into tile-style profiles. Other profiles can resemble shingles and shake.',
-      },
-      {
-        title: 'Is stone-coated steel lighter than concrete tile?',
-        description:
-          'The weight difference depends on the specific products being compared. Once R&C identifies the stone-coated steel and tile systems it installs, an accurate product-specific weight comparison can be provided.',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </FAQs>
-
-  <!-- P-12 · Final CTA -->
   <CTABanner
-    title="See if Stone-Coated Steel Fits Your Property"
-    subtitle="Stone-coated steel gives you another way to consider metal roofing without committing to the appearance of a traditional metal-panel roof.<br />The next step is determining whether the system fits your roof design, location, project requirements, and budget."
+    title="Find Out if Stone-Coated Steel Fits Your Property"
+    subtitle="Get expert guidance and objective facts for your stone-coated steel roofing project."
     ctaText="Discuss Stone-Coated Steel Roofing"
   />
-
 </Layout>

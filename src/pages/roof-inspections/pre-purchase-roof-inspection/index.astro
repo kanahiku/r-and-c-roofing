@@ -2,10 +2,21 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import {
+  inspectionHeroActions,
+  inspectionProcessIcons,
+  otherInspectionServices,
+} from '~/data/pages/roofInspections';
 
 const metadata = {
   title: 'Pre-Purchase Roof Inspections Oahu | R&C Roofing',
@@ -13,103 +24,146 @@ const metadata = {
     'Schedule a pre-purchase roof inspection on Oahu with R&C Roofing Contractors. Get a closer look at roof condition before moving forward with a real estate transaction.',
   ignoreTitleTemplate: true,
 };
+
+const otherServices = otherInspectionServices('/roof-inspections/pre-purchase-roof-inspection');
+
+const evaluate = [
+  {
+    title: 'Roofing Materials',
+    description: 'We look for visible deterioration, shifted components, and previous patchwork.',
+    icon: 'tabler:layers-intersect',
+  },
+  {
+    title: 'Flashing and Penetrations',
+    description: 'We inspect vents, pipes, and skylights for proper sealing and water-entry vulnerabilities.',
+    icon: 'tabler:circle-dashed',
+  },
+  {
+    title: 'Edges and Drainage',
+    description: 'We review roof edges, valleys, and gutters to ensure water moves away from the structure.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Exposed Metal',
+    description: 'We check fasteners and flashing for corrosion caused by coastal salt air exposure.',
+    icon: 'tabler:sun',
+  },
+];
+
+const whenItMakesSense = [
+  {
+    title: 'Older Materials',
+    description: 'The roof is aging and its repair history is unclear.',
+    icon: 'tabler:calendar',
+  },
+  {
+    title: 'Flagged Concerns',
+    description: 'A general home inspector identified a potential roofing issue that needs expert review.',
+    icon: 'tabler:flag',
+  },
+  {
+    title: 'Visible Water Signs',
+    description: 'You see evidence of interior ceiling stains or previous leak repairs.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Severe Exposure',
+    description: 'The property sits in a high-wind or heavy-rain microclimate on Oahu.',
+    icon: 'tabler:wind',
+  },
+];
+
+const faqs = [
+  {
+    title: 'Is a roof inspection different from a general home inspection?',
+    description:
+      'Yes. A dedicated roof inspection focuses strictly on the structural integrity of the roofing system rather than a broad property overview.',
+  },
+  {
+    title: 'Can R&C tell me exactly how many years the roof has left?',
+    description:
+      'No. We evaluate visible deterioration to determine if you need immediate repair or replacement rather than predicting an exact failure date.',
+  },
+  {
+    title: 'Can the inspection findings be used during negotiations?',
+    description:
+      'Yes. You can use our objective documentation and repair estimates to inform your discussions with the seller.',
+  },
+  {
+    title: 'Does R&C inspect the attic?',
+    description:
+      'Yes. We review accessible interior attic areas when they are highly relevant to a specific leak or roofing concern.',
+  },
+  {
+    title: 'Can R&C complete repairs after the inspection?',
+    description:
+      'Yes. We operate under Hawaii Contractor License C-33642 and can execute any necessary repairs if you purchase the property.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white + motif -->
   <Hero2
-    actions={[{ variant: 'primary', text: 'Schedule a Pre-Purchase Roof Inspection', href: '/contact' }]}
-    image={{ src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=2070&q=80', alt: 'Pre-purchase roof inspection on Oahu' }}
+    actions={inspectionHeroActions}
   >
     <Fragment slot="title">Pre-Purchase Roof<br />Inspections on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Understand the Roof Before You Close
-      </span>
-      A roof can represent a significant future expense, so it helps to understand its condition before a real estate transaction moves forward.
-      <br /><br />
-      R&C Roofing Contractors provides pre-purchase roof inspections for Oahu properties. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.
+      Understand the true condition of the roof before you close. We evaluate the structure to protect you from
+      unexpected repair costs after you buy.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Pre-purchase inspection photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- Why Separate Inspection — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Get a Separate Roof Inspection Before Buying?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-4 max-w-3xl">
-      A general home inspection covers many parts of a property. A dedicated roof inspection allows a roofing contractor to take a closer look at the roofing system itself.
-    </p>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-6 max-w-3xl">
-      That can be useful when:
-    </p>
-    <ul class="space-y-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-3xl">
-      {[
-        'The roof is older or its history is unclear.',
-        'The general inspection identifies a roofing concern.',
-        'There are visible signs of previous leaks or repairs.',
-        'The property has experienced significant wind or weather exposure.',
-        'You want more information before making a decision about the property.',
-      ].map((item) => (
-        <li class="flex gap-3">
-          <span class="shrink-0 text-primary mt-0.5">—</span>
-          {item}
-        </li>
-      ))}
-    </ul>
-    <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic max-w-3xl">
-      R&C is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that should be considered, our team can explain the potential scope.
-    </p>
+    <Headline title="Standard Home Inspection vs. Dedicated Roof Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+      <p>
+        A general home inspection covers many parts of a property but often misses specific roofing failures. We provide
+        a dedicated structural evaluation.
+      </p>
+      <p>
+        Robert Pilato (Certification #201408313) brings advanced diagnostic training to assess the exact condition of
+        the materials based on local island weather exposure.
+      </p>
+    </div>
+    <ComparisonTable
+      columns={['Standard Home Inspection', 'Pre-Purchase Roof Assessment']}
+      rows={[
+        {
+          feature: 'Primary Focus',
+          left: 'Broad overview of the entire property.',
+          right: 'Deep structural evaluation of the roofing system.',
+        },
+        {
+          feature: 'Damage Evaluation',
+          left: 'Basic visual checks from the ground or ladder.',
+          right: 'Comprehensive material and component analysis.',
+        },
+        {
+          feature: 'Actionable Utility',
+          left: 'Highlights general property concerns.',
+          right: 'Delivers specific repair scopes and structural documentation.',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What We Evaluate — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      What We Evaluate During a Pre-Purchase Roof Inspection
-    </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
-      The inspection scope depends on the property, roofing system, accessibility, and visible conditions.
-    </p>
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Where accessible, R&C may evaluate:
+      A damaged component does not always tell the full story. We look deeper to find the root cause.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Roofing Materials',
-          description:
-            'We look for visible deterioration, damage, displacement, previous repairs, and other conditions that may affect the roofing system.',
-        },
-        {
-          title: 'Flashing and Roof Penetrations',
-          description:
-            'Areas around vents, pipes, skylights, transitions, and other penetrations can be important points to review for visible deterioration or water-entry concerns.',
-        },
-        {
-          title: 'Roof Edges and Drainage Areas',
-          description:
-            'We review accessible roof edges, valleys, gutters, and other areas involved in moving water away from the roof.',
-        },
-        {
-          title: 'Exposed Metal Components',
-          description:
-            'Fasteners, flashing, and other exposed metal components may show signs of corrosion, particularly on properties with greater coastal exposure.',
-        },
-        {
-          title: 'Signs of Moisture or Previous Leaks',
-          description:
-            'When interior access is appropriate, visible signs of moisture or previous water intrusion may help provide additional context about the roof.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {evaluate.map((card) => (
+        <InfoCard title={card.title} description={card.description} icon={card.icon} variant="dark" />
       ))}
     </div>
     <Fragment slot="bg">
@@ -117,220 +171,78 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What Findings Tell You — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What the Inspection Findings Can Tell You" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      The goal is not to predict an exact date when the roof will fail. It is to give you better information about its current visible condition.
+    <Headline title="When a Pre-Purchase Inspection Makes Sense" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      You need objective data when the cause or extent of your roof damage is unclear.
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'For Buyers',
-          description:
-            'Inspection findings can help you understand whether the roof appears to need immediate attention or whether there are conditions you should plan for after purchasing the property. If roofing work is recommended, R&C can provide contractor-side information about the proposed scope.',
-        },
-        {
-          title: 'For Sellers',
-          description:
-            'A roof inspection before listing may help identify visible problems that you want to address before the property goes on the market. It can also give you more information if a roofing concern is raised later in the transaction.',
-        },
-        {
-          title: 'For Real Estate Professionals',
-          description:
-            'When a client needs a closer look at the roof, R&C can provide a roofing-specific inspection and explain the findings in practical terms.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Schedule a Pre-Purchase Inspection</a>
-    </div>
+    <IconPointGrid items={whenItMakesSense} />
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Oahu Conditions — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Oahu Conditions Matter When Evaluating a Roof
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>Two roofs of a similar age can show very different wear depending on where they are located.</p>
-      <p>A coastal property may have greater exposure to salt air. A home in a wetter area may show different moisture-related conditions. Strong sun exposure can also affect roofing materials and exposed components over time.</p>
-      <p>R&C considers the property location and visible roof conditions as part of the inspection rather than relying on roof age alone.</p>
-    </div>
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We follow a strict assessment protocol to give you clear answers.
+    </p>
+    <Timeline
+      items={[
+        { title: 'Listen', description: 'We review the property details and any known concerns from previous general inspections.', icon: inspectionProcessIcons.listen },
+        { title: 'Evaluate', description: 'We safely access the roof to inspect the materials, flashing, and drainage components.', icon: inspectionProcessIcons.evaluate },
+        { title: 'Document', description: 'We capture photographs and detailed notes to record the exact physical condition of the roof.', icon: inspectionProcessIcons.document },
+        { title: 'Recommend', description: 'We explain our findings and advise if the property requires maintenance, repair, or a full replacement.', icon: inspectionProcessIcons.recommend },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Process — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white">
-        What Happens During a Pre-Purchase Roof Inspection?
-      </h2>
-      <a href="/contact" class="btn-primary shrink-0">Schedule a Pre-Purchase Inspection</a>
-    </div>
-    <div class="flex flex-col gap-6 max-w-2xl">
-      {[
-        {
-          step: '1',
-          title: 'We Review the Property and Any Known Concerns',
-          description:
-            'If another inspection has already identified a roofing issue, let us know what was observed.',
-        },
-        {
-          step: '2',
-          title: 'We Inspect Accessible Roofing Areas',
-          description:
-            'Where access and site conditions allow, we evaluate relevant parts of the roofing system for visible damage or deterioration.',
-        },
-        {
-          step: '3',
-          title: 'We Document Relevant Findings',
-          description:
-            "Photos and notes can help provide a clearer record of the roof's condition at the time of the inspection.",
-        },
-        {
-          step: '4',
-          title: 'We Explain What the Findings Mean',
-          description:
-            'We discuss whether visible conditions appear to require maintenance, repair, further evaluation, or consideration of a larger roofing project.',
-        },
-      ].map(({ step, title, description }) => (
-        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[15px] text-black mt-0.5">
-            {step}
-          </div>
-          <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-white">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-          </div>
-        </div>
-      ))}
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
+      Using Your Inspection Findings
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
+      <p>
+        A pre-purchase inspection provides structural facts to inform your buying decision. It does not predict an exact
+        failure date or guarantee future performance.
+      </p>
+      <p>
+        How you use these findings during real estate negotiations is up to you and your agent. R&C Roofing Contractors
+        provides objective contractor documentation and repair estimates to support your due diligence.
+      </p>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- HAAG Note — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="HAAG Certified Roof Damage Assessment" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 max-w-4xl">
-      <p>Specialized damage-assessment training can add helpful context when evaluating visible roofing damage and deterioration.</p>
-      <p>Robert Pilato is a HAAG Certified Inspector, Certification #201408313.</p>
-      <p>HAAG certification includes specialized education and testing in roof damage assessment. This gives R&C additional training when evaluating visible roofing damage and deterioration.</p>
-      <p>That inspection expertise is paired with R&C's work as a licensed Hawaii roofing contractor.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/roof-inspections/haag-certified-inspection" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Learn About HAAG Certified Roof Inspections</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Explore Other Inspections — Grey #FAFAFA, black cards -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      A real estate transaction is one reason to take a closer look at a roof. R&C also provides inspections for other property needs.
+      We offer specialized evaluations for different stages of property ownership.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'HAAG Certified Roof Inspections',
-          description: 'Get a closer assessment of visible roof damage supported by specialized HAAG training.',
-          href: '/roof-inspections/haag-certified-inspection',
-          linkText: 'View HAAG Certified Inspections',
-        },
-        {
-          title: 'Storm & Wind Damage Inspections',
-          description: 'Evaluate visible roof conditions after strong winds or severe weather.',
-          href: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'View Storm Damage Inspections',
-        },
-        {
-          title: 'Annual Maintenance Inspections',
-          description: 'Track roof conditions over time and identify areas that may need attention.',
-          href: '/roof-inspections/annual-maintenance-inspection',
-          linkText: 'View Maintenance Inspections',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
-          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {otherServices.map((card) => (
+        <ServiceCard title={card.title} description={card.description} href={card.href} linkText={card.linkText} variant="light" />
       ))}
     </div>
-    <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
-    </div>
     <Fragment slot="bg">
-      <SectionBg variant="grey" />
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- FAQs — White -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Is a roof inspection different from a general home inspection?',
-        description:
-          'A dedicated roof inspection focuses specifically on the roofing system. It can provide additional detail when a general inspection identifies a roofing concern or when you want a roofing contractor to evaluate the roof more closely.',
-      },
-      {
-        title: 'When should I schedule a roof inspection during a real estate transaction?',
-        description:
-          'Inspection timelines vary by transaction. If the roof is part of your due diligence, schedule the inspection early enough to review the findings before any applicable inspection or contingency deadlines.',
-      },
-      {
-        title: 'Can R&C tell me how many years the roof has left?',
-        description:
-          'Roof condition cannot always be reduced to an exact remaining number of years. R&C can evaluate visible deterioration and explain whether the current condition suggests maintenance, repair, or replacement should be considered.',
-      },
-      {
-        title: 'Can the inspection findings be used during negotiations?',
-        description:
-          'Inspection findings may provide useful information about the condition of the roof and any recommended work. How that information is used in a real estate transaction is up to the parties involved and their real estate professionals.',
-      },
-      {
-        title: 'Does R&C inspect the attic?',
-        description:
-          'Interior or attic areas may be reviewed when they are accessible and relevant to the roofing concern. The scope depends on the property and inspection conditions.',
-      },
-      {
-        title: 'Should a newer roof still be inspected?',
-        description:
-          'A newer roof may still be worth evaluating if there is a visible concern, a known leak, unclear installation history, or another reason to take a closer look at the roofing system.',
-      },
-      {
-        title: 'Can R&C complete repairs after the inspection?',
-        description:
-          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If the inspection identifies roofing work that needs to be considered, our team can provide the appropriate roofing services.',
-      },
-    ]}
-  >
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <Fragment slot="bg">
-      <SectionBg variant="white" />
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — Yellow -->
   <CTABanner
-    title="Know More About the Roof Before You Move Forward"
-    subtitle="A pre-purchase roof inspection can give you a clearer understanding of the roofing system before your real estate transaction moves ahead.<br />R&amp;C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what those findings may mean for the property."
-    ctaText="Schedule a Pre-Purchase Roof Inspection"
+    title="Know More About the Roof Before You Close"
+    subtitle="Find out exactly what is happening before you commit to a real estate transaction."
+    ctaText="Schedule Inspection"
   />
-
 </Layout>

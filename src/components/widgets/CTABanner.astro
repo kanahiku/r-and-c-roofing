@@ -8,6 +8,8 @@ export interface Props {
   ctaText?: string;
   ctaHref?: string;
   showAfterHoursNote?: boolean;
+  license?: string;
+  extraLines?: string[];
 }
 
 const {
@@ -16,6 +18,8 @@ const {
   ctaText = 'Schedule a Roof Inspection',
   ctaHref = '/contact',
   showAfterHoursNote = false,
+  license,
+  extraLines = [],
 } = Astro.props;
 ---
 
@@ -42,6 +46,10 @@ const {
           <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
           <p>3302 Campbell Ave, Honolulu, HI 96815</p>
           <p>(808) 888-2524</p>
+          {extraLines.map((line) => (
+            <p set:html={line} />
+          ))}
+          {license && <p>{license}</p>}
           {showAfterHoursNote && (
             <p class="mt-2 text-[13px] md:text-[14px] italic">After-hours roofing concern? Use the online chat to contact the team.</p>
           )}

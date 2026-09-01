@@ -6,8 +6,8 @@
 // #EDD974 - Gold/Yellow (Primary CTA, Accent)
 // #000000 - Black (Navbar, Footer)
 // #222222 - Charcoal (Headings)
-// #4F5E65 - Slate (Body text)
-// #A2AFB5 - Gray (Muted text)
+// #444444 - Subtle black (Body / muted text on light sections)
+// #4F5E65 - Slate (legacy default)
 // #FFFFFF - White (Page bg)
 // #E3E6E7 - Light gray (Section bg)
 // #082244 - Navy (Dark sections)
@@ -26,8 +26,8 @@
     --aw-color-accent-hover: rgb(212 188 87);
 
     --aw-color-text-heading: rgb(34 34 34);
-    --aw-color-text-default: rgb(79 94 101);
-    --aw-color-text-muted: rgb(162 175 181);
+    --aw-color-text-default: rgb(68 68 68);
+    --aw-color-text-muted: rgb(68 68 68);
     --aw-color-bg-page: rgb(255 255 255);
     --aw-color-bg-section-white: rgb(255 255 255);
     --aw-color-bg-section-grey: rgb(250 250 250);
@@ -41,7 +41,7 @@
 
     --aw-color-card-heading-light: var(--aw-color-text-heading);
     --aw-color-card-body-light: var(--aw-color-text-muted);
-    --aw-color-card-link-light: var(--aw-color-accent);
+    --aw-color-card-link-light: var(--aw-color-text-heading);
 
     --aw-color-card-border-dark: rgb(237 217 116 / 60%);
     --aw-color-card-border-light: transparent;
@@ -113,7 +113,7 @@
     --aw-color-testimonial-hr-dark: rgb(255 255 255 / 10%);
 
     /* FAQ Colors */
-    --aw-color-faq-border-light: rgb(229 231 235);
+    --aw-color-faq-border-light: rgb(229 231 235 / 40%);
     --aw-color-faq-question-light: var(--aw-color-text-heading);
     --aw-color-faq-answer-light: var(--aw-color-text-muted);
     --aw-color-faq-toggle-border-light: rgb(209 213 219);

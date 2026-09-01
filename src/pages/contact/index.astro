@@ -1,0 +1,246 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import Button from '~/components/ui/Button.astro';
+import FormContainer from '~/components/ui/Form.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { contactDirectionsHref, contactHelpOptions, contactMapEmbedSrc } from '~/data/pages/contact';
+
+const metadata = {
+  title: 'Contact R&C Roofing Contractors | Honolulu, HI',
+  description:
+    'Contact R&C Roofing Contractors in Honolulu for roof inspections, repairs, replacements, storm damage, commercial roofing, gutters, and other roofing needs.',
+  ignoreTitleTemplate: true,
+};
+
+const touchpoints = [
+  {
+    title: 'Call Us',
+    description: '(808) 888-2524. Alternate phone: (808) 216-3256.',
+    icon: 'tabler:phone',
+  },
+  {
+    title: 'Email Us',
+    description: 'info@safehomeservice.com',
+    icon: 'tabler:mail',
+  },
+  {
+    title: 'Visit Us',
+    description: 'R&C Roofing Contractors, 3302 Campbell Ave, Honolulu, HI 96815.',
+    icon: 'tabler:map-pin',
+  },
+  {
+    title: 'Business Hours',
+    description: 'Monday to Friday: 8:00 a.m. to 4:30 p.m. Saturday: Closed. Sunday: Closed.',
+    icon: 'tabler:clock',
+  },
+];
+
+const reasons = [
+  {
+    title: 'My Roof Is Leaking',
+    description: 'Water coming through the ceiling or showing up after rain? Start by finding the source of the leak.',
+    href: '/roof-problems/my-roof-is-leaking',
+    linkText: 'My Roof Is Leaking',
+  },
+  {
+    title: 'My Roof Was Damaged by a Storm',
+    description:
+      'If the problem appeared after strong wind or severe weather, the roof may need to be evaluated for storm-related damage.',
+    href: '/roof-problems/storm-damage-on-my-roof',
+    linkText: 'Storm Damage on My Roof',
+  },
+  {
+    title: 'I Am Trying to Decide Whether to Repair or Replace',
+    description:
+      'The decision should be based on the condition and extent of the roofing problem rather than age alone.',
+    href: '/roof-problems/my-roof-is-at-end-of-life',
+    linkText: 'My Roof Is at End of Life',
+  },
+  {
+    title: 'I Need a Roof Inspection',
+    description:
+      "R&C provides roof inspections for roofing concerns, property transactions, storm damage, and other situations where you need a clearer understanding of the roof's condition.",
+    href: '/roof-inspections',
+    linkText: 'Roof Inspections',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={[{ variant: 'primary', text: 'Call (808) 888-2524', href: 'tel:+18088882524' }]}>
+    <Fragment slot="title">Contact R&amp;C Roofing Contractors</Fragment>
+    <Fragment slot="subtitle">
+      <span
+        class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight"
+      >
+        Tell Us What Is Happening With Your Roof
+      </span>
+      Have a roof leak, storm damage, an aging roof, or another roofing question?
+      <br /><br />
+      Tell us what you are seeing and how we can reach you. You do not need to know which roofing service you need before
+      contacting R&amp;C. We can start with the condition of the roof and determine what should be considered next.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Contact page photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Get in Touch" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {
+        touchpoints.map((item) => (
+          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
+        ))
+      }
+    </div>
+    <div class="mt-8 md:mt-10 text-center">
+      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-6">
+        Need Help After Hours? For after-hours emergency service, please use our website chat feature.
+      </p>
+      <Button variant="ghost-light" text="Open Chat" href="#message" />
+    </div>
+    <p class="mt-6 text-center">
+      <a href="tel:+18088882524" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
+        (808) 888-2524
+      </a>
+      <span class="text-muted"> · </span>
+      <a href="tel:+18082163256" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
+        (808) 216-3256
+      </a>
+      <span class="text-muted"> · </span>
+      <a href="mailto:info@safehomeservice.com" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
+        info@safehomeservice.com
+      </a>
+    </p>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper id="message" containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Send Us a Message" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Tell us a little about your property and what is happening with the roof. A member of the R&amp;C team can follow
+      up using the contact information you provide.
+    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div class="rounded-lg bg-white p-4 sm:p-6 lg:p-8">
+        <FormContainer
+          inputs={[
+            { type: 'text', name: 'name', label: 'Name *', autocomplete: 'name', required: true },
+            { type: 'email', name: 'email', label: 'Email *', autocomplete: 'email', required: true },
+            { type: 'tel', name: 'phone', label: 'Phone *', autocomplete: 'tel', required: true },
+            { type: 'text', name: 'zip', label: 'ZIP Code *', autocomplete: 'postal-code', required: true },
+            {
+              type: 'select',
+              name: 'topic',
+              label: 'What Can We Help You With? *',
+              required: true,
+              placeholder: 'Select a topic',
+              options: contactHelpOptions,
+            },
+          ]}
+          textarea={{ label: 'Tell Us What Is Happening', name: 'message', rows: 5 }}
+          button="Send Message"
+        />
+      </div>
+      <div>
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-white mb-3">
+          Find R&amp;C Roofing Contractors
+        </h3>
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/70 mb-4">
+          3302 Campbell Ave<br />Honolulu, HI 96815
+        </p>
+        <div class="rounded-md overflow-hidden border border-accent/60 bg-[#222] aspect-[4/3] min-h-[280px]">
+          <iframe
+            title="Map of R&C Roofing Contractors at 3302 Campbell Ave, Honolulu"
+            src={contactMapEmbedSrc}
+            class="w-full h-full min-h-[280px]"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="mt-6">
+          <Button variant="ghost-dark" text="Get Directions" href={contactDirectionsHref} target="_blank" />
+        </div>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <Content
+    isReversed
+    title="Not Sure Which Roofing Service You Need?"
+    callToAction={{ variant: 'ghost-light', text: 'Schedule a Roof Inspection', href: '#message' }}
+  >
+    <Fragment slot="content">
+      <p class="text-muted">That is okay.</p>
+      <p class="mt-4 text-muted">
+        A roof problem does not automatically tell you what the solution should be. A leak may call for a localized
+        repair, while broader deterioration may require a different approach. In some cases, the roof may need to be
+        monitored rather than immediately repaired or replaced.
+      </p>
+      <p class="mt-4 text-muted">Start by telling R&amp;C what you are seeing.</p>
+      <p class="mt-4">
+        <a href="/roof-inspections" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
+          Explore Roof Inspections
+        </a>
+      </p>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Roof inspection photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </Content>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Common Reasons People Contact R&amp;C" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {
+        reasons.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="dark"
+          />
+        ))
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title="Contact R&C Roofing Contractors"
+    subtitle="R&amp;C Roofing Contractors can evaluate the roof and help determine what roofing work should be considered next."
+    ctaText="Call R&C Roofing"
+    ctaHref="tel:+18088882524"
+    extraLines={[
+      'Alternate Phone: (808) 216-3256',
+      'Email: info@safehomeservice.com',
+      'Monday to Friday: 8:00 a.m. to 4:30 p.m.',
+      'Saturday to Sunday: Closed',
+    ]}
+    license="Hawaii Contractor License C-33642"
+  />
+</Layout>

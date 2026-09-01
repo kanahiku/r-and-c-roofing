@@ -1,0 +1,65 @@
+---
+export interface Props {
+  featureLabel?: string;
+  columns: [string, string];
+  rows: Array<{ feature: string; left: string; right: string }>;
+}
+
+const { featureLabel = 'Feature', columns, rows } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full min-w-[640px] border-separate border-spacing-0 text-left">
+    <thead>
+      <tr>
+        <th
+          class="bg-[#222] text-white text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg w-[22%] border-r border-accent"
+        >
+          {featureLabel}
+        </th>
+        <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 w-[39%] border-r border-accent">
+          {columns[0]}
+        </th>
+        <th
+          class="bg-[#222] text-accent text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg w-[39%]"
+        >
+          {columns[1]}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map(({ feature, left, right }, index) => {
+          const isLast = index === rows.length - 1;
+          return (
+            <tr>
+              <th
+                class:list={[
+                  'align-top bg-white text-heading text-[14px] md:text-[15px] font-medium font-heading leading-[130%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
+                  isLast && 'rounded-bl-lg',
+                ]}
+              >
+                {feature}
+              </th>
+              <td
+                class:list={[
+                  'align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
+                ]}
+              >
+                {left}
+              </td>
+              <td
+                class:list={[
+                  'align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5',
+                  isLast && 'rounded-br-lg',
+                ]}
+              >
+                {right}
+              </td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,8 +1,15 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
+import Headline from '~/components/ui/Headline.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { aboutHrefs, serviceHeroActions } from '~/data/pages/about';
 
 const metadata = {
   title: 'Our Story | R&C Roofing Contractors Hawaii',
@@ -10,118 +17,187 @@ const metadata = {
     'Learn the story behind R&C Roofing Contractors, the experience that shaped our inspection-first approach, and the roofing expertise behind our work on Oahu.',
   ignoreTitleTemplate: true,
 };
+
+const conditions = [
+  {
+    title: 'Coastal Exposure',
+    description: 'High exposure to salt in the air for properties near the water.',
+    icon: 'tabler:ripple',
+  },
+  {
+    title: 'Moisture Variations',
+    description: 'Windward and leeward areas experience drastically different rainfall patterns.',
+    icon: 'tabler:cloud-rain',
+  },
+  {
+    title: 'Weather Extremes',
+    description: 'Strong sun, heavy rain, and high wind events all accelerate wear.',
+    icon: 'tabler:sun',
+  },
+];
+
+const credentials = [
+  {
+    title: 'Hawaii Contractor License',
+    description: 'C-33642',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'Specialized Certification',
+    description: 'HAAG Certified Inspector (Robert Pilato, #201408313)',
+    icon: 'tabler:badge',
+  },
+  {
+    title: 'Industry Experience',
+    description: '50+ Years of Combined Crew Experience',
+    icon: 'tabler:clock',
+  },
+  {
+    title: 'Professional Affiliation',
+    description: 'Building Industry Association of Hawaii (BIA) Member',
+    icon: 'tabler:building',
+  },
+];
+
+const yelpEmbeds = `
+<span class="yelp-review" data-review-id="wfK95mJOJuhlnDWT6027ow" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=RiSfA-nw1ngEY_q6tzwoQA" rel="nofollow noopener">Ronald C.</a>'s <a href="https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu?hrid=wfK95mJOJuhlnDWT6027ow" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/2YU-fBK6jEfW12MP_E_r6g" rel="nofollow noopener">R &amp; C Roofing Contractors</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script src="https://www.yelp.com/embed/widgets.js" type="text/javascript" async><\/script></span>
+<span class="yelp-review" data-review-id="FB6iD9eGHe6Z2DRhu3Szgw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=jKtqiGp_z46RAmwxolPp7Q" rel="nofollow noopener">Nancy M.</a>'s <a href="https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu?hrid=FB6iD9eGHe6Z2DRhu3Szgw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/2YU-fBK6jEfW12MP_E_r6g" rel="nofollow noopener">R &amp; C Roofing Contractors</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script src="https://www.yelp.com/embed/widgets.js" type="text/javascript" async><\/script></span>
+<span class="yelp-review" data-review-id="cuFBoA_QIJoI59bmAyuDrg" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=SW5560TYBu1fHCisx3wHWA" rel="nofollow noopener">Herman Y.</a>'s <a href="https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu?hrid=cuFBoA_QIJoI59bmAyuDrg" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/2YU-fBK6jEfW12MP_E_r6g" rel="nofollow noopener">R &amp; C Roofing Contractors</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a><script src="https://www.yelp.com/embed/widgets.js" type="text/javascript" async><\/script></span>
+`;
 ---
 
 <Layout metadata={metadata}>
+  <Hero2 actions={serviceHeroActions('Schedule a Roof Inspection')}>
+    <Fragment slot="title">Our Story: A Different Way of Looking at Roofing</Fragment>
+    <Fragment slot="subtitle">
+      Most people do not spend much time thinking about their roof until something changes. By the time someone calls a
+      roofing contractor, they are often already wondering whether they need a complete roof replacement. That
+      uncertainty has shaped the way R&amp;C Roofing Contractors approaches the work. We do not start with the assumption
+      that every roofing problem needs a major construction project. The first step is understanding what is actually
+      happening.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Our story photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
 
-  <!-- P-13 · Our Story / A Different Way of Looking at Roofing — white -->
+  <Content isReversed title="Experience Has Shaped How We Make Decisions">
+    <Fragment slot="content">
+      <p class="text-muted">
+        R&amp;C Roofing is a locally owned company bringing more than 50 years of combined crew experience to Oahu. We
+        have seen firsthand how different problems produce similar symptoms.
+      </p>
+      <p class="mt-4 text-muted">
+        A ceiling stain may point to a localized issue, while leaks in different areas tell a different story. The right
+        answer is not always the biggest answer. Our team walks you through different materials to find the exact
+        solution that fits your property, delivering quality workmanship in a safe environment.
+      </p>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="R&C Roofing crew standing in front of branded company truck" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </Content>
+
+  <Content
+    isDark={true}
+    title="Why Inspection Drives Our Work"
+    classes={{ title: 'text-white' }}
+    callToAction={{
+      variant: 'ghost-dark',
+      text: 'Explore HAAG Certified Roof Inspections',
+      href: aboutHrefs.haag,
+    }}
+  >
+    <Fragment slot="content">
+      <p class="text-white/70">
+        The purpose of an inspection is not to create a reason for construction, but to create a clearer basis for making
+        a roofing decision.
+      </p>
+      <p class="mt-4 text-white/70">
+        Because we operate under Hawaii contractor license C-33642, we move seamlessly from evaluating a condition into
+        construction when work is appropriate. R&amp;C Roofing brings specialized damage assessment expertise through
+        Robert Pilato, HAAG Certified Inspector (#201408313). We connect our findings to practical options: repair,
+        replacement, additional evaluation, or continued monitoring.
+      </p>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="HAAG inspection photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </Content>
+
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-4">
-      Our Story
-    </h1>
-    <h2 class="text-[24px] md:text-[32px] font-normal leading-[130%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      A Different Way of Looking at Roofing
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Most people do not spend much time thinking about their roof until something changes. A stain appears on the ceiling after heavy rain. Roofing material shifts after strong winds. A home inspection raises a question. An older roof begins needing repairs more often than it used to.</p>
-      <p>By the time someone calls a roofing contractor, they are often already wondering whether they are about to hear that the entire roof needs to be replaced.</p>
-      <p>That uncertainty has shaped the way R&amp;C Roofing Contractors approaches the work.</p>
-      <p>After years of working on roofs in Hawaiʻi, the team has learned that the first visible problem rarely tells the whole story. Water may enter through one part of the roof and become visible somewhere else inside the home. An older roof may still have large areas that remain serviceable. A problem that appears after severe weather may involve both recent damage and conditions that were already developing.</p>
-      <p>That is why R&amp;C does not start with the assumption that every roofing problem needs a major construction project. The first step is understanding what is actually happening.</p>
-      <p>Today, that idea sits at the center of the company's approach: inspect first, understand the condition, then decide what roofing work makes sense.</p>
+    <Headline title="Local Expertise for Oahu Roofs" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Conditions change considerably from one part of Oahu to another. We avoid relying on generic lifespan rules because
+      the physical condition of the roof matters more. Oahu properties face distinct local challenges:
+    </p>
+    <IconPointBand items={conditions} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mt-8 md:mt-10">
+      This local judgment is crucial whether we are helping a homeowner with a leak, a property manager presenting to a
+      board, or a general contractor coordinating a build.
+    </p>
+    <div class="mt-8 flex justify-center">
+      <a href="/who-we-serve/homeowners" class="btn-ghost-light">Who We Serve</a>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Experience Has Shaped How We Make Roofing Decisions — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Experience Has Shaped How We Make Roofing Decisions
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>R&amp;C brings more than 50 years of combined crew experience to roofing work in Hawaiʻi. That experience has come from seeing how roofing systems perform over time and how very different problems can produce similar symptoms.</p>
-      <p>A ceiling stain may point to a relatively localized issue. Several leaks appearing in different areas can tell a different story. Roofing material that looks worn from the ground may still require a much closer evaluation before anyone can say whether repair or replacement is appropriate.</p>
-      <p>Those distinctions matter because the right answer is not always the biggest answer.</p>
-      <p>There are situations where repairing one area makes more sense than replacing an entire roof. There are also times when repeated repairs across several parts of the roofing system begin to indicate a broader problem. And sometimes an inspection shows that major roofing work is not necessary at all.</p>
-      <p>R&amp;C's job is to understand where the property falls within that range.</p>
-      <p>That applies whether the customer is a homeowner dealing with a leak, a property manager preparing information for an AOAO or HOA board, a general contractor coordinating roofing within a larger construction project, or a buyer trying to understand a roof before purchasing a property.</p>
-      <p>The circumstances may be different, but the basic question is the same: What does the roof actually need?</p>
-      <p>That question is more useful than beginning with a repair estimate or replacement proposal because it keeps the roofing recommendation tied to the condition of the property.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-8 md:mb-12">
+      <div>
+        <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
+          The Credentials Behind the Approach
+        </h2>
+        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
+          The philosophy behind R&amp;C Roofing's work is supported by qualifications that our customers can verify. Each
+          of these credentials serves a different purpose, but they all support the same mission: understand the
+          condition carefully, explain what is found, and connect the findings to the roofing work that actually makes
+          sense.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-3 md:gap-4">
+        <HeroImagePlaceholder label="Award and lei photo placeholder" />
+        <HeroImagePlaceholder label="Local recognition photo placeholder" />
+      </div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+      {
+        credentials.map((item) => (
+          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
+        ))
+      }
     </div>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Why Roof Inspection Became an Important Part of R&C — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Why Roof Inspection Became an Important Part of R&amp;C
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>As R&amp;C's approach became increasingly focused on diagnosis before construction, roof inspection became a natural extension of the company's roofing work.</p>
-      <p>R&amp;C has specialized roof damage assessment expertise through Robert Pilato, HAAG Certified Inspector, certification #201408313. HAAG certification is a third-party credential focused on roof damage assessment and gives the company another level of training for situations where the cause or extent of a roofing problem may not be immediately obvious.</p>
-      <p>That becomes particularly useful when a roof begins leaking after a storm, when an older roofing system is showing several different problems, or when a property owner needs to understand whether a particular condition appears localized or more widespread.</p>
-      <p>The purpose of the inspection is not to create a reason for construction. It is to create a clearer basis for making a roofing decision.</p>
-      <p>R&amp;C Roofing Contractors also operates under Hawaii contractor license C-33642, which means the company is able to move from evaluating a roofing condition into construction when roofing work is appropriate.</p>
-      <p>That connection between inspection and construction has become an important part of the way R&amp;C works. A customer does not simply receive a roofing opinion and then have to figure out what it means. The findings can be connected to practical options such as repair, replacement, additional evaluation, or continued monitoring.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/roof-inspections" class="text-primary font-medium text-[15px] hover:underline">
-        Learn About HAAG Certified Roof Inspections →
-      </a>
-    </div>
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Our Oahu Clients Say" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Our commitment to honest assessments and quality workmanship is reflected in the feedback we receive from the local
+      community.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 yelp-review-grid" set:html={yelpEmbeds} />
     <Fragment slot="bg">
-      <SectionBg variant="white" />
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Roofing on Oahu Requires More Than a Generic Answer — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Roofing on Oahu Requires More Than a Generic Answer
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Experience in Hawaiʻi also makes it difficult to treat every roof the same way.</p>
-      <p>Conditions can change considerably from one part of Oahu to another. Properties closer to the coast may experience greater exposure to salt in the air. Windward areas can face very different moisture conditions from drier leeward neighborhoods. Strong sun, heavy rainfall, wind exposure, previous repairs, roofing material, and installation history can all influence how a particular roof performs over time.</p>
-      <p>That is one reason R&amp;C avoids relying on generic lifespan rules or assuming that a roof should be replaced simply because it has reached a certain age.</p>
-      <p>The physical condition of the roof matters more.</p>
-      <p>The same principle carries into the materials and roofing work R&amp;C recommends. What makes sense for one property may not be the right choice for another. The building, its roofing system, its exposure, and the reason the customer called all need to be considered together.</p>
-      <p>That local judgment becomes even more important because R&amp;C works with more than residential homeowners. Property managers, AOAO and HOA boards, general contractors, architects and specifiers, trustees, and estate managers may all need roofing information for different reasons.</p>
-      <p>A homeowner may be deciding whether to repair a leak. A property manager may need enough information to help a board understand a larger roofing issue. A general contractor may be evaluating how roofing fits into the broader project scope. A trustee may simply need a clearer picture of the property's condition.</p>
-      <p>In each case, useful roofing guidance begins with understanding the property rather than starting with a predetermined solution.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/who-we-serve" class="text-primary font-medium text-[15px] hover:underline">
-        See Who We Serve →
-      </a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 · The Credentials Behind the Approach — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      The Credentials Behind the Approach
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>The philosophy behind R&amp;C's work is supported by qualifications that customers can verify.</p>
-      <p>R&amp;C Roofing Contractors operates under Hawaii contractor license C-33642. Robert Pilato holds HAAG certification #201408313 in roof damage assessment. The roofing team brings 50+ years of combined crew experience, and R&amp;C is a member of the Building Industry Association of Hawaii.</p>
-      <p>Each of those qualifications serves a different purpose, but they support the same approach to the work: understand the condition carefully, explain what is found, and connect the findings to the roofing work that actually makes sense.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Final CTA -->
   <CTABanner
-    title="Understand the Roof First. Then Decide What Comes Next."
-    subtitle="R&amp;C Roofing Contractors provides roof inspections, repairs, replacements, and related roofing services within its Oahu service area.<br />Whether something has already gone wrong or you want to understand the roof before a problem develops, the approach remains consistent: start with the condition of the roof."
+    title="Where R&C Roofing Is Today"
+    subtitle="We provide roof inspections, roof repairs, roof replacements, and related roofing services across Oahu. Whether something has already gone wrong, or you want to understand your roof before a problem becomes serious, we understand the roof first. Then, we help you decide what comes next."
+    ctaText="Schedule a Roof Inspection"
   />
-
 </Layout>

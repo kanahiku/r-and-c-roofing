@@ -1,0 +1,171 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { exploreFromHurricane, serviceHeroActions } from '~/data/pages/roofProblems';
+
+const metadata = {
+  title: 'Preparing Your Roof for Hurricane Season in Hawaii | R&C Roofing',
+  description:
+    'Prepare your Oahu roof for hurricane season. Learn what weather risks to expect, how to inspect for wind vulnerabilities, and how R&C Roofing helps protect your home.',
+  ignoreTitleTemplate: true,
+};
+
+const checklist = [
+  {
+    title: 'Check for Loose or Damaged Material',
+    description:
+      'Inspect sloped surfaces for missing shingles, cracked tiles, or loose metal panels that high winds can easily tear away.',
+    icon: 'tabler:layers-off',
+  },
+  {
+    title: 'Examine Flashing and Sealants',
+    description:
+      'Check metal flashing around chimneys, vents, valleys, and wall junctions where wind-driven rain frequently exploits gaps.',
+    icon: 'tabler:layers-intersect',
+  },
+  {
+    title: 'Clear Gutters and Drains',
+    description:
+      'Ensure roof drainage systems, scuppers, and downspouts are completely free of debris so heavy tropical downpours can escape safely.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Inspect Soffits and Overhangs',
+    description:
+      'Check exterior soffits and roof overhangs for loose boards or gaps that allow wind uplift forces to push beneath the roof deck.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Review Attic and Underlayment Conditions',
+    description:
+      'Look inside the attic for signs of past moisture intrusion, which often points to vulnerable spots that severe storms will worsen.',
+    icon: 'tabler:eye',
+  },
+];
+
+const climate = [
+  {
+    title: 'Wind Uplift Pressures',
+    description:
+      'Hurricane-force winds create negative pressure above the roof, attempting to lift materials away from the structure. Proper fastening and anchoring are essential.',
+    icon: 'tabler:arrow-bar-up',
+  },
+  {
+    title: 'Wind-Driven Rain',
+    description:
+      'Severe storms push water horizontally. Even minor gaps in flashing or aged underlayment can allow water to bypass the exterior weather barrier.',
+    icon: 'tabler:cloud-rain',
+  },
+  {
+    title: 'Flying Debris',
+    description:
+      'High winds can carry branches and other debris across neighborhoods, increasing the risk of physical impact damage to your roof surface.',
+    icon: 'tabler:tree',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={serviceHeroActions('Schedule a Hurricane Roof Check')}>
+    <Fragment slot="title">Preparing Your Roof for Hurricane Season on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      Tropical weather brings the threat of heavy rainfall, severe wind gusts, and wind-driven moisture. A roof that
+      holds up during normal island trade winds can still have hidden vulnerabilities when put to the test by severe
+      storm conditions. Protect your property before severe tropical weather arrives with expert roof evaluations and
+      wind mitigation guidance, backed by Hawaii License C-33642.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Hurricane prep photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Hurricane Roof Preparation Checklist" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Before storm season peaks, review these critical areas of your roofing system or schedule a professional
+      inspection to check them:
+    </p>
+    <IconPointBand items={checklist} />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="How Oahu's Tropical Climate Impacts Storm Readiness" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Island weather creates unique challenges for roofing assemblies during severe storm events:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      {
+        climate.map((item) => (
+          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
+        ))
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Other Roof Problem Solutions" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      If you are dealing with other property concerns or post-storm issues, explore our dedicated problem-solving
+      resources:
+    </p>
+    <ServiceDirectory items={exploreFromHurricane} variant="light" />
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Happens When You Schedule a Hurricane Readiness Check?" classes={{ container: 'mb-8 md:mb-12' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Getting your roof evaluated before a storm doesn't have to be stressful:
+    </p>
+    <Timeline
+      items={[
+        {
+          title: 'Schedule an Assessment',
+          description: 'Contact us to review your roof condition and discuss your property exposure.',
+          icon: 'tabler:calendar',
+        },
+        {
+          title: 'Comprehensive Roof Inspection',
+          description:
+            'We inspect your exterior materials, flashing, valleys, and attic space for potential wind and water vulnerabilities.',
+          icon: 'tabler:search',
+        },
+        {
+          title: 'Actionable Recommendations',
+          description:
+            'We provide a clear report and complete any necessary preventative maintenance or repairs before severe weather strikes.',
+          icon: 'tabler:clipboard-check',
+        },
+      ]}
+    />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title="Strengthen Your Roof Before the Next Storm"
+    subtitle="Don't wait for a severe weather warning to find out if your roof is ready. Get professional guidance and proactive protection today."
+    ctaText="Schedule a Hurricane Roof Check"
+  />
+</Layout>

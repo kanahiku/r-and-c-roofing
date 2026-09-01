@@ -56,7 +56,7 @@ const headlineClasses = isDark
             <CardWrapper
               {...cardLinkProps}
               class:list={[
-                'relative flex flex-col rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+                'relative flex flex-col h-full rounded-lg p-6 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
                 cardBg,
                 cardHref && 'card-hover cursor-pointer'
               ]}
@@ -66,7 +66,17 @@ const headlineClasses = isDark
                 {itemTitle}
               </h3>
               {description && (
-                <p class:list={['text-[14px] md:text-[15px] font-medium leading-[160%] mt-2', cardDesc]} set:html={description} />
+                <p class:list={['text-[14px] md:text-[15px] font-normal leading-[160%] mt-2 flex-1', cardDesc]} set:html={description} />
+              )}
+              {callToAction?.text && (
+                <span
+                  class:list={[
+                    'mt-auto pt-4 font-medium text-[14px] md:text-[15px]',
+                    callToAction.class || (isDark ? 'text-accent' : 'text-heading'),
+                  ]}
+                >
+                  {callToAction.text}
+                </span>
               )}
             </CardWrapper>
           );

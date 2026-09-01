@@ -18,12 +18,14 @@ interface Link {
 
 interface MenuLink extends Link {
   links?: Array<MenuLink>;
+  columns?: Array<{ title: string; links: Array<MenuLink> }>;
 }
 
 export interface Props {
   id?: string;
   links?: Array<MenuLink>;
   actions?: Array<CallToAction>;
+  phone?: { text: string; href: string };
   isSticky?: boolean;
   isDark?: boolean;
   isFullWidth?: boolean;
@@ -36,6 +38,7 @@ const {
   id = 'header',
   links = [],
   actions = [],
+  phone,
   isSticky = false,
   isDark = false,
   isFullWidth = false,
@@ -81,14 +84,19 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[15px] tracking-[0.01rem] font-medium md:justify-center"
         >
           {
-            links.map(({ text, href, links }) => (
-              <li class={links?.length ? 'dropdown' : ''}>
-                {links?.length ? (
+            links.map(({ text, href, links: childLinks, columns }) => {
+              const isDropdown = Boolean(childLinks?.length || columns?.length);
+              return (
+              <li class:list={[{ dropdown: isDropdown, mega: Boolean(columns?.length) }]}>
+                {isDropdown ? (
                   <>
                     {href ? (
                     <a
                       href={href}
-                      class="text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap"
+                      class:list={[
+                        'text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap',
+                        { 'aw-link-active': href === currentPath },
+                      ]}
                     >
                       {text}{' '}
                       <Icon
@@ -105,8 +113,36 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       />
                     </span>
                     )}
+                    {columns?.length ? (
+                    <div class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[520px] drop-shadow-xl">
+                      <div class="flex flex-col md:flex-row md:gap-6 md:p-5">
+                        {columns.map((col) => (
+                          <div class="md:min-w-[220px]">
+                            <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent px-5 md:px-2 pt-3 md:pt-0 pb-1">
+                              {col.title}
+                            </p>
+                            <ul>
+                              {col.links.map(({ text: text2, href: href2 }) => (
+                                <li>
+                                  <a
+                                    class:list={[
+                                      'first:rounded-t last:rounded-b md:hover:bg-white/10 hover:text-white text-white/80 py-2 px-5 md:px-2 block whitespace-nowrap',
+                                      { 'aw-link-active': href2 === currentPath },
+                                    ]}
+                                    href={href2}
+                                  >
+                                    {text2}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    ) : (
                     <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
-                      {links.map(({ text: text2, href: href2, links: links2 }) => (
+                      {childLinks?.map(({ text: text2, href: href2, links: links2 }) => (
                         <li class:list={[{ 'relative group/nested': links2?.length }]}>
                           <a
                             class:list={[
@@ -144,6 +180,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         </li>
                       ))}
                     </ul>
+                    )}
                   </>
                 ) : (
                   <a
@@ -157,7 +194,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   </a>
                 )}
               </li>
-            ))
+              );
+            })
           }
         </ul>
       </nav>
@@ -190,10 +228,34 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ''
             )
           }
+          {
+            phone && (
+              <a
+                href={phone.href}
+                class="ml-4 inline-flex items-center gap-2 text-accent hover:text-white font-semibold text-[15px] whitespace-nowrap transition-colors duration-200"
+              >
+                <Icon name="tabler:phone" class="w-4 h-4" />
+                {phone.text}
+              </a>
+            )
+          }
         </div>
       </div>
     </div>
   </header>
+  {
+    phone && (
+      <div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-accent">
+        <a
+          href={phone.href}
+          class="flex items-center justify-center gap-2 py-3.5 font-semibold text-[16px] text-black"
+        >
+          <Icon name="tabler:phone" class="w-5 h-5" />
+          {phone.text}
+        </a>
+      </div>
+    )
+  }
 </aw-header>
 
 <style>
@@ -308,14 +370,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         a.classList.toggle('aw-link-active', norm(new URL(a.href).pathname) === current);
       });
 
-      // Walk every top-level dropdown trigger and activate it when a child matches.
+      // Parent stays active on its own page, or when any child page is current.
       this.querySelectorAll<HTMLElement>('nav > ul > li.dropdown').forEach((li) => {
         const childLinks = li.querySelectorAll<HTMLAnchorElement>('.dropdown-menu a[href]');
         const anyChildActive = Array.from(childLinks).some(
           (a) => norm(new URL(a.href).pathname) === current
         );
-        const trigger = li.querySelector<HTMLAnchorElement>(':scope > a');
-        if (trigger) trigger.classList.toggle('aw-link-active', anyChildActive);
+        const trigger = li.querySelector<HTMLElement>(':scope > a, :scope > span');
+        const triggerHref = trigger instanceof HTMLAnchorElement ? trigger.getAttribute('href') : null;
+        const triggerActive = Boolean(triggerHref && norm(triggerHref) === current);
+        if (trigger) trigger.classList.toggle('aw-link-active', anyChildActive || triggerActive);
       });
     }
   }

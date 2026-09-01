@@ -6,6 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import { unified } from '@astrojs/markdown-remark';
 
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
@@ -25,6 +26,26 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'static',
+  adapter: vercel(),
+
+  redirects: {
+    '/insurance-claim-help': '/claims',
+    '/insurance-claim-help/how-the-claim-process-works': '/claims/how-the-claim-process-works',
+    '/insurance-claim-help/denied-or-underpaid-claims': '/claims/denied-or-underpaid-claims',
+    '/my-roof-is-leaking': '/roof-problems/my-roof-is-leaking',
+    '/storm-damage-on-my-roof': '/roof-problems/storm-damage-on-my-roof',
+    '/my-roof-is-at-end-of-life': '/roof-problems/my-roof-is-at-end-of-life',
+    '/my-insurance-claim-was-denied': '/roof-problems/my-insurance-claim-was-denied',
+    '/buying-or-selling-a-home': '/roof-problems/buying-or-selling-a-home',
+    '/preparing-for-hurricane-season': '/roof-problems/preparing-for-hurricane-season',
+    '/roof-inspections/pre-listing-sellers-roof-inspection': '/roof-inspections/pre-listing-roof-inspection',
+    '/roof-inspection': '/roof-inspections',
+    '/services/roofing-materials/tile-roofing-clay-and-concrete': '/services/roofing-materials/tile-roofing',
+    '/services/roofing-materials/slate-and-rubber-slate-roofing': '/services/roofing-materials/slate-roofing',
+    '/privacy': '/privacy-policy',
+    '/terms': '/terms-of-service',
+    '/about/reviews': '/reviews',
+  },
 
   // Prefetch links as they enter the viewport for snappier navigations
   // (works together with <ClientRouter />, which enables prefetch by default).
@@ -57,7 +78,13 @@ export default defineConfig({
   ],
 
   integrations: [
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/homes/') &&
+        !page.includes('/landing/') &&
+        !page.includes('/pricing') &&
+        !page.includes('/404'),
+    }),
     mdx(),
     icon({
       include: {

@@ -3,37 +3,49 @@ import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+
+const fieldClass =
+  'py-3 px-4 block w-full text-[14px] md:text-[15px] rounded-md border border-black/15 bg-white text-heading';
 ---
 
-<form>
+<form id="contact-form">
   {
     inputs &&
-      inputs.map(
-        ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
-          name && (
-            <div class="mb-6">
-              {label && (
-                <label for={name} class="block text-sm font-medium">
-                  {label}
-                </label>
-              )}
+      inputs.map(({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required, options }) =>
+        name && (
+          <div class="mb-6">
+            {label && (
+              <label for={name} class="block text-[14px] md:text-[15px] font-medium text-heading mb-2">
+                {label}
+              </label>
+            )}
+            {type === 'select' ? (
+              <select id={name} name={name} required={required} class={fieldClass}>
+                <option value="">{placeholder || 'Select an option'}</option>
+                {(options ?? []).map((option) => (
+                  <option value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            ) : (
               <input
                 type={type}
                 name={name}
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                required={required}
+                class={fieldClass}
               />
-            </div>
-          )
+            )}
+          </div>
+        )
       )
   }
 
   {
     textarea && (
       <div>
-        <label for="textarea" class="block text-sm font-medium">
+        <label for="textarea" class="block text-[14px] md:text-[15px] font-medium text-heading mb-2">
           {textarea.label}
         </label>
         <textarea
@@ -41,11 +53,13 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          class={fieldClass}
         />
       </div>
     )
   }
+
+  <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
 
   {
     disclaimer && (
@@ -77,6 +91,8 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 
+  <p id="form-status" class="mt-4 text-center hidden" aria-live="polite"></p>
+
   {
     description && (
       <div class="mt-3 text-center">
@@ -85,3 +101,50 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 </form>
+
+<script>
+  function bindContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+
+    if (!form || !status || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const data = Object.fromEntries(new FormData(form));
+
+      if (data.website) return;
+
+      if (submitButton) submitButton.disabled = true;
+      status.className = 'mt-4 text-center text-[14px] md:text-[15px] font-medium text-muted';
+      status.textContent = 'Sending…';
+      status.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          status.textContent = "Thanks! We'll be in touch soon.";
+          status.className = 'mt-4 text-center text-[14px] md:text-[15px] font-medium text-heading';
+          form.reset();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
+        status.className = 'mt-4 text-center text-[14px] md:text-[15px] font-medium text-red-700';
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+        status.classList.remove('hidden');
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', bindContactForm);
+</script>

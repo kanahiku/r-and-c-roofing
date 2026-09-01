@@ -1,0 +1,214 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { deniedClaimResources, serviceHeroActions } from '~/data/pages/claims';
+
+const metadata = {
+  title: 'Denied or Underpaid Roof Claims Hawaii | R&C Roofing',
+  description:
+    'If your Hawaii roof claim was denied or the approved scope does not match the roofing work needed, R&C can inspect the roof and provide contractor-side documentation.',
+  ignoreTitleTemplate: true,
+};
+
+const friction = [
+  {
+    title: 'Existing Deterioration',
+    description:
+      'The carrier may claim the damage was caused by long-term aging or lack of maintenance rather than a specific weather event.',
+    icon: 'tabler:clock',
+  },
+  {
+    title: 'Previous Patchwork',
+    description: 'Older repairs on the roof may lead an adjuster to question the origin of a new leak.',
+    icon: 'tabler:layers-off',
+  },
+  {
+    title: 'Differing Material Standards',
+    description:
+      "The carrier's estimate may assume basic repair materials where local island building conditions require a more comprehensive structural fix.",
+    icon: 'tabler:ruler-measure',
+  },
+];
+
+const faqs = [
+  {
+    title: 'What should I do if my insurance claim was denied?',
+    description:
+      "Start by reviewing the carrier's written explanation. If you need clarity on the physical condition of the roof itself, R&C can inspect the property and provide objective contractor-side findings.",
+  },
+  {
+    title: 'Can R&C overturn a denied insurance claim?',
+    description:
+      'No. We do not make insurance coverage decisions and cannot legally force a carrier to change their ruling. We simply provide the physical roof documentation.',
+  },
+  {
+    title: 'What does it mean if the insurance estimate is lower than the contractor estimate?',
+    description:
+      'This usually means the carrier and the contractor are using different scopes of work or project assumptions. We can explain what is required to fix your roof properly, but your carrier decides what costs they will cover.',
+  },
+  {
+    title: 'Should I hire a public adjuster or an attorney?',
+    description:
+      'R&C cannot advise you on legal representation or public adjusting. If you need help interpreting your policy or fighting a disputed denial, you should speak with a licensed insurance professional.',
+  },
+  {
+    title: 'Can R&C complete the repairs if the claim gets reopened?',
+    description:
+      'Yes. We operate under Hawaii Contractor License C-33642 and can execute the approved repair or full replacement once your project is cleared to move forward.',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={serviceHeroActions('Schedule a Roof Inspection')}>
+    <Fragment slot="title">Denied or Underpaid Roof Insurance Claims on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      When your insurance claim is denied or the approved payout does not cover the necessary repairs, you need clear
+      physical facts to understand your next steps.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Denied claim photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Understanding the Disagreement: Denied vs. Underpaid" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Not all insurance setbacks are the same. Identifying the exact point of conflict helps determine how to proceed.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col h-full">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-white">
+          If Your Claim Was Denied
+        </h3>
+        <div class="space-y-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">
+          <p>Your carrier officially determined that the loss is not covered under your policy language.</p>
+          <p>The denial document should explicitly state the carrier's reason for rejection.</p>
+          <p>
+            R&amp;C can inspect the roof to document visible physical conditions, but challenging the legal decision
+            requires your carrier or an insurance professional.
+          </p>
+        </div>
+      </div>
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col h-full">
+        <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-4 text-white">
+          If Your Claim Was Underpaid / Approved Scope is Incomplete
+        </h3>
+        <div class="space-y-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60">
+          <p>
+            Your carrier acknowledges the damage but has approved a lower payout or a smaller repair scope than what is
+            required to actually fix the roof.
+          </p>
+          <p>
+            Disagreements often arise over material types, hidden damage, or distinguishing between sudden storm impact
+            and pre-existing wear.
+          </p>
+          <p>
+            R&amp;C can supply technical contractor estimates and photo documentation to explain why a broader scope of
+            work is necessary.
+          </p>
+        </div>
+      </div>
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Start With the Written Explanation" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Before requesting another inspection, review the paperwork your carrier sent you. Look closely at the specific
+      reasons they gave. Common friction points include:
+    </p>
+    <IconPointBand items={friction} variant="dark" />
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="How Our Inspection Process Helps After a Denial" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      When you need a second look at the physical roof after a setback, our evaluation follows a focused, objective path:
+    </p>
+    <Timeline
+      items={[
+        {
+          title: "Review the Carrier's Notes",
+          description:
+            'We look at your denial letter or initial estimate to understand the exact points the adjuster questioned or rejected.',
+          icon: 'tabler:file-text',
+        },
+        {
+          title: 'Evaluate Accessible Areas',
+          description:
+            'Robert Pilato (Certification #201408313) uses specialized HAAG training to assess damage patterns and look for missed structural impacts.',
+          icon: 'tabler:search',
+        },
+        {
+          title: 'Document the Physical Reality',
+          description:
+            'We capture high-resolution photos and detailed notes showing the actual physical condition of your roofing components.',
+          icon: 'tabler:camera',
+        },
+        {
+          title: 'Provide Technical Scope',
+          description:
+            'If our findings support a more extensive repair or replacement, we provide a clean contractor estimate that you can submit back to your carrier for review.',
+          icon: 'tabler:clipboard-list',
+        },
+      ]}
+    />
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Our Other Claim Resources" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Navigating a difficult insurance claim requires the right information at every stage:
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+      {
+        deniedClaimResources.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="dark"
+          />
+        ))
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <FAQs title="Frequently Asked Questions" items={faqs} isDark={true}>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </FAQs>
+
+  <CTABanner
+    title="Get a Professional Second Look at Your Roof"
+    subtitle="Find out what the physical evidence shows before you respond to your insurance carrier's decision."
+    ctaText="Schedule a Roof Inspection"
+  />
+</Layout>

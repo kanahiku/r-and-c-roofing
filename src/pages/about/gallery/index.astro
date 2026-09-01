@@ -2,9 +2,11 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
 
 const metadata = {
   title: 'Oahu Roofing Projects & Before and After Photos | R&C Roofing',
@@ -13,291 +15,177 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
-const projectTypes = ['All Projects', 'Roof Repair', 'Roof Replacement', 'Residential Roofing', 'Commercial Roofing', 'Storm Damage'];
+const projectTypes = [
+  'All Projects',
+  'Roof Repair',
+  'Roof Replacement',
+  'Residential Roofing',
+  'Commercial Roofing',
+  'Storm Damage',
+];
 const materials = ['All Materials', 'Metal', 'Asphalt Shingle', 'Stone-Coated Steel', 'Tile'];
-const areas = ['All Oahu', 'Honolulu', 'Kailua', 'Kāneʻohe', 'Hawaiʻi Kai', 'Aiea & Pearl City', 'Kapolei & ʻEwa Beach', 'Mililani', 'Waipahu'];
+const areas = [
+  'All Oahu',
+  'Honolulu',
+  'Kailua',
+  'Kāneʻohe',
+  'Hawaiʻi Kai',
+  'Aiea & Pearl City',
+  'Kapolei & ʻEwa Beach',
+  'Mililani',
+  'Waipahu',
+];
 
 const featuredProjects = [
-  {
-    name: 'Roof Repair — Honolulu',
-    neighborhood: 'Honolulu',
-    propertyType: 'Residential',
-    material: 'Asphalt Shingle',
-    situation: 'The property owner noticed ceiling staining following heavy rainfall. An inspection identified localized damage around two roof penetrations.',
-    work: 'R&C repaired the affected area including flashing replacement and shingle resetting. Project details will be updated with photography at launch.',
-  },
-  {
-    name: 'Roof Replacement — Kailua',
-    neighborhood: 'Kailua',
-    propertyType: 'Residential',
-    material: 'Metal',
-    situation: 'An aging roof with recurring repairs across several areas. Inspection indicated the roofing system had reached the end of its serviceable life.',
-    work: 'Full roof replacement completed. Project details will be updated with before-and-after photography at launch.',
-  },
-  {
-    name: 'Commercial Roof Repair — Honolulu',
-    neighborhood: 'Honolulu',
-    propertyType: 'Commercial',
-    material: 'Stone-Coated Steel',
-    situation: 'Property manager reported water intrusion in multiple sections of the building. Inspection documented the affected areas.',
-    work: 'R&C completed targeted repairs across the affected sections. Project details and photography will be added at launch.',
-  },
-  {
-    name: 'Storm Damage Inspection — Kāneʻohe',
-    neighborhood: 'Kāneʻohe',
-    propertyType: 'Residential',
-    material: 'Tile',
-    situation: 'High winds caused visible tile displacement. Property owner contacted R&C for inspection and damage documentation.',
-    work: 'Inspection completed and damage documented for insurance purposes. Tile repair completed following claim approval.',
-  },
-  {
-    name: 'Roof Replacement — Hawaiʻi Kai',
-    neighborhood: 'Hawaiʻi Kai',
-    propertyType: 'Residential',
-    material: 'Asphalt Shingle',
-    situation: 'Coastal exposure had accelerated deterioration. Multiple areas showed moisture infiltration and material degradation.',
-    work: 'Full roof replacement with materials appropriate for coastal exposure. Project photography to be added at launch.',
-  },
-  {
-    name: 'HOA Roof Assessment — Pearl City',
-    neighborhood: 'Pearl City',
-    propertyType: 'Commercial',
-    material: 'Asphalt Shingle',
-    situation: 'HOA board needed a documented assessment of roofing conditions across the property to plan maintenance budget.',
-    work: 'R&C completed a full inspection and provided documentation to support the board\'s planning. Details updated at launch.',
-  },
-];
-
-const beforeAfterProjects = [
-  {
-    name: 'Roof Replacement — Kailua',
-    neighborhood: 'Kailua',
-    summary: 'Full roof replacement following repeated repairs. The original asphalt shingle roof was replaced with a new system appropriate for Windward Oahu conditions.',
-  },
-  {
-    name: 'Roof Repair — Honolulu',
-    neighborhood: 'Honolulu',
-    summary: 'Localized repair around roof penetrations. Water intrusion traced to damaged flashing rather than widespread material failure.',
-  },
-  {
-    name: 'Storm Damage Repair — Kāneʻohe',
-    neighborhood: 'Kāneʻohe',
-    summary: 'Wind-displaced tile repair following storm damage. Inspection confirmed the damage was localized to affected sections.',
-  },
-];
-
-const areaLinks = [
-  { area: 'Honolulu', href: '/areas/honolulu' },
-  { area: 'Kailua & Kāneʻohe', href: '/areas/kailua' },
-  { area: 'Aiea & Pearl City', href: '/areas/aiea-pearl-city' },
-  { area: 'Kapolei & ʻEwa Beach', href: '/areas/kapolei' },
-  { area: 'Mililani', href: '/areas/mililani' },
-  { area: 'Waipahu', href: '/areas/waipahu' },
+  { name: 'Featured Roofing Project', neighborhood: 'Oahu' },
+  { name: 'Featured Roofing Project', neighborhood: 'Oahu' },
+  { name: 'Featured Roofing Project', neighborhood: 'Oahu' },
+  { name: 'Featured Roofing Project', neighborhood: 'Oahu' },
 ];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero -->
-  <Hero2
-    image={{
-      src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2070&q=80',
-      alt: 'Completed roofing project on an Oahu home',
-    }}
-  >
-    <Fragment slot="title">
-      Roofing Projects<br />Across Oahu
-    </Fragment>
+  <Hero2>
+    <Fragment slot="title">Roofing Projects Across Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        See the Work Behind R&amp;C Roofing Contractors
-      </span>
-      Every roofing project starts with a different property and a different reason for calling.
-      <br /><br />
-      Explore completed R&amp;C Roofing Contractors projects across Oahu, including roof repairs, roof replacements, residential and commercial roofing, and different roofing materials.
-      <br /><br />
-      Use the filters below to browse projects by the type of work, roofing material, or area.
+      Every roofing project starts with a different property and a different reason for calling. Explore completed
+      R&amp;C Roofing Contractors projects across Oahu, including roof repairs, roof replacements, residential and
+      commercial roofing, and different roofing materials. Use the filters below to browse projects by the type of work,
+      roofing material, or area.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Hero project photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- Filter UI -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Our Roofing Projects" classes={{ container: 'mb-8 md:mb-10' }} />
     <div class="flex flex-col gap-5">
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <span class="text-[14px] font-medium text-heading shrink-0 w-36">Project Type:</span>
         <div class="flex flex-wrap gap-2">
-          {projectTypes.map((type, i) => (
-            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-accent text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
-              {type}
-            </span>
-          ))}
+          {
+            projectTypes.map((type, i) => (
+              <span
+                class:list={[
+                  'px-3 py-1 rounded-full text-[13px] font-medium',
+                  i === 0 ? 'bg-accent text-heading' : 'bg-white text-muted',
+                ]}
+              >
+                {type}
+              </span>
+            ))
+          }
         </div>
       </div>
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <span class="text-[14px] font-medium text-heading shrink-0 w-36">Roofing Material:</span>
         <div class="flex flex-wrap gap-2">
-          {materials.map((mat, i) => (
-            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-accent text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
-              {mat}
-            </span>
-          ))}
+          {
+            materials.map((mat, i) => (
+              <span
+                class:list={[
+                  'px-3 py-1 rounded-full text-[13px] font-medium',
+                  i === 0 ? 'bg-accent text-heading' : 'bg-white text-muted',
+                ]}
+              >
+                {mat}
+              </span>
+            ))
+          }
         </div>
       </div>
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <span class="text-[14px] font-medium text-heading shrink-0 w-36">Area:</span>
         <div class="flex flex-wrap gap-2">
-          {areas.map((area, i) => (
-            <span class={`px-3 py-1 rounded-full text-[13px] font-medium cursor-default transition-colors ${i === 0 ? 'bg-accent text-gray-900' : 'bg-gray-100 dark:bg-slate-800 text-muted hover:bg-gray-200 dark:hover:bg-slate-700'}`}>
-              {area}
-            </span>
-          ))}
+          {
+            areas.map((area, i) => (
+              <span
+                class:list={[
+                  'px-3 py-1 rounded-full text-[13px] font-medium',
+                  i === 0 ? 'bg-accent text-heading' : 'bg-white text-muted',
+                ]}
+              >
+                {area}
+              </span>
+            ))
+          }
         </div>
       </div>
     </div>
-    <p class="mt-4 text-[12px] md:text-[13px] font-medium text-muted italic">
-      Filters allow browsing by project type, roofing material, or area. Individual project pages link to related service and area pages.
+    <p class="mt-6 text-[13px] md:text-[14px] font-medium leading-[160%] text-muted italic">
+      Filters will update this gallery once project photography is published. They do not create separate filter URLs.
     </p>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-09 Featured Projects Grid -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Featured Roofing Projects" />
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {featuredProjects.map(({ name, neighborhood, propertyType, material, situation, work }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <!-- Before/After image placeholder -->
-          <div class="grid grid-cols-2 h-40">
-            <div class="bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1 border-r border-gray-200 dark:border-slate-700">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="text-[11px] font-medium text-gray-400 dark:text-slate-500 uppercase tracking-wider">Before</span>
-            </div>
-            <div class="bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="text-[11px] font-medium text-gray-400 dark:text-slate-500 uppercase tracking-wider">After</span>
-            </div>
-          </div>
-
-          <div class="p-5 flex flex-col gap-3 flex-1">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{name}</h3>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{neighborhood}, Oahu</span>
-              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{propertyType}</span>
-              <span class="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 rounded text-[12px] font-medium text-muted">{material}</span>
-            </div>
-            <div class="flex flex-col gap-2 flex-1">
-              <div>
-                <p class="text-[12px] font-semibold text-heading uppercase tracking-wider mb-1">The Situation</p>
-                <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{situation}</p>
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Featured Roofing Projects" classes={{ container: 'mb-8 md:mb-12' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {
+        featuredProjects.map((project) => (
+          <div class="rounded-lg border border-accent/60 bg-[#222] overflow-hidden flex flex-col h-full">
+            <div class="grid grid-cols-2">
+              <div class="border-r border-white/10">
+                <HeroImagePlaceholder label={`${project.name} before photo`} />
+                <p class="px-3 py-2 text-[12px] font-medium uppercase tracking-wider text-white/50">Before</p>
               </div>
               <div>
-                <p class="text-[12px] font-semibold text-heading uppercase tracking-wider mb-1">The Work</p>
-                <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{work}</p>
+                <HeroImagePlaceholder label={`${project.name} after photo`} />
+                <p class="px-3 py-2 text-[12px] font-medium uppercase tracking-wider text-white/50">After</p>
               </div>
             </div>
-            <a href="#" class="text-primary font-medium text-[14px] hover:underline mt-auto pt-2">View Project →</a>
+            <div class="p-5 flex flex-col flex-1">
+              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-white mb-2">
+                {project.name}
+              </h3>
+              <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-white/60 flex-1">
+                {project.neighborhood}. Project name, neighborhood, property type, roofing material, and the situation
+                and work descriptions will be added when photography is available.
+              </p>
+              <span class="mt-auto pt-4 text-[14px] md:text-[15px] font-medium text-accent">View Project</span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
 
+  <Content isReversed title="Before and After">
+    <Fragment slot="content">
+      <p class="text-muted">
+        Some roofing changes are easier to understand when you can see where the project started and where it finished.
+        Browse before-and-after views from selected R&amp;C roofing projects across Oahu once photography is published.
+      </p>
+    </Fragment>
+    <Fragment slot="image">
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <HeroImagePlaceholder label="Before photo placeholder" />
+          <p class="mt-2 text-[12px] font-medium uppercase tracking-wider text-muted">Before</p>
+        </div>
+        <div>
+          <HeroImagePlaceholder label="After photo placeholder" />
+          <p class="mt-2 text-[12px] font-medium uppercase tracking-wider text-muted">After</p>
+        </div>
+      </div>
+    </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
-  </WidgetWrapper>
+  </Content>
 
-  <!-- Before & After Section -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline
-      title="Before and After"
-      classes={{ container: 'mb-4 md:mb-6' }}
-    />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Some roofing changes are easier to understand when you can see where the project started and where it finished.
-    </p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {beforeAfterProjects.map(({ name, neighborhood, summary }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <!-- Side-by-side before/after -->
-          <div class="grid grid-cols-2 h-48">
-            <div class="relative bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1 border-r border-white dark:border-slate-700">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="absolute bottom-2 left-2 bg-black/50 text-white text-[11px] font-medium px-2 py-0.5 rounded">Before</span>
-            </div>
-            <div class="relative bg-gray-100 dark:bg-slate-800 flex flex-col items-center justify-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="absolute bottom-2 right-2 bg-accent/90 text-gray-900 text-[11px] font-medium px-2 py-0.5 rounded">After</span>
-            </div>
-          </div>
-          <div class="p-4 flex flex-col gap-2 flex-1">
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{name}</h3>
-            <p class="text-[12px] font-medium text-muted">{neighborhood}, Oahu</p>
-            <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted flex-1">{summary}</p>
-            <a href="#" class="text-primary font-medium text-[14px] hover:underline mt-2">View Full Project →</a>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Projects by Area -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline
-      title="Roofing Projects by Area"
-      classes={{ container: 'mb-4 md:mb-6' }}
-    />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      R&C works on properties in communities across its Oahu service area. Explore roofing services and completed projects closer to your property.
-    </p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {areaLinks.map(({ area, href }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card overflow-hidden flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="w-full h-32 bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-gray-300 dark:text-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <div class="p-4 flex flex-col gap-2 flex-1">
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%]">{area}</h3>
-            <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted flex-1">
-              Project details and photography will be added as projects in this area are documented.
-            </p>
-            <a href={href} class="text-primary font-medium text-[14px] hover:underline mt-auto pt-2">
-              Explore {area} Roofing →
-            </a>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-12 Final CTA -->
   <CTABanner
     title="Have a Roofing Project of Your Own?"
-    subtitle="If you are dealing with a leak, an aging roof, storm damage, or another roofing concern, start by finding out what condition the roof is in.<br />R&amp;C Roofing Contractors can evaluate the roof and help determine what roofing work should be considered next."
+    subtitle="If you are dealing with a leak, an aging roof, storm damage, or another roofing concern, start by finding out what condition the roof is in. R&C Roofing Contractors can evaluate the roof and help determine what roofing work should be considered next."
+    ctaText="Schedule a Roof Inspection"
   />
-
 </Layout>

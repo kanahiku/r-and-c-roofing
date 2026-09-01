@@ -1,0 +1,146 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { exploreFromBuy, serviceHeroActions } from '~/data/pages/roofProblems';
+
+const metadata = {
+  title: 'Buying or Selling a Home on Oahu? Check the Roof | R&C',
+  description:
+    'Buying or selling a home on Oahu? Learn what roof problems to look into before closing and how a roof inspection can clarify repair or replacement needs.',
+  ignoreTitleTemplate: true,
+};
+
+const questions = [
+  {
+    title: 'Visible Damage',
+    description: 'Are there missing materials, compromised flashing, or visible wear?',
+    icon: 'tabler:eye',
+  },
+  {
+    title: 'Leak History',
+    description: 'Are there signs of previous or recurring moisture intrusion?',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Scope of Wear',
+    description: 'Does the roof show localized damage or broader, system-wide deterioration?',
+    icon: 'tabler:layers-intersect',
+  },
+  {
+    title: 'Serviceability',
+    description: 'Does the surrounding material remain sound, or is replacement the more practical long-term choice?',
+    icon: 'tabler:home-check',
+  },
+];
+
+const nextSteps = [
+  {
+    title: 'Schedule an Inspection',
+    description: 'Contact us to discuss your timeline and the specific concerns flagged for the property.',
+    icon: 'tabler:calendar',
+  },
+  {
+    title: 'Professional Condition Evaluation',
+    description:
+      'We perform a thorough inspection of the roof exterior, flashing, and attic space to assess its true condition.',
+    icon: 'tabler:search',
+  },
+  {
+    title: 'Clear Recommendations',
+    description:
+      'We provide an objective report and contractor-side pricing to help buyers and sellers make informed decisions before closing.',
+    icon: 'tabler:clipboard-list',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={serviceHeroActions('Schedule a Roof Inspection')}>
+    <Fragment slot="title">Buying or Selling a Home? Do Not Guess About the Roof</Fragment>
+    <Fragment slot="subtitle">
+      A roof can become a major question during a home purchase or sale, whether flagged by a home inspection, looking
+      old, or showing signs of previous repairs. Get expert local evaluation from licensed professionals backed by
+      Hawaii License C-33642.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Real estate roof photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Are You Buying or Selling?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      The roofing questions depend on which side of the transaction you are on:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      <InfoCard
+        title="If You Are Buying"
+        description="Understand the roof condition before taking ownership. Find out whether visible problems are localized or broad, and get contractor pricing if roofing work or repairs are recommended."
+        icon="tabler:key"
+        variant="dark"
+      />
+      <InfoCard
+        title="If You Are Selling"
+        description="Identify potential roofing issues before they surprise you during closing. Address repairs beforehand or get clear information to keep the transaction moving smoothly."
+        icon="tabler:home-dollar"
+        variant="dark"
+      />
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Roofing Questions Should Be Answered Before Closing?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      A roof does not have to be actively leaking to deserve a closer look during a real estate transaction. Consider
+      these practical questions:
+    </p>
+    <IconPointGrid items={questions} variant="dark" />
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Other Roof Problem Solutions" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      If your real estate concerns involve other specific property situations, explore our other dedicated
+      problem-solving resources:
+    </p>
+    <ServiceDirectory items={exploreFromBuy} variant="light" />
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="What Happens When You Call Us?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Getting a roof evaluated during a home transaction shouldn't add to your stress:
+    </p>
+    <IconPointBand items={nextSteps} />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title="Get the Roof Facts Before You Move Forward"
+    subtitle="Whether you are buying or selling, you do not want to make a roofing decision based on an assumption. Find out what condition the roof is in today."
+    ctaText="Schedule a Roof Inspection"
+  />
+</Layout>

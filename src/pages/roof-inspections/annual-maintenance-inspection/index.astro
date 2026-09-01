@@ -2,10 +2,21 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import {
+  inspectionHeroActions,
+  inspectionProcessIcons,
+  otherInspectionServices,
+} from '~/data/pages/roofInspections';
 
 const metadata = {
   title: 'Annual Roof Maintenance Inspections Oahu | R&C Roofing',
@@ -13,285 +24,223 @@ const metadata = {
     'Schedule an annual roof maintenance inspection on Oahu with R&C Roofing Contractors. Identify visible wear, document roof conditions, and address developing problems before they become larger repairs.',
   ignoreTitleTemplate: true,
 };
+
+const otherServices = otherInspectionServices('/roof-inspections/annual-maintenance-inspection');
+
+const evaluate = [
+  {
+    title: 'Roofing Materials',
+    description: 'We check for UV degradation, cracking, and surface wear across your specific material type.',
+    icon: 'tabler:sun',
+  },
+  {
+    title: 'Flashing and Penetrations',
+    description: 'We inspect the seals around vents, pipes, and skylights where water intrusion typically begins.',
+    icon: 'tabler:circle-dashed',
+  },
+  {
+    title: 'Edges and Drainage',
+    description: 'We review valleys, gutters, and roof edges to ensure water moves cleanly off the structure.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Exposed Metal',
+    description: 'We check fasteners and structural metal for corrosion accelerated by coastal salt air.',
+    icon: 'tabler:anchor',
+  },
+];
+
+const whyItMatters = [
+  {
+    title: 'Coastal Exposure',
+    description: 'Monitor salt air corrosion on exposed metal roofing components and fasteners.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'High UV and Heat',
+    description: 'Track the aging and drying out of roofing materials and sealants under intense sun.',
+    icon: 'tabler:sun',
+  },
+  {
+    title: 'Heavy Moisture Areas',
+    description: 'Identify debris buildup and drainage issues in wetter island regions before they cause rot.',
+    icon: 'tabler:cloud-rain',
+  },
+  {
+    title: 'Complex Roof Systems',
+    description: 'Stay ahead of wear on roofs with multiple valleys, skylights, and transition points.',
+    icon: 'tabler:home',
+  },
+];
+
+const faqs = [
+  {
+    title: 'Does every roof need an annual inspection?',
+    description:
+      'Not every roof has the same maintenance needs. Age, location, and environmental exposure dictate your ideal schedule, but an annual check provides consistent tracking.',
+  },
+  {
+    title: 'Is a maintenance inspection only for older roofs?',
+    description:
+      'No. Newer roofs can still develop localized issues around flashing, penetrations, or drainage areas before the main materials age.',
+  },
+  {
+    title: 'Can R&C inspect multiple buildings for an HOA or commercial property?',
+    description:
+      'Yes. We work with property managers and boards to evaluate multi-unit properties and provide contractor-side recommendations.',
+  },
+  {
+    title: 'Should I schedule another inspection after a storm?',
+    description:
+      'Yes. If you notice missing materials or a new leak after severe weather, request a dedicated storm damage inspection even if your annual check is not due.',
+  },
+  {
+    title: 'Can R&C repair the damage found during maintenance?',
+    description:
+      "Yes. We operate under Hawaii Contractor License C-33642 and can execute any targeted repairs necessary to extend your roof's lifespan.",
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white + motif -->
   <Hero2
-    actions={[{ variant: 'primary', text: 'Schedule a Maintenance Roof Inspection', href: '/contact' }]}
-    image={{ src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2070&q=80', alt: 'Annual roof maintenance inspection on Oahu' }}
+    actions={inspectionHeroActions}
   >
     <Fragment slot="title">Annual Roof Maintenance<br />Inspections on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Keep a Closer Eye on Your Roof's Condition
-      </span>
-      Roof problems do not always begin with an obvious leak. Wear around flashing, exposed metal components, roofing materials, and other vulnerable areas can develop before there is a visible problem inside the property.
-      <br /><br />
-      R&C Roofing Contractors provides maintenance roof inspections for residential and commercial properties within its Oahu service area. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313.
+      Keep a closer eye on your roof’s condition. We identify minor wear and structural vulnerabilities before they turn
+      into expensive interior leaks.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Annual maintenance inspection photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- Why Routine Inspections — Grey #FAFAFA, right-column black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Routine Roof Inspections Matter on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
-    <div class="flex flex-col lg:flex-row gap-8 md:gap-12">
-      <div class="lg:basis-1/2">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-          <p>Roofing conditions vary across the island.</p>
-          <p>Properties near the coast may have greater exposure to salt air. Wetter areas can experience more persistent moisture. Strong sun exposure can affect roofing materials and exposed components over time.</p>
-          <p>A maintenance inspection helps identify visible changes before you have to rely on a ceiling stain or active leak to tell you something is wrong.</p>
-        </div>
-      </div>
-      <div class="lg:basis-1/2">
-        <div class="flex flex-col gap-4 md:gap-5">
-          {[
-            {
-              title: 'Coastal Exposure',
-              description:
-                'Salt air can contribute to corrosion on certain exposed metal roofing components, including flashing and fasteners.',
-            },
-            {
-              title: 'Moisture and Drainage',
-              description:
-                'Debris, drainage issues, and areas that remain damp can affect parts of the roofing system over time.',
-            },
-            {
-              title: 'UV and Heat Exposure',
-              description: 'Sun exposure can contribute to visible aging of roofing materials and sealants.',
-            },
-            {
-              title: 'Flashing and Roof Penetrations',
-              description:
-                'Areas around vents, pipes, skylights, roof transitions, and other penetrations can be important inspection points because they create breaks in the roofing system.',
-            },
-          ].map(({ title, description }) => (
-            <div class="rounded-lg border border-accent/60 bg-[#222] p-5 md:p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-              <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-2 text-white">{title}</h3>
-              <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <Headline title="Reactive Repairs vs. Preventative Maintenance" classes={{ container: 'mb-4 md:mb-6' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+      <p>
+        Roof problems do not always start with water pouring through your ceiling. Robert Pilato (Certification
+        #201408313) brings advanced diagnostic training to catch structural deterioration early, saving you from
+        emergency construction costs.
+      </p>
     </div>
+    <ComparisonTable
+      columns={['Reactive Leak Repair', 'Preventative Maintenance']}
+      rows={[
+        {
+          feature: 'Primary Focus',
+          left: 'Stopping active water intrusion.',
+          right: 'Tracking material lifespan and wear.',
+        },
+        {
+          feature: 'Damage Evaluation',
+          left: 'Emergency patching of a failed component.',
+          right: 'Systematic review of all vulnerabilities.',
+        },
+        {
+          feature: 'Actionable Utility',
+          left: 'High-stress, immediate damage control.',
+          right: 'Predictable budgeting and long-term planning.',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What We Look For — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      What We Look for During a Maintenance Roof Inspection
-    </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
-      The inspection scope depends on the property, roof type, accessibility, and existing conditions.
-    </p>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-6">
-      Where accessible, R&C may evaluate:
-    </p>
-    <ul class="space-y-3 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 max-w-3xl mx-auto">
-      {[
-        'Roofing materials for visible wear or damage',
-        'Flashing around roof transitions and penetrations',
-        'Exposed fasteners and metal components',
-        'Valleys and roof edges',
-        'Drainage areas and gutters',
-        'Visible sealant deterioration',
-        'Signs of previous or developing water intrusion',
-        'Other areas that may require maintenance or closer evaluation',
-      ].map((item) => (
-        <li class="flex gap-3">
-          <span class="shrink-0 text-accent mt-0.5">—</span>
-          {item}
-        </li>
-      ))}
-    </ul>
-    <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/50 italic max-w-3xl mx-auto">
-      If we identify a concern, we explain what we found and whether maintenance, repair, or additional evaluation should be considered.
-    </p>
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Build a Record — White -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Build a Record of Your Roof's Condition Over Time" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>One benefit of regular roof inspections is having a clearer record of how the roofing system changes from one inspection to the next.</p>
-      <p>Documenting visible conditions can make it easier to identify new deterioration, monitor areas that were previously flagged, and plan future roofing work based on what is actually happening with the property.</p>
-      <p>For homeowners, that can provide useful context when deciding whether a roof needs maintenance or repair.</p>
-      <p>For commercial property owners and managers, periodic inspections can also support longer-term maintenance planning across one or multiple buildings.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Property Managers — Grey #FAFAFA -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Maintenance Inspections for Property Managers and AOAO or HOA Boards" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>Managing roofing across a multi-unit or multi-building property requires a different approach than responding to a single residential leak.</p>
-      <p>A regular inspection schedule can help property managers and boards keep a record of visible roofing conditions and identify maintenance needs before they become urgent projects.</p>
-      <p>R&C can inspect accessible roofing areas and provide contractor-side recommendations when repair or replacement work should be considered.</p>
-      <p>For properties with multiple roofs or buildings, contact our team to discuss the property and determine an appropriate inspection approach.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Request a Property Roof Inspection</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- What If We Find a Problem — Black + motif, dark cards -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      What Happens If We Find a Problem?
-    </h2>
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Finding an issue during a maintenance inspection does not automatically mean you need a new roof.
+      A damaged component does not always tell the full story. We look deeper to find the root cause of localized wear.
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Minor Maintenance May Be Enough',
-          description:
-            'Some findings may involve a localized area or roofing component that can be addressed without replacing the surrounding roofing system.',
-        },
-        {
-          title: 'A Roof Repair May Be Recommended',
-          description:
-            'If damage is limited and the surrounding materials remain serviceable, a targeted repair may be appropriate.',
-        },
-        {
-          title: 'Larger Deterioration May Need Further Evaluation',
-          description:
-            'If similar problems are appearing across multiple areas of the roof, we may recommend evaluating whether a larger repair or replacement project makes more sense.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {evaluate.map((card) => (
+        <InfoCard title={card.title} description={card.description} icon={card.icon} variant="dark" />
       ))}
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Frequency — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Often Should You Have Your Roof Inspected?" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>There is no single inspection schedule that applies to every property.</p>
-      <p>The appropriate frequency can depend on the roof type, age, location, previous damage, and exposure to local conditions.</p>
-      <p>An annual inspection provides a consistent way to track visible roof conditions over time. Additional evaluation may also make sense after severe weather or when you notice a change in the roof.</p>
-      <p>If you are unsure what schedule is appropriate for your property, R&C can review your roofing situation and help you determine a practical approach.</p>
-    </div>
+    <Headline title="Why Routine Roof Inspections Matter on Oahu" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      You need objective data to protect your property investment across Oahu's unique microclimates.
+    </p>
+    <IconPointGrid items={whyItMatters} />
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore Other Inspections — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Annual maintenance is one reason to have a roof inspected. R&C also provides inspection services for other property needs.
+      We follow a strict assessment protocol to give you clear answers.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'HAAG Certified Roof Inspections',
-          description: 'Get a closer assessment of visible roof damage with specialized HAAG damage-assessment training.',
-          href: '/roof-inspections/haag-certified-inspection',
-          linkText: 'View HAAG Certified Inspections →',
-        },
-        {
-          title: 'Pre-Purchase Roof Inspections',
-          description: 'Learn more about the condition of a roof before moving forward with a property transaction.',
-          href: '/roof-inspections/pre-purchase-roof-inspection',
-          linkText: 'View Pre-Purchase Inspections →',
-        },
-        {
-          title: 'Storm & Wind Damage Inspections',
-          description: 'Document visible roof conditions after strong winds or severe weather.',
-          href: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'View Storm Damage Inspections →',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
-          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
-    </div>
+    <Timeline
+      items={[
+        { title: 'Listen', description: 'We review the roof\'s history and any minor changes you have noticed since the last evaluation.', icon: inspectionProcessIcons.listen },
+        { title: 'Evaluate', description: 'We safely access your roof to assess visible materials, flashing, and drainage components.', icon: inspectionProcessIcons.evaluate },
+        { title: 'Document', description: 'We capture photographs and detailed notes to build a continuous historical record of your property.', icon: inspectionProcessIcons.document },
+        { title: 'Recommend', description: 'We explain our findings and advise if you need a targeted repair or simply continued monitoring.', icon: inspectionProcessIcons.recommend },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- FAQs — White -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Does every roof need an annual inspection?',
-        description:
-          'Not every roof has the same maintenance needs. Roof age, roofing material, property location, previous damage, and environmental exposure can all affect how often an inspection makes sense. Annual inspections offer one way to track visible roof conditions consistently.',
-      },
-      {
-        title: 'Is a maintenance inspection only for older roofs?',
-        description:
-          'No. A newer roof can still develop localized issues around flashing, penetrations, drainage areas, or other roofing components. The condition of the roof matters more than age alone.',
-      },
-      {
-        title: 'Can R&C inspect multiple buildings for an AOAO, HOA, or commercial property?',
-        description:
-          'R&C works with property professionals as well as homeowners. Contact our team with information about the property so we can discuss the appropriate inspection scope.',
-      },
-      {
-        title: 'What happens if the inspection finds damage?',
-        description:
-          'We explain the condition we observed and whether maintenance, repair, or further evaluation should be considered. R&C is also a licensed Hawaii roofing contractor, License C-33642, so our team can provide roofing services when work is needed.',
-      },
-      {
-        title: 'Can I inspect my own roof?',
-        description:
-          'You can monitor your property from the ground for visible changes, but climbing onto a roof presents safety risks and can damage some roofing materials if they are walked on incorrectly. A professional inspection allows accessible roofing areas to be evaluated more closely.',
-      },
-      {
-        title: 'Should I schedule another inspection after a storm?',
-        description:
-          'If you notice missing roofing materials, leaks, visible damage, or another change after strong winds or severe weather, a storm damage inspection may be appropriate even if your regular maintenance inspection is not yet due.',
-      },
-    ]}
-  >
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
+      Managing Your Long-Term Roof Health
+    </h2>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
+      <p>
+        An annual maintenance inspection provides structural facts to inform your property management strategy. It does
+        not guarantee your roof will never leak, nor does it predict the exact day a material will fail.
+      </p>
+      <p>
+        How you use our documentation to budget for AOAO, HOA, or commercial property reserves is up to you and your
+        management board. R&C Roofing Contractors simply provides objective contractor documentation and targeted repair
+        scopes to keep your property secure over time.
+      </p>
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We offer specialized evaluations for different stages of property ownership.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {otherServices.map((card) => (
+        <ServiceCard title={card.title} description={card.description} href={card.href} linkText={card.linkText} variant="light" />
+      ))}
+    </div>
     <Fragment slot="bg">
       <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <FAQs title="Frequently Asked Questions" items={faqs}>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — Yellow -->
   <CTABanner
     title="Keep Track of Your Roof Before a Problem Becomes Urgent"
-    subtitle="A maintenance inspection can give you a clearer understanding of the roof's current condition and identify areas that may need attention.<br />R&amp;C Roofing Contractors can evaluate the roofing system, explain what we find, and recommend the appropriate next step when work is needed."
-    ctaText="Schedule a Maintenance Roof Inspection"
+    subtitle="Find out exactly what is happening before you commit to a major repair."
+    ctaText="Schedule Inspection"
   />
-
 </Layout>

@@ -2,13 +2,14 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
-import Timeline from '~/components/ui/Timeline.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import BulletCard from '~/components/ui/BulletCard.astro';
-import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { roofingServiceLinks, serviceHeroActions } from '~/data/pages/services';
 
 const metadata = {
   title: 'Roof Repair Honolulu & Oahu | R&C Roofing Contractors',
@@ -16,483 +17,216 @@ const metadata = {
     'Need roof repair on Oahu? R&C Roofing Contractors repairs leaks, damaged shingles, flashing problems, and other localized roof issues. Schedule an inspection.',
   ignoreTitleTemplate: true,
 };
+
+const whenRepair = [
+  {
+    title: 'Localized Leaks',
+    description:
+      'Tracing interior ceiling stains or moisture back to a specific exterior breach, such as a cracked vent or separated valley flashing.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Storm-Displaced or Damaged Shingles',
+    description:
+      'Replacing missing, torn, or lifted shingles caused by high wind gusts or falling tree debris before water intrusion spreads.',
+    icon: 'tabler:wind',
+  },
+  {
+    title: 'Flashing Failures',
+    description:
+      'Repairing or resealing corroded or loosened metal flashing around chimneys, skylights, roof transitions, and wall junctions.',
+    icon: 'tabler:layers-intersect',
+  },
+  {
+    title: 'Penetration Wear',
+    description: 'Addressing deteriorated rubber boots or sealants around plumbing stacks and exhaust vents.',
+    icon: 'tabler:circle-dashed',
+  },
+];
+
+const whyTrust = [
+  {
+    title: 'Licensed Hawaii Contractor',
+    description:
+      "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+    icon: 'tabler:certificate',
+  },
+  {
+    title: '50+ Years Combined Experience',
+    description: 'Decades of specialized island roofing experience across residential and commercial properties.',
+    icon: 'tabler:clock',
+  },
+  {
+    title: 'Inspection-First Philosophy',
+    description:
+      'We base our recommendations on physical facts, ensuring you only pay for the scope of work your property requires.',
+    icon: 'tabler:search',
+  },
+  {
+    title: 'Insurance Documentation Support',
+    description:
+      'We provide clear, contractor-side paperwork to assist you when filing a storm or wind damage claim with your carrier.',
+    icon: 'tabler:file-text',
+  },
+];
+
+const related = [
+  {
+    title: 'Roof Inspections',
+    description:
+      'Get a professional, HAAG-certified assessment (Cert #201408313) to find the exact root cause.',
+    href: roofingServiceLinks.inspections.href,
+    linkText: 'View Roof Inspections',
+  },
+  {
+    title: 'Roof Replacement',
+    description: 'Explore full tear-offs and new installations if your roof has widespread structural damage.',
+    href: roofingServiceLinks.replacement.href,
+    linkText: 'View Roof Replacement',
+  },
+  {
+    title: 'Gutter Services',
+    description: 'Custom gutter solutions to ensure proper drainage away from your foundation and roof edges.',
+    href: roofingServiceLinks.gutters.href,
+    linkText: 'View Gutter Services',
+  },
+  {
+    title: 'Insurance Claim Help',
+    description:
+      'Objective, contractor-side documentation if your repair involves severe weather or wind damage.',
+    href: roofingServiceLinks.claims.href,
+    linkText: 'Explore Insurance Claim Help',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 · Hero -->
-  <Hero2
-    actions={[{ variant: 'primary', text: 'Schedule a Roof Repair Inspection', href: '/contact' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?auto=format&fit=crop&w=1200&q=80',
-      alt: 'Roofing crew repairing a residential roof on Oahu',
-    }}
-  >
-    <Fragment slot="title">
-      Roof Repair Services on Oahu
-    </Fragment>
+  <Hero2 actions={serviceHeroActions('Schedule a Roof Repair Inspection')}>
+    <Fragment slot="title">Roof Repair Services on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Find the Problem Before You Repair It
-      </p>
-      A roof leak can show up far from the place where water is entering. Missing roofing materials may be obvious, while damaged flashing or deterioration around a roof penetration can be harder to identify from the ground.
-      <br /><br />
-      R&C Roofing Contractors provides roof repair services for residential and commercial properties within its Oahu service area. We start by evaluating the roofing problem and the surrounding roof condition before recommending a repair.
-      <br /><br />
-      R&C operates under Hawaii contractor license C-33642. If the damage is localized and the surrounding roofing system remains serviceable, a targeted repair may be all that is needed.
-      <span class="block mt-8"></span>
+      Targeted, permanent solutions for active leaks, damaged shingles, and compromised flashing when your surrounding
+      roofing system is still sound—backed by Hawaii License C-33642.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Roof repair photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- P-05 style · What Roof Problem Are You Seeing? (grey bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Roof Problem Are You Seeing?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Some roof problems need attention even before the source is clear.
+    <Headline title="When a Targeted Repair is the Right Choice" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      Not every roof problem requires a total tear-off. When damage is isolated and the rest of your roofing system
+      remains in good condition, a targeted repair is often the most practical and cost-effective approach:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Roof Leak',
-          description: 'Water stains, dripping, or signs of moisture may point to a problem somewhere in the roofing system.',
-          href: '/contact',
-          linkText: 'Schedule an Inspection',
-        },
-        {
-          title: 'Missing or Damaged Roofing Materials',
-          description: 'Wind, debris, aging, or other conditions can leave shingles or other roofing materials damaged or displaced.',
-          href: '/contact',
-          linkText: 'Schedule an Inspection',
-        },
-        {
-          title: 'Flashing Problems',
-          description: 'Flashing around penetrations and roof transitions can loosen, corrode, or deteriorate over time.',
-          href: '/contact',
-          linkText: 'Schedule an Inspection',
-        },
-        {
-          title: 'Storm or Wind Damage',
-          description: 'If your roof looks different after severe weather, an inspection can help document visible conditions and determine what needs attention.',
-          href: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'View Storm Damage Inspections',
-        },
-        {
-          title: 'Roof Edge Damage',
-          description: 'Fascia, soffits, roof edges, and nearby roofing components can also develop damage that may affect the roof system.',
-          href: '/contact',
-          linkText: 'Schedule an Inspection',
-        },
-        {
-          title: 'Unsure What Is Wrong',
-          description: 'You do not need to diagnose the problem yourself. R&C can inspect accessible roofing areas and explain what we find.',
-          href: '/contact',
-          linkText: 'Schedule a Roof Inspection',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 flex-1">{description}</p>
-          <a href={href} class="mt-4 text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-            {linkText} →
-          </a>
-        </div>
-      ))}
-    </div>
+    <IconPointGrid items={whenRepair} />
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Horizontal rows · Common Roof Repairs We Handle (Black) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
-      Common Roof Repairs We Handle
-    </h2>
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
-      The repair needed depends on the roofing material, location of the damage, and condition of the surrounding roof.
+    <Headline isDark={true} title="How We Approach Every Roof Repair" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We don't just apply temporary patches or guess at the source of a leak. Every repair follows a strict diagnostic
+      process:
     </p>
-    <div class="divide-y divide-white/10 border-t border-white/10">
-      {[
+    <Timeline
+      isDark={true}
+      items={[
         {
-          title: 'Roof Leak Repair',
-          paragraphs: [
-            'Finding a ceiling stain does not always reveal where water entered the roof.',
-            'R&C evaluates accessible roofing areas and relevant interior conditions when appropriate to identify visible signs that may be contributing to the leak.',
-          ],
+          title: 'Inspect the Problem',
+          description: "We start with what you notice—whether it's an active ceiling drip, missing shingles, or storm-related damage.",
+          icon: 'tabler:search',
         },
         {
-          title: 'Shingle Repair',
-          paragraphs: [
-            'Damaged, missing, or displaced asphalt shingles may be repairable when the surrounding roofing system remains in suitable condition.',
-          ],
+          title: 'Evaluate Surrounding Materials',
+          description: 'A repair must work seamlessly with the roof around it. We inspect the adjacent components to ensure the fix will actually hold.',
+          icon: 'tabler:clipboard-list',
         },
         {
-          title: 'Flashing Repair',
-          paragraphs: [
-            'Flashing helps manage water around roof transitions and penetrations. Damaged or deteriorated flashing may need to be repaired or replaced depending on its condition.',
-          ],
+          title: 'Provide an Honest Scope',
+          description: 'If a localized repair can safely solve the issue, we recommend it. If widespread wear means a repair is just throwing money away, we explain why.',
+          icon: 'tabler:file-description',
         },
         {
-          title: 'Roof Penetration Repair',
-          paragraphs: [
-            'Areas around vents, pipes, skylights, and other penetrations can require attention when roofing components or sealants have deteriorated.',
-          ],
+          title: 'Execute Professional Construction',
+          description: 'Our licensed crews complete the repair using corrosion-resistant fasteners and proper flashing techniques built for Oahu weather.',
+          icon: 'tabler:hammer',
         },
-        {
-          title: 'Roof Edge and Fascia Repair',
-          paragraphs: [
-            'Damage around roof edges may involve fascia, soffits, flashing, or adjacent roofing materials. R&C can evaluate the affected area and recommend the appropriate roofing work.',
-          ],
-        },
-        {
-          title: 'Localized Decking or Underlayment Repair',
-          paragraphs: [
-            'When roofing materials are removed during a repair, additional deterioration may sometimes become visible underneath.',
-            'If that happens, R&C can explain the condition and any additional work that should be considered before the roofing materials are restored.',
-          ],
-        },
-      ].map(({ title, paragraphs }) => (
-        <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <div class="space-y-3">
-            {paragraphs.map((p) => (
-              <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">{p}</p>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-08 · How R&C Approaches a Roof Repair (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        How R&C Approaches a Roof Repair
-      </h2>
-      <a href="/contact" class="btn-primary shrink-0">Request a Roof Repair Inspection</a>
-    </div>
-    <div class="flex flex-col md:flex-row gap-10 md:gap-16">
-      <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          <p>A good repair starts with understanding the condition around the damaged area. R&C does not begin work without evaluating the roof first — the repair has to be appropriate for the roof it is going on.</p>
-        </div>
-      </div>
-      <div class="md:basis-1/2">
-        <Timeline
-          items={[
-            {
-              title: 'Inspect the Problem',
-              description: 'We start with what you have noticed, such as an active leak, missing material, storm damage, or visible deterioration.',
-              icon: 'tabler:search',
-            },
-            {
-              title: 'Evaluate the Surrounding Roof',
-              description: 'A repair has to work with the roofing system around it. We look at accessible surrounding materials and components before recommending the scope.',
-              icon: 'tabler:clipboard-list',
-            },
-            {
-              title: 'Explain the Repair',
-              description: 'If the problem appears suitable for a targeted repair, we explain what area needs attention and what work we recommend. If the surrounding roof condition changes that recommendation, we explain why.',
-              icon: 'tabler:file-description',
-            },
-            {
-              title: 'Complete the Agreed Work',
-              description: 'Once the repair scope is approved, R&C completes the roofing work according to the project requirements.',
-              icon: 'tabler:hammer',
-            },
-          ]}
-        />
-      </div>
-    </div>
-  </WidgetWrapper>
-
-  <!-- Custom · Roof Repair or Roof Replacement? (Grey #FAFAFA) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roof Repair or Roof Replacement?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Not every leak requires a new roof. The right decision depends on the condition of the damaged area and the roofing system around it.
+    <Headline title="Explore Our Roofing Services & Resources" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      As a licensed Hawaii roofing contractor, we provide full structural support from minor fixes to major installations:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
-      <BulletCard
-        title="Repair May Make Sense When"
-        items={[
-          'Damage is limited to a specific area.',
-          'Surrounding roofing materials remain serviceable.',
-          'The affected area can be repaired without creating additional damage.',
-          'A targeted repair addresses the roofing problem.',
-        ]}
-      />
-      <BulletCard
-        title="Replacement May Need to Be Considered When"
-        items={[
-          'Similar problems appear across multiple areas.',
-          'The surrounding roofing system shows widespread deterioration.',
-          'Existing materials cannot be repaired effectively.',
-          'A localized repair would not address the broader roof condition.',
-        ]}
-      />
-    </div>
-    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
-      R&C bases its recommendation on the roof we inspect. We do not assume that every roofing problem requires replacement.
-    </p>
-    <div class="text-center">
-      <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Explore Roof Replacement</a>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {
+        related.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="light"
+          />
+        ))
+      }
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-06 · What Affects the Cost (Black, 5 items = 3+2) -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Oahu Property Owners Trust R&C Roofing" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <IconPointGrid items={whyTrust} />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">What Affects the Cost of Roof Repair on Oahu?</h2>
-    <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
-        There is no single price for roof repair because the scope can vary significantly from one property to another.
-      </p>
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mt-2">
-        Several factors can affect the cost:
-      </p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-      {[
-        {
-          title: 'Location of the Damage',
-          description: 'A straightforward repair in an accessible area may involve a different scope than damage around a valley, penetration, roof transition, or difficult-to-access section.',
-        },
-        {
-          title: 'Roofing Material',
-          description: 'Repair methods and material costs vary between asphalt shingles, metal roofing, tile, stone-coated steel, and other roofing systems.',
-        },
-        {
-          title: 'Condition Beneath the Surface',
-          description: 'Some underlying conditions are not visible until roofing materials are removed.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-10">
-      {[
-        {
-          title: 'Size of the Repair Area',
-          description: 'A localized repair requires a different amount of labor and material than damage affecting a larger portion of the roof.',
-        },
-        {
-          title: 'Accessibility and Roof Design',
-          description: 'Roof slope, height, access, and surrounding property conditions can affect how the work is performed.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
-    </div>
-    <p class="text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8">
-      R&C can provide an estimate after evaluating the roofing problem and determining the proposed repair scope.
+    <Headline isDark={true} title="What Happens Next?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Getting a roof repair handled properly is straightforward:
     </p>
-    <div class="text-center">
-      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Request a Roof Repair Estimate</a>
-    </div>
+    <Timeline
+      isDark={true}
+      items={[
+        {
+          title: 'Schedule Your Inspection',
+          description: 'Contact us online or call directly to set up an evaluation of your leak or damage.',
+          icon: 'tabler:calendar',
+        },
+        {
+          title: 'Review the Diagnostic Findings',
+          description: 'We identify the exact point of failure and present a clear, project-specific repair estimate.',
+          icon: 'tabler:file-text',
+        },
+        {
+          title: 'Complete the Repair',
+          description: 'Our team executes the agreed-upon fix efficiently, keeping your property clean and secure.',
+          icon: 'tabler:check',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-02 variant · Roof Repairs for Oahu Conditions (white bg, 4 items) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roof Repairs for Oahu Conditions" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Roofing conditions vary throughout the island.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Coastal Exposure',
-          description: 'Salt air can contribute to corrosion on certain exposed metal roofing components, including flashing and fasteners.',
-        },
-        {
-          title: 'Wind and Severe Weather',
-          description: 'Strong winds can displace roofing materials or affect roof edges and other exposed components.',
-        },
-        {
-          title: 'Rain and Moisture',
-          description: 'Water can enter through damaged materials, deteriorated flashing, or other vulnerable areas of the roofing system.',
-        },
-        {
-          title: 'Sun Exposure',
-          description: 'UV and heat can contribute to the aging of roofing materials and exposed sealants over time.',
-        },
-      ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-    <p class="mt-8 md:mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      The visible symptom is only part of the repair decision. R&C also considers the condition and exposure of the roof around the affected area.
-    </p>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 · Insurance Claim Info (Grey #FAFAFA) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      What If the Roof Damage May Be Related to an Insurance Claim?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>
-        If you believe the roofing problem followed a storm or another covered event, documenting the condition of the roof may be useful during the insurance process.
-      </p>
-      <p>
-        R&C can inspect accessible roofing areas, document relevant visible findings, and provide contractor-side information about recommended repair work. Your insurance carrier determines whether the damage is covered under your policy.
-      </p>
-      <p>
-        R&C Roofing Contractors is not a public adjuster. We do not negotiate insurance settlements or guarantee claim outcomes.
-      </p>
-    </div>
-    <div class="mt-8 md:mt-10">
-      <a href="/insurance-claim-help" class="btn btn-secondary">Explore Insurance Claim Help</a>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-09 · Recent Roof Repair Projects (Black) -->
-  <ProjectsSection
-    title="Recent Roof Repair Projects"
-    isDark={true}
-    ctaText="View Roofing Projects"
-    projects={[
-      { title: 'Roof Repair Project 1', description: 'Details coming soon.' },
-      { title: 'Roof Repair Project 2', description: 'Details coming soon.' },
-      { title: 'Roof Repair Project 3', description: 'Details coming soon.' },
-    ]}
-  >
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </ProjectsSection>
-
-  <!-- P-05 style · Related Services (White bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Related Roofing Services" classes={{ container: 'mb-8 md:mb-12' }} />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Roof Replacement & Installation',
-          description: 'Learn when a larger roofing project may make more sense than another localized repair.',
-          href: '/services/roof-replacement-and-new-installation',
-          linkText: 'View Roof Replacement',
-        },
-        {
-          title: 'Residential Roofing',
-          description: 'Explore roofing services for Oahu homes, including repairs and replacement options.',
-          href: '/services/residential-roofing',
-          linkText: 'View Residential Roofing',
-        },
-        {
-          title: 'Commercial Roofing',
-          description: 'Roofing services for commercial properties and the professionals responsible for managing them.',
-          href: '/services/commercial-roofing',
-          linkText: 'View Commercial Roofing',
-        },
-        {
-          title: 'Roof Inspections',
-          description: 'Start here when you know something is wrong but are not sure what work the roof needs.',
-          href: '/roof-inspections',
-          linkText: 'View Roof Inspections',
-        },
-        {
-          title: 'Gutter Installation & Repair',
-          description: 'Address gutter and drainage needs that may affect how water moves away from the property.',
-          href: '/services/gutter-installation-and-repair',
-          linkText: 'View Gutter Services',
-        },
-        {
-          title: 'Roofing Materials',
-          description: 'Compare available roofing materials for repair, replacement, or future roofing projects.',
-          href: '/services/roofing-materials',
-          linkText: 'Explore Roofing Materials',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted flex-1">{description}</p>
-          <a href={href} class="mt-4 text-primary font-medium text-[14px] md:text-[15px] hover:underline">
-            {linkText} →
-          </a>
-        </div>
-      ))}
-    </div>
-  </WidgetWrapper>
-
-  <!-- P-10 · FAQs (Grey #FAFAFA) -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'How do I know if my roof can be repaired?',
-        description:
-          'The answer depends on the location of the damage and the condition of the surrounding roofing system. A localized problem may be suitable for repair when the surrounding materials remain serviceable. An inspection can help determine whether repair or replacement should be considered.',
-      },
-      {
-        title: 'How much does roof repair cost on Oahu?',
-        description:
-          'Roof repair costs depend on the scope of work, roofing material, accessibility, size of the affected area, and whether additional deterioration is discovered. R&C provides an estimate based on the roofing problem and proposed repair.',
-      },
-      {
-        title: 'Can R&C repair a leaking roof?',
-        description:
-          'Yes. R&C provides roof repair services for leaks and other localized roofing concerns. The first step is evaluating where the visible problem may be coming from and what roofing components require attention.',
-      },
-      {
-        title: 'Can damaged shingles be replaced without replacing the entire roof?',
-        description:
-          'Sometimes. Individual or localized shingles may be repairable when compatible materials are available and the surrounding roof remains in suitable condition. R&C can evaluate the existing roof before recommending the repair.',
-      },
-      {
-        title: 'Can new roofing materials match my existing roof?',
-        description:
-          'An exact visual match may not always be possible because existing roofing materials can change appearance with age and exposure. Availability also depends on the original product. R&C can review available options for the repair.',
-      },
-      {
-        title: 'Is storm-related roof damage covered by homeowners insurance?',
-        description:
-          'Coverage depends on your policy and the circumstances of the loss. Your insurance carrier determines whether the damage is covered. R&C can document visible roofing conditions and provide contractor-side information related to the repair.',
-      },
-      {
-        title: 'Can R&C repair the roof after a storm damage inspection?',
-        description:
-          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If an inspection identifies repair work that is appropriate for the roof, our team can provide the roofing services for the project.',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </FAQs>
-
-  <!-- Final CTA -->
   <CTABanner
-    title="Get the Roof Problem Checked Before It Gets Worse"
-    subtitle="If you have noticed a leak, missing roofing materials, damaged flashing, or another change in your roof, start by finding out what needs attention.<br />R&amp;C Roofing Contractors can inspect the roofing problem, explain the recommended repair, and complete the agreed work if the roof is suitable for repair."
+    title="Stop a Small Leak Before It Becomes a Major Problem"
+    subtitle="Get objective facts and expert repairs from experienced local professionals."
     ctaText="Schedule a Roof Repair Inspection"
   />
-
 </Layout>

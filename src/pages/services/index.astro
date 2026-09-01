@@ -2,10 +2,14 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import { roofingServiceLinks, serviceHeroActions } from '~/data/pages/services';
 
 const metadata = {
   title: 'Roofing Services in Hawaii | Oahu Contractor | R&C Roofing',
@@ -13,181 +17,192 @@ const metadata = {
     'Explore our complete range of roofing services on Oahu. We provide licensed roof repairs, total replacements, and commercial roofing solutions.',
   ignoreTitleTemplate: true,
 };
+
+const whoWeServe = [
+  {
+    title: 'Residential Homeowners',
+    description:
+      'Tailored roofing solutions, repairs, and full replacements engineered to withstand coastal salt air, heavy sun, and valley moisture in your specific neighborhood.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Property Managers & AOAO/HOA Boards',
+    description:
+      'Structured, long-term maintenance, multi-building inspections, and commercial-grade solutions designed to protect community assets and reserve funds.',
+    icon: 'tabler:building-community',
+  },
+];
+
+const coreServices = [
+  {
+    title: 'Roof Repair',
+    description:
+      'Targeted fixes for active leaks and localized wind damage. We locate and fix the root cause rather than applying temporary patches.',
+    href: roofingServiceLinks.repair.href,
+    linkText: 'View Roof Repair',
+  },
+  {
+    title: 'Roof Replacement & New Installation',
+    description:
+      'Complete tear-offs and new roof installations built to strict wind-uplift codes and severe weather standards.',
+    href: roofingServiceLinks.replacement.href,
+    linkText: 'View Roof Replacement',
+  },
+  {
+    title: 'Residential Roofing',
+    description:
+      'Comprehensive roofing solutions designed to protect Oahu homes against tropical UV degradation and heavy seasonal showers.',
+    href: roofingServiceLinks.residential.href,
+    linkText: 'View Residential Roofing',
+  },
+  {
+    title: 'Commercial Roofing',
+    description:
+      'Engineered solutions and structural restoration services built for commercial buildings, multi-family units, and association boards.',
+    href: roofingServiceLinks.commercial.href,
+    linkText: 'View Commercial Roofing',
+  },
+  {
+    title: 'Gutter Installation & Repair',
+    description: 'Custom seamless gutter systems designed to direct heavy island rainfall away from your foundation.',
+    href: roofingServiceLinks.gutters.href,
+    linkText: 'View Gutter Services',
+  },
+  {
+    title: 'Roofing Materials Hub',
+    description:
+      'Compare the performance, lifespan, and environmental benefits of metal, asphalt, stone-coated steel, and tile roofing.',
+    href: roofingServiceLinks.materials.href,
+    linkText: 'Compare Roofing Materials',
+  },
+];
+
+const whyTrust = [
+  {
+    title: 'Local Environmental Defense',
+    description:
+      'We combat coastal salt-air corrosion, engineer systems for wind-driven rain, and select materials resistant to tropical UV degradation.',
+    icon: 'tabler:shield-check',
+  },
+  {
+    title: 'Code Compliance & Permitting',
+    description:
+      'We manage the entire municipal permitting process, ensuring installations strictly adhere to Hawaii building codes for wind uplift resistance.',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'Protected Warranties',
+    description: 'We utilize factory-approved installation methods so your manufacturer warranties remain fully intact.',
+    icon: 'tabler:award',
+  },
+  {
+    title: 'Local Experience',
+    description:
+      'We bring decades of hands-on island roofing experience directly to your residential or commercial property.',
+    icon: 'tabler:map-pin',
+  },
+];
+
+const faqs = [
+  {
+    title: 'Are you a licensed and insured roofing contractor?',
+    description:
+      "Yes. R&C operates under Hawaii Contractor License C-33642 and carries full general liability and workers' compensation insurance.",
+  },
+  {
+    title: 'How do I know if I need a repair or a full replacement?',
+    description:
+      'We rely on diagnostic facts gathered during a professional inspection. We recommend a full replacement only when a targeted repair is structurally impossible or financially irresponsible.',
+  },
+  {
+    title: 'Do you handle the building permits for a new roof?',
+    description: 'Yes. We manage the entire municipal permitting process for Oahu properties from start to finish.',
+  },
+  {
+    title: 'What types of roofing materials do you install?',
+    description:
+      'We install asphalt shingles, standing seam metal, stone-coated steel, concrete tile, and commercial roofing systems matched to your neighborhood microclimate.',
+  },
+  {
+    title: 'How long does a standard roof replacement take?',
+    description:
+      'Most residential roof replacements are completed in two to three days, while commercial timelines vary based on square footage and building complexity.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 · Hero (White + motif) -->
-  <Hero2
-    actions={[{ variant: 'primary', text: 'Book Your Diagnostic Inspection', href: '/contact' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
-      alt: 'R&C Roofing crew working on an Oahu residential roof',
-    }}
-  >
-    <Fragment slot="title">
-      Hawaii Roofing Services
-    </Fragment>
+  <Hero2 actions={serviceHeroActions('Book Your Diagnostic Inspection')}>
+    <Fragment slot="title">Hawaii Roofing Services on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Precision Diagnostics Meet Expert Construction
-      </p>
-      Most contractors guess at the problem. We diagnose it first. R&C Roofing Contractors is a fully licensed Hawaii roofing firm (License C-33642) providing complete diagnostic and construction services across Oahu.
-      <br /><br />
-      Our business model prioritizes forensic accuracy. Every repair, replacement, and commercial project we undertake is guided by a HAAG Certified Inspection. We pinpoint the exact cause of your roof failure before we ever recommend a physical solution. This ensures you only pay for the exact scope of work your property actually requires.
+      Precision diagnostics meet expert construction. We identify the exact root cause of your roof failure before
+      recommending any physical solution.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Roofing services photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- P-05 style · Core Services Grid (Grey #FAFAFA — black cards) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Our Core Roofing Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Diagnostics lead the way. Once we have documented the structural facts of your property, our experienced crews execute the necessary construction flawlessly.
+    <Headline title="Who We Serve on Oahu" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      Different properties require different approaches. We tailor our diagnostic and construction services to meet the
+      specific demands of your property type.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Roof Repair',
-          description:
-            'Targeted fixes for active leaks and localized wind damage. We fix the root cause instead of applying temporary patches.',
-          href: '/services/roof-repair',
-        },
-        {
-          title: 'Roof Replacement & New Installation',
-          description:
-            'Complete tear-offs and new roof installations. We build systems designed to withstand severe weather events.',
-          href: '/services/roof-replacement-and-new-installation',
-        },
-        {
-          title: 'Residential Roofing',
-          description:
-            'Tailored solutions for Oahu homeowners. We utilize materials engineered for specific coastal and valley microclimates.',
-          href: '/services/residential-roofing',
-        },
-        {
-          title: 'Commercial Roofing',
-          description:
-            'Flat roof solutions and structural restorations designed for AOAO boards and property managers.',
-          href: '/services/commercial-roofing',
-        },
-        {
-          title: 'Gutter Installation & Repair',
-          description:
-            'Custom seamless gutters engineered to handle heavy seasonal showers and protect your foundation from water intrusion.',
-          href: '/services/gutter-installation-and-repair',
-        },
-        {
-          title: 'Flat Roofing & Silicone Coating',
-          description:
-            'Waterproofing systems and silicone roof restorations that extend the life of low-slope commercial structures.',
-          href: '/services/flat-roofing-and-silicone-coating',
-        },
-        {
-          title: 'Roofing Materials',
-          description:
-            'Compare the specific benefits of metal, asphalt, stone-coated steel, and tile roofing to find the best fit for your budget.',
-          href: '/services/roofing-materials',
-        },
-      ].map(({ title, description, href }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 flex-1">{description}</p>
-          <a href={href} class="mt-4 text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-            Learn More →
-          </a>
-        </div>
-      ))}
-    </div>
+    <IconPointGrid items={whoWeServe} />
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Why Choose R&C · Black section -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
-      Why Choose R&C Roofing Contractors?
-    </h2>
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
-      Hawaii roofs age differently than mainland roofs. You need a contractor who understands the specific environmental threats on Oahu.
+    <Headline isDark={true} title="Explore Our Core Roofing Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      As a licensed Hawaii roofing contractor (License C-33642), we provide a complete range of specialized services.
+      Choose a category below to learn more:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Local Environmental Defense',
-          description:
-            'We combat coastal salt-air corrosion. We engineer systems to handle upward wind-driven rain. We select materials proven to resist tropical UV degradation.',
-        },
-        {
-          title: 'Code Compliance and Permitting',
-          description:
-            'We manage the entire municipal permitting process. Our installations strictly adhere to Hawaii building codes regarding wind uplift resistance.',
-        },
-        {
-          title: 'Warranty Protection',
-          description:
-            'Manufacturers will void your warranty if their products are installed incorrectly. We utilize factory-approved installation methods to guarantee your coverage remains fully intact.',
-        },
-        {
-          title: 'Proven Local Experience',
-          description: 'We bring over 50 years of combined local crew experience to your property.',
-        },
-      ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/70">{description}</p>
-        </div>
-      ))}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {
+        coreServices.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="dark"
+          />
+        ))
+      }
     </div>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-10 · FAQs (White bg) -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Are you a licensed and insured roofing contractor?',
-        description:
-          'Yes. R&C Roofing Contractors operates under an active Hawaii contractor license (License C-33642). We carry full general liability and workers\u2019 compensation insurance to protect your property during construction.',
-      },
-      {
-        title: 'How do I know if I need a repair or a full replacement?',
-        description:
-          'We rely on diagnostic facts. We conduct a HAAG Certified Inspection to evaluate the structural integrity of your decking and the age of your materials. We recommend a full replacement only when a targeted repair is structurally impossible or financially irresponsible.',
-      },
-      {
-        title: 'Do you handle the building permits for a new roof?',
-        description:
-          'Yes. We manage the entire municipal permitting process for Oahu properties. We ensure all paperwork is filed and approved before construction begins.',
-      },
-      {
-        title: 'What types of roofing materials do you install?',
-        description:
-          'We install asphalt shingles, standing seam metal, stone-coated steel, concrete tile, and commercial flat roofing systems. We help you match the material to your specific neighborhood microclimate.',
-      },
-      {
-        title: 'How long does a standard roof replacement take?',
-        description:
-          'Most residential roof replacements are completed in two to three days. Commercial projects vary based on square footage and structural requirements.',
-      },
-    ]}
-  >
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Oahu Properties Trust R&C Roofing" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      Hawaii roofs age differently than mainland roofs. You need a contractor who understands the specific environmental
+      threats across the island:
+    </p>
+    <IconPointGrid items={whyTrust} />
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <FAQs title="Frequently Asked Questions" items={faqs}>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 · Final CTA (Yellow) -->
   <CTABanner
-    title="Start with the Facts"
-    subtitle="Do not sign a construction contract without a documented structural assessment.<br />Contact us today to schedule your initial evaluation."
+    title="Start With the Facts"
+    subtitle="Do not sign a construction contract without a documented structural assessment."
     ctaText="Book Your Diagnostic Inspection"
   />
-
 </Layout>

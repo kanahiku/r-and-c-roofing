@@ -2,10 +2,15 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
-import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
+import { exploreFromArchitects, serviceHeroActions } from '~/data/pages/whoWeServe';
 
 const metadata = {
   title: 'Roofing Contractor for Architects Oahu | R&C Roofing',
@@ -13,506 +18,247 @@ const metadata = {
     'Roofing support for Oahu architects and specifiers. Discuss roofing materials, constructability, product information, roof details, project requirements, and installation considerations with R&C Roofing Contractors.',
   ignoreTitleTemplate: true,
 };
+
+const input = [
+  {
+    title: 'Existing Conditions',
+    description:
+      'Evaluate current roofing systems and document visible conditions before reroofing or renovation decisions are finalized.',
+    icon: 'tabler:search',
+  },
+  {
+    title: 'Design Development',
+    description: "Discuss roofing materials and practical installation considerations based on R&C's available systems.",
+    icon: 'tabler:pencil',
+  },
+  {
+    title: 'Material Selection',
+    description: 'Gain contractor-side input on material availability, roof configuration, and installation requirements.',
+    icon: 'tabler:stack-2',
+  },
+  {
+    title: 'Construction Documents',
+    description: 'Review roofing scope information and identify questions that may affect installation or pricing.',
+    icon: 'tabler:file-text',
+  },
+  {
+    title: 'Bid / Procurement',
+    description: 'Receive detailed roofing proposals based on available drawings, specifications, and project information.',
+    icon: 'tabler:calculator',
+  },
+  {
+    title: 'Construction Coordination',
+    description:
+      'Coordinate agreed roofing scopes with the project team and address roofing-related field conditions through established RFI processes.',
+    icon: 'tabler:hammer',
+  },
+];
+
+const process = [
+  {
+    title: 'Review the Roofing Scope',
+    description: 'We review available drawings, roofing information, project requirements, and existing conditions.',
+    icon: 'tabler:file-search',
+  },
+  {
+    title: 'Identify Roofing Questions',
+    description:
+      'Constructability questions, material issues, or unclear scope conditions are identified before pricing or installation.',
+    icon: 'tabler:help',
+  },
+  {
+    title: 'Confirm Proposed Systems',
+    description:
+      'The selected system is evaluated for alignment with approved project documents and environmental requirements.',
+    icon: 'tabler:circle-check',
+  },
+  {
+    title: 'Provide Contractor Information',
+    description: 'We prepare scopes, pricing, and available product documentation based on the project parameters.',
+    icon: 'tabler:clipboard-list',
+  },
+  {
+    title: 'Coordinate During Construction',
+    description:
+      'Roofing work is meticulously coordinated with the GC and applicable project team members to honor the design intent.',
+    icon: 'tabler:users',
+  },
+];
+
+const why = [
+  {
+    title: 'Licensed Hawaii Roofing Contractor',
+    description: 'Operating under Hawaii License C-33642.',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'HAAG Certified Inspection Expertise',
+    description: 'Robert Pilato holds HAAG certification #201408313 for accurate existing-condition assessments.',
+    icon: 'tabler:badge',
+  },
+  {
+    title: 'Installation Perspective',
+    description:
+      'R&C brings pragmatic contractor-side roofing experience to conversations around material selection and constructability.',
+    icon: 'tabler:hammer',
+  },
+  {
+    title: 'Comprehensive Material Support',
+    description: 'Expertise across metal roofing, asphalt shingles, stone-coated steel, and clay or concrete tile systems.',
+    icon: 'tabler:stack-2',
+  },
+  {
+    title: 'Experience & Community',
+    description: 'Over 50 years of combined crew experience and proud membership in BIA Hawaii.',
+    icon: 'tabler:users',
+  },
+];
+
+const quotes = [
+  {
+    name: 'Karen Miyaki',
+    quote: 'Matt was excellent with his services and follow-up. Workers were great. Thank you.',
+  },
+  {
+    name: 'Erlinda',
+    quote: 'James is very knowledgeable and does a good job. Go team!',
+  },
+];
+
+const faqs = [
+  {
+    title: 'Can R&C help architects evaluate roofing materials?',
+    description:
+      'Yes. R&C can provide contractor-side information about roofing materials and systems within our current installation capabilities, though final specification remains with project decision-makers.',
+  },
+  {
+    title: 'Can R&C review roofing details before bidding?',
+    description:
+      'Yes. We review available roofing information to identify contractor-side scope or constructability questions prior to bid finalized stages.',
+  },
+  {
+    title: 'Can R&C provide wind-uplift information?',
+    description:
+      'R&C provides available manufacturer and roofing-system information associated with the products we install. Project-specific wind design or structural calculations should remain with the licensed engineer.',
+  },
+  {
+    title: 'Can R&C inspect an existing roof before we complete renovation drawings?',
+    description:
+      'Yes. R&C provides HAAG Certified roof inspection services to help document visible existing roofing conditions for renovation or reroofing projects.',
+  },
+  {
+    title: 'Can R&C suggest an alternative if a specified roofing product is unavailable?',
+    description:
+      'Yes. We can identify available roofing alternatives within our capabilities and provide product information for the design team\'s formal substitution approval process.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        Roofing Support for Architects &amp; Specifiers on Oahu
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Bring Roofing Into the Conversation Before the Details Are Locked
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>Roofing decisions made during design can affect material selection, detailing, constructability, project cost, and installation later.</p>
-        <p>R&amp;C Roofing Contractors works with architects, specifiers, and project teams on Oahu to provide contractor-side roofing input before and during construction.</p>
-        <p>We can discuss available roofing materials, existing roof conditions, installation considerations, roof interfaces, and the practical requirements of the roofing systems within R&amp;C's capabilities.</p>
-        <p>Final design, engineering, code interpretation, and specification responsibility remain with the appropriate licensed design professionals.</p>
-        <p>R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined crew experience.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Discuss Roofing Requirements With R&amp;C</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
+  <Hero2 actions={serviceHeroActions('Discuss Roofing Requirements With R&C')}>
+    <Fragment slot="title">Roofing Support for Architects &amp; Specifiers on Oahu</Fragment>
+    <Fragment slot="subtitle">
+      Roofing decisions made during design can affect material selection, detailing, constructability, project cost, and
+      installation later. Bring roofing into the conversation before details are locked. Get expert contractor-side input
+      backed by Hawaii License C-33642.
     </Fragment>
-  </WidgetWrapper>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Architect roofing photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
 
-  <!-- "Where Can Roofing Contractor Input Help?" — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="Where Can Roofing Contractor Input Help?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-10">
-      The most useful time to resolve a roofing question is often before it becomes a field condition.
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      The most useful time to resolve a roofing question is often before it becomes a field condition. The earlier
+      relevant roofing questions are identified, the easier it is for the project team to address them before
+      mobilization:
     </p>
-    <div class="overflow-x-auto mb-8 md:mb-10">
-      <table class="w-full text-[15px] md:text-[16px] font-medium leading-[160%] border-collapse">
-        <thead>
-          <tr class="border-b-2 border-primary">
-            <th class="text-left py-3 pr-8 font-heading font-medium text-heading text-[16px] md:text-[18px] whitespace-nowrap">Project Stage</th>
-            <th class="text-left py-3 font-heading font-medium text-heading text-[16px] md:text-[18px]">Where R&amp;C Can Contribute</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-gray-100 dark:border-slate-700">
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Existing Conditions</td>
-            <td class="py-3 text-muted align-top">Evaluate the current roofing system and document visible conditions before reroofing or renovation decisions are finalized.</td>
-          </tr>
-          <tr class="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-900/20">
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Schematic / Design Development</td>
-            <td class="py-3 text-muted align-top">Discuss roofing materials and practical installation considerations based on R&amp;C's available systems.</td>
-          </tr>
-          <tr class="border-b border-gray-100 dark:border-slate-700">
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Material Selection</td>
-            <td class="py-3 text-muted align-top">Provide contractor-side input about material availability, roof configuration, installation requirements, and project considerations.</td>
-          </tr>
-          <tr class="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-900/20">
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Construction Documents</td>
-            <td class="py-3 text-muted align-top">Review roofing scope information and identify questions that may affect installation or pricing.</td>
-          </tr>
-          <tr class="border-b border-gray-100 dark:border-slate-700">
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Bid / Procurement</td>
-            <td class="py-3 text-muted align-top">Provide a roofing proposal based on the available drawings, specifications, and project information.</td>
-          </tr>
-          <tr>
-            <td class="py-3 pr-8 font-semibold text-heading align-top whitespace-nowrap">Construction</td>
-            <td class="py-3 text-muted align-top">Coordinate the agreed roofing scope with the project team and address roofing-related field conditions through the project's established process.</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {input.map((item) => <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />)}
     </div>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      The earlier relevant roofing questions are identified, the easier it is for the project team to address them before mobilization.
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Happens When You Contact R&C Roofing?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Partnering with a reliable roofing contractor shouldn't add ambiguity to your design process:
     </p>
+    <IconPointBand items={process} variant="dark" />
     <Fragment slot="bg">
-      <SectionBg variant="grey" />
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- "Roofing Materials for Oahu Projects" — white -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roofing Materials for Oahu Projects" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-4">
-      <p>R&amp;C's current primary roofing material categories include:</p>
-    </div>
-    <ul class="space-y-2 text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-heading list-disc list-inside mb-6">
-      <li>Metal Roofing</li>
-      <li>Asphalt Shingle Roofing</li>
-      <li>Stone-Coated Steel Roofing</li>
-      <li>Clay &amp; Concrete Tile Roofing</li>
-    </ul>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3 mb-8">
-      <p>Different roofing materials create different questions around roof configuration, substrate, attachment, flashing, transitions, appearance, and other project requirements.</p>
-      <p>R&amp;C can discuss the practical installation considerations of roofing systems it currently installs.</p>
-    </div>
-    <div class="mb-10 md:mb-12">
-      <a href="/services/roofing-materials" class="btn btn-secondary">Explore Roofing Materials</a>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Metal Roofing',
-          description: 'Metal roofing can vary significantly by metal, profile, finish, panel configuration, and attachment method.',
-          href: '/services/roofing-materials/metal-roofing',
-        },
-        {
-          title: 'Asphalt Shingle Roofing',
-          description: 'Shingle products vary by profile and manufacturer, and the roof assembly involves more than the visible shingles.',
-          href: '/services/roofing-materials/asphalt-shingle-roofing',
-        },
-        {
-          title: 'Stone-Coated Steel Roofing',
-          description: 'Stone-coated steel provides another metal roofing option with profiles that can create a more traditional architectural appearance.',
-          href: '/services/roofing-materials/stone-coated-steel-roofing',
-        },
-        {
-          title: 'Clay & Concrete Tile Roofing',
-          description: 'Tile introduces its own material, roof-loading, attachment, flashing, and installation considerations.',
-          href: '/services/roofing-materials/tile-roofing-clay-and-concrete',
-        },
-      ].map(({ title, description, href }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-3">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">Explore {title} →</a>
-        </div>
-      ))}
+    <Headline title="Explore Other Who We Serve Resources" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      If your design partnerships or stakeholder responsibilities involve other specialized sectors, explore our other
+      dedicated audience solutions:
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+      {
+        exploreFromArchitects.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="light"
+          />
+        ))
+      }
     </div>
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- "Roofing Details That Are Better Resolved on Paper" — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roofing Details That Are Better Resolved on Paper" classes={{ container: 'mb-2 md:mb-3' }} />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12 text-center max-w-3xl mx-auto space-y-3">
-      <p>Roofing performance depends heavily on what happens at transitions and interfaces.</p>
-      <p>Depending on the project, coordination may be needed around:</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Roof-to-Wall Transitions',
-          description: 'Where roofing meets vertical construction, the project team should establish the intended roofing and flashing conditions.',
-        },
-        {
-          title: 'Penetrations',
-          description: 'Mechanical, plumbing, electrical, and other roof penetrations need to be coordinated with the roofing assembly.',
-        },
-        {
-          title: 'Curbs and Equipment',
-          description: 'Equipment curbs and other rooftop components can affect roofing installation and flashing details.',
-        },
-        {
-          title: 'Valleys and Drainage Paths',
-          description: 'Roof geometry influences where water moves and where additional detailing may be required.',
-        },
-        {
-          title: 'Edges, Eaves, and Perimeters',
-          description: 'Roof edges involve both architectural appearance and roofing-system requirements.',
-        },
-        {
-          title: 'Material Transitions',
-          description: 'Projects using more than one roofing material or connecting new roofing to existing construction may require additional coordination.',
-        },
-      ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3">
-      <p>R&amp;C can identify contractor-side constructability questions related to the roofing scope.</p>
-      <p>The architect, engineer, manufacturer, and other applicable design professionals remain responsible for the final project details and design requirements.</p>
-    </div>
+    <Headline title="Why Architects and Project Teams Work With R&C Roofing" classes={{ container: 'mb-8 md:mb-12' }} />
+    <IconPointBand items={why} />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- "Designing for Oahu Conditions" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Designing for Oahu Conditions" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3 mb-10 md:mb-12">
-      <p>The same roofing detail may not deserve the same level of attention on every property.</p>
-      <p>Oahu projects can face different levels of coastal exposure, rainfall, sun, and wind depending on location and building conditions.</p>
-    </div>
-    <div class="divide-y divide-gray-200 dark:divide-slate-700">
-      <div class="py-8 first:pt-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">Coastal Exposure</h3>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">Roofing specifications may need to consider exposed metal components, flashing, fasteners, coatings, and other materials in relation to the property's coastal environment.</p>
-      </div>
-      <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">Rainfall and Drainage</h3>
-        <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">Roof configuration, transitions, penetrations, valleys, and drainage details should be considered together rather than relying on the exterior roofing material alone.</p>
-      </div>
-      <div class="py-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">Wind Exposure</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3">
-          <p>Roof geometry, building conditions, project location, attachment requirements, and the selected roofing system may affect wind-related design requirements.</p>
-          <p>R&amp;C can provide information related to the roofing products and installation scope it performs.</p>
-          <p>Wind design, structural calculations, code determinations, and engineered requirements should come from the appropriate design professional and applicable product documentation.</p>
-        </div>
-      </div>
-      <div class="py-8 last:pb-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">UV and Heat Exposure</h3>
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3">
-          <p>Product and finish selection can also affect the material discussion for roofs exposed to Oahu sun throughout the year.</p>
-          <p>Any performance claim should be tied to the actual roofing product being specified rather than applied generically to a material category.</p>
-        </div>
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "Product Data and Roofing Submittals" — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Product Data and Roofing Submittals
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>For specified projects, the design team may need product information before roofing materials are approved.</p>
-      <p>Depending on the manufacturer, roofing system, contract requirements, and R&amp;C's current administrative process, project information may include items such as:</p>
-    </div>
-    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
-      <li>Manufacturer product literature</li>
-      <li>Product specifications</li>
-      <li>Color or profile information</li>
-      <li>Installation literature</li>
-      <li>Applicable product testing or approvals</li>
-      <li>Samples</li>
-      <li>Roofing submittal information</li>
-      <li>Warranty documentation</li>
-      <li>Material substitution information</li>
-    </ul>
-    <div class="mt-6 rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300">
-      R&amp;C should not promise custom shop drawings, delegated engineering, stamped calculations, substitution requests, or formal specification review unless those services are actually part of its current workflow and the responsible professional is clearly identified.
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "Wind Uplift, Code, and Product Requirements" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Wind Uplift, Code, and Product Requirements
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Architects and specifiers need more than broad statements such as "high-wind roofing."</p>
-      <p>The requirements for a specific project may depend on the building, roof geometry, project location, applicable code, specified roofing system, manufacturer requirements, and engineering.</p>
-      <p>R&amp;C's role is to install roofing work according to the approved project requirements and communicate contractor-side questions when the proposed conditions need clarification.</p>
-      <p>Where design or engineering decisions are required, those decisions should remain with the architect, engineer, manufacturer, or other responsible design professional.</p>
-      <p>This distinction keeps responsibilities clear before work reaches the field.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "Existing Roof Conditions for Renovation Projects" — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Existing Roof Conditions for Renovation Projects
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Renovation projects introduce another problem: the drawings may not tell the whole story.</p>
-      <p>Existing roofing assemblies can contain repairs, previous modifications, concealed deterioration, or conditions that are difficult to establish from record drawings alone.</p>
-      <p>R&amp;C provides roof inspection services that can help document visible existing conditions before a reroofing or renovation scope is finalized.</p>
-      <p>R&amp;C's inspection capabilities include HAAG Certified expertise through Robert Pilato, certification #201408313.</p>
-      <p>An existing-condition assessment may help the design team better understand what is present before construction documents and roofing scope are finalized.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/roof-inspections" class="text-primary font-medium text-[15px] hover:underline">Explore Roof Inspections →</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "Material Substitutions and Roofing Alternatives" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Material Substitutions and Roofing Alternatives
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Specified products are not always the only products considered during procurement.</p>
-      <p>Material availability, project requirements, budget, or other factors may lead a project team to evaluate an alternative roofing product.</p>
-      <p>R&amp;C can provide contractor-side information about roofing products within its capabilities.</p>
-      <p>Any proposed substitution should be evaluated against the project's design intent, specification requirements, product documentation, applicable approvals, and other criteria established by the design team.</p>
-      <p>Final acceptance of a substitution remains with the appropriate project decision-makers.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-08 "From Drawings to Installation" — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="From Drawings to Installation" />
-    <div class="flex flex-col gap-6 max-w-2xl">
-      {[
-        {
-          step: '1',
-          title: 'Review the Roofing Scope',
-          description: 'R&C reviews the available drawings, roofing information, project requirements, and existing conditions where applicable.',
-        },
-        {
-          step: '2',
-          title: 'Identify Roofing Questions',
-          description: 'Constructability questions, material issues, or unclear scope conditions can be identified before pricing or installation.',
-        },
-        {
-          step: '3',
-          title: 'Confirm the Proposed Roofing System',
-          description: 'The selected system should align with the approved project documents and requirements.',
-        },
-        {
-          step: '4',
-          title: 'Provide Contractor-Side Project Information',
-          description: "R&C prepares the roofing scope and pricing based on the available project information. Formal product documentation can be provided according to the agreed project requirements and R&C's verified capabilities.",
-        },
-        {
-          step: '5',
-          title: 'Coordinate During Construction',
-          description: 'Roofing work is coordinated with the GC and applicable project team members.',
-        },
-        {
-          step: '6',
-          title: 'Address Field Conditions',
-          description: "Conditions that differ from the project documents should move through the project's established RFI, change, or approval process rather than being resolved through undocumented field assumptions.",
-        },
-      ].map(({ step, title, description }) => (
-        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
-            {step}
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Construction Partners & Clients Say" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Collaborating with design teams and executing specified assemblies requires deep product knowledge, proactive
+      communication, and follow-through. Read verified feedback from clients who experienced R&amp;C's technical
+      execution:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      {
+        quotes.map((item) => (
+          <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col h-full">
+            <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60 flex-1">“{item.quote}”</p>
+            <p class="mt-auto pt-4 text-[16px] md:text-[18px] font-medium font-heading text-white">{item.name}</p>
           </div>
-          <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Discuss an Upcoming Project</a>
+        ))
+      }
     </div>
     <Fragment slot="bg">
-      <SectionBg variant="grey" />
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-06 "Why Architects and Project Teams Work With R&C" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Architects and Project Teams Work With R&C" />
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-      {[
-        {
-          title: 'Licensed Hawaii Roofing Contractor',
-          description: 'R&C Roofing Contractors operates under Hawaii contractor license C-33642.',
-        },
-        {
-          title: 'Installation Perspective',
-          description: "R&C brings contractor-side roofing experience to conversations around material selection and constructability.",
-        },
-        {
-          title: 'Roof Inspection Capability',
-          description: 'R&C can evaluate existing roofing conditions when renovation or reroofing work is being considered.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-      {[
-        {
-          title: 'HAAG Certified Inspection Expertise',
-          description: 'Robert Pilato holds HAAG certification #201408313.',
-        },
-        {
-          title: 'Residential and Commercial Roofing',
-          description: 'R&C works on roofing scopes for both residential and commercial properties.',
-        },
-        {
-          title: '50+ Years of Combined Crew Experience',
-          description: 'R&C brings more than 50 years of combined crew roofing experience.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-
+  <FAQs title="Frequently Asked Questions For Architects & Specifiers" items={faqs}>
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
-  </WidgetWrapper>
+  </FAQs>
 
-  <!-- P-09 Architect or Specifier Project Example — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300 mb-8">
-      Client content required before launch. This section will be much stronger with at least one verified architect-led or specifier project.
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-  <ProjectsSection
-    title="Architect or Specifier Project Example"
-    subtitle="See examples of roofing work completed by R&C for architect-led projects on Oahu."
-    projects={[
-      { title: 'Project 1', description: 'Roofing project details coming soon.' },
-      { title: 'Project 2', description: 'Roofing project details coming soon.' },
-      { title: 'Project 3', description: 'Roofing project details coming soon.' },
-    ]}
-  >
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </ProjectsSection>
-
-  <!-- "What Design Professionals Say" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      What Design Professionals Say
-    </h2>
-    <div class="rounded-md bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 px-5 py-4 text-[14px] md:text-[15px] font-medium leading-[160%] text-amber-800 dark:text-amber-300 mb-8">
-      Insert a verified architect, designer, or GC testimonial before launch. Useful topics include communication during design or construction, responsiveness to questions, ability to provide roofing information, coordination around details, or performance within a specified project.
-    </div>
-    <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-8">
-      <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted italic mb-6">
-        Verified architect or design professional testimonial coming soon.
-      </p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-10 FAQ -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'Can R&C help architects evaluate roofing materials?',
-        description:
-          'Yes. R&C can provide contractor-side information about roofing materials and systems within its current installation capabilities.<br><br>Final product selection and specification remain with the appropriate project decision-makers.',
-      },
-      {
-        title: 'Can R&C review roofing details before bidding?',
-        description:
-          "R&C can review available roofing information and identify contractor-side scope or constructability questions.<br><br>R&C should not be positioned as providing architectural or engineering design unless that responsibility is separately established with appropriately licensed professionals.",
-      },
-      {
-        title: 'Does R&C provide roofing submittals?',
-        description:
-          "[Client confirmation required. Confirm R&C's standard process for product data, samples, manufacturer literature, and formal submittal packages before publishing specific commitments.]",
-      },
-      {
-        title: 'Does R&C provide shop drawings?',
-        description:
-          '[Client confirmation required. Do not promise shop drawings unless R&C confirms when they are provided, who prepares them, and which roofing systems require them.]',
-      },
-      {
-        title: 'Can R&C provide wind-uplift information?',
-        description:
-          'R&C can provide available manufacturer and roofing-system information associated with products it installs.<br><br>Project-specific wind design or structural calculations should come from the appropriate engineer, design professional, or other authorized source.',
-      },
-      {
-        title: 'Can R&C inspect an existing roof before we complete renovation drawings?',
-        description:
-          'Yes. R&C provides roof inspection services that can help document visible existing roofing conditions for a renovation or reroofing project.',
-      },
-      {
-        title: 'Can R&C suggest an alternative if a specified roofing product is unavailable?',
-        description:
-          "R&C can identify available roofing alternatives within its capabilities and provide contractor-side product information.<br><br>Any substitution should go through the project's required design and approval process.",
-      },
-      {
-        title: 'What roofing materials does R&C currently work with?',
-        description:
-          'Current primary material categories include metal roofing, asphalt shingles, stone-coated steel, and clay or concrete tile.',
-      },
-    ]}
-  />
-
-  <!-- P-12 Final CTA -->
   <CTABanner
     title="Resolve Roofing Questions Before They Become Field Questions"
-    subtitle="If roofing details, materials, or existing conditions may affect an Oahu project, involve the roofing contractor early enough to identify practical installation questions.<br /><br />R&amp;C Roofing Contractors can review the roofing scope, discuss available systems, and provide contractor-side input for the design and construction team."
-    ctaText="Discuss Roofing Requirements With R&amp;C"
+    subtitle="If roofing details, materials, or existing conditions may affect an Oahu project, involve the roofing contractor early enough to identify practical installation questions."
+    ctaText="Discuss Roofing Requirements With R&C"
   />
-
 </Layout>

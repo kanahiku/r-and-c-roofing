@@ -19,8 +19,15 @@ Before writing or editing any page, always read:
 - Max content width: `max-w-[1400px] mx-auto` on every `WidgetWrapper`
 - Backgrounds alternate white → grey → white → grey down the page
 - No eyebrow/tagline text above headings
-- No icons on cards unless the pattern explicitly includes them
+- Simple heading+description cards (no link/button) always get a Tabler icon mark via `InfoCard`. Do not add icons to P-05 service cards that already have a bottom link
 - Only use typography classes defined in `PAGE-BUILDER.md` — never invent new sizes
+- Heading + paragraph(s) + CTA is always P-03 with a side image. Flip the image side from the previous split on the page (Hero2 is image-right, so the next split is image-left / `isReversed`)
+- Grid cards with a link or button: card is `flex flex-col h-full`, body is `flex-1`, CTA is `mt-auto` so links line up at the bottom regardless of copy length
+- Adjacent sections must use different structures — never two card grids in a row
+- Never lay out 5 items as cards (no 3+2). Use P-06 `IconPointBand` (horizontal icon points), or a `ServiceDirectory` for linked items
+- H2 + 3 or 5 icon points (no links): `IconPointBand` — one row, icon above title, center-aligned. Not a timeline, not cards
+- H2 + 4 unlinked icon points as text (no cards): `IconPointGrid` — 2 × 2, icon above title, left-aligned
+- Yellow / accent-tint cards (`bg-card-light`, `bg-accent`, yellow wash) — including those on grey `#FAFAFA`: links use `text-heading` (`#222`) or `text-card-link-light`. Never `text-primary` or `text-accent` — those blend into the yellow
 - Run `npm run build` after every page change and fix any errors before finishing
 
 ## Hero Rules
@@ -38,7 +45,8 @@ Before writing or editing any page, always read:
 | H2 + paragraphs + image one side + optional CTA | P-03 |
 | H2 title sharing a row with a CTA button | P-04 |
 | 4–6 cards with per-card links | P-05 |
-| Exactly 5 benefit cards (3+2 layout) | P-06 |
+| 3 or 5 icon points, no cards (one horizontal row) | P-06 |
+| 4 icon + heading + description, 2 × 2 text grid, no cards | P-14 |
 | 4 compact info cards one row | P-07 |
 | H2 + steps/timeline + optional image | P-08 |
 | Grid of project/gallery cards | P-09 |

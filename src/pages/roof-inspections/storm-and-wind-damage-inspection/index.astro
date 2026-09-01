@@ -2,10 +2,21 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import {
+  inspectionHeroActions,
+  inspectionProcessIcons,
+  otherInspectionServices,
+} from '~/data/pages/roofInspections';
 
 const metadata = {
   title: 'Storm & Wind Damage Roof Inspections Oahu | R&C Roofing',
@@ -13,120 +24,144 @@ const metadata = {
     'Schedule a storm damage roof inspection on Oahu with R&C Roofing Contractors. Get HAAG Certified assessment and documentation of visible wind and roof damage.',
   ignoreTitleTemplate: true,
 };
+
+const otherServices = otherInspectionServices('/roof-inspections/storm-and-wind-damage-inspection');
+
+const evaluate = [
+  {
+    title: 'Lifted Materials',
+    description: 'We inspect shingles and metal components for broken adhesive seals and wind uplift.',
+    icon: 'tabler:wind',
+  },
+  {
+    title: 'Flashing Damage',
+    description: 'We check the metal transitions around vents and pipes for bent or loosened materials.',
+    icon: 'tabler:border-corners',
+  },
+  {
+    title: 'Debris Impact',
+    description: 'We identify structural bruising or punctures caused by airborne branches.',
+    icon: 'tabler:tree',
+  },
+  {
+    title: 'Drainage Blockages',
+    description: 'We review valleys and gutters for storm debris that forces water under your roofing materials.',
+    icon: 'tabler:droplet',
+  },
+];
+
+const whenItMakesSense = [
+  {
+    title: 'Missing Materials',
+    description: 'You see shingles, tiles, or metal components in your yard.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'New Interior Leaks',
+    description: 'Water appears on your ceiling immediately following severe weather.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Visible Impact',
+    description: 'Branches or heavy debris physically struck your property.',
+    icon: 'tabler:alert-triangle',
+  },
+  {
+    title: 'Displaced Metal',
+    description: 'You notice bent fascia, soffits, or loosened roof edge materials.',
+    icon: 'tabler:tools',
+  },
+];
+
+const faqs = [
+  {
+    title: 'How do I know if my roof has wind damage?',
+    description:
+      'Visible signs include missing materials, new leaks, or debris impact. Wind uplift often breaks seals without blowing shingles off entirely, which requires a professional inspection to identify.',
+  },
+  {
+    title: 'Should I climb onto my roof after a storm?',
+    description: 'No. Wet or damaged roofs create severe safety risks.',
+  },
+  {
+    title: 'Can R&C document storm damage for an insurance claim?',
+    description: 'Yes. We inspect accessible areas and provide objective contractor documentation of the visible damage.',
+  },
+  {
+    title: 'Does homeowners insurance cover roof wind damage?',
+    description: 'Coverage depends entirely on the terms and exclusions of your individual policy.',
+  },
+  {
+    title: 'Should I have my roof inspected after every storm?',
+    description:
+      'No. You only need an inspection if you notice a new leak, displaced materials, or visible debris impact after severe weather.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white + motif -->
   <Hero2
-    actions={[{ variant: 'primary', text: 'Schedule a Storm Damage Roof Inspection', href: '/contact' }]}
-    image={{ src: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=2070&q=80', alt: 'Storm and wind damage roof inspection on Oahu' }}
+    actions={inspectionHeroActions}
   >
-    <Fragment slot="title">Storm &amp; Wind Damage<br />Roof Inspections on Oahu</Fragment>
+    <Fragment slot="title">Storm &amp; Wind Damage Roof<br />Inspections on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Find Out What the Storm Did to Your Roof
-      </span>
-      Wind damage is not always obvious from the ground. Roofing materials can shift, flashing can loosen, and other vulnerable areas can be affected even when the roof still looks intact from the driveway.
-      <br /><br />
-      R&C Roofing Contractors provides storm and wind damage roof inspections for properties on Oahu. Our team includes HAAG Certified Inspector Robert Pilato, Certification #201408313, with specialized training in roof damage assessment.
+      Find out what the storm actually did to your roof. We identify hidden structural impacts before they turn into
+      major leaks.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Storm damage inspection photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- What To Do After a Storm — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What to Do After a Storm" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      If you suspect roof damage after strong winds or severe weather, focus first on safety and documentation.
-    </p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Stay Off a Wet or Damaged Roof',
-          description:
-            'Do not climb onto the roof to look for damage yourself. Wet roofing surfaces can be slippery, and damaged areas may not be safe to walk on.',
-        },
-        {
-          title: 'Document What You Can See Safely',
-          description:
-            'Take photos of visible damage from the ground. If water has entered the property, photograph ceiling stains, interior leaks, or other affected areas.',
-        },
-        {
-          title: 'Limit Further Interior Damage When It Is Safe',
-          description:
-            'If water is entering the property, take reasonable steps inside the home to protect belongings and manage the water without climbing onto the roof.',
-        },
-        {
-          title: 'Schedule a Roof Inspection',
-          description:
-            'A professional inspection can provide a closer look at accessible roofing areas and document visible conditions that may not be apparent from the ground.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
+    <Headline title="Hidden Wind Damage vs. Visible Storm Impacts" classes={{ container: 'mb-4 md:mb-6' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+      <p>
+        High winds can lift shingles and break seals without blowing the materials off your property entirely. When the
+        storm passes, your roof may look normal from the driveway while remaining structurally compromised.
+      </p>
+      <p>
+        Robert Pilato (Certification #201408313) applies specialized HAAG damage assessment training to find what a
+        standard ground-level check misses.
+      </p>
     </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Schedule a Storm Damage Inspection</a>
-    </div>
+    <ComparisonTable
+      columns={['Standard Ground Check', 'Professional Storm Assessment']}
+      rows={[
+        {
+          feature: 'Primary Focus',
+          left: 'Missing shingles and obvious debris.',
+          right: 'Hidden wind uplift and broken seals.',
+        },
+        {
+          feature: 'Damage Evaluation',
+          left: 'What you can safely see from the yard.',
+          right: 'Hands-on inspection of fasteners and flashing.',
+        },
+        {
+          feature: 'Actionable Utility',
+          left: 'Confirms obvious exterior issues.',
+          right: 'Provides structural documentation for insurance claims.',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What We Look For — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      What We Look for During a Storm Damage Inspection
-    </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-3">
-      The inspection scope depends on the property, roofing system, accessibility, and conditions after the storm.
-    </p>
+    <Headline isDark={true} title="What We Evaluate After a Storm" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Where accessible, R&C may evaluate:
+      A damaged component does not always tell the full story. We look deeper to find the root cause of storm-related
+      failures.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Displaced or Lifted Roofing Materials',
-          description:
-            'Wind can affect shingles, metal roofing components, tiles, and other roof materials. We look for visible movement, displacement, or damage.',
-        },
-        {
-          title: 'Flashing Damage',
-          description:
-            'Flashing around roof transitions and penetrations can be affected by wind or debris. Damaged or displaced flashing may create areas where water can enter.',
-        },
-        {
-          title: 'Fastener and Attachment Issues',
-          description:
-            'We look for visible signs that roofing components or their attachment points may have been affected.',
-        },
-        {
-          title: 'Impact Damage',
-          description:
-            'Branches and other windblown debris can damage roofing materials or exposed roof components.',
-        },
-        {
-          title: 'Roof Edges and Eaves',
-          description:
-            'Roof edges can experience significant wind exposure. We inspect accessible fascia, soffit, edge materials, and related components for visible changes.',
-        },
-        {
-          title: 'Drainage Areas',
-          description:
-            'Storm debris can collect around valleys, gutters, and other drainage areas. These areas may need attention after severe weather.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {evaluate.map((card) => (
+        <InfoCard title={card.title} description={card.description} icon={card.icon} variant="dark" />
       ))}
     </div>
     <Fragment slot="bg">
@@ -134,303 +169,79 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Why Not Visible From Ground — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Why Storm Damage Is Not Always Visible From the Ground
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>Missing roofing materials are easy to spot. Other types of wind damage can be harder to identify.</p>
-      <p>Wind can lift or shift roofing materials without completely removing them. When the wind stops, some materials may settle back into place and appear normal from the ground.</p>
-      <p>Flashing can also move or loosen without creating an obvious visual change from the driveway.</p>
-      <p>That is why a closer inspection may be useful after severe weather, especially when you notice a new leak or another change in the roof.</p>
-    </div>
+    <Headline title="When a Storm Inspection Makes Sense" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      You do not need to diagnose the problem yourself. Call for an evaluation if you notice any of these physical
+      changes.
+    </p>
+    <IconPointGrid items={whenItMakesSense} />
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Signs Your Roof May Have Damage — Grey #FAFAFA, black cards -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Signs Your Roof May Have Wind or Storm Damage" classes={{ container: 'mb-4 md:mb-6' }} />
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      You do not need to diagnose the problem yourself. However, certain changes may be a reason to schedule an inspection.
+      We follow a strict assessment protocol to give you clear answers safely.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Missing or Displaced Roofing Materials',
-          description:
-            'Shingles, tiles, metal components, or other materials that have moved or come off the roof should be evaluated.',
-        },
-        {
-          title: 'Lifted or Creased Shingles',
-          description:
-            'Wind can affect the position or condition of asphalt shingles even when they remain attached.',
-        },
-        {
-          title: 'Damaged Flashing',
-          description:
-            'Bent, shifted, or visibly damaged flashing around roof penetrations and transitions can affect how the roof manages water.',
-        },
-        {
-          title: 'Debris Impact',
-          description:
-            'Branches or other debris can damage roofing materials during severe weather.',
-        },
-        {
-          title: 'New Interior Leaks or Ceiling Stains',
-          description:
-            'Water appearing after a storm may indicate a roofing issue that needs closer evaluation.',
-        },
-        {
-          title: 'Damage Around Roof Edges',
-          description:
-            'Changes around fascia, soffits, gutters, or roof edges can also indicate storm-related impact or wind exposure.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Schedule a Storm Damage Roof Inspection</a>
-    </div>
+    <Timeline
+      items={[
+        { title: 'Listen', description: 'We discuss the specific weather event and what physical changes you noticed.', icon: inspectionProcessIcons.listen },
+        { title: 'Evaluate', description: 'We safely access the roof surface to inspect materials, fasteners, and impact zones.', icon: inspectionProcessIcons.evaluate },
+        { title: 'Document', description: 'We capture photographs and detailed notes to record the exact physical condition of the damage.', icon: inspectionProcessIcons.document },
+        { title: 'Recommend', description: 'We explain our findings and advise if you need a localized repair or a full replacement.', icon: inspectionProcessIcons.recommend },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Process — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6">
-      What Happens During a Storm Damage Roof Inspection?
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
+      Building Your Claim Documentation
     </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 mb-8 max-w-2xl">
-      Every property is different, but the inspection generally follows the same process used across R&C's roof inspection services.
-    </p>
-    <div class="flex flex-col gap-6 max-w-2xl mb-10">
-      {[
-        {
-          step: '1',
-          title: 'We Review What Happened',
-          description:
-            'We start by asking what you noticed during or after the storm, such as a leak, missing materials, debris impact, or another change.',
-        },
-        {
-          step: '2',
-          title: 'We Inspect Accessible Roofing Areas',
-          description:
-            'Where access and site conditions allow, we evaluate the roof surface and relevant components for visible signs of damage or deterioration. Interior areas may also be reviewed when there is an active leak or moisture concern.',
-        },
-        {
-          step: '3',
-          title: 'We Document Relevant Findings',
-          description:
-            "Photos and notes help create a record of the roof's condition after the weather event.",
-        },
-        {
-          step: '4',
-          title: 'We Explain What We Found',
-          description:
-            'We review the findings and discuss whether repair, replacement, additional evaluation, or monitoring should be considered.',
-        },
-      ].map(({ step, title, description }) => (
-        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-accent flex items-center justify-center font-heading font-medium text-[15px] text-black mt-0.5">
-            {step}
-          </div>
-          <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-white">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div class="rounded-lg border border-accent/60 bg-[#222] p-6 max-w-3xl">
-      <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">
-        HAAG Certified Storm Damage Assessment
-      </h3>
-      <div class="text-[15px] md:text-[16px] font-medium leading-[160%] text-white/70 space-y-3">
-        <p>Robert Pilato is a HAAG Certified Inspector, Certification #201408313.</p>
-        <p>HAAG certification includes specialized education and testing focused on roof damage assessment. This gives R&C additional training when evaluating roofing conditions following wind or storm events.</p>
-        <p>That expertise is paired with R&C's experience as a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can also provide the roofing services required for the project.</p>
-      </div>
-      <a href="/roof-inspections/haag-certified-inspection" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200 mt-4">
-        Learn About HAAG Certified Roof Inspections
-      </a>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
+      <p>
+        A storm damage inspection provides contractor-side evidence for your insurance file. It does not guarantee claim
+        approval. Your insurance carrier makes all final coverage decisions based on your specific policy language.
+      </p>
+      <p>
+        R&C Roofing Contractors is not a public adjuster. We do not negotiate settlements or represent policyholders in
+        claim disputes.
+      </p>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Insurance Documentation — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Storm Damage Documentation for Insurance Claims" />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8 max-w-4xl">
-      <p>If you believe your roof was damaged by a covered weather event, documentation of the roof's condition may be useful during the insurance process.</p>
-      <p>R&C can inspect accessible roofing areas, photograph relevant findings, and provide contractor-side information related to the roofing scope.</p>
-      <p>Your insurance carrier determines coverage based on your policy and its claim review process.</p>
-      <p>R&C Roofing Contractors is not a public adjuster. We do not adjust claims, negotiate insurance settlements, represent policyholders in claim negotiations, or guarantee claim outcomes.</p>
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We offer specialized evaluations for different stages of property ownership.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {otherServices.map((card) => (
+        <ServiceCard title={card.title} description={card.description} href={card.href} linkText={card.linkText} variant="light" />
+      ))}
     </div>
-    <a href="/insurance-claim-help" class="btn-primary">Explore Insurance Claim Help</a>
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- If We Find Damage — Grey #FAFAFA, black cards -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Happens If We Find Damage?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Finding storm damage does not automatically mean the entire roof needs replacement.
-    </p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'A Localized Repair May Be Appropriate',
-          description:
-            'If damage is limited to a specific area and surrounding materials remain serviceable, a targeted repair may be considered.',
-        },
-        {
-          title: 'More Extensive Work May Be Needed',
-          description:
-            'If damage affects multiple areas or the surrounding roofing system is already deteriorated, a larger repair or replacement may need to be evaluated.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
-      ))}
-    </div>
-    <p class="mt-6 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted italic">
-      R&C explains what we find and why a particular scope of work is being recommended.
-    </p>
-    <div class="mt-8">
-      <a href="/services/roof-repair" class="btn-primary">Explore Roof Repair Services</a>
-    </div>
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Explore Other Inspections — Black + motif, dark cards -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      Explore Our Other Roof Inspection Services
-    </h2>
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      Storm damage is one reason to have your roof inspected. R&C also provides inspections for other property needs.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'HAAG Certified Roof Inspections',
-          description: 'Get a closer assessment of visible roof damage supported by HAAG damage-assessment training.',
-          href: '/roof-inspections/haag-certified-inspection',
-          linkText: 'View HAAG Certified Inspections',
-        },
-        {
-          title: 'Pre-Purchase Roof Inspections',
-          description: 'Learn more about the condition of a roof before moving forward with a property transaction.',
-          href: '/roof-inspections/pre-purchase-roof-inspection',
-          linkText: 'View Pre-Purchase Inspections',
-        },
-        {
-          title: 'Annual Maintenance Inspections',
-          description: 'Track visible roof conditions over time and identify areas that may need maintenance or repair.',
-          href: '/roof-inspections/annual-maintenance-inspection',
-          linkText: 'View Maintenance Inspections',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
-          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-accent text-white font-semibold text-[15px] leading-snug hover:bg-accent hover:text-black transition-colors duration-200">View All Roof Inspection Services</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Service Area — White -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Storm Damage Roof Inspections Within Our Oahu Service Area
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>R&C Roofing Contractors is based in Honolulu and provides storm and wind damage roof inspections within its Oahu service area.</p>
-      <p>Conditions can vary across the island. Properties near exposed coastal areas may experience different wind and weather conditions than properties in sheltered valleys or other neighborhoods.</p>
-      <p>If your roof looks different after severe weather, contact R&C with your property location and roofing concern.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">Explore Areas We Serve</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- FAQs — White -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'How do I know if my roof has wind damage?',
-        description:
-          'Visible signs can include missing or displaced roofing materials, lifted shingles, damaged flashing, debris impact, or a new leak after severe weather. Some damage may be difficult to identify from the ground, so an inspection may be appropriate if you notice a change after a storm.',
-      },
-      {
-        title: 'Should I climb onto my roof after a storm?',
-        description:
-          'No. Wet or damaged roofs can create safety risks. You can document visible conditions from the ground and contact a roofing professional for a closer inspection.',
-      },
-      {
-        title: 'What if my roof is not leaking?',
-        description:
-          'A leak is not the only indication that a roof may have been affected. If you notice missing materials, visible movement, flashing damage, debris impact, or another change after the storm, an inspection can help evaluate the condition.',
-      },
-      {
-        title: 'Can R&C document storm damage for an insurance claim?',
-        description:
-          'R&C can inspect accessible roofing areas and document relevant visible findings. We can also provide contractor-side information related to the roofing scope. Coverage decisions are made by your insurance carrier.',
-      },
-      {
-        title: 'Does homeowners insurance cover roof wind damage?',
-        description:
-          'Coverage depends on the terms, exclusions, deductibles, and conditions of your individual policy. Review your policy or contact your insurance carrier for information about your coverage.',
-      },
-      {
-        title: 'Can R&C repair the roof after the inspection?',
-        description:
-          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If repair or replacement work is needed, our team can provide roofing services for the project.',
-      },
-      {
-        title: 'Should I have my roof inspected after every storm?',
-        description:
-          'Not every weather event requires a roof inspection. An inspection may make sense when you notice a new leak, displaced roofing materials, debris impact, visible damage, or another change after severe weather.',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — Yellow -->
   <CTABanner
     title="Check Your Roof After Severe Weather"
-    subtitle="If you have noticed a leak, missing roofing materials, storm debris, or another change in your roof, an inspection can help determine what was affected.<br />R&amp;C Roofing Contractors can evaluate accessible roofing areas, document relevant findings, and explain what the condition means for your property."
-    ctaText="Schedule a Storm Damage Roof Inspection"
+    subtitle="Find out exactly what is happening before you commit to a construction contract."
+    ctaText="Schedule Inspection"
   />
-
 </Layout>

@@ -2,10 +2,22 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
-import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
+import {
+  exploreFromHomeowners,
+  serviceHeroActions,
+  yelpHerman,
+  yelpLeonard,
+  yelpWunShen,
+} from '~/data/pages/whoWeServe';
 
 const metadata = {
   title: 'Roofing for Oahu Homeowners | R&C Roofing Contractors',
@@ -13,382 +25,214 @@ const metadata = {
     'Worried about your roof? R&C Roofing Contractors helps Oahu homeowners understand roof problems, compare repair and replacement options, and plan the right next step.',
   ignoreTitleTemplate: true,
 };
+
+const worries = [
+  {
+    title: 'I Found a Leak',
+    description: 'Identify where water is coming from and what part of the system needs attention.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'My Roof Was Damaged in a Storm',
+    description: 'Document visible damage and check whether repair or replacement is needed.',
+    icon: 'tabler:wind',
+  },
+  {
+    title: 'My Roof Is Getting Older',
+    description: "Understand your roof's current condition before problems become more obvious.",
+    icon: 'tabler:clock',
+  },
+  {
+    title: 'I Think I Need a New Roof',
+    description: 'Evaluate the existing roof and explore repair-versus-replacement factors.',
+    icon: 'tabler:home-plus',
+  },
+  {
+    title: 'I Have an Insurance Claim',
+    description: 'Document visible damage and get contractor-side roofing information.',
+    icon: 'tabler:file-text',
+  },
+  {
+    title: 'I Have No Idea What I Need',
+    description: 'Start with an expert roof condition assessment instead of guessing.',
+    icon: 'tabler:help',
+  },
+];
+
+const process = [
+  {
+    title: 'Tell Us What You Are Seeing',
+    description:
+      'Share your leak, storm impact, age concerns, or other property details without needing technical terminology.',
+    icon: 'tabler:phone',
+  },
+  {
+    title: 'We Evaluate the Roof',
+    description:
+      'We perform a comprehensive inspection, backed by HAAG Certified expertise (Robert Pilato, certification #201408313).',
+    icon: 'tabler:search',
+  },
+  {
+    title: 'We Explain What We Find',
+    description: "You receive a clear, objective breakdown of your roof's actual condition.",
+    icon: 'tabler:file-text',
+  },
+  {
+    title: 'You Review Your Options',
+    description: 'We walk you through repair, replacement, or monitoring choices so you understand the rationale.',
+    icon: 'tabler:list-details',
+  },
+  {
+    title: 'You Decide How to Move Forward',
+    description: 'We develop a detailed project scope only when you are ready to proceed.',
+    icon: 'tabler:circle-check',
+  },
+];
+
+const why = [
+  {
+    title: 'Licensed Roofing Contractor',
+    description: 'Operating under Hawaii License C-33642.',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'Inspection Expertise',
+    description: 'HAAG Certified inspection expertise through Robert Pilato, certification #201408313.',
+    icon: 'tabler:badge',
+  },
+  {
+    title: 'Comprehensive Services',
+    description:
+      'Inspections, repairs, replacements, new installations, and gutter services handled by one experienced local team.',
+    icon: 'tabler:tools',
+  },
+  {
+    title: 'Experience & Community',
+    description: 'Over 50 years of combined crew experience and proud membership in BIA Hawaii.',
+    icon: 'tabler:users',
+  },
+];
+
+const faqs = [
+  {
+    title: 'I do not know whether I need a repair or replacement. Where should I start?',
+    description:
+      'Start with an evaluation of the roof. R&C can look at the existing condition and explain whether a localized repair, larger project, or continued monitoring should be considered.',
+  },
+  {
+    title: 'Will R&C recommend replacement if my roof can be repaired?',
+    description:
+      'Recommendations are based strictly on the condition of the roof and the extent of the problem. A localized issue will always call for repair rather than an unnecessary complete replacement.',
+  },
+  {
+    title: 'What roofing services does R&C provide for homeowners?',
+    description:
+      'R&C provides roof inspections, roof repairs, roof replacements and new installations, gutter services, and multiple material options.',
+  },
+  {
+    title: 'Do I need to know what is wrong before scheduling an inspection?',
+    description: 'No. You can contact R&C with what you are seeing, and the roof can be evaluated from there.',
+  },
+];
+
+const yelpEmbeds = `${yelpLeonard}${yelpWunShen}${yelpHerman}`;
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="py-8 md:py-12 max-w-3xl">
-      <h1 class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading mb-6">
-        Roofing for Oahu Homeowners
-      </h1>
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        You Do Not Need to Know What Your Roof Needs Before You Call
-      </p>
-      <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-4 mb-8">
-        <p>A roof problem can be stressful, especially when you do not know whether you are dealing with a small repair or a much larger project.</p>
-        <p>You may see a ceiling stain. You may notice missing roofing material after a storm. Maybe the roof is getting older and you simply want to know what condition it is in.</p>
-        <p>R&amp;C Roofing Contractors helps Oahu homeowners start with the condition of the roof before deciding what work should come next.</p>
-        <p>We provide roof inspections, repairs, replacements, new installations, gutter services, and material options for homes within our Oahu service area.</p>
-        <p>R&amp;C operates under Hawaii contractor license C-33642 and brings more than 50 years of combined crew experience.</p>
-      </div>
-      <a href="/contact" class="btn-primary">Talk to R&amp;C About Your Roof</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
+  <Hero2 actions={serviceHeroActions('Talk to R&C About Your Roof')}>
+    <Fragment slot="title">Roofing for Oahu Homeowners</Fragment>
+    <Fragment slot="subtitle">
+      You do not need to know what your roof needs before you call. Whether you are dealing with a leak, storm damage,
+      or an aging system, get expert local support backed by Hawaii License C-33642.
     </Fragment>
-  </WidgetWrapper>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Homeowner roofing photo placeholder" />
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
 
-  <!-- P-05 "What Are You Worried About?" — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
     <Headline title="What Are You Worried About?" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      You do not have to diagnose the problem yourself.
+      You do not have to diagnose the problem yourself. Find the situation that matches what you are seeing:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'I Found a Leak',
-          description: 'Start by identifying where the problem is coming from and what part of the roofing system needs attention.',
-          link: '/services/roof-repair',
-          linkText: 'Explore Roof Repair →',
-        },
-        {
-          title: 'My Roof Was Damaged in a Storm',
-          description: 'An inspection can document visible roof conditions and help determine whether repair or replacement should be considered.',
-          link: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'Explore Storm Damage Inspections →',
-        },
-        {
-          title: 'My Roof Is Getting Older',
-          description: 'A roof inspection can help you understand its current condition before problems become more obvious.',
-          link: '/roof-inspections',
-          linkText: 'Schedule a Roof Inspection →',
-        },
-        {
-          title: 'I Think I Need a New Roof',
-          description: 'R&C can evaluate the existing roof and explain the factors that go into a repair-versus-replacement decision.',
-          link: '/services/roof-replacement-and-new-installation',
-          linkText: 'Explore Roof Replacement →',
-        },
-        {
-          title: 'I Have an Insurance Claim',
-          description: 'We can document visible damage and provide contractor-side information related to the roofing work.',
-          link: '/insurance-claim-help',
-          linkText: 'Explore Insurance Claim Help →',
-        },
-        {
-          title: 'I Have No Idea What I Need',
-          description: 'That is exactly when an inspection is useful. Start with the roof condition instead of choosing a service yourself.',
-          link: '/roof-inspections',
-          linkText: 'Explore Roof Inspections →',
-        },
-      ].map(({ title, description, link, linkText }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          <a href={link} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-        </div>
-      ))}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {worries.map((item) => <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />)}
+    </div>
+    <div class="mt-8 md:mt-10 flex justify-center">
+      <a href="/contact" class="btn-primary">Schedule a Roof Evaluation</a>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-08 "What Happens When You Contact R&C?" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="What Happens When You Contact R&C?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 max-w-2xl">
-      For many homeowners, the uncertainty around the process is almost as frustrating as the roof problem itself. Here is the basic path.
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Happens When You Contact R&C Roofing?" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Navigating roofing work shouldn't add to your stress:
     </p>
-    <div class="flex flex-col gap-6 max-w-2xl">
-      {[
-        {
-          step: '1',
-          title: 'Tell Us What You Are Seeing',
-          description: 'You do not need roofing terminology. Tell us about the leak, damage, age of the roof, recent weather event, or other concern that prompted you to call.',
-        },
-        {
-          step: '2',
-          title: 'We Evaluate the Roof',
-          description: "The appropriate evaluation depends on the situation. R&C's inspection capabilities include HAAG Certified inspection expertise through Robert Pilato, certification #201408313.",
-        },
-        {
-          step: '3',
-          title: 'We Explain What We Find',
-          description: 'The goal is to give you enough information to understand what condition the roof is in and what roofing work should be considered.',
-        },
-        {
-          step: '4',
-          title: 'You Review Your Options',
-          description: 'Depending on the findings, the next step may involve repair, replacement, additional monitoring, or another roofing service. You should understand why a recommendation is being made before agreeing to the work.',
-        },
-        {
-          step: '5',
-          title: 'You Decide How to Move Forward',
-          description: 'R&C can develop the roofing scope and project information once the appropriate direction has been established.',
-        },
-      ].map(({ step, title, description }) => (
-        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center font-heading font-medium text-[15px] text-white dark:text-slate-900 mt-0.5">
-            {step}
-          </div>
-          <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8">
-      <a href="/contact" class="btn-primary">Start With Your Roof</a>
-    </div>
+    <IconPointBand items={process} variant="dark" />
     <Fragment slot="bg">
-      <SectionBg variant="white" />
+      <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 "Repair or Replacement?" — grey -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Repair or Replacement?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>One of the biggest concerns homeowners have is whether a roofing contractor will recommend a full replacement when a repair could solve the problem.</p>
-      <p>R&amp;C's approach is to evaluate the condition first. The answer depends on the individual roof.</p>
-    </div>
-    <div class="mt-8 flex flex-col gap-3">
-      <a href="/services/roof-repair" class="text-primary font-medium text-[15px] hover:underline">Explore Roof Repair →</a>
-      <a href="/services/roof-replacement-and-new-installation" class="text-primary font-medium text-[15px] hover:underline">Explore Roof Replacement &amp; New Installation →</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-02 "Choosing a New Roofing Material" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Choosing a New Roofing Material" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-6">
-      If your home does need a new roof, you may have more than one material option.
+    <Headline title="Explore Other Who We Serve Resources" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      If your property management needs or stakeholder responsibilities involve other specialized sectors, explore our
+      other dedicated audience solutions:
     </p>
-    <ul class="space-y-3 text-[18px] md:text-[20px] font-medium font-heading leading-[130%] text-heading list-disc list-inside">
-      <li>Metal Roofing</li>
-      <li>Asphalt Shingle Roofing</li>
-      <li>Stone-Coated Steel Roofing</li>
-      <li>Clay &amp; Concrete Tile Roofing</li>
-    </ul>
-    <div class="mt-8 md:mt-10 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-3">
-      <p>Different homes may call for different roofing systems based on the roof design, existing structure, property conditions, appearance preferences, and budget.</p>
-      <p>You do not have to decide which material you want before contacting R&amp;C.</p>
-    </div>
-    <div class="mt-6 md:mt-8">
-      <a href="/services/roofing-materials" class="btn btn-secondary">Compare Roofing Materials</a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "If Storm Damage Leads to an Insurance Claim" — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      If Storm Damage Leads to an Insurance Claim
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Roof insurance claims can add another layer of uncertainty for homeowners.</p>
-      <p>R&amp;C can help on the contractor side of the process by inspecting the roof, documenting visible roofing conditions, and providing information about the proposed roofing work.</p>
-      <p>Your insurance carrier determines whether a loss is covered and what the policy will pay.</p>
-      <p>R&amp;C Roofing Contractors is not a public adjuster. We do not negotiate insurance settlements, represent policyholders in claim disputes, interpret insurance coverage, or guarantee claim outcomes.</p>
-    </div>
-    <div class="mt-8">
-      <a href="/insurance-claim-help" class="text-primary font-medium text-[15px] hover:underline">
-        Learn About Roof Insurance Claim Help →
-      </a>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 "Understanding the Cost Before Work Begins" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Understanding the Cost Before Work Begins
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Roofing costs vary widely because the scope can change from one property to another. Pricing may depend on:</p>
-    </div>
-    <ul class="mt-5 space-y-2 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted list-disc list-inside">
-      <li>Roof size and design</li>
-      <li>Repair versus replacement</li>
-      <li>Selected roofing material</li>
-      <li>Existing roof conditions</li>
-      <li>Property access</li>
-      <li>Roofing details and penetrations</li>
-      <li>Additional work identified during evaluation</li>
-    </ul>
-    <div class="mt-5 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      <p>R&amp;C can develop project-specific pricing after the roofing need and proposed scope are understood.</p>
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-02 "Roofing Conditions Vary Across Oahu" — grey -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Roofing Conditions Vary Across Oahu" classes={{ container: 'mb-2 md:mb-3' }} />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12 text-center max-w-3xl mx-auto">
-      <p>A home near the coast can face different exposure than a home farther inland. Rainfall and wind conditions can also vary substantially by location. R&amp;C considers the individual property when evaluating a roof. There is no single roofing material or repair strategy that fits every Oahu home.</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Coastal Exposure',
-          description: 'Salt exposure may affect certain metal roofing components, flashing, fasteners, and finishes.',
-        },
-        {
-          title: 'Wind',
-          description: 'Roof shape, location, surrounding terrain, and roofing system can influence how a property responds to wind.',
-        },
-        {
-          title: 'Rain',
-          description: 'Flashing, valleys, penetrations, roof edges, and drainage all play a role in managing water.',
-        },
-        {
-          title: 'Sun',
-          description: 'Roofing materials experience year-round sun and heat, which makes product selection and roof condition important over time.',
-        },
-      ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-06 "Why Homeowners Work With R&C" — white -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Homeowners Work With R&C" />
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-      {[
-        {
-          title: 'Licensed Roofing Contractor',
-          description: 'R&C Roofing Contractors operates under Hawaii contractor license C-33642.',
-        },
-        {
-          title: 'Inspection Expertise',
-          description: 'R&C employs HAAG Certified inspection expertise through Robert Pilato, certification #201408313.',
-        },
-        {
-          title: 'Inspection and Roofing Work in One Company',
-          description: 'If an inspection identifies roofing work that needs to be addressed, R&C also performs roofing construction services.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-      {[
-        {
-          title: '50+ Years of Combined Crew Experience',
-          description: 'R&C brings more than 50 years of combined crew experience to its roofing work.',
-        },
-        {
-          title: 'Local Industry Membership',
-          description: 'R&C is a member of BIA Hawaii.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-white/16 bg-white dark:bg-slate-900 shadow-card p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
+      {
+        exploreFromHomeowners.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="light"
+          />
+        ))
+      }
     </div>
-
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-09 Recent Residential Roofing Projects — grey -->
-  <ProjectsSection
-    title="Recent Residential Roofing Projects"
-    subtitle="See examples of roofing work completed by R&C for homes on Oahu."
-    projects={[
-      { title: 'Project 1', description: 'Roofing project details coming soon.' },
-      { title: 'Project 2', description: 'Roofing project details coming soon.' },
-      { title: 'Project 3', description: 'Roofing project details coming soon.' },
-    ]}
-  >
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Why Oahu Homeowners Choose R&C Roofing" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <IconPointGrid items={why} />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
-  </ProjectsSection>
+  </WidgetWrapper>
 
-  <!-- P-10 FAQ — white -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'I do not know whether I need a repair or replacement. Where should I start?',
-        description:
-          'Start with an evaluation of the roof.<br><br>R&C can look at the existing condition and explain whether a localized repair, larger roofing project, or continued monitoring should be considered.',
-      },
-      {
-        title: 'Will R&C recommend replacement if my roof can be repaired?',
-        description:
-          'The recommendation should be based on the condition of the roof and extent of the problem.<br><br>A localized issue may call for repair rather than a complete replacement.',
-      },
-      {
-        title: 'What roofing services does R&C provide for homeowners?',
-        description:
-          "R&C's residential roofing services include roof inspections, roof repair, roof replacement and new installation, gutter services, and multiple roofing material options.",
-      },
-      {
-        title: 'Can R&C help after a storm?',
-        description:
-          'Yes. R&C provides storm and wind damage roof inspections and can document visible roofing conditions.<br><br>If an insurance claim is involved, R&C can provide contractor-side documentation and information while the insurance carrier makes coverage and payment decisions.',
-      },
-      {
-        title: 'Does R&C offer financing?',
-        description: '[Client confirmation required before publishing.]',
-      },
-      {
-        title: 'What warranty comes with my roof?',
-        description:
-          'Warranty coverage depends on the roofing product and R&C\'s current workmanship terms.<br><br>[Client confirmation required before publishing exact warranty information.]',
-      },
-      {
-        title: 'What roofing materials can I choose from?',
-        description:
-          'Current primary options include metal, asphalt shingles, stone-coated steel, and clay or concrete tile.<br><br>R&C can help you compare materials based on the individual home and project.',
-      },
-      {
-        title: 'Do I need to know what is wrong before scheduling an inspection?',
-        description:
-          'No.<br><br>You can contact R&C with what you are seeing, and the roof can be evaluated from there.',
-      },
-    ]}
-  />
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="What Oahu Homeowners Say" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Roofing work happens at your home, so workmanship is only part of the experience. Communication and knowing what to
+      expect matter too.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 yelp-review-grid" set:html={yelpEmbeds} />
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
 
-  <!-- P-12 Final CTA -->
+  <FAQs title="Frequently Asked Questions For Homeowners" items={faqs}>
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </FAQs>
+
   <CTABanner
     title="Start With the Condition of Your Roof"
-    subtitle="You do not need to decide between repair, replacement, or a specific roofing material before asking for help.<br /><br />Start by finding out what is happening with the roof.<br /><br />R&amp;C Roofing Contractors can evaluate the property, explain the roofing options, and help you determine the appropriate next step for your home."
-    ctaText="Schedule a Roof Inspection"
+    subtitle="You do not need to decide between repair, replacement, or a specific material before asking for help. Start by finding out what is happening with the roof."
+    ctaText="Talk to R&C About Your Roof"
   />
-
 </Layout>

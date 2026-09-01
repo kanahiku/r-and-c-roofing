@@ -2,11 +2,14 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceCard from '~/components/ui/ServiceCard.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import Timeline from '~/components/ui/Timeline.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import { hubMaterialCards, serviceHeroActions } from '~/data/pages/materials';
 
 const metadata = {
   title: 'Roofing Materials Oahu | Compare Roof Options | R&C Roofing',
@@ -14,469 +17,219 @@ const metadata = {
     'Compare roofing materials for Oahu properties, including metal, asphalt shingles, stone-coated steel, and clay or concrete tile. Explore your options with R&C Roofing.',
   ignoreTitleTemplate: true,
 };
+
+const howToChoose = [
+  {
+    title: 'Roof Design & Slope',
+    description:
+      'The pitch, shape, size, and transitions of your roof dictate which installation methods and systems are appropriate.',
+    icon: 'tabler:ruler-measure',
+  },
+  {
+    title: 'Property Location & Microclimates',
+    description:
+      'Environmental factors across Oahu—such as coastal salt air, heavy valley rainfall, wind exposure, and intense tropical sun—directly impact material lifespan.',
+    icon: 'tabler:map-pin',
+  },
+  {
+    title: 'Existing Structure',
+    description:
+      'If you are replacing an existing roof, your current decking and framing assembly may limit or influence your material options.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Architectural Appearance',
+    description:
+      "Roofing materials make up a major portion of your property's exterior aesthetic, ranging from clean metal lines to textured tile.",
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Total Project Budget',
+    description:
+      'Material cost is only part of the equation; installation complexity, structural adjustments, and project scope determine overall investment.',
+    icon: 'tabler:wallet',
+  },
+];
+
+const comparisonRows = [
+  {
+    material: 'Metal Roofing',
+    goodFor: 'Properties wanting a durable, modern metal system for replacement or new construction.',
+    appearance: 'Available in different profiles and modern finishes.',
+    consider: 'Roof design, finish quality, coastal salt-air exposure, and system specs.',
+  },
+  {
+    material: 'Asphalt Shingles',
+    goodFor: 'Homes looking for a familiar, cost-effective residential roofing solution.',
+    appearance: 'Traditional shingle profile with wide style choices.',
+    consider: 'Product selection, roof slope, local wind exposure, and budget.',
+  },
+  {
+    material: 'Stone-Coated Steel',
+    goodFor: 'Property owners wanting steel strength with a textured residential look.',
+    appearance: 'Profiles resembling tile, shake, or traditional shingles.',
+    consider: 'System selection, roof design, structural load, and project requirements.',
+  },
+  {
+    material: 'Clay & Concrete Tile',
+    goodFor: 'Homes and buildings structurally suited for a heavy-weight tile system.',
+    appearance: 'Distinctive, traditional tile architectural profile.',
+    consider: 'Structural weight capacity, roof pitch, and specialized installation requirements.',
+  },
+];
+
+const faqs = [
+  {
+    title: 'What roofing materials does R&C install on Oahu?',
+    description:
+      'We work with a variety of proven residential and commercial systems, including metal roofing, asphalt shingles, stone-coated steel, and clay or concrete tile.',
+  },
+  {
+    title: 'What is the best roofing material for a home on Oahu?',
+    description:
+      'There is no single "best" material for every property. The right choice depends on your roof\'s design, neighborhood weather exposure, structural load capacity, and budget.',
+  },
+  {
+    title: 'Does living near the ocean affect my roofing material choice?',
+    description:
+      'Yes. Coastal salt air can accelerate corrosion on certain exposed metal fasteners, flashing, and finishes, making material and component selection critical for oceanfront properties.',
+  },
+  {
+    title: 'Can I change to a different roofing material during a replacement?',
+    description:
+      'Often yes, but it depends on your existing roof structure, roof pitch, and weight capacity. We evaluate these factors before recommending a material switch.',
+  },
+  {
+    title: 'Should I choose my roofing material before scheduling an inspection?',
+    description:
+      'No. If you are unsure which material fits your property best, we can evaluate your roof\'s physical condition first and then discuss which options align with your project goals.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 · Hero -->
-  <Hero2
-    actions={[{ variant: 'primary', text: 'Discuss Your Roofing Material Options', href: '/contact' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
-      alt: 'Roofing materials comparison for Oahu properties',
-    }}
-  >
-    <Fragment slot="title">
-      Roofing Materials for Oahu Properties
-    </Fragment>
+  <Hero2 actions={serviceHeroActions('Discuss Your Roofing Material Options')}>
+    <Fragment slot="title">Roofing Materials for Oahu Properties</Fragment>
     <Fragment slot="subtitle">
-      <p class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Compare Your Options Before Choosing a Roof
-      </p>
-      Choosing a roofing material involves more than deciding which one looks best. The roof design, property location, existing structure, project budget, and type of building can all affect which roofing system should be considered.
-      <br /><br />
-      R&amp;C Roofing Contractors works with several roofing materials for residential and commercial projects within its Oahu service area. We can help you compare the available options and understand how each may fit your property.
-      <br /><br />
-      R&amp;C operates under Hawaii contractor license C-33642.
-      <span class="block mt-8"></span>
+      Compare your options before choosing a roof. We help you evaluate how different materials fit your property's
+      architecture, local weather exposure, and budget—backed by Hawaii License C-33642.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Roofing materials photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- Comparison table · Compare Roofing Materials (grey bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Compare Roofing Materials" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Use this comparison as a starting point. The right choice still depends on the individual property and roofing project.
+    <Headline title="Choose Your Roofing Material" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Every material performs differently under island conditions. Select a category below to explore specific styles,
+      benefits, and considerations:
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {
+        hubMaterialCards.map((card) => (
+          <ServiceCard
+            title={card.title}
+            description={card.description}
+            href={card.href}
+            linkText={card.linkText}
+            variant="dark"
+          />
+        ))
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Compare Your Options at a Glance" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Use this matrix to understand how different roofing materials match various property goals:
     </p>
     <div class="overflow-x-auto">
-      <table class="w-full border-collapse">
+      <table class="w-full min-w-[720px] border-separate border-spacing-0 text-left">
         <thead>
-          <tr class="border-b border-gray-200 dark:border-gray-700">
-            <th class="text-left py-4 pr-8 text-[16px] md:text-[17px] font-semibold font-heading text-heading">Roofing Material</th>
-            <th class="text-left py-4 pr-8 text-[16px] md:text-[17px] font-semibold font-heading text-heading">Good Starting Point For</th>
-            <th class="text-left py-4 pr-8 text-[16px] md:text-[17px] font-semibold font-heading text-heading">Appearance</th>
-            <th class="text-left py-4 pr-8 text-[16px] md:text-[17px] font-semibold font-heading text-heading">Things to Consider</th>
-            <th class="text-left py-4 text-[16px] md:text-[17px] font-semibold font-heading text-heading"></th>
+          <tr>
+            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg border-r border-accent">
+              Roofing Material
+            </th>
+            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
+              Good Starting Point For
+            </th>
+            <th class="bg-[#222] text-white text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
+              Appearance
+            </th>
+            <th class="bg-[#222] text-accent text-[13px] md:text-[14px] font-medium leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg">
+              Key Considerations
+            </th>
           </tr>
         </thead>
         <tbody>
-          {[
-            {
-              material: 'Metal Roofing',
-              goodFor: 'Properties considering a metal roofing system for replacement or new construction',
-              appearance: 'Available in different profiles and finishes',
-              consider: 'Roof design, finish, coastal exposure, system specifications, budget',
-              href: '/services/roofing-materials/metal-roofing',
-              linkText: 'Explore →',
-            },
-            {
-              material: 'Asphalt Shingles',
-              goodFor: 'Homes looking for a familiar residential roofing option',
-              appearance: 'Traditional shingle appearance with many styles available',
-              consider: 'Product selection, roof slope, exposure, existing structure, budget',
-              href: '/services/roofing-materials/asphalt-shingle-roofing',
-              linkText: 'Explore →',
-            },
-            {
-              material: 'Stone-Coated Steel',
-              goodFor: 'Property owners interested in steel with a more textured residential appearance',
-              appearance: 'Profiles can resemble tile, shake, or shingles',
-              consider: 'System selection, roof design, appearance, project requirements',
-              href: '/services/roofing-materials/stone-coated-steel-roofing',
-              linkText: 'Explore →',
-            },
-            {
-              material: 'Clay & Concrete Tile',
-              goodFor: 'Homes and buildings suited to a tile roofing system',
-              appearance: 'Distinctive tile profile',
-              consider: 'Structural considerations, roof design, weight, installation requirements',
-              href: '/services/roofing-materials/tile-roofing-clay-and-concrete',
-              linkText: 'Explore →',
-            },
-          ].map(({ material, goodFor, appearance, consider, href, linkText }) => (
-            <tr class="border-b border-gray-200 dark:border-gray-700">
-              <td class="py-4 pr-8 text-[15px] md:text-[16px] font-semibold font-heading text-heading">{material}</td>
-              <td class="py-4 pr-8 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{goodFor}</td>
-              <td class="py-4 pr-8 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{appearance}</td>
-              <td class="py-4 pr-8 text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{consider}</td>
-              <td class="py-4 whitespace-nowrap">
-                <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText}</a>
-              </td>
-            </tr>
-          ))}
+          {
+            comparisonRows.map((row, index) => {
+              const isLast = index === comparisonRows.length - 1;
+              return (
+                <tr>
+                  <th
+                    class:list={[
+                      'align-top bg-white text-heading text-[14px] md:text-[15px] font-medium font-heading leading-[130%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
+                      isLast && 'rounded-bl-lg',
+                    ]}
+                  >
+                    {row.material}
+                  </th>
+                  <td class="align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
+                    {row.goodFor}
+                  </td>
+                  <td class="align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
+                    {row.appearance}
+                  </td>
+                  <td
+                    class:list={[
+                      'align-top bg-white text-muted text-[14px] md:text-[15px] font-normal leading-[160%] px-4 md:px-5 py-4 md:py-5',
+                      isLast && 'rounded-br-lg',
+                    ]}
+                  >
+                    {row.consider}
+                  </td>
+                </tr>
+              );
+            })
+          }
         </tbody>
       </table>
     </div>
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Stacked divider rows · How Do You Choose the Right Roofing Material? (Black) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-4 md:mb-6 text-center">
-      How Do You Choose the Right Roofing Material?
-    </h2>
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">
-      There is no single roofing material that is right for every Oahu property. Start with the building itself.
-    </p>
-    <div class="divide-y divide-white/10 border-t border-white/10">
-      {[
-        {
-          title: 'Roof Design',
-          description: 'The slope, shape, size, transitions, and other details of the roof can affect which roofing systems are appropriate.',
-        },
-        {
-          title: 'Property Location',
-          description: 'Conditions can vary across Oahu. Coastal exposure, rainfall, wind, and sun should be considered alongside the roofing system being proposed.',
-        },
-        {
-          title: 'Existing Structure',
-          description: 'If you are replacing an existing roof, the structure and current roofing assembly may affect the available options. This can be especially important when considering roofing systems with different structural or installation requirements.',
-        },
-        {
-          title: 'Appearance',
-          description: 'The roof makes up a large part of the exterior appearance of many homes. Metal, shingles, stone-coated steel, and tile create noticeably different architectural looks.',
-        },
-        {
-          title: 'Budget',
-          description: 'Material cost is only one part of the project. Installation requirements, roof complexity, existing conditions, and other parts of the roofing scope can also affect the total cost.',
-        },
-        {
-          title: 'Long-Term Ownership Plans',
-          description: 'How you use the property and how long you expect to own it may also influence how you evaluate roofing options.',
-        },
-      ].map(({ title, description }) => (
-        <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70">{description}</p>
-        </div>
-      ))}
-    </div>
-    <div class="mt-10 text-center">
-      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Talk to R&amp;C About Your Roof</a>
-    </div>
-    <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Stacked divider rows · Explore Roofing Materials (White bg) -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Roofing Materials" classes={{ container: 'mb-10 md:mb-14' }} />
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
-      {[
-        {
-          title: 'Metal Roofing',
-          paragraphs: [
-            'Metal roofing is available in a variety of profiles, finishes, and system configurations.',
-            'For Oahu properties, material selection should consider the roof design and the property\'s exposure. Coastal conditions may also be relevant when evaluating finishes, fasteners, flashing, and other metal components.',
-            'Metal roofing can be used on both residential and commercial projects depending on the system and building.',
-          ],
-          href: '/services/roofing-materials/metal-roofing',
-          linkText: 'Explore Metal Roofing',
-        },
-        {
-          title: 'Asphalt Shingle Roofing',
-          paragraphs: [
-            'Asphalt shingles are a familiar option for sloped residential roofs.',
-            'They are available in different colors, profiles, and product lines, giving homeowners a broad range of appearance and budget choices.',
-            'The appropriate shingle system depends on the roof design, property conditions, and specific product selected for the project.',
-          ],
-          href: '/services/roofing-materials/asphalt-shingle-roofing',
-          linkText: 'Explore Asphalt Shingle Roofing',
-        },
-        {
-          title: 'Stone-Coated Steel Roofing',
-          paragraphs: [
-            'Stone-coated steel uses a steel roofing base with a textured exterior finish.',
-            'Available profiles can create an appearance similar to tile, shake, or other traditional residential roofing materials.',
-            'It may be worth considering when you want to compare a steel roofing system with more traditional-looking roof profiles.',
-          ],
-          href: '/services/roofing-materials/stone-coated-steel-roofing',
-          linkText: 'Explore Stone-Coated Steel Roofing',
-        },
-        {
-          title: 'Clay & Concrete Tile Roofing',
-          paragraphs: [
-            'Clay and concrete tile offer a distinctive roofing appearance and are commonly associated with specific architectural styles.',
-            'Tile should be evaluated in the context of the roof structure and overall project. The existing building, roof design, selected tile system, and installation requirements all need to be considered.',
-          ],
-          href: '/services/roofing-materials/tile-roofing-clay-and-concrete',
-          linkText: 'Explore Tile Roofing',
-        },
-      ].map(({ title, paragraphs, href, linkText }) => (
-        <div class="py-8 md:py-10 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-4">{title}</h3>
-          <div class="space-y-3 mb-4">
-            {paragraphs.map((p) => (
-              <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">{p}</p>
-            ))}
-          </div>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
-        </div>
-      ))}
-    </div>
-  </WidgetWrapper>
-
-  <!-- 4-col no-card · How Oahu Conditions Can Affect Material Selection (Grey #FAFAFA) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Oahu Conditions Can Affect Material Selection" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Where a property is located can influence the roofing conversation.
+    <Headline title="How to Choose the Right Roofing Material on Oahu" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      Choosing a roof involves looking beyond a product photo. Every material performs differently based on your specific
+      property:
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Coastal Exposure',
-          description: 'Salt carried through coastal air can be relevant to exposed metal roofing components, fasteners, flashing, finishes, and other materials.',
-        },
-        {
-          title: 'Wind Exposure',
-          description: 'Building height, roof shape, surrounding terrain, and location can influence how a property experiences wind.',
-        },
-        {
-          title: 'Rainfall',
-          description: 'Oahu has significant differences in rainfall between locations. Roofing details that manage water, including flashing and drainage, remain important regardless of the exterior roofing material.',
-        },
-        {
-          title: 'Sun and Heat',
-          description: 'Roofing materials are exposed to UV and heat throughout the year. Different products respond to long-term exposure differently, so the specific roofing system should be considered rather than relying only on the name of the material.',
-        },
-      ].map(({ title, description }) => (
-        <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-        </div>
-      ))}
-    </div>
-    <p class="mt-8 md:mt-10 text-center max-w-3xl mx-auto text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      These conditions do not automatically make one material better than another. The right choice depends on the property and the complete roofing system.
-    </p>
+    <IconPointBand items={howToChoose} />
     <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- P-13 · Replacing an Existing Roof? (Black) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      Replacing an Existing Roof?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5 mb-8">
-      <p>You do not necessarily have to replace your current roof with the same material.</p>
-      <p>A roof replacement can be an opportunity to compare other roofing options, but changing materials may introduce different structural, installation, or project considerations.</p>
-      <p>R&amp;C can evaluate the existing roofing system and discuss which options should be considered for the property.</p>
-    </div>
-    <a href="/services/roof-replacement-and-new-installation" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-accent text-black font-semibold text-[15px] leading-snug hover:bg-yellow-400 transition-colors duration-200">Explore Roof Replacement &amp; New Installation</a>
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-13 · Roofing Material vs. Roofing System (white bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Roofing Material vs. Roofing System
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 mb-8">
-      <p>The exterior material is important, but it is only one part of the roof.</p>
-      <p>Depending on the project, the overall roofing system may also involve:</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-8">
-      {[
-        'Roof decking',
-        'Underlayment',
-        'Flashing',
-        'Roof penetrations',
-        'Roof edges',
-        'Fasteners and attachment methods',
-        'Ventilation or drainage components',
-        'Gutters and downspouts',
-      ].map((item) => (
-        <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-primary font-bold shrink-0 text-[18px] leading-[160%]">›</span>
-          <span class="text-[15px] md:text-[16px] font-medium leading-[160%] text-muted">{item}</span>
-        </div>
-      ))}
-    </div>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>Two properties using the same exterior roofing material can still have very different project requirements.</p>
-      <p>That is why R&amp;C looks at the entire roofing project rather than recommending a material based on one feature alone.</p>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-08 · Not Sure Which Roofing Material to Choose? (Grey #FAFAFA) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-      <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
-        Not Sure Which Roofing Material to Choose?
-      </h2>
-      <a href="/contact" class="btn-primary shrink-0">Discuss Your Roofing Options</a>
-    </div>
-    <div class="flex flex-col md:flex-row gap-10 md:gap-16">
-      <div class="md:basis-1/2 flex flex-col gap-6">
-        <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400">
-          <p>You do not need to choose a roofing material before contacting R&amp;C. We start with the property and project, then help you compare the options that make sense for your roof.</p>
-        </div>
-      </div>
-      <div class="md:basis-1/2">
-        <Timeline
-          items={[
-            {
-              title: 'Tell Us About the Property',
-              description: 'We start with the type of property, current roof, project goal, and any concerns you already have.',
-              icon: 'tabler:home',
-            },
-            {
-              title: 'Evaluate the Roofing Project',
-              description: 'For an existing roof, the current condition and roof design can help determine which options are worth considering.',
-              icon: 'tabler:search',
-            },
-            {
-              title: 'Compare Appropriate Materials',
-              description: 'R&C can discuss available roofing materials and the considerations associated with each option.',
-              icon: 'tabler:template',
-            },
-            {
-              title: 'Develop the Roofing Scope',
-              description: 'Once the roofing direction is established, the project scope and pricing can be developed based on the property and selected system.',
-              icon: 'tabler:file-description',
-            },
-          ]}
-        />
-      </div>
-    </div>
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- P-09 · See Roofing Materials on Real Oahu Projects (Black) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-12 text-center">See Roofing Materials on Real Oahu Projects</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-      {[
-        { material: 'Metal Roofing', href: '/services/roofing-materials/metal-roofing', linkText: 'View Metal Roofing' },
-        { material: 'Asphalt Shingle Roofing', href: '/services/roofing-materials/asphalt-shingle-roofing', linkText: 'View Asphalt Shingle Roofing' },
-        { material: 'Stone-Coated Steel Roofing', href: '/services/roofing-materials/stone-coated-steel-roofing', linkText: 'View Stone-Coated Steel Roofing' },
-        { material: 'Tile Roofing', href: '/services/roofing-materials/tile-roofing-clay-and-concrete', linkText: 'View Tile Roofing' },
-      ].map(({ material, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-4">
-          <div class="w-full h-40 bg-black/40 rounded mb-3 flex items-center justify-center text-white/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <p class="text-[15px] md:text-[16px] font-semibold font-heading text-white mb-1">{material}</p>
-          <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-white/60 mb-3">[Verified Oahu project image and short description.]</p>
-          <a href={href} class="text-accent font-medium text-[13px] md:text-[14px] hover:underline">{linkText} →</a>
-        </div>
-      ))}
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- Stacked rows · Start With the Roofing Project (White bg) -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Start With the Roofing Project" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-center max-w-3xl mx-auto mb-10 md:mb-14 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted">
-      Different projects require different decisions.
-    </p>
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700">
-      {[
-        {
-          title: 'Replacing an Existing Roof',
-          description: 'Compare materials while considering the condition and configuration of the existing roofing system.',
-          href: '/services/roof-replacement-and-new-installation',
-          linkText: 'View Roof Replacement',
-        },
-        {
-          title: 'Planning a Residential Roof',
-          description: 'Explore roofing services and material options for Oahu homes.',
-          href: '/services/residential-roofing',
-          linkText: 'View Residential Roofing',
-        },
-        {
-          title: 'Planning a Commercial Project',
-          description: 'Discuss roofing systems in the context of the building and larger commercial project.',
-          href: '/services/commercial-roofing',
-          linkText: 'View Commercial Roofing',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="py-8 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-          <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-3">{description}</p>
-          <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline">{linkText} →</a>
-        </div>
-      ))}
-    </div>
-  </WidgetWrapper>
-
-  <!-- P-10 · FAQs (Grey #FAFAFA) -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'What roofing materials does R&C work with?',
-        description:
-          "R&C's current roofing material options include metal roofing, asphalt shingles, stone-coated steel, and clay and concrete tile. Additional materials should be confirmed for the individual project before they are included in the roofing scope.",
-      },
-      {
-        title: 'What is the best roofing material for Oahu?',
-        description:
-          'There is no single best roofing material for every Oahu property. The right option depends on the roof design, structure, property location, project requirements, appearance preferences, and budget.',
-      },
-      {
-        title: 'What roofing material is best near the ocean?',
-        description:
-          'Coastal exposure should be considered when choosing roofing materials and components, particularly exposed metals, fasteners, flashing, and finishes. The appropriate recommendation depends on the specific property and roofing system.',
-      },
-      {
-        title: 'Is metal roofing better than asphalt shingles?',
-        description:
-          'Neither option is automatically better for every property. Metal and asphalt shingles have different materials, installation requirements, appearance options, and project costs. The roof design and owner\'s priorities should guide the comparison.',
-      },
-      {
-        title: 'What is the difference between metal roofing and stone-coated steel?',
-        description:
-          'Stone-coated steel is a type of steel roofing system with a textured exterior finish and profiles that may resemble tile, shake, or shingles. Other metal roofing systems can have different profiles, finishes, and installation configurations.',
-      },
-      {
-        title: 'Can I replace shingles with metal or tile?',
-        description:
-          'Changing roofing materials may be possible, but the existing structure, roof design, and requirements of the proposed system need to be evaluated first. R&C can review the property before recommending a change in roofing material.',
-      },
-      {
-        title: 'How much do different roofing materials cost?',
-        description:
-          'Pricing varies by product, roofing system, roof size, design, accessibility, existing conditions, and installation requirements. R&C can provide project-specific pricing after the property and proposed roofing scope are evaluated.',
-      },
-      {
-        title: 'Should I choose the roofing material before scheduling an inspection?',
-        description:
-          'No. If you are unsure what material fits the property, R&C can evaluate the roofing project first and then discuss the available options.',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-[#FAFAFA] dark:bg-slate-900/30"></div>
+      <SectionBg variant="grey" />
     </Fragment>
   </FAQs>
 
-  <!-- Final CTA -->
   <CTABanner
-    title="Compare Your Roofing Options With R&C"
-    subtitle="Start with the property. Then compare the roofing systems that make sense for your roof, project, and budget.<br />R&amp;C Roofing Contractors can help you understand the options and develop the roofing scope."
+    title="Compare Your Roofing Options With R&C Roofing"
+    subtitle="Do not choose a roofing material based on a single feature alone. Get expert guidance matched to your specific property."
     ctaText="Discuss Your Roofing Material Options"
   />
-
 </Layout>

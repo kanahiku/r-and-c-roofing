@@ -2,10 +2,21 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import IconPointGrid from '~/components/ui/IconPointGrid.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import {
+  inspectionHeroActions,
+  inspectionProcessIcons,
+  otherInspectionServices,
+} from '~/data/pages/roofInspections';
 
 const metadata = {
   title: 'HAAG Certified Roof Inspector Hawaii | R&C Roofing',
@@ -13,78 +24,146 @@ const metadata = {
     'Schedule a HAAG Certified roof inspection with R&C Roofing Contractors. Get specialized roof damage assessment and documented findings for your Oahu property.',
   ignoreTitleTemplate: true,
 };
+
+const currentHref = '/roof-inspections/haag-certified-inspection';
+const otherServices = otherInspectionServices(currentHref, true);
+
+const evaluate = [
+  {
+    title: 'Visible Damage Patterns',
+    description: 'We analyze where the damage appears and how it affects surrounding materials.',
+    icon: 'tabler:eye',
+  },
+  {
+    title: 'Material Deterioration',
+    description: 'We evaluate existing wear alongside the structural condition of your specific roofing type.',
+    icon: 'tabler:layers-intersect',
+  },
+  {
+    title: 'Storm-Related Impacts',
+    description: 'We identify physical evidence directly correlated to high winds and severe weather.',
+    icon: 'tabler:wind',
+  },
+  {
+    title: 'Hidden Failure Points',
+    description: 'We investigate previous repairs and installation errors that contribute to current leaks.',
+    icon: 'tabler:search',
+  },
+];
+
+const whenItMakesSense = [
+  {
+    title: 'After Severe Weather',
+    description: 'Document the exact condition of your materials after high winds impact your neighborhood.',
+    icon: 'tabler:cloud-rain',
+  },
+  {
+    title: 'During Insurance Claims',
+    description: 'Provide your insurance carrier with professional contractor documentation regarding visible damage.',
+    icon: 'tabler:file-text',
+  },
+  {
+    title: 'For Unexplained Leaks',
+    description: 'Uncover the true source of water intrusion when the visual cause is not obvious.',
+    icon: 'tabler:droplet',
+  },
+  {
+    title: 'Before Major Repairs',
+    description: 'Get a definitive assessment before committing to a costly replacement project.',
+    icon: 'tabler:home-check',
+  },
+];
+
+const faqs = [
+  {
+    title: 'What is a HAAG Certified Inspector?',
+    description:
+      'A HAAG Certified Inspector has completed specialized forensic damage assessment training. R&C\'s Robert Pilato holds HAAG Certification #201408313.',
+  },
+  {
+    title: 'Is this different from a standard roof inspection?',
+    description:
+      'Yes. The inspector applies advanced diagnostic training to distinguish between normal wear and actual structural damage.',
+  },
+  {
+    title: 'Do I need this inspection after every storm?',
+    description:
+      'No. You should request this evaluation if you notice new leaks, displaced materials, or visible changes after severe weather.',
+  },
+  {
+    title: 'Will this report prove my insurance claim is covered?',
+    description:
+      'No. We provide objective contractor documentation of the damage, but your insurance carrier dictates all final coverage decisions.',
+  },
+  {
+    title: 'Can R&C repair the roof after the inspection?',
+    description:
+      'Yes. We operate under Hawaii Contractor License C-33642 and can execute the necessary repairs or full replacement.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- P-01 Hero — white + motif -->
   <Hero2
-    actions={[{ variant: 'primary', text: 'Schedule a HAAG Certified Roof Inspection', href: '/contact' }]}
-    image={{ src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2070&q=80', alt: 'HAAG Certified roof inspection on Oahu' }}
+    actions={inspectionHeroActions}
   >
     <Fragment slot="title">HAAG Certified Roof<br />Inspections on Oahu</Fragment>
     <Fragment slot="subtitle">
-      <span class="block text-[20px] md:text-[24px] font-medium font-heading text-heading mb-6 leading-[130%] tracking-tight">
-        Specialized Training for Roof Damage Assessment
-      </span>
-      When a roof has been damaged, the first question is not always whether it can be repaired. You also need to understand what happened and what parts of the roofing system were affected.
-      <br /><br />
-      R&C Roofing Contractors has a HAAG Certified Inspector on staff. Robert Pilato, Certification #201408313, brings specialized roof damage assessment training to inspections for Oahu property owners.
+      Find out exactly what happened to your roof with forensic damage assessment training.
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="HAAG certified inspection photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
     </Fragment>
   </Hero2>
 
-  <!-- What Does HAAG Certified Mean? — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      What Does HAAG Certified Mean?
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
-      <p>HAAG certification is specialized training for professionals who evaluate roof damage. It gives inspectors a more structured way to assess roofing materials, visible damage patterns, and conditions that may affect how a roof performs.</p>
-      <p>The training covers how different roofing systems respond to weather, aging, installation conditions, and other sources of damage. It also helps inspectors distinguish between conditions that may look similar at first glance but can have different causes.</p>
-      <p>For property owners, that added training can be especially useful when the cause of roof damage is not obvious. A missing shingle, damaged flashing, or a new leak does not always tell you why the problem happened or how much of the roofing system may be affected.</p>
-      <p>R&C combines HAAG damage-assessment training with practical roofing experience. That means the inspection is not limited to identifying a visible problem. The findings are considered in the context of the roofing material, surrounding components, property conditions, and any other visible factors that may help explain what is happening.</p>
-      <p>Robert Pilato holds HAAG Certification #201408313, bringing that specialized training directly into R&C's roof inspection process.</p>
+    <Headline title="The HAAG Certification Difference" classes={{ container: 'mb-4 md:mb-6' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+      <p>
+        Standard visual inspections often misdiagnose normal aging as storm damage or miss the root cause of a leak
+        entirely. HAAG certification provides a structured, forensic method to evaluate your property accurately.
+      </p>
+      <p>
+        Robert Pilato (Certification #201408313) brings this advanced diagnostic training directly to Oahu. We
+        distinguish between conditions that look similar but have entirely different structural causes.
+      </p>
     </div>
+    <ComparisonTable
+      columns={['Standard Roof Inspection', 'HAAG Certified Assessment']}
+      rows={[
+        {
+          feature: 'Primary Focus',
+          left: 'General condition and age estimation.',
+          right: 'Forensic root cause of specific damage.',
+        },
+        {
+          feature: 'Damage Evaluation',
+          left: 'Visual guesses based on basic contractor experience.',
+          right: 'Engineering-backed diagnostic standards.',
+        },
+        {
+          feature: 'Insurance Utility',
+          left: 'Provides a basic repair estimate.',
+          right: 'Delivers objective, structured evidence for your carrier.',
+        },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- What HAAG Adds — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      What HAAG Certification Adds to a Roof Inspection
-    </h2>
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
     <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      A roof can show similar symptoms for different reasons. A HAAG Certified inspection adds a damage-assessment perspective to the evaluation.
+      A damaged component does not always tell the full story. We look deeper to find the root cause.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Visible Damage Patterns',
-          description: 'We look at where damage appears and how it relates to surrounding roofing materials and components.',
-        },
-        {
-          title: 'Roofing Material Condition',
-          description: 'Visible deterioration is considered alongside the type and condition of the existing roofing material.',
-        },
-        {
-          title: 'Wind and Storm-Related Conditions',
-          description: 'When severe weather is a concern, we look for visible conditions that may be relevant to wind or storm exposure.',
-        },
-        {
-          title: 'Other Possible Sources of Damage',
-          description:
-            'Not every roofing problem is storm-related. Existing deterioration, previous repairs, installation conditions, and other factors may also need to be considered.',
-        },
-      ].map(({ title, description }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60">{description}</p>
-        </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {evaluate.map((card) => (
+        <InfoCard title={card.title} description={card.description} icon={card.icon} variant="dark" />
       ))}
     </div>
     <Fragment slot="bg">
@@ -92,222 +171,75 @@ const metadata = {
     </Fragment>
   </WidgetWrapper>
 
-  <!-- When Makes Sense — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="When Does a HAAG Certified Roof Inspection Make Sense?" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      A HAAG Certified inspection can be useful when the cause or extent of visible roof damage needs a closer look.
+    <Headline title="When a HAAG Inspection Makes Sense" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+      You need objective data when the cause or extent of your roof damage is unclear.
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-      {[
-        {
-          title: 'After Strong Winds or Severe Weather',
-          description:
-            'If roofing materials have shifted, a leak appears, or the roof looks different after a storm, a damage-focused inspection can help document the condition.',
-          href: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'View Storm & Wind Damage Inspections',
-        },
-        {
-          title: 'When Damage Documentation Is Needed',
-          description:
-            'If you are documenting roof conditions for an insurance claim, specialized damage-assessment training can provide useful context for the contractor-side findings.',
-          href: '/insurance-claim-help',
-          linkText: 'Explore Insurance Claim Help',
-        },
-        {
-          title: 'When the Cause of a Roofing Problem Is Unclear',
-          description:
-            'Roof problems can develop from weather exposure, material deterioration, previous repairs, or other conditions. A closer inspection can help identify visible factors that should be considered.',
-        },
-        {
-          title: 'When You Want a Roofing-Specific Assessment',
-          description:
-            'A property owner may simply want a closer evaluation from a roofing contractor with additional training in damage assessment.',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/50 bg-white dark:bg-slate-900 p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-3 text-heading">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4 flex-1">{description}</p>
-          {href ? (
-            <a href={href} class="text-primary font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-          ) : null}
-        </div>
-      ))}
-    </div>
+    <IconPointGrid items={whenItMakesSense} />
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Process — Grey #FAFAFA -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-12">
-      What Happens During a HAAG Certified Roof Inspection?
-    </h2>
-    <div class="flex flex-col gap-6 max-w-2xl">
-      {[
-        {
-          step: '1',
-          title: 'We Review Your Concern',
-          description:
-            'We start by understanding why you requested the inspection and what you have noticed about the roof.',
-        },
-        {
-          step: '2',
-          title: 'We Evaluate Accessible Roofing Areas',
-          description:
-            'Where site conditions and access allow, we inspect relevant roofing materials and components for visible damage or deterioration.',
-        },
-        {
-          step: '3',
-          title: 'We Document Relevant Findings',
-          description: "Photos and notes help create a record of the roof's condition at the time of inspection.",
-        },
-        {
-          step: '4',
-          title: 'We Explain the Findings',
-          description:
-            'We review what was observed and discuss whether repair, replacement, further evaluation, or monitoring should be considered. If roofing work is needed, R&C can provide information about the proposed scope.',
-        },
-      ].map(({ step, title, description }) => (
-        <div class="flex gap-5 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <div class="shrink-0 w-9 h-9 rounded-full bg-[#222] flex items-center justify-center font-heading font-medium text-[15px] text-accent mt-0.5">
-            {step}
-          </div>
-          <div>
-            <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1 text-heading">{title}</h3>
-            <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We follow a strict assessment protocol to give you clear answers.
+    </p>
+    <Timeline
+      items={[
+        { title: 'Listen', description: 'We start by understanding your specific concerns and observations.', icon: inspectionProcessIcons.listen },
+        { title: 'Evaluate', description: 'We safely access your roof to assess the visible materials and structural components.', icon: inspectionProcessIcons.evaluate },
+        { title: 'Document', description: 'We capture photographs and detailed notes to create a clear record of the damage.', icon: inspectionProcessIcons.document },
+        { title: 'Recommend', description: 'We explain our findings and advise you on the most practical repair or replacement options.', icon: inspectionProcessIcons.recommend },
+      ]}
+    />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Insurance Claims Note — Black + motif -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white text-center mb-4 md:mb-6">
-      HAAG Certified Inspections and Insurance Claims
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
+      How We Support Your Insurance Claim
     </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-4 mb-8 max-w-3xl mx-auto text-center">
-      <p>A HAAG Certified inspection does not determine whether an insurance claim will be approved.</p>
-      <p>Coverage decisions are made by the insurance carrier based on the policy and its claim review process.</p>
-      <p>R&C can inspect accessible roofing areas, document relevant visible conditions, and provide contractor-side information about roofing damage and the proposed scope of work.</p>
-      <p>R&C Roofing Contractors is not a public adjuster. We do not adjust claims, negotiate insurance settlements, represent policyholders in claim negotiations, or guarantee claim outcomes.</p>
-    </div>
-    <div class="text-center">
-      <a href="/insurance-claim-help" class="btn-primary">Learn About Insurance Claim Help</a>
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
+      <p>
+        A HAAG Certified inspection provides contractor-side evidence for your insurance file. It does not guarantee
+        claim approval. Your insurance carrier makes all final coverage decisions based on your specific policy
+        language.
+      </p>
+      <p>
+        R&C Roofing Contractors is not a public adjuster. We do not negotiate settlements or represent policyholders in
+        claim disputes.
+      </p>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Verify Certification — White -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
-      Verify Our HAAG Certification
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5 max-w-4xl">
-      <p>Robert Pilato holds HAAG Certification #201408313.</p>
-      <p>R&C includes this certification number so property owners can identify the credential associated with the inspector evaluating their roof.</p>
-      <p>Our HAAG inspection expertise is paired with R&C Roofing Contractors' Hawaii contractor license C-33642.</p>
-    </div>
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+      We offer specialized evaluations for different stages of property ownership.
+    </p>
+    <ServiceDirectory items={otherServices} variant="light" />
     <Fragment slot="bg">
       <SectionBg variant="white" />
     </Fragment>
   </WidgetWrapper>
 
-  <!-- Explore Other Inspections — Grey #FAFAFA, black cards -->
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Roof Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
-      A HAAG Certified inspection is one option within R&C's roof inspection services.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
-      {[
-        {
-          title: 'Pre-Purchase Roof Inspections',
-          description: "Get a closer look at the roof's condition before moving forward with a real estate transaction.",
-          href: '/roof-inspections/pre-purchase-roof-inspection',
-          linkText: 'View Pre-Purchase Inspections',
-        },
-        {
-          title: 'Storm & Wind Damage Inspections',
-          description: 'Evaluate visible roof conditions after strong winds or severe weather.',
-          href: '/roof-inspections/storm-and-wind-damage-inspection',
-          linkText: 'View Storm Damage Inspections',
-        },
-        {
-          title: 'Annual Maintenance Inspections',
-          description: 'Track roof conditions over time and identify areas that may need attention.',
-          href: '/roof-inspections/annual-maintenance-inspection',
-          linkText: 'View Maintenance Inspections',
-        },
-      ].map(({ title, description, href, linkText }) => (
-        <div class="rounded-lg border border-accent/60 bg-[#222] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-          <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3 text-white">{title}</h3>
-          <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/60 mb-4 flex-1">{description}</p>
-          <a href={href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline mt-auto">{linkText}</a>
-        </div>
-      ))}
-    </div>
-    <div class="mt-8 text-center">
-      <a href="/roof-inspections" class="inline-flex items-center justify-center px-6 py-3 rounded-md border-2 border-black text-black font-semibold text-[15px] leading-snug hover:bg-black hover:text-white transition-colors duration-200">View All Roof Inspection Services</a>
-    </div>
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <!-- FAQs — White -->
-  <FAQs
-    title="Frequently Asked Questions"
-    items={[
-      {
-        title: 'What is a HAAG Certified Inspector?',
-        description:
-          "A HAAG Certified Inspector has completed specialized damage-assessment education and testing through HAAG. R&C's Robert Pilato holds HAAG Certification #201408313.",
-      },
-      {
-        title: 'Is a HAAG Certified inspection different from a standard roof inspection?',
-        description:
-          'The roofing system itself is still being inspected. The difference is the additional damage-assessment training the HAAG Certified Inspector brings to the evaluation.',
-      },
-      {
-        title: 'Do I need a HAAG Certified inspection after every storm?',
-        description:
-          'Not necessarily. An inspection may make sense if you notice a new leak, displaced roofing materials, visible damage, or another change after severe weather.',
-      },
-      {
-        title: 'Will a HAAG Certified inspection prove that my insurance claim is covered?',
-        description:
-          'No. R&C can document visible roofing conditions and provide contractor-side information, but the insurance carrier determines whether damage is covered under your policy.',
-      },
-      {
-        title: 'Can a HAAG inspection help if an insurance claim has already been denied?',
-        description:
-          'An additional roof inspection may provide more information about visible roofing conditions, but R&C does not determine coverage or overturn insurance decisions. Questions about a denied claim should also be discussed directly with your carrier or an appropriately licensed insurance professional.',
-      },
-      {
-        title: 'Can R&C repair the roof after the inspection?',
-        description:
-          'Yes. R&C Roofing Contractors is a licensed Hawaii roofing contractor, License C-33642. If roofing work is needed, our team can provide repair or replacement services.',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
     </Fragment>
   </FAQs>
 
-  <!-- P-12 Final CTA — Yellow -->
   <CTABanner
     title="Get a Closer Look at Your Roof Damage"
-    subtitle="If you are dealing with storm damage or another roofing concern, a HAAG Certified inspection can provide a closer assessment of the roof's visible condition.<br />R&amp;C Roofing Contractors can inspect the roofing system, document relevant findings, and explain what those findings may mean for your property."
-    ctaText="Schedule a HAAG Certified Roof Inspection"
+    subtitle="Find out exactly what is happening before you commit to a construction contract."
+    ctaText="Schedule Inspection"
   />
-
 </Layout>

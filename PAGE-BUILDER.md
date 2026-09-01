@@ -61,6 +61,11 @@ import ServiceCard from '~/components/ui/ServiceCard.astro';
 import ProjectCard from '~/components/ui/ProjectCard.astro';
 import BulletCard from '~/components/ui/BulletCard.astro';
 import BenefitItem from '~/components/ui/BenefitItem.astro';
+import IconPoint from '~/components/ui/IconPoint.astro';
+import IconPointBand from '~/components/ui/IconPointBand.astro';
+import FivePointGrid from '~/components/ui/FivePointGrid.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -93,9 +98,13 @@ Every section on every page must follow these rules. Do not deviate.
 | H2 | Every section title |
 | H3 | Card or item titles within a section |
 | No eyebrows/taglines | Never add eyebrow text above headings |
-| No icons on cards | Unless the pattern explicitly includes them |
+| Simple card icons | Heading+description-only cards get a Tabler icon mark (`InfoCard`). P-05 linked service cards stay icon-free |
 | One CTA type per section | Use **either** Primary **or** Ghost buttons in a section — never mix both styles in the same section |
+| Heading + para + CTA | Always **P-03** with a side image. Alternate image left/right from the previous split on the page (see **Split Image Side Rule**) |
 | Headline description alignment | When `<Headline>` is used (always center-aligned), any description immediately below it **must also be center-aligned**. **Never pass body text as the `subtitle` prop on `<Headline>`.** The `subtitle` slot is only for true visual sub-headings (rarely used). All descriptive sentences belong as a separate `<p>` below the `<Headline>` with `text-center max-w-3xl mx-auto mb-8 md:mb-12`, and add `classes={{ container: 'mb-4 md:mb-6' }}` on the `<Headline>` to tighten the gap. For sections with left-aligned body paragraphs, prepend the sentence as the first `<p>` inside the existing body `<div>` — no centering needed. |
+| Adjacent section variety | Neighboring sections cannot share a structure. Never stack card grid → card grid, list → list, timeline → timeline, or P-13 → P-13. Break them with a different pattern. |
+| Five items | Never a 5-card grid (no 3+2). Use **P-06** `IconPointBand` (horizontal) or a `ServiceDirectory` if each item links. |
+| Icon points | H2 + 3 or 5 icon points, no links: `IconPointBand` — one row, icon above title, center-aligned. H2 + 4 icon points as text: `IconPointGrid` — 2 × 2, left-aligned. No boxes, no timeline line. |
 
 ### CTA Button Consistency Rule
 
@@ -113,6 +122,28 @@ Every section on every page must follow these rules. Do not deviate.
 - **Ghost:** Use when the section's goal is exploration (view more, learn about, browse)
 - **Per-card links:** Text links (`text-primary hover:underline`) are allowed alongside a section CTA — they don't count as a second button style
 
+### Split Image Side Rule
+
+A section that is **heading + paragraph(s) + CTA** is always **P-03** (`Content.astro`) and **must include a side image**. Do not flatten it to P-13.
+
+**Pick the side by reading the page, not by guessing:**
+
+1. Walk the page from the top.
+2. Find the nearest **previous split** — any section that already has a left/right image (`Hero2`, `Content`, or `Steps` with an image).
+3. Place this section's image on the **opposite** side.
+
+| Component | Image on the RIGHT (text left) | Image on the LEFT (text right) |
+|-----------|-------------------------------|--------------------------------|
+| `Hero2` (P-01) | Default — always | — |
+| `Content` (P-03) | Omit `isReversed` | Add `isReversed` |
+| `Steps` (P-08) | Omit `isReversed` | Add `isReversed` |
+
+**Typical page:** Hero image is on the right → first P-03 uses `isReversed` (image left) → next split is default (image right) → keep flipping.
+
+Cards, stats, FAQ, testimonials, P-12, and P-13 do **not** count. They do not reset the next image side.
+
+If this is the first split on the page, start with image **right**, then alternate. If the brief has no image URL, still add an image with accurate alt text.
+
 ### Grid Card Decision Rule
 
 **Only use card grids when the item count fits cleanly into standard layouts.** Analyze the content before choosing a pattern.
@@ -123,12 +154,12 @@ Every section on every page must follow these rules. Do not deviate.
 | 2 | ✅ Yes | P-02, P-05 | `sm:grid-cols-2` |
 | 3 | ✅ Yes | P-02, P-05, P-09 | `sm:grid-cols-3` |
 | 4 | ✅ Yes | P-02, P-05, P-07 | `sm:grid-cols-4` or `sm:grid-cols-2` (2×2) |
-| 5 | ⚠️ Special | **P-06 only** | 3+2 split rows — never a single grid |
+| 5 | ❌ No cards | **P-06** | `IconPointBand` one row. Linked items: `ServiceDirectory` rows |
 | 6 | ✅ Yes | P-05, P-09 | `sm:grid-cols-3` (2 rows) or `sm:grid-cols-2` (3 rows) |
 | 7+ | ⚠️ Caution | Split sections | Consider breaking into multiple sections or use a different format |
 
 **When NOT to use cards:**
-- Content has 5 items → use **P-06** (3+2 split layout)
+- Content has 5 items → use **P-06** (`IconPointBand`) or `ServiceDirectory` — never cards
 - Content has 7+ items → split into logical groups or use **P-08** (timeline) / **P-13** (editorial)
 - Content is primarily narrative/explanatory → use **P-03** (text + image) or **P-13** (full-width editorial)
 - Items are not parallel in structure (different lengths, some have links, some don't) → use prose format instead
@@ -163,7 +194,7 @@ Every section on every page must follow these rules. Do not deviate.
 |-----------|-----------|------------|
 | Service cards (P-05) | ✅ Yes — links to service page | ✅ Fully clickable |
 | Project/gallery cards (P-09) | ✅ Yes — links to project detail | ✅ Fully clickable |
-| Benefit/feature cards (P-02, P-06) | ❌ No link | ❌ Static |
+| Benefit/feature cards (P-02) | ❌ No link | ❌ Static |
 | Testimonial cards (P-11) | ❌ No link | ❌ Static |
 | Info cards (P-07) | Depends on content | Match the link presence |
 
@@ -188,11 +219,16 @@ Use these exact classes everywhere. Do not invent new sizes.
 | **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
 | **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
 | **Body large** (main paragraphs) | `text-[16px] md:text-[17px] font-medium leading-[160%] text-muted` |
-| **Body small** (card descriptions) | `text-[14px] md:text-[15px] font-medium leading-[160%] text-muted` |
+| **Body small** (card descriptions) | `text-[14px] md:text-[15px] font-normal leading-[160%] text-muted` |
 | **Body xs** (disclaimers, labels) | `text-[13px] md:text-[14px] font-medium leading-[160%] text-muted` |
+
+Card body copy is `font-normal`. Card headings and links stay `font-medium`.
+
+On white / grey / yellow-tint sections, `text-muted` is subtle black `#444444` — not washed-out grey, not pure `#000`. On dark sections use `text-white/70` (or `text-white/60` on dark cards).
 | **Primary button** | `btn-primary` |
 | **Ghost / outline button** | `btn btn-secondary` |
 | **Text link** | `text-primary font-medium text-[14px] md:text-[15px] hover:underline` |
+| **Text link on yellow / accent card** | `text-heading font-medium text-[14px] md:text-[15px] hover:underline` (or `text-card-link-light`) — never `text-primary` or `text-accent` |
 | **Trust badge / tag** | `tag-pill` |
 
 ---
@@ -201,16 +237,16 @@ Use these exact classes everywhere. Do not invent new sizes.
 
 Read each section of the content doc → find its shape below → use that pattern number.
 
-> **Important:** Before selecting a card-based pattern, count the items. See the **Grid Card Decision Rule** above. If the count doesn't fit cleanly (e.g., 5 items), use the designated pattern (P-06) or restructure the content.
+> **Important:** Before selecting a card-based pattern, count the items. See the **Grid Card Decision Rule** above. Never put two card sections back to back. Five items are never cards.
 
 | What the doc section looks like | Pattern |
 |---------------------------------|---------|
 | Page title (H1) + 1–2 paragraphs + primary CTA + optional image + optional badges | **P-01** |
 | H2 + 1–2 intro paragraphs + 2–4 feature/benefit points, no image | **P-02** |
-| H2 + paragraphs + image on one side + CTA | **P-03** |
+| H2 + paragraphs + CTA (always add a side image; flip side from the last split) | **P-03** |
 | H2 title that should share a row with a CTA button | **P-04** *(composable — combine with P-02, P-08, etc.)* |
 | 2, 3, 4, or 6 cards each with title, description, and a link to its own page | **P-05** |
-| Exactly 5 benefit/feature points (use 3+2 split — never a single grid) | **P-06** |
+| 3 or 5 icon + title + description points, no cards (one horizontal row) | **P-06** |
 | 4 compact info items (areas served, credentials, quick specs) | **P-07** |
 | H2 + 1–2 paragraphs + 3–6 ordered steps + optional image + optional disclaimer | **P-08** |
 | Grid of project/portfolio cards with optional image placeholders | **P-09** |
@@ -218,7 +254,8 @@ Read each section of the content doc → find its shape below → use that patte
 | Customer quotes with name and role | **P-11** |
 | Page-ending call to action with contact info and a button | **P-12** |
 | H2 title + multiple body paragraphs, full width, no image, no grid — content-heavy narrative | **P-13** |
-| *New layout polished and approved* | **P-14, P-15 …** *(add to this file)* |
+| 4 icon + heading + description points, 2 × 2 text grid, no cards | **P-14** |
+| *New layout polished and approved* | **P-15 …** *(add to this file)* |
 
 ---
 
@@ -255,6 +292,7 @@ Read each section of the content doc → find its shape below → use that patte
 ```
 
 **Variants:**
+- No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
 - No image → use `Hero.astro` instead (centered layout)
 - No badges → omit `<Fragment slot="content">`
 - Single heading line → remove `<br />`
@@ -265,7 +303,8 @@ Read each section of the content doc → find its shape below → use that patte
 
 **Content shape:** H2 title, 1–2 intro paragraphs, 2–4 feature/benefit points (no image, no per-item links)  
 **Pattern:** Inline `WidgetWrapper`  
-**⚠️ Item count:** Works best with 2, 3, or 4 items. For 5 items, use **P-06** instead.
+**⚠️ Item count:** Works best with 2, 3, or 4 items. For 5 items, use **P-06** (`IconPoint`) instead — never a 5-card grid.  
+**If the points are cards** (boxed), use `InfoCard` with a Tabler `icon` — do not ship heading+description-only boxes.
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -288,7 +327,7 @@ Read each section of the content doc → find its shape below → use that patte
     ].map(({ title, description }) => (
       <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
         <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
+        <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">{description}</p>
       </div>
     ))}
   </div>
@@ -316,9 +355,10 @@ Read each section of the content doc → find its shape below → use that patte
 
 ### P-03 · Two-Column Text + Image
 
-**Content shape:** H2 title, 2–3 paragraphs, image on one side, optional CTA  
+**Content shape:** H2 title, 2–3 paragraphs, CTA, and a required side image  
 **Component:** `Content.astro`  
-**Note:** Title is left-aligned above the text column, not centered above both columns.
+**Note:** Title is left-aligned above the text column, not centered above both columns.  
+**Image side:** Follow the **Split Image Side Rule** — opposite of the previous split on the page. After a default `Hero2` (image right), the first P-03 is `isReversed` (image left).
 
 ```astro
 <Content
@@ -338,10 +378,11 @@ Read each section of the content doc → find its shape below → use that patte
 ```
 
 **Variants:**
-- Image left, text right → add `isReversed` prop to `<Content>`
-- No CTA → omit `callToAction`
-- No image → omit `image` prop (becomes full-width text with centered Headline)
+- Image left, text right → add `isReversed` (use this when the previous split has its image on the right)
+- Image right, text left → omit `isReversed` (use this when the previous split has its image on the left)
+- No CTA → omit `callToAction` (if there is still a heading + paragraphs, keep the image)
 - Ghost CTA → `callToAction={{ variant: 'secondary', ... }}`
+- Never omit the image on a heading + para + CTA section
 
 ---
 
@@ -369,7 +410,8 @@ Read each section of the content doc → find its shape below → use that patte
 
 **Content shape:** 2, 3, 4, or 6 cards (NOT 5), each with title, description, and a link to its own page  
 **Component:** `Features2.astro`  
-**⚠️ Item count:** Only use when you have 2, 3, 4, or 6 items. For 5 items, use **P-06** instead.
+**⚠️ Item count:** Only use when you have 2, 3, 4, or 6 items. For 5 items, use **P-06** (`IconPoint` or `ServiceDirectory`) — never cards.  
+**Card links:** Sit on the bottom of every card. `Features2` already applies `h-full` + `flex-1` + `mt-auto`. Handmade cards must do the same.
 
 ```astro
 <Features2
@@ -383,7 +425,7 @@ Read each section of the content doc → find its shape below → use that patte
         variant: 'link',
         text: 'Learn More →',
         href: '/services/slug',
-        class: 'text-primary font-medium text-[14px] md:text-[15px] hover:underline',
+        class: 'text-heading font-medium text-[14px] md:text-[15px] hover:underline',
       },
     },
     // repeat for each card — no icon property
@@ -395,62 +437,44 @@ Read each section of the content doc → find its shape below → use that patte
 - No per-card links → omit `callToAction` in each item
 - 4 columns → add `columns={4}` prop (default is 3)
 - Custom background → add `<Fragment slot="bg">...</Fragment>` inside the component
+- Yellow / accent-tint cards → link `text-heading` (shown above). Black cards on grey → `text-accent`
 
 ---
 
-### P-06 · Uneven Card Grid (3 + 2)
+### P-06 · Icon-Point Band
 
-**Content shape:** Exactly 5 benefit/feature points, no per-card links  
-**Pattern:** Two stacked grids — 3-col row then 2-col row  
-**⚠️ This is the ONLY pattern for 5 items.** Never use a single grid for 5 items — it creates awkward spacing.
+**Content shape:** H2 + intro + 3–5 parallel points with icons, no per-item links  
+**Pattern:** `IconPointBand` — one horizontal row on `md+`. Icon on top, title, description. Center-aligned. Tight title-to-description gap. **No card boxes. No timeline line or step numbers.**
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <Headline title="Section Title" />
+  <Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6' }} />
+  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    Intro sentence from the brief.
+  </p>
 
-  <!-- Row 1: 3 equal cards -->
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
-    {[
-      { title: 'Benefit One', description: 'Description from doc.' },
-      { title: 'Benefit Two', description: 'Description from doc.' },
-      { title: 'Benefit Three', description: 'Description from doc.' },
-    ].map(({ title, description }) => (
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-      </div>
-    ))}
-  </div>
-
-  <!-- Row 2: 2 half-width cards -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-    {[
-      { title: 'Benefit Four', description: 'Description from doc.' },
-      { title: 'Benefit Five', description: 'Description from doc.' },
-    ].map(({ title, description }) => (
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-6 flex flex-col intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[22px] md:text-[26px] font-medium font-heading leading-[130%] mb-3">{title}</h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted">{description}</p>
-      </div>
-    ))}
-  </div>
+  <IconPointBand items={points} />
 
   <Fragment slot="bg">
-    <div class="absolute inset-0 bg-gray-50 dark:bg-slate-900/30"></div>
+    <SectionBg variant="grey" />
   </Fragment>
 </WidgetWrapper>
 ```
 
+**Linked 5 items:** use `<ServiceDirectory items={...} variant="dark" />` instead of a band.
+
 **Variants:**
-- 4 items → single `sm:grid-cols-4` grid
-- 6 items → two `sm:grid-cols-3` grids
-- Cards with links → add `<a href="..." class="mt-auto pt-4 text-primary font-medium text-[14px] hover:underline">Text →</a>` inside the card div
+- Dark section → `variant="dark"`
+- 3 or 5 points → same component; columns match the item count
+- 4 points as a 2 × 2 text grid → use **P-14** `IconPointGrid` instead
+- Center-align each point’s icon, title, and description. Do not add a connecting rail — that is P-08 Timeline
 
 ---
 
 ### P-07 · 4-Cards One Row (Compact)
 
-**Content shape:** 4 compact info items — areas served, credentials, quick specs — plus an optional ghost CTA below
+**Content shape:** 4 compact info items — areas served, credentials, quick specs — plus an optional ghost CTA below  
+**Icons:** These are heading+description cards — each item must have a Tabler icon via `InfoCard`.
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -458,15 +482,12 @@ Read each section of the content doc → find its shape below → use that patte
 
   <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
     {[
-      { title: 'Item One',   description: 'Short detail from doc.' },
-      { title: 'Item Two',   description: 'Short detail from doc.' },
-      { title: 'Item Three', description: 'Short detail from doc.' },
-      { title: 'Item Four',  description: 'Short detail from doc.' },
-    ].map(({ title, description }) => (
-      <div class="rounded-lg border border-[#ffffff29] bg-white dark:bg-slate-900 shadow-[0_4px_30px_rgba(0,0,0,0.08)] p-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        <h3 class="text-[16px] md:text-[18px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-        <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
-      </div>
+      { title: 'Item One',   description: 'Short detail from doc.', icon: 'tabler:home' },
+      { title: 'Item Two',   description: 'Short detail from doc.', icon: 'tabler:shield' },
+      { title: 'Item Three', description: 'Short detail from doc.', icon: 'tabler:sun' },
+      { title: 'Item Four',  description: 'Short detail from doc.', icon: 'tabler:droplet' },
+    ].map(({ title, description, icon }) => (
+      <InfoCard title={title} description={description} icon={icon} variant="dark" />
     ))}
   </div>
 
@@ -553,6 +574,8 @@ Read each section of the content doc → find its shape below → use that patte
 
 **Variants:**
 - Steps only, no left column → remove the flex split and use `<Timeline>` full width
+- Horizontal on desktop, vertical on mobile (default) → omit `variant` or `variant="horizontal"` (desktop is an icon rail; each step’s column and copy width grow with step count and that item’s title/description)
+- Vertical timeline → `variant="vertical"` only when the brief is a stacked process, not the default
 - No image → omit `<Image />` block
 - No CTA in header → replace header row with `<Headline title="..." />`
 
@@ -562,7 +585,7 @@ Read each section of the content doc → find its shape below → use that patte
 
 **Content shape:** H2 title, subtitle, 3+ cards (photo + title + description), ghost CTA below  
 **Note:** Use the SVG placeholder when real images are not yet available — it will be replaced later.  
-**⚠️ Item count:** Works best with 3, 6, or 9 items (multiples of 3). For 5 items, use **P-06** layout instead.
+**⚠️ Item count:** Works best with 3, 6, or 9 items (multiples of 3). For 5 items, use **P-06** (`IconPoint` or `ServiceDirectory`).
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
@@ -587,7 +610,7 @@ Read each section of the content doc → find its shape below → use that patte
           </div>
         )}
         <h3 class="text-[18px] md:text-[20px] font-medium font-heading leading-[130%] mb-1">{title}</h3>
-        <p class="text-[13px] md:text-[14px] font-medium leading-[160%] text-muted">{description}</p>
+        <p class="text-[13px] md:text-[14px] font-normal leading-[160%] text-muted">{description}</p>
       </div>
     ))}
   </div>
@@ -734,6 +757,35 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 ---
 
+### P-14 · Icon-Point Text Grid (2 × 2)
+
+**Content shape:** H2 + optional intro + 4 unlinked icon + heading + description points  
+**Pattern:** `IconPointGrid` — two columns on `sm+` (2 × 2). Icon on top, then title, then description. **Left-aligned.** No card boxes.
+
+```astro
+<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+    Intro sentence from the brief.
+  </p>
+
+  <IconPointGrid items={points} />
+
+  <Fragment slot="bg">
+    <SectionBg variant="white" />
+  </Fragment>
+</WidgetWrapper>
+```
+
+**Variants:**
+- Dark section → `variant="dark"` on `IconPointGrid` (and `isDark` on the wrapper / Headline)
+- 2 items → same component, one row of two
+- 6 items → same component, 2 × 3
+- Prefer this over P-06 when there are exactly 4 points and you do not want a centered one-row band
+- Prefer this over P-07 when the points should stay as open text, not cards
+
+---
+
 ## New Page Checklist
 
 1. Create `src/pages/[route]/index.astro`
@@ -751,7 +803,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 When a new layout is polished and approved in the browser:
 
-1. Pick the next number: **P-13**, P-14, …
+1. Pick the next number: **P-15**, …
 2. Add a row to the **Pattern Selector** table
 3. Add the pattern entry below P-12 using the same format:
    - `### P-XX · Pattern Name`
@@ -1030,6 +1082,7 @@ import Timeline from '~/components/ui/Timeline.astro';
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `items` | Array | `[]` | Array of step objects |
+| `variant` | `'vertical'` \| `'horizontal'` | `'vertical'` | Vertical stack, or desktop row that stacks on mobile |
 | `defaultIcon` | string | — | Tabler icon name for all steps |
 | `isDark` | boolean | `false` | Set `true` for black sections |
 | `classes` | object | — | Override container, panel, title, description, icon styles |
@@ -1047,9 +1100,21 @@ Each item in the `items` array can have:
 
 ### Usage
 
-**Basic usage (light section):**
+**Basic usage (light section, horizontal on desktop):**
 ```astro
 <Timeline
+  items={[
+    { title: 'Step 1', description: 'First step description.', icon: 'tabler:search' },
+    { title: 'Step 2', description: 'Second step description.', icon: 'tabler:file' },
+    { title: 'Step 3', description: 'Third step description.', icon: 'tabler:check' },
+  ]}
+/>
+```
+
+**Vertical (opt-in only):**
+```astro
+<Timeline
+  variant="vertical"
   items={[
     { title: 'Step 1', description: 'First step description.', icon: 'tabler:search' },
     { title: 'Step 2', description: 'Second step description.', icon: 'tabler:file' },
