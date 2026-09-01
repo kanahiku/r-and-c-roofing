@@ -1,72 +1,48 @@
 ---
-import simplePattern from '~/assets/images/patterns/simple.svg';
+import type { ImageMetadata } from 'astro';
+import MotifLayer from '~/components/ui/MotifLayer.astro';
+import { MOTIF, MOTIF_COLOR_VARS, MOTIF_OPACITY_VARS } from '~/config/motif';
 
 export interface Props {
   variant: 'hero' | 'dark' | 'grey' | 'white';
-  motifOpacity?: number;
+  /** Override opacity for this section. Number (0.15) or percent string ("15%"). */
+  motifOpacity?: number | string;
   fadeDirection?: 'top-to-bottom' | 'bottom-to-top' | 'none';
   pattern?: ImageMetadata;
+  /** Force motif on/off for this section, ignoring MOTIF.sections. */
+  showMotif?: boolean;
+  /** CSS color or `var(--aw-color-motif-hero)`. Defaults to the variant token. */
+  motifColor?: string;
 }
 
 const {
   variant,
   motifOpacity,
-  fadeDirection = 'top-to-bottom',
-  pattern = simplePattern,
+  fadeDirection = MOTIF.fade,
+  pattern = MOTIF.pattern,
+  showMotif,
+  motifColor,
 } = Astro.props;
 
-const variantConfig = {
-  hero: {
-    bgClass: '',
-    motifColorVar: 'var(--aw-color-motif-hero)',
-    opacityVar: 'var(--aw-opacity-motif-hero)',
-    hasMotif: true,
-  },
-  dark: {
-    bgClass: 'bg-section-dark',
-    motifColorVar: 'var(--aw-color-motif-dark)',
-    opacityVar: 'var(--aw-opacity-motif-dark)',
-    hasMotif: true,
-  },
-  grey: {
-    bgClass: 'bg-section-grey',
-    motifColorVar: '',
-    opacityVar: '',
-    hasMotif: false,
-  },
-  white: {
-    bgClass: 'bg-section-white',
-    motifColorVar: '',
-    opacityVar: '',
-    hasMotif: false,
-  },
-};
+const bgClass = {
+  hero: '',
+  dark: 'bg-section-dark',
+  grey: 'bg-section-grey',
+  white: 'bg-section-white',
+}[variant];
 
-const config = variantConfig[variant];
-const opacity = motifOpacity !== undefined ? motifOpacity : config.opacityVar;
-
-const fadeStyles = {
-  'top-to-bottom': 'linear-gradient(to bottom, black 0%, transparent 100%)',
-  'bottom-to-top': 'linear-gradient(to top, black 0%, transparent 100%)',
-  'none': 'none',
-};
-const fadeStyle = fadeStyles[fadeDirection];
+const hasMotif = showMotif ?? MOTIF.sections[variant];
+const color = motifColor ?? MOTIF_COLOR_VARS[variant];
+const opacityFallback = MOTIF_OPACITY_VARS[variant];
 ---
 
-{config.hasMotif ? (
-  <>
-    {config.bgClass && <div class={`absolute inset-0 ${config.bgClass}`}></div>}
-    <div 
-      class="absolute inset-0" 
-      style={fadeStyle !== 'none' ? `-webkit-mask-image: ${fadeStyle}; mask-image: ${fadeStyle};` : ''}
-    >
-      <div
-        class="absolute inset-0"
-        style={`opacity: ${opacity}; background-color: ${config.motifColorVar}; -webkit-mask-image: url('${pattern.src}'); mask-image: url('${pattern.src}'); -webkit-mask-size: cover; mask-size: cover; -webkit-mask-mode: luminance; mask-mode: luminance;`}
-        aria-hidden="true"
-      ></div>
-    </div>
-  </>
-) : (
-  <div class={`absolute inset-0 ${config.bgClass}`}></div>
+{bgClass && <div class={`absolute inset-0 ${bgClass}`}></div>}
+{hasMotif && (
+  <MotifLayer
+    color={color}
+    opacity={motifOpacity}
+    opacityFallback={opacityFallback}
+    fade={fadeDirection}
+    pattern={pattern}
+  />
 )}

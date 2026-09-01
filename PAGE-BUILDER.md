@@ -214,7 +214,7 @@ Use these exact classes everywhere. Do not invent new sizes.
 | Role | Tailwind classes |
 |------|-----------------|
 | **H1** (hero only) | `text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter font-heading` |
-| **H2** (section title) | `text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
+| **H2** (section title) | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
 | **H3 standard** | `text-[22px] md:text-[26px] font-medium font-heading leading-[130%]` |
 | **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium font-heading leading-[130%]` |
 | **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium font-heading leading-[130%]` |
@@ -395,7 +395,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 
 ```astro
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-  <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+  <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
     Section Title
   </h2>
   <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -521,7 +521,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 
   <!-- Header row with CTA — or swap for <Headline> if no CTA needed -->
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
+    <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
       Section Title
     </h2>
     <a href="/page" class="btn-primary shrink-0">CTA Text</a>
@@ -724,7 +724,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 **Note:** The component automatically includes:
 - Yellow (`bg-accent`) background
-- Black pattern motif at 3% opacity with fade
+- Motif from `src/config/motif.ts` (R&C: black pattern at 3% opacity with fade)
 - R&C contact info (address, phone)
 - Black divider line
 - Black CTA button with hover state
@@ -737,7 +737,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-  <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+  <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
     Section Title
   </h2>
   <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
@@ -857,7 +857,9 @@ import HeroAccent from '~/components/ui/HeroAccent.astro';
 
 ### SectionBg
 
-Reusable background component for section `<Fragment slot="bg">` slots. Handles solid colors and pattern motifs with proper dark mode support.
+Reusable background component for section `<Fragment slot="bg">` slots. Solid colors plus the site motif from `src/config/motif.ts`.
+
+**Do not import pattern SVGs on pages.** Pages only pass `variant`. Motif shape, fade, tile size, and which sections show it are site config. Colors/opacity live in `CustomStyles.astro` (`--aw-color-motif-*`, `--aw-opacity-motif-*`).
 
 **Import:**
 ```astro
@@ -869,19 +871,21 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 | Prop | Values | Default | Description |
 |------|--------|---------|-------------|
 | `variant` | `hero`, `dark`, `grey`, `white` | (required) | Background preset |
-| `motifOpacity` | String like `"10%"`, `"8%"` | Per variant | Override default opacity |
-| `motifColor` | `accent`, `black` | Per variant | Override motif color |
-| `fadeDirection` | `top-to-bottom`, `bottom-to-top`, `none` | `top-to-bottom` | Gradient fade direction |
-| `pattern` | `ImageMetadata` | `simple.svg` | Custom pattern SVG |
+| `motifOpacity` | `0.15` or `"15%"` | Token for that variant | Override this section only |
+| `motifColor` | CSS color | Token for that variant | Override this section only |
+| `fadeDirection` | `top-to-bottom`, `bottom-to-top`, `none` | `MOTIF.fade` | Override fade |
+| `pattern` | `ImageMetadata` | `MOTIF.pattern` | Override SVG |
+| `showMotif` | boolean | `MOTIF.sections[variant]` | Force motif on/off |
 
-**Variant defaults:**
+**R&C variant defaults** (other sites change `src/config/motif.ts`):
 
-| Variant | Background | Motif | Opacity |
-|---------|------------|-------|---------|
-| `hero` | transparent (white) | yellow accent | 10% |
-| `dark` | black | yellow accent | 12% |
-| `grey` | #FAFAFA | none | — |
-| `white` | white | none | — |
+| Variant | Background | Motif |
+|---------|------------|-------|
+| `hero` | transparent (white) | on — accent at 10% |
+| `dark` | black | on — accent at 12% |
+| `grey` | #FAFAFA | off |
+| `white` | white | off |
+| CTA banner | yellow card | on — black at 3% (`CTABanner` reads the same config) |
 
 **Usage:**
 ```astro
@@ -893,7 +897,7 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 </WidgetWrapper>
 ```
 
-**Custom opacity example:**
+**One-off override (rare):**
 ```astro
 <Fragment slot="bg">
   <SectionBg variant="hero" motifOpacity="15%" />
@@ -1055,7 +1059,7 @@ import Headline from '~/components/ui/Headline.astro';
 
 The Headline component uses consistent typography:
 
-- **Title (H2):** 30px mobile / 40px desktop, Sora Regular, tight tracking
+- **Title (H2):** 26px mobile / 40px desktop, Sora Regular, tight tracking
 - **Subtitle:** 16px mobile / 17px desktop, Inter Medium, 160% line height
 
 ### Color Variables

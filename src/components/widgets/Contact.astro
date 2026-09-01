@@ -7,7 +7,6 @@ import type { Contact as Props } from '~/types';
 const {
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
-  tagline = await Astro.slots.render('tagline'),
   inputs,
   textarea,
   disclaimer,
@@ -22,12 +21,22 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-[1400px] mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  <Headline title={title} classes={{ container: 'mb-4 md:mb-6' }} />
+
+  {
+    subtitle && (
+      <p
+        class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted"
+        set:html={subtitle}
+      />
+    )
+  }
 
   {
     inputs && (
-      <div class="flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow p-4 sm:p-6 lg:p-8 w-full">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-10 max-w-2xl mx-auto w-full">
         <FormContainer
+          tone="dark"
           inputs={inputs}
           textarea={textarea}
           disclaimer={disclaimer}

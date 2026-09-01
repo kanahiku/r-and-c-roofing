@@ -1,0 +1,359 @@
+export interface Env {
+  DB: D1Database;
+  TURNSTILE_SECRET: string;
+  RESEND_API_KEY: string;
+  /** Inbox that receives lead emails. Required in Resend test mode (must be the Resend account email). */
+  NOTIFY_EMAIL?: string;
+  NOTIFY_EMAIL_OVERRIDE?: string;
+  /** Defaults to Resend's test sender until a client domain is verified. */
+  RESEND_FROM?: string;
+  /** Extra origins as JSON array or comma-separated list. */
+  ALLOWED_ORIGINS?: string;
+  /** Notify emails per site per UTC day. Extra leads still save. Default 20. */
+  RESEND_DAILY_LIMIT?: string;
+}
+
+interface SiteRow {
+  slug: string;
+  name: string;
+  notify_email: string;
+  from_email: string;
+  from_name: string;
+  allowed_origins: string;
+}
+
+interface Submission {
+  site: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  website: string;
+  turnstileToken: string;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX = { name: 120, email: 254, phone: 40, message: 5000 };
+const DEFAULT_RESEND_DAILY_LIMIT = 20;
+
+/** Always allowed so local + Vercel preview/prod work before a custom domain exists. */
+const DEFAULT_ORIGIN_PATTERNS = [
+  'http://localhost:*',
+  'http://127.0.0.1:*',
+  'https://*.vercel.app',
+  'https://randcroofing.com',
+  'https://www.randcroofing.com',
+];
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const origin = request.headers.get('Origin') || '';
+    const url = new URL(request.url);
+
+    if (request.method === 'GET' && (url.pathname === '/' || url.pathname === '/health')) {
+      return json({ ok: true, service: 'massic-forms' });
+    }
+
+    if (request.method === 'OPTIONS') {
+      if (!originAllowed(origin, defaultPatterns(env))) {
+        return json({ ok: false, error: 'Origin not allowed' }, 403);
+      }
+      return cors(origin, new Response(null, { status: 204 }));
+    }
+
+    const patterns = defaultPatterns(env);
+
+    if (request.method !== 'POST') {
+      return withCors(origin, patterns, json({ ok: false, error: 'Method not allowed' }, 405));
+    }
+
+    if (url.pathname !== '/submit' && url.pathname !== '/') {
+      return withCors(origin, patterns, json({ ok: false, error: 'Not found' }, 404));
+    }
+
+    try {
+      const body = await readBody(request);
+
+      if (body.website) {
+        return withCors(origin, patterns, json({ ok: true }));
+      }
+
+      const parsed = validate(body);
+      if ('error' in parsed) {
+        return withCors(origin, patterns, json({ ok: false, error: parsed.error }, 400));
+      }
+
+      const site = await env.DB.prepare('SELECT * FROM sites WHERE slug = ?')
+        .bind(parsed.site)
+        .first<SiteRow>();
+
+      if (!site) {
+        return withCors(origin, patterns, json({ ok: false, error: 'Unknown site' }, 400));
+      }
+
+      const allowed = [...patterns, ...parseOrigins(site.allowed_origins)];
+      if (origin && !originAllowed(origin, allowed)) {
+        return json({ ok: false, error: 'Origin not allowed' }, 403);
+      }
+
+      const turnstileOk = await verifyTurnstile(parsed.turnstileToken, env.TURNSTILE_SECRET, request);
+      if (!turnstileOk) {
+        return withCors(origin, allowed, json({ ok: false, error: 'Spam check failed' }, 400));
+      }
+
+      const id = crypto.randomUUID();
+      const createdAt = new Date().toISOString();
+
+      await env.DB.prepare(
+        `INSERT INTO leads (id, site_slug, name, email, phone, message, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`
+      )
+        .bind(id, site.slug, parsed.name, parsed.email, parsed.phone || null, parsed.message, createdAt)
+        .run();
+
+      const dailyLimit = parseDailyLimit(env.RESEND_DAILY_LIMIT);
+      const sentToday = await emailsSentToday(env.DB, site.slug, utcDayStartIso());
+
+      if (sentToday >= dailyLimit) {
+        console.warn(`Resend skipped: ${site.slug} hit daily cap (${dailyLimit})`);
+      } else {
+        const notifyTo = env.NOTIFY_EMAIL_OVERRIDE || env.NOTIFY_EMAIL || site.notify_email;
+        const from = env.RESEND_FROM || site.from_email;
+
+        const sent = await sendResend(env.RESEND_API_KEY, {
+          from,
+          to: notifyTo,
+          replyTo: parsed.email,
+          subject: `New website inquiry — ${parsed.name}`,
+          html: emailHtml(site.name, parsed),
+          text: emailText(site.name, parsed),
+        });
+
+        if (sent) {
+          await env.DB.prepare('UPDATE leads SET email_sent_at = ? WHERE id = ?')
+            .bind(new Date().toISOString(), id)
+            .run();
+        }
+      }
+
+      // Lead is in D1. Never tell the visitor whether Resend ran.
+      return withCors(origin, allowed, json({ ok: true }));
+    } catch (err) {
+      console.error('submit failed', err);
+      return withCors(origin, patterns, json({ ok: false, error: 'Unable to submit right now' }, 500));
+    }
+  },
+};
+
+function defaultPatterns(env: Env): string[] {
+  return [...DEFAULT_ORIGIN_PATTERNS, ...parseEnvOrigins(env.ALLOWED_ORIGINS)];
+}
+
+function withCors(origin: string, patterns: string[], response: Response): Response {
+  if (origin && originAllowed(origin, patterns)) {
+    return cors(origin, response);
+  }
+  return response;
+}
+
+function cors(origin: string, response: Response): Response {
+  const headers = new Headers(response.headers);
+  if (origin) {
+    headers.set('Access-Control-Allow-Origin', origin);
+    headers.set('Vary', 'Origin');
+  }
+  headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  headers.set('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  headers.set('Access-Control-Max-Age', '86400');
+  return new Response(response.body, { status: response.status, headers });
+}
+
+function json(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  });
+}
+
+function originMatches(origin: string, pattern: string): boolean {
+  if (!origin || !pattern) return false;
+  if (origin === pattern) return true;
+  const escaped = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[^/]*');
+  return new RegExp(`^${escaped}$`, 'i').test(origin);
+}
+
+function originAllowed(origin: string, patterns: string[]): boolean {
+  return patterns.some((pattern) => originMatches(origin, pattern));
+}
+
+function parseEnvOrigins(raw?: string): string[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (Array.isArray(parsed)) return parsed.filter((item): item is string => typeof item === 'string');
+  } catch {
+    /* comma-separated */
+  }
+  return raw
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+async function readBody(request: Request): Promise<Record<string, string>> {
+  const contentType = request.headers.get('Content-Type') || '';
+  if (contentType.includes('application/json')) {
+    const data = (await request.json()) as Record<string, unknown>;
+    return Object.fromEntries(Object.entries(data).map(([k, v]) => [k, v == null ? '' : String(v)]));
+  }
+
+  const form = await request.formData();
+  const out: Record<string, string> = {};
+  for (const [key, value] of form.entries()) {
+    if (typeof value === 'string') out[key] = value;
+  }
+  return out;
+}
+
+function phoneDigits(phone: string): string {
+  return phone.replace(/\D/g, '');
+}
+
+function isValidPhone(phone: string): boolean {
+  const digits = phoneDigits(phone);
+  if (digits.length === 11 && digits.startsWith('1')) return true;
+  return digits.length >= 10 && digits.length <= 15;
+}
+
+function validate(body: Record<string, string>): Submission | { error: string } {
+  const site = (body.site || '').trim();
+  const name = (body.name || '').trim();
+  const email = (body.email || '').trim();
+  const phone = (body.phone || '').trim();
+  const message = (body.message || '').trim();
+  const website = (body.website || '').trim();
+  const turnstileToken = (body['cf-turnstile-response'] || body.turnstileToken || '').trim();
+
+  if (!site) return { error: 'Missing site' };
+  if (name.length < 1 || name.length > MAX.name) return { error: 'Enter your name' };
+  if (!EMAIL_RE.test(email) || email.length > MAX.email) return { error: 'Enter a valid email' };
+  if (!isValidPhone(phone) || phone.length > MAX.phone) return { error: 'Enter a valid phone number' };
+  if (message.length < 1 || message.length > MAX.message) return { error: 'Enter a message' };
+  if (!turnstileToken) return { error: 'Spam check is required' };
+
+  return { site, name, email, phone, message, website, turnstileToken };
+}
+
+function parseOrigins(raw: string): string[] {
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
+async function verifyTurnstile(token: string, secret: string, request: Request): Promise<boolean> {
+  if (!secret) return false;
+  const ip = request.headers.get('CF-Connecting-IP') || '';
+  const body = new URLSearchParams({ secret, response: token });
+  if (ip) body.set('remoteip', ip);
+
+  const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body,
+  });
+  if (!res.ok) return false;
+  const data = (await res.json()) as { success?: boolean };
+  return data.success === true;
+}
+
+function parseDailyLimit(raw?: string): number {
+  const n = Number.parseInt(raw ?? '', 10);
+  if (!Number.isFinite(n) || n < 0) return DEFAULT_RESEND_DAILY_LIMIT;
+  return n;
+}
+
+function utcDayStartIso(): string {
+  const d = new Date();
+  d.setUTCHours(0, 0, 0, 0);
+  return d.toISOString();
+}
+
+async function emailsSentToday(db: D1Database, siteSlug: string, sinceIso: string): Promise<number> {
+  const row = await db
+    .prepare(
+      `SELECT COUNT(*) AS n FROM leads
+       WHERE site_slug = ?
+         AND email_sent_at IS NOT NULL
+         AND email_sent_at >= ?`
+    )
+    .bind(siteSlug, sinceIso)
+    .first<{ n: number | string }>();
+  return Number(row?.n ?? 0);
+}
+
+function hasRealResendKey(apiKey?: string): boolean {
+  if (!apiKey) return false;
+  return apiKey.startsWith('re_') && apiKey.length > 20 && !/x{4,}/i.test(apiKey);
+}
+
+async function sendResend(
+  apiKey: string | undefined,
+  email: { from: string; to: string; replyTo: string; subject: string; html: string; text: string }
+): Promise<boolean> {
+  if (!hasRealResendKey(apiKey)) {
+    console.warn('Resend skipped: set a real RESEND_API_KEY on the Worker');
+    return false;
+  }
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: email.from,
+      to: [email.to],
+      reply_to: email.replyTo,
+      subject: email.subject,
+      html: email.html,
+      text: email.text,
+    }),
+  });
+  if (!res.ok) {
+    const errText = await res.text();
+    console.error('Resend failed', res.status, errText);
+  }
+  return res.ok;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function emailHtml(siteName: string, lead: Submission): string {
+  return `
+    <p>New inquiry from <strong>${escapeHtml(siteName)}</strong></p>
+    <p><strong>Name:</strong> ${escapeHtml(lead.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(lead.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(lead.phone || '—')}</p>
+    <p><strong>Message:</strong></p>
+    <p>${escapeHtml(lead.message).replace(/\n/g, '<br />')}</p>
+  `;
+}
+
+function emailText(siteName: string, lead: Submission): string {
+  return [
+    `New inquiry from ${siteName}`,
+    `Name: ${lead.name}`,
+    `Email: ${lead.email}`,
+    `Phone: ${lead.phone || '—'}`,
+    '',
+    lead.message,
+  ].join('\n');
+}
