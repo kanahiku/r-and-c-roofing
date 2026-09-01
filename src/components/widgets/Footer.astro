@@ -1,9 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
-import logoImg from '~/assets/images/whiteLogo.svg';
+import Logo from '~/components/Logo.astro';
 
 interface Link {
   text?: string;
@@ -58,7 +56,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
           <a class="inline-block" href={getHomePermalink()}>
-            <Image src={logoImg} alt={SITE?.name || 'R&C Roofing'} class="h-8 md:h-9 w-auto max-w-[180px] object-contain" width={180} height={36} />
+            <Logo />
           </a>
         </div>
         <div class="text-sm text-white/50 flex gap-1">

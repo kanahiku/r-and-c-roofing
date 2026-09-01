@@ -1,6 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import logoImg from '~/assets/images/whiteLogo.svg';
+import logoImg from '~/assets/images/logo.webp';
 ---
 
-<Image src={logoImg} alt="R&C Roofing" class="h-8 md:h-9 w-auto max-w-[180px] object-contain" width={180} height={36} loading="eager" />
+<img
+  src={logoImg.src}
+  alt="R&C Roofing"
+  width={logoImg.width}
+  height={logoImg.height}
+  class="h-8 md:h-9 w-auto max-w-[240px] object-contain object-left shrink-0"
+  loading="eager"
+  decoding="async"
+/>

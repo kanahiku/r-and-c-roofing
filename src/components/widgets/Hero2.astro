@@ -72,22 +72,23 @@ const {
         </div>
         {content && <Fragment set:html={content} />}
       </div>
-      <div class="basis-1/2">
+      <div class="basis-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
         {
           image && (
-            <div class="relative m-auto max-w-5xl intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+            <div class="relative w-full max-w-[600px] aspect-square shrink-0 intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto rounded-md w-full"
-                  widths={[400, 768, 1024, 2040]}
-                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+                  {...image}
+                  class="rounded-md w-full h-full object-cover"
+                  widths={[400, 600, 800, 1200]}
+                  sizes="(max-width: 639px) 100vw, 600px"
                   loading="eager"
                   width={600}
                   height={600}
+                  layout="cover"
                   format="webp"
-                  {...image}
                 />
               )}
             </div>

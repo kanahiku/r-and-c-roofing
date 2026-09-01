@@ -79,11 +79,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) =>
-        !page.includes('/homes/') &&
-        !page.includes('/landing/') &&
-        !page.includes('/pricing') &&
-        !page.includes('/404'),
+      filter: (page) => !page.includes('/404'),
     }),
     mdx(),
     icon({

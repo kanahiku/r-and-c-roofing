@@ -291,6 +291,8 @@ Read each section of the content doc → find its shape below → use that patte
 </Hero2>
 ```
 
+Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cover`). Same size on every page.
+
 **Variants:**
 - No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
 - No image → use `Hero.astro` instead (centered layout)

@@ -18,9 +18,9 @@ metadata:
   openGraph:
     site_name: R&C Roofing
     images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
+      - url: '~/assets/images/logo.webp'
+        width: 1024
+        height: 124
     type: website
   twitter:
     handle: ''
@@ -33,7 +33,7 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
 
     post:
