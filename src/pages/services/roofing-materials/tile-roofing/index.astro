@@ -96,7 +96,7 @@ const whyTrust = [
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-8 md:mb-10">
+    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-[20px]">
       Is Tile Roofing Right for Your Property?
     </h2>
     <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted space-y-5">
@@ -113,12 +113,13 @@ const whyTrust = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Comparing Tile Roofing to Other Options" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="Comparing Tile Roofing to Other Options" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       To decide if a tile system is right for you, it helps to evaluate how it compares against alternative materials
       across key decision factors:
     </p>
     <ComparisonTable
+      isDark={true}
       featureLabel="Material Comparison"
       columns={['When to Choose Tile', 'When to Consider Alternatives']}
       rows={[
@@ -147,8 +148,8 @@ const whyTrust = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Clay Tile vs. Concrete Tile" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Clay Tile vs. Concrete Tile" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Both materials deliver a classic tile profile, but they are manufactured differently to suit different project
       goals:
     </p>
@@ -165,8 +166,8 @@ const whyTrust = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Tile Roofing and Oahu’s Microclimates" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Tile Roofing and Oahu’s Microclimates" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       A tile roof is an assembly of components that must withstand Hawaii’s severe weather:
     </p>
     <IconPointBand items={microclimates} />
@@ -176,8 +177,8 @@ const whyTrust = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Explore Other Roofing Materials" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="Explore Other Roofing Materials" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Compare tile side-by-side with other available material options for your Oahu property:
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -199,7 +200,7 @@ const whyTrust = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Oahu Property Owners Trust R&C Roofing" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
+    <Headline title="Why Oahu Property Owners Trust R&C Roofing" classes={{ container: 'mb-[30px] text-left md:mx-0' }} />
     <IconPointGrid items={whyTrust} />
     <Fragment slot="bg">
       <SectionBg variant="white" />

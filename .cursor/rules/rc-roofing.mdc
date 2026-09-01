@@ -25,7 +25,7 @@ Before writing or editing any page, always read:
 - Grid cards with a link or button: card is `flex flex-col h-full`, body is `flex-1`, CTA is `mt-auto` so links line up at the bottom regardless of copy length
 - Adjacent sections must use different structures — never two card grids in a row
 - Never lay out 5 items as cards (no 3+2). Use P-06 `IconPointBand` (horizontal icon points), or a `ServiceDirectory` for linked items
-- H2 + 3 or 5 icon points (no links): `IconPointBand` — one row, icon above title, center-aligned. Not a timeline, not cards
+- H2 + 3 or 5 icon points (no links): `IconPointBand` — one row, icon above title, left-aligned. Not a timeline, not cards
 - H2 + 4 unlinked icon points as text (no cards): `IconPointGrid` — 2 × 2, icon above title, left-aligned
 - Yellow / accent-tint cards (`bg-card-light`, `bg-accent`, yellow wash) — including those on grey `#FAFAFA`: links use `text-heading` (`#222`) or `text-card-link-light`. Never `text-primary` or `text-accent` — those blend into the yellow
 - Run `npm run build` after every page change and fix any errors before finishing

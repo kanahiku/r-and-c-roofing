@@ -42,32 +42,30 @@ const hasImage = Boolean(image);
   containerClass={`max-w-[1400px] mx-auto ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${classes?.container ?? ''}`}
   bg={bg}
 >
-  {/* Centered headline only when there is no side image */}
   {!hasImage && (
     <Headline
       title={title}
       subtitle={subtitle}
       tagline={tagline}
       classes={{
-      container: 'sm:mx-auto',
-      title: 'text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-4 font-heading',
-      subtitle: 'mx-auto sm:text-center text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400',
+      title: 'text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading',
+      subtitle: 'text-[16px] md:text-[17px] font-medium leading-[160%] text-muted dark:text-slate-400',
       }}
     />
   )}
-  <div class="mx-auto max-w-[1400px] p-4 md:px-8">
+  <div class="mx-auto">
     <div class:list={[{ 'md:flex md:gap-16': hasImage }, { 'md:flex-row-reverse': hasImage && isReversed }]}>
       <div class:list={[{ 'md:basis-1/2': hasImage }, 'self-center']}>
         {/* When there's a side image, render title inline above the content */}
         {hasImage && title && (
           <h2
-            class={`text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-4 font-heading ${classes?.title ?? 'text-heading'}`}
+            class={`text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-[20px] font-heading ${classes?.title ?? 'text-heading'}`}
             set:html={title}
           />
         )}
         {content && (
           <div
-            class="text-[16px] md:text-[17px] font-medium leading-[160%] dark:text-slate-400"
+            class="text-[16px] md:text-[17px] font-medium leading-[160%] dark:text-slate-400 mb-[30px] last:mb-0"
             set:html={content}
           />
         )}
@@ -116,7 +114,7 @@ const hasImage = Boolean(image);
 
         {
           callToAction && (
-            <div class="mt-8">
+            <div>
               <Button {...callToAction} />
             </div>
           )
@@ -124,18 +122,24 @@ const hasImage = Boolean(image);
       </div>
       {
         hasImage && (
-          <div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
-            <div class="relative m-auto max-w-4xl">
+          <div
+            aria-hidden="true"
+            class:list={[
+              'mt-10 md:mt-0 md:basis-1/2 flex justify-center',
+              isReversed ? 'md:justify-start' : 'md:justify-end',
+            ]}
+          >
+            <div class="relative w-full max-w-[500px] aspect-square">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto w-full rounded-lg bg-gray-500 shadow-lg"
+                  class="w-full h-full rounded-lg object-cover bg-gray-500 shadow-lg"
                   width={500}
                   height={500}
                   widths={[400, 768]}
-                  sizes="(max-width: 768px) 100vw, 432px"
-                  layout="constrained"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  layout="cover"
                   format="webp"
                   {...image}
                 />

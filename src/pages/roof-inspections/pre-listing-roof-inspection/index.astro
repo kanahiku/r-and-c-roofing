@@ -10,6 +10,7 @@ import ServiceCard from '~/components/ui/ServiceCard.astro';
 import ComparisonTable from '~/components/ui/ComparisonTable.astro';
 import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import {
@@ -120,8 +121,8 @@ const faqs = [
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Pre-Listing vs. Pre-Purchase Roof Inspections" classes={{ container: 'mb-4 md:mb-6' }} />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+    <Headline title="Pre-Listing vs. Pre-Purchase Roof Inspections" classes={{ container: 'mb-[20px]' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px] space-y-4">
       <p>
         Both inspections evaluate the roofing system, but they serve different sides of the real estate transaction. A
         pre-listing assessment helps you prepare before a buyer's inspector flags a potential problem.
@@ -149,8 +150,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       A damaged component does not always tell the full story. We look deeper to find the root cause.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
@@ -164,8 +165,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="When a Pre-Listing Inspection Makes Sense" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+    <Headline title="When a Pre-Listing Inspection Makes Sense" classes={{ container: 'mb-[9px] text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-[30px]">
       You need objective data before a buyer's inspector raises a red flag.
     </p>
     <IconPointGrid items={whenItMakesSense} />
@@ -175,8 +176,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We follow a strict assessment protocol to give you clear answers.
     </p>
     <Timeline
@@ -192,29 +193,33 @@ const faqs = [
     </Fragment>
   </WidgetWrapper>
 
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      Preparing Your Selling Strategy
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
-      <p>
+  <Content
+    isDark={true}
+    title="Preparing Your Selling Strategy"
+    classes={{ title: 'text-white' }}
+  >
+    <Fragment slot="content">
+      <p class="text-white/70">
         A pre-listing inspection provides structural facts to inform your selling strategy. It does not prevent buyer
         objections or guarantee a flawless real estate transaction.
       </p>
-      <p>
+      <p class="mt-4 text-white/70">
         How you use our documentation to satisfy seller disclosure requirements is entirely up to you and your real
         estate agent. R&C Roofing Contractors simply provides objective contractor documentation and potential repair
         scopes to support your preparation.
       </p>
-    </div>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Pre-listing roof inspection photo placeholder" />
+    </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
-  </WidgetWrapper>
+  </Content>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We offer specialized evaluations for different stages of property ownership.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">

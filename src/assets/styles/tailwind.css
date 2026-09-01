@@ -130,6 +130,10 @@
   color: var(--aw-color-headline-subtitle-dark);
 }
 
+@utility text-timeline-step-light {
+  color: var(--aw-color-timeline-step-light);
+}
+
 @utility text-timeline-icon-light {
   color: var(--aw-color-timeline-icon-light);
 }

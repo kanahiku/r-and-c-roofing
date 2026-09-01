@@ -33,7 +33,12 @@ const linkClass = variant === 'dark' ? 'text-card-link-dark' : 'text-card-link-l
   <p class:list={['text-[14px] md:text-[15px] font-normal leading-[160%] mb-3 flex-1', bodyClass]}>
     {description}
   </p>
-  <span class:list={['mt-auto text-[14px] md:text-[15px] font-medium hover:underline', linkClass]}>
+  <span
+    class:list={[
+      'mt-auto text-[14px] md:text-[15px] font-medium underline underline-offset-[3px] decoration-2 decoration-transparent transition-[text-decoration-color] duration-200 group-hover:decoration-current',
+      linkClass,
+    ]}
+  >
     {linkText}
   </span>
 </CardWrapper>

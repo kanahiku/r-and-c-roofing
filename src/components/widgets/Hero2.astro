@@ -27,7 +27,7 @@ const {
   <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6">
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="py-12 md:py-[100px] lg:flex lg:items-center lg:gap-8">
-      <div class="basis-1/2 text-center lg:text-left mx-auto">
+      <div class="basis-1/2 text-left">
         {
           tagline && (
             <p
@@ -39,16 +39,16 @@ const {
         {
           title && (
             <h1
-              class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter mb-4 font-heading text-[#111111] dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+              class="text-[42px] md:text-[56px] font-medium leading-[115%] tracking-tighter mb-[20px] font-heading text-[#111111] dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
               set:html={title}
             />
           )
         }
-        <div class="max-w-3xl mx-auto lg:max-w-none">
+        <div class="max-w-3xl lg:max-w-none">
           {
             subtitle && (
               <p
-                class="text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444] mb-6 dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                class="text-[16px] md:text-[17px] font-medium leading-[160%] text-[#444444] mb-[30px] dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
                 set:html={subtitle}
               />
             )
@@ -56,7 +56,7 @@ const {
 
           {
             actions && (
-              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:justify-start lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+              <div class="max-w-xs sm:max-w-md flex flex-nowrap flex-col sm:flex-row justify-start gap-4 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
                     <div class="flex w-full sm:w-auto">
@@ -75,18 +75,18 @@ const {
       <div class="basis-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
         {
           image && (
-            <div class="relative w-full max-w-[600px] aspect-square shrink-0 intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+            <div class="relative w-full max-w-[500px] aspect-square shrink-0 intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
                   {...image}
                   class="rounded-md w-full h-full object-cover"
-                  widths={[400, 600, 800, 1200]}
-                  sizes="(max-width: 639px) 100vw, 600px"
+                  widths={[500, 750, 1000]}
+                  sizes="(max-width: 639px) 100vw, 500px"
                   loading="eager"
-                  width={600}
-                  height={600}
+                  width={500}
+                  height={500}
                   layout="cover"
                   format="webp"
                 />

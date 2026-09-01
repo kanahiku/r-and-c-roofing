@@ -97,7 +97,7 @@ const reasons = [
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Get in Touch" classes={{ container: 'mb-8 md:mb-12' }} />
+    <Headline title="Get in Touch" classes={{ container: 'mb-[30px]' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {
         touchpoints.map((item) => (
@@ -105,13 +105,13 @@ const reasons = [
         ))
       }
     </div>
-    <div class="mt-8 md:mt-10 text-center">
+    <div class="mt-8 md:mt-10">
       <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-6">
         Need Help After Hours? For after-hours emergency service, please use our website chat feature.
       </p>
       <Button variant="ghost-light" text="Open Chat" href="#message" />
     </div>
-    <p class="mt-6 text-center">
+    <p class="mt-6 text-left">
       <a href="tel:+18088882524" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
         (808) 888-2524
       </a>
@@ -130,8 +130,8 @@ const reasons = [
   </WidgetWrapper>
 
   <WidgetWrapper id="message" containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Send Us a Message" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="Send Us a Message" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Tell us a little about your property and what is happening with the roof. A member of the R&amp;C team can follow
       up using the contact information you provide.
     </p>
@@ -211,7 +211,7 @@ const reasons = [
   </Content>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Common Reasons People Contact R&amp;C" classes={{ container: 'mb-8 md:mb-12' }} />
+    <Headline title="Common Reasons People Contact R&amp;C" classes={{ container: 'mb-[30px]' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
       {
         reasons.map((card) => (

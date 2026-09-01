@@ -21,12 +21,12 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-[1400px] mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} classes={{ container: 'mb-4 md:mb-6' }} />
+  <Headline title={title} classes={{ container: subtitle ? 'mb-[9px]' : 'mb-[30px]' }} />
 
   {
     subtitle && (
       <p
-        class="text-center max-w-3xl mx-auto mb-8 md:mb-12 text-[16px] md:text-[17px] font-medium leading-[160%] text-muted"
+        class="text-left max-w-3xl mb-[30px] text-[16px] md:text-[17px] font-medium leading-[160%] text-muted"
         set:html={subtitle}
       />
     )
@@ -34,7 +34,7 @@ const {
 
   {
     inputs && (
-      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-10 max-w-2xl mx-auto w-full">
+      <div class="rounded-lg border border-accent/60 bg-[#222] p-6 md:p-10 max-w-2xl w-full">
         <FormContainer
           tone="dark"
           inputs={inputs}

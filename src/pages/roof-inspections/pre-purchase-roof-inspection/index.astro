@@ -10,6 +10,7 @@ import ServiceCard from '~/components/ui/ServiceCard.astro';
 import ComparisonTable from '~/components/ui/ComparisonTable.astro';
 import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import {
@@ -120,8 +121,8 @@ const faqs = [
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Standard Home Inspection vs. Dedicated Roof Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+    <Headline title="Standard Home Inspection vs. Dedicated Roof Assessment" classes={{ container: 'mb-[20px]' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px] space-y-4">
       <p>
         A general home inspection covers many parts of a property but often misses specific roofing failures. We provide
         a dedicated structural evaluation.
@@ -157,8 +158,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       A damaged component does not always tell the full story. We look deeper to find the root cause.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
@@ -172,8 +173,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="When a Pre-Purchase Inspection Makes Sense" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+    <Headline title="When a Pre-Purchase Inspection Makes Sense" classes={{ container: 'mb-[9px] text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-[30px]">
       You need objective data when the cause or extent of your roof damage is unclear.
     </p>
     <IconPointGrid items={whenItMakesSense} />
@@ -183,8 +184,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We follow a strict assessment protocol to give you clear answers.
     </p>
     <Timeline
@@ -200,28 +201,32 @@ const faqs = [
     </Fragment>
   </WidgetWrapper>
 
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      Using Your Inspection Findings
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
-      <p>
+  <Content
+    isDark={true}
+    title="Using Your Inspection Findings"
+    classes={{ title: 'text-white' }}
+  >
+    <Fragment slot="content">
+      <p class="text-white/70">
         A pre-purchase inspection provides structural facts to inform your buying decision. It does not predict an exact
         failure date or guarantee future performance.
       </p>
-      <p>
+      <p class="mt-4 text-white/70">
         How you use these findings during real estate negotiations is up to you and your agent. R&C Roofing Contractors
         provides objective contractor documentation and repair estimates to support your due diligence.
       </p>
-    </div>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Pre-purchase inspection findings photo placeholder" />
+    </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
-  </WidgetWrapper>
+  </Content>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We offer specialized evaluations for different stages of property ownership.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">

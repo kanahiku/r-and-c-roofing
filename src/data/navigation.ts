@@ -80,7 +80,13 @@ export const navigationData: NavigationContent = {
       },
       { text: 'Contact', href: '/contact' },
     ],
-    actions: [],
+    actions: [
+      {
+        variant: 'primary',
+        text: '(808) 888-2524',
+        href: 'tel:+18088882524',
+      },
+    ],
     phone: {
       text: '(808) 888-2524',
       href: 'tel:+18088882524',

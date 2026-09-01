@@ -39,7 +39,7 @@ const baseClasses = [
   variantClasses[variant],
   borderClasses[variant],
   sizeClasses[size],
-  isClickable ? 'cursor-pointer transition-all duration-200 hover:border-accent' : '',
+  isClickable ? 'group cursor-pointer transition-all duration-200 hover:border-accent' : '',
   'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
   className,
 ].filter(Boolean).join(' ');

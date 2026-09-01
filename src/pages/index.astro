@@ -82,9 +82,9 @@ const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
   <!-- Stats Bar -->
   <section class="bg-[#222] py-6 md:py-8">
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-left">
         {page.statsBar.map(({ stat, label }) => (
-          <div class="flex flex-col items-center">
+          <div class="flex flex-col items-start">
             <span class="text-[28px] md:text-[36px] font-medium font-heading leading-tight text-accent">{stat}</span>
             <span class="text-[13px] md:text-[14px] font-medium text-white/60 mt-1">{label}</span>
           </div>
@@ -132,8 +132,8 @@ const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
 
   <!-- P-02 Built for Oahu Roofing Conditions -->
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title={page.oahuConditions.title} classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title={page.oahuConditions.title} classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       {page.oahuConditions.paragraph1}
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
@@ -141,7 +141,7 @@ const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
         <InfoCard title={card.title} description={card.description} icon={card.icon} variant="light" border={false} />
       ))}
     </div>
-    <div class="mt-8 md:mt-10 text-center">
+    <div class="mt-8 md:mt-10">
       <a href={page.oahuConditions.ctaHref} class="btn-ghost-light">{page.oahuConditions.ctaText}</a>
     </div>
     <Fragment slot="bg">

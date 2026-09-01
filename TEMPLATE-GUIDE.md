@@ -581,7 +581,7 @@ Read the doc section → find its **content shape** below → jump to that patte
   </div>
 
   <!-- Optional CTA below items -->
-  <div class="mt-8 text-center">
+  <div class="mt-8">
     <a href="/page" class="btn-primary">CTA Text</a>
   </div>
 
@@ -748,7 +748,7 @@ Read the doc section → find its **content shape** below → jump to that patte
     ))}
   </div>
 
-  <div class="mt-8 md:mt-10 text-center">
+  <div class="mt-8 md:mt-10">
     <a href="/page" class="btn btn-secondary">Ghost CTA Text</a>
   </div>
 
@@ -853,7 +853,7 @@ Read the doc section → find its **content shape** below → jump to that patte
     ))}
   </div>
 
-  <div class="mt-8 md:mt-10 text-center">
+  <div class="mt-8 md:mt-10">
     <a href="/gallery" class="btn btn-secondary">View Gallery</a>
   </div>
 
@@ -905,14 +905,14 @@ Read the doc section → find its **content shape** below → jump to that patte
 
 #### P-12 · Final CTA (Page Ender)
 **Content shape:** H2 closing headline, 1–2 sentences, contact info, primary CTA  
-**Pattern:** Shadowed card — centered heading top, contact left + button right bottom
+**Pattern:** Shadowed card — left-aligned heading top, contact left + button right bottom
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <div class="w-full p-8 md:p-12 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600">
 
-    <!-- Centered heading + subtitle -->
-    <div class="text-center mb-8 md:mb-10">
+    <!-- Left-aligned heading + subtitle -->
+    <div class="text-left mb-8 md:mb-10">
       <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading mb-4">
         Closing Headline
       </h2>

@@ -47,6 +47,12 @@ const {
   position = 'center',
 } = Astro.props;
 
+const phoneAction = phone
+  ? { variant: 'primary' as const, text: phone.text, href: phone.href, icon: 'tabler:phone' }
+  : undefined;
+const extraActions = (actions ?? []).filter((action) => action.href !== phone?.href);
+const headerActions = phoneAction ? [phoneAction, ...extraActions] : extraActions;
+
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
@@ -218,25 +224,14 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             }
           </div>
           {
-            actions?.length ? (
+            headerActions.length ? (
               <span class="ml-4 rtl:ml-0 rtl:mr-4">
-                {actions.map((btnProps) => (
+                {headerActions.map((btnProps) => (
                   <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
                 ))}
               </span>
             ) : (
               ''
-            )
-          }
-          {
-            phone && (
-              <a
-                href={phone.href}
-                class="ml-4 inline-flex items-center gap-2 text-accent hover:text-white font-semibold text-[15px] whitespace-nowrap transition-colors duration-200"
-              >
-                <Icon name="tabler:phone" class="w-4 h-4" />
-                {phone.text}
-              </a>
             )
           }
         </div>

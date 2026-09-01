@@ -10,6 +10,7 @@ import ServiceCard from '~/components/ui/ServiceCard.astro';
 import ComparisonTable from '~/components/ui/ComparisonTable.astro';
 import Timeline from '~/components/ui/Timeline.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import {
@@ -120,8 +121,8 @@ const faqs = [
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Reactive Repairs vs. Preventative Maintenance" classes={{ container: 'mb-4 md:mb-6' }} />
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12 space-y-4">
+    <Headline title="Reactive Repairs vs. Preventative Maintenance" classes={{ container: 'mb-[20px]' }} />
+    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px] space-y-4">
       <p>
         Roof problems do not always start with water pouring through your ceiling. Robert Pilato (Certification
         #201408313) brings advanced diagnostic training to catch structural deterioration early, saving you from
@@ -154,8 +155,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="What We Evaluate During an Assessment" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       A damaged component does not always tell the full story. We look deeper to find the root cause of localized wear.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
@@ -169,8 +170,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Why Routine Roof Inspections Matter on Oahu" classes={{ container: 'mb-4 md:mb-6 text-left md:mx-0' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-8 md:mb-12">
+    <Headline title="Why Routine Roof Inspections Matter on Oahu" classes={{ container: 'mb-[9px] text-left md:mx-0' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted mb-[30px]">
       You need objective data to protect your property investment across Oahu's unique microclimates.
     </p>
     <IconPointGrid items={whyItMatters} />
@@ -180,8 +181,8 @@ const faqs = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="How Our Inspection Process Works" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We follow a strict assessment protocol to give you clear answers.
     </p>
     <Timeline
@@ -197,29 +198,33 @@ const faqs = [
     </Fragment>
   </WidgetWrapper>
 
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <h2 class="text-[30px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-white mb-8 md:mb-10">
-      Managing Your Long-Term Roof Health
-    </h2>
-    <div class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 space-y-5">
-      <p>
+  <Content
+    isDark={true}
+    title="Managing Your Long-Term Roof Health"
+    classes={{ title: 'text-white' }}
+  >
+    <Fragment slot="content">
+      <p class="text-white/70">
         An annual maintenance inspection provides structural facts to inform your property management strategy. It does
         not guarantee your roof will never leak, nor does it predict the exact day a material will fail.
       </p>
-      <p>
+      <p class="mt-4 text-white/70">
         How you use our documentation to budget for AOAO, HOA, or commercial property reserves is up to you and your
         management board. R&C Roofing Contractors simply provides objective contractor documentation and targeted repair
         scopes to keep your property secure over time.
       </p>
-    </div>
+    </Fragment>
+    <Fragment slot="image">
+      <HeroImagePlaceholder label="Long-term roof health inspection photo placeholder" />
+    </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
-  </WidgetWrapper>
+  </Content>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Explore Our Other Inspection Services" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       We offer specialized evaluations for different stages of property ownership.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">

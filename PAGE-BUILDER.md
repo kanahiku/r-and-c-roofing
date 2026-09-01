@@ -101,10 +101,10 @@ Every section on every page must follow these rules. Do not deviate.
 | Simple card icons | Heading+description-only cards get a Tabler icon mark (`InfoCard`). P-05 linked service cards stay icon-free |
 | One CTA type per section | Use **either** Primary **or** Ghost buttons in a section — never mix both styles in the same section |
 | Heading + para + CTA | Always **P-03** with a side image. Alternate image left/right from the previous split on the page (see **Split Image Side Rule**) |
-| Headline description alignment | When `<Headline>` is used (always center-aligned), any description immediately below it **must also be center-aligned**. **Never pass body text as the `subtitle` prop on `<Headline>`.** The `subtitle` slot is only for true visual sub-headings (rarely used). All descriptive sentences belong as a separate `<p>` below the `<Headline>` with `text-center max-w-3xl mx-auto mb-8 md:mb-12`, and add `classes={{ container: 'mb-4 md:mb-6' }}` on the `<Headline>` to tighten the gap. For sections with left-aligned body paragraphs, prepend the sentence as the first `<p>` inside the existing body `<div>` — no centering needed. |
+| Headline description alignment | Section headings and descriptions are **always left-aligned**. `<Headline>` is left-aligned. **Never pass body text as the `subtitle` prop on `<Headline>`.** The `subtitle` slot is only for true visual sub-headings (rarely used). A **single intro line** under an H2 uses `9px` gap (`classes={{ container: 'mb-[9px]' }}` on `<Headline>`, then one `<p>`). Do **not** use `9px` when the heading is followed by multiple paragraphs — keep the existing `20px`/`30px` gap. |
 | Adjacent section variety | Neighboring sections cannot share a structure. Never stack card grid → card grid, list → list, timeline → timeline, or P-13 → P-13. Break them with a different pattern. |
 | Five items | Never a 5-card grid (no 3+2). Use **P-06** `IconPointBand` (horizontal) or a `ServiceDirectory` if each item links. |
-| Icon points | H2 + 3 or 5 icon points, no links: `IconPointBand` — one row, icon above title, center-aligned. H2 + 4 icon points as text: `IconPointGrid` — 2 × 2, left-aligned. No boxes, no timeline line. |
+| Icon points | H2 + 3 or 5 icon points, no links: `IconPointBand` — one row, icon above title, left-aligned. H2 + 4 icon points as text: `IconPointGrid` — 2 × 2, left-aligned. No boxes, no timeline line. |
 
 ### CTA Button Consistency Rule
 
@@ -266,7 +266,7 @@ Read each section of the content doc → find its shape below → use that patte
 ### P-01 · Hero
 
 **Content shape:** Page H1, 1–2 description paragraphs, primary CTA, optional image, optional trust badges  
-**Components:** `Hero2.astro` (left-right split) · `Hero.astro` (centered, text-only)
+**Components:** `Hero2.astro` (left-right split) · `Hero.astro` (left-aligned, text-only)
 
 ```astro
 <Hero2
@@ -295,7 +295,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 
 **Variants:**
 - No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
-- No image → use `Hero.astro` instead (centered layout)
+- No image → use `Hero.astro` instead (left-aligned layout)
 - No badges → omit `<Fragment slot="content">`
 - Single heading line → remove `<br />`
 
@@ -335,7 +335,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
   </div>
 
   <!-- Optional CTA below items — omit if not in doc -->
-  <div class="mt-8 text-center">
+  <div class="mt-8">
     <a href="/page" class="btn-primary">CTA Text</a>
   </div>
 
@@ -446,12 +446,12 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 ### P-06 · Icon-Point Band
 
 **Content shape:** H2 + intro + 3–5 parallel points with icons, no per-item links  
-**Pattern:** `IconPointBand` — one horizontal row on `md+`. Icon on top, title, description. Center-aligned. Tight title-to-description gap. **No card boxes. No timeline line or step numbers.**
+**Pattern:** `IconPointBand` — one horizontal row on `md+`. Icon on top, title, description. Left-aligned. Tight title-to-description gap. **No card boxes. No timeline line or step numbers.**
 
 ```astro
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
   <Headline title="Section Title" classes={{ container: 'mb-4 md:mb-6' }} />
-  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+  <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-8 md:mb-12">
     Intro sentence from the brief.
   </p>
 
@@ -494,7 +494,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
   </div>
 
   <!-- Ghost CTA — omit if not in doc -->
-  <div class="mt-8 md:mt-10 text-center">
+  <div class="mt-8 md:mt-10">
     <a href="/page" class="btn btn-secondary">Ghost CTA Text</a>
   </div>
 
@@ -617,7 +617,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
     ))}
   </div>
 
-  <div class="mt-8 md:mt-10 text-center">
+  <div class="mt-8 md:mt-10">
     <a href="/gallery" class="btn btn-secondary">View Gallery</a>
   </div>
 
@@ -672,7 +672,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 ### P-12 · Final CTA (Page Ender)
 
 **Content shape:** H2 closing headline, 1–2 supporting sentences, contact info block, primary CTA  
-**Pattern:** Yellow card with pattern motif — heading + subtitle centered at top, contact left + button right below a black divider  
+**Pattern:** Yellow card with pattern motif — heading + subtitle left-aligned at top, contact left + button right below a black divider  
 **Every page ends with this section.** Use the reusable `CTABanner` component.
 
 **Import:**
@@ -783,7 +783,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 - Dark section → `variant="dark"` on `IconPointGrid` (and `isDark` on the wrapper / Headline)
 - 2 items → same component, one row of two
 - 6 items → same component, 2 × 3
-- Prefer this over P-06 when there are exactly 4 points and you do not want a centered one-row band
+- Prefer this over P-06 when there are exactly 4 points and you do not want a one-row band
 - Prefer this over P-07 when the points should stay as open text, not cards
 
 ---

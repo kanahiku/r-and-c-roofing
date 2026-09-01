@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 // CSS variable-based classes
-const borderColor = isDark ? 'divide-faq-dark border-faq-dark' : 'divide-faq-light border-faq-light';
+const itemBorder = isDark ? 'border-faq-dark' : 'border-faq-light';
 const questionColor = classes?.question ?? (isDark ? 'text-faq-question-dark' : 'text-faq-question-light');
 const answerColor = classes?.answer ?? (isDark ? 'text-faq-answer-dark' : 'text-faq-answer-light');
 const toggleBase = isDark ? 'border-faq-toggle-dark text-faq-toggle-dark' : 'border-faq-toggle-light text-faq-toggle-light';
@@ -28,9 +28,9 @@ const toggleActive = 'group-open:border-accent group-open:text-accent';
 
   {
     items.length > 0 && (
-      <div class={`divide-y border-b intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${borderColor}`}>
-        {items.map(({ title: itemTitle, description }) => (
-          <details class="group py-1" name="faq-accordion">
+      <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        {items.map(({ title: itemTitle, description }, index) => (
+          <details class:list={['group py-1', index > 0 && `border-t ${itemBorder}`]} name="faq-accordion">
             <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
               <span class={`text-[16px] md:text-[18px] font-medium font-heading leading-snug pr-4 ${questionColor}`}>
                 {itemTitle}

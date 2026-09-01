@@ -142,7 +142,12 @@ const descTypography = isHorizontal
                 style={isHorizontal ? `--timeline-copy: ${copyMaxCh[index]}ch` : undefined}
               >
                 {isHorizontal && (
-                  <p class="rc-tl-step text-[13px] md:text-[14px] font-medium leading-[160%] text-accent mb-2">
+                  <p
+                    class:list={[
+                      'rc-tl-step text-[13px] md:text-[14px] font-medium leading-[160%] mb-2',
+                      isDark ? 'text-accent' : 'text-timeline-step-light',
+                    ]}
+                  >
                     {stepLabel}
                   </p>
                 )}

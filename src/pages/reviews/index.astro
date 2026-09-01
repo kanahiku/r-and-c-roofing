@@ -75,8 +75,8 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Reviews From Across the Web" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Reviews From Across the Web" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Customer feedback about R&amp;C Roofing Contractors can be found on multiple independent review platforms.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -103,8 +103,8 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Featured Customer Reviews" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline isDark={true} title="Featured Customer Reviews" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Verified Yelp reviews, shown with their original wording and a link back to the source.
     </p>
     <div class="columns-1 md:columns-2 gap-x-8 md:gap-x-12">
@@ -132,8 +132,8 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Reviews From Different Roofing Projects" classes={{ container: 'mb-4 md:mb-6' }} />
-    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-center max-w-3xl mx-auto mb-8 md:mb-12">
+    <Headline title="Reviews From Different Roofing Projects" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-medium leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Customers come to R&amp;C for different reasons. Some are dealing with an active leak. Others need a roof replaced,
       have questions after strong weather, or simply want to understand what condition their roof is in.
     </p>
@@ -150,7 +150,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
         ))
       }
     </div>
-    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-center">
+    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-left">
       For storm or insurance-related roofing work, see
       <a href={aboutHrefs.storm} class="text-heading underline underline-offset-2">Storm Damage Roof Inspections</a>
       and
@@ -164,7 +164,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="More Customer Feedback" classes={{ container: 'mb-8 md:mb-12' }} />
+    <Headline title="More Customer Feedback" classes={{ container: 'mb-[30px]' }} />
     <div class="columns-1 sm:columns-2 gap-x-12 md:gap-x-16">
       {
         archiveQuotes.map((item) => (
@@ -184,7 +184,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
         ))
       }
     </div>
-    <div class="mt-8 md:mt-10 text-center">
+    <div class="mt-8 md:mt-10">
       <Button
         variant="ghost-light"
         text="Load More Reviews"

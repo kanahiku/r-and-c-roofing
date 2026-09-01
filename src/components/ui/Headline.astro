@@ -31,7 +31,7 @@ const subtitleColor = isDark ? 'text-headline-subtitle-dark' : 'text-headline-su
 
 {
   (title || subtitle || tagline) && (
-    <div class={twMerge('mb-8 md:mx-auto md:mb-12 text-center', containerClass)}>
+    <div class={twMerge('mb-[30px] text-left', containerClass)}>
       {tagline && (
         <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase" set:html={tagline} />
       )}
@@ -42,7 +42,7 @@ const subtitleColor = isDark ? 'text-headline-subtitle-dark' : 'text-headline-su
         />
       )}
 
-      {subtitle && <p class={twMerge('mt-2', subtitleTypography, subtitleColor, subtitleClass)} set:html={subtitle} />}
+      {subtitle && <p class={twMerge('mt-[9px]', subtitleTypography, subtitleColor, subtitleClass)} set:html={subtitle} />}
     </div>
   )
 }
