@@ -24,7 +24,7 @@ export const blogPost = defineType({
       title: 'Slug',
       type: 'slug',
       group: 'content',
-      description: 'Used in the URL: /blog/your-slug',
+      description: 'Used in the URL: /blog/your-slug. Publish to make the article live — no code deploy needed.',
       options: { source: 'title' },
       validation: (r) => r.required(),
     }),

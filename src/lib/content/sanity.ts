@@ -291,3 +291,21 @@ export async function getSanityBlogPostsRelatedTo(pageSlug: string): Promise<Blo
   const posts = await sanityClient.fetch<SanityBlogPost[]>(BLOG_POSTS_RELATED_TO_QUERY, { pageSlug });
   return (posts ?? []).filter((post) => post?.slug && post?.title).map(normalizeBlogPost);
 }
+
+const SERVICE_PAGE_SLUGS_QUERY = /* groq */ `
+  *[_type == "servicePage" && defined(slug.current)].slug.current
+`;
+
+const BLOG_POST_SLUGS_QUERY = /* groq */ `
+  *[_type == "blogPost" && defined(slug.current)].slug.current
+`;
+
+export async function getSanityServicePageSlugs(): Promise<string[]> {
+  const slugs = await sanityClient.fetch<string[]>(SERVICE_PAGE_SLUGS_QUERY);
+  return (slugs ?? []).filter((slug): slug is string => typeof slug === 'string' && slug.length > 0);
+}
+
+export async function getSanityBlogPostSlugs(): Promise<string[]> {
+  const slugs = await sanityClient.fetch<string[]>(BLOG_POST_SLUGS_QUERY);
+  return (slugs ?? []).filter((slug): slug is string => typeof slug === 'string' && slug.length > 0);
+}

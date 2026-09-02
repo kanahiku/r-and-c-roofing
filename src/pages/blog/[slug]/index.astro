@@ -7,19 +7,20 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 import CmsSections from '~/components/widgets/CmsSections.astro';
 import Image from '~/components/common/Image.astro';
 import { getFormattedDate } from '~/utils/utils';
-import { getBlogPosts } from '~/lib/content';
+import { getBlogPost } from '~/lib/content';
 import { sectionSurface } from '~/lib/content/sectionTheme';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 
-export async function getStaticPaths() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+export const prerender = false;
+
+const slug = Astro.params.slug;
+const post = typeof slug === 'string' ? await getBlogPost(slug) : undefined;
+
+if (!post) {
+  Astro.response.status = 404;
+  return Astro.rewrite('/404');
 }
 
-const { post } = Astro.props;
 const publishDate = new Date(post.publishDate);
 const heroParagraphs = post.heroParagraphs.length ? post.heroParagraphs : post.body;
 const heroImageLabel = post.imagePlaceholder || `${post.title} photo placeholder`;

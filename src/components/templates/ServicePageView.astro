@@ -8,15 +8,17 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CmsSections from '~/components/widgets/CmsSections.astro';
 import Image from '~/components/common/Image.astro';
 import { getServicePage } from '~/lib/content';
+import type { ServicePageContent } from '~/lib/content/types';
 import { isDarkSurface, sectionSurface } from '~/lib/content/sectionTheme';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 
 export interface Props {
   slug: string;
+  page?: ServicePageContent;
 }
 
-const { slug } = Astro.props;
-const page = await getServicePage(slug);
+const { slug, page: providedPage } = Astro.props;
+const page = providedPage ?? (await getServicePage(slug));
 
 const metadata = {
   title: page.meta.title,

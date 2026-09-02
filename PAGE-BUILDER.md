@@ -43,6 +43,19 @@ const metadata = {
 Pages live at `src/pages/[route]/index.astro`.  
 Example: `/services/roof-inspection` → `src/pages/services/roof-inspection/index.astro`
 
+### CMS pages (Sanity) — do not add a new Astro file
+
+The live site is ISR: **Publish in Sanity goes live without a developer deploy.**
+
+| Content team creates | URL | What you do in code |
+|---|---|---|
+| Blog post with slug `my-article` | `/blog/my-article` | Nothing. Template is `src/pages/blog/[slug]/index.astro` |
+| Service / page document with slug `services/new-offer` | `/services/new-offer` | Nothing. Unknown slugs use the CMS catch-all |
+
+Only add a new `src/pages/.../index.astro` for routes that are **not** a Sanity `blogPost` or `servicePage` (contact, reviews, privacy, or a new layout the CMS cannot render). Reserved slugs: `contact`, `blog`, `reviews`, `privacy-policy`.
+
+After Publish, a Sanity webhook should `POST /api/revalidate` so cached HTML refreshes immediately. Without the webhook, pages refresh within 5 minutes (`isr.expiration`).
+
 ---
 
 ## Standard Import Block

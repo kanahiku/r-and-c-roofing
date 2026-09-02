@@ -24,9 +24,17 @@ const hasExternalScripts = false;
 const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
+const isrBypassToken = process.env.ISR_BYPASS_TOKEN || 'dev-isr-bypass-token-32-chars-min';
+
 export default defineConfig({
-  output: 'static',
-  adapter: vercel(),
+  output: 'server',
+  adapter: vercel({
+    isr: {
+      expiration: 60 * 5,
+      bypassToken: isrBypassToken,
+      exclude: [/^\/api(\/|$)/, '/sitemap.xml'],
+    },
+  }),
 
   redirects: {
     '/insurance-claim-help': '/claims',

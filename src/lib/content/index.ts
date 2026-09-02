@@ -2,9 +2,11 @@ import type { BlogPost, HomePageContent, NavigationContent, ServicePageContent }
 import {
   getSanityBlogPost,
   getSanityBlogPosts,
+  getSanityBlogPostSlugs,
   getSanityHomeContent,
   getSanityNavigationContent,
   getSanityServicePage,
+  getSanityServicePageSlugs,
 } from './sanity';
 import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 
@@ -50,12 +52,44 @@ function ensureBlogNav(nav: NavigationContent): NavigationContent {
   };
 }
 
+export async function findServicePage(slug: string): Promise<ServicePageContent | null> {
+  return getSanityServicePage(slug);
+}
+
 export async function getServicePage(slug: string): Promise<ServicePageContent> {
-  const page = await getSanityServicePage(slug);
+  const page = await findServicePage(slug);
   if (!page) {
     throw new Error(`Sanity servicePage document is missing for slug "${slug}".`);
   }
   return page;
+}
+
+export async function getServicePageSlugs(): Promise<string[]> {
+  try {
+    return await getSanityServicePageSlugs();
+  } catch (error) {
+    console.warn('Sanity service page slugs unavailable.', error);
+    return [];
+  }
+}
+
+export async function getBlogPostSlugs(): Promise<string[]> {
+  const [sanitySlugs, localSlugs] = await Promise.all([
+    getSanityBlogPostSlugs().catch(() => [] as string[]),
+    Promise.resolve(localBlogPosts.map((post) => post.slug)),
+  ]);
+  return [...new Set([...localSlugs, ...sanitySlugs])];
+}
+
+const STATIC_PATHS = ['/', '/blog', '/contact', '/reviews', '/privacy-policy'];
+
+export async function getPublicContentPaths(): Promise<string[]> {
+  const [pageSlugs, postSlugs] = await Promise.all([getServicePageSlugs(), getBlogPostSlugs()]);
+  return [
+    ...STATIC_PATHS,
+    ...pageSlugs.map((slug) => `/${slug.replace(/^\/+/, '')}`),
+    ...postSlugs.map((slug) => `/blog/${slug.replace(/^\/+/, '')}`),
+  ];
 }
 
 export function getBlogPermalink(slug: string): string {
