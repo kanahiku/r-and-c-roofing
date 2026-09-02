@@ -29,11 +29,22 @@ export async function getNavigationContent(): Promise<NavigationContent> {
 function ensureBlogNav(nav: NavigationContent): NavigationContent {
   const blogLink = { text: 'Blog', href: '/blog' };
 
-  const headerLinks = nav.header.links.map((link) => {
-    if (link.text !== 'About' || !link.links) return link;
-    if (link.links.some((item) => item.href === '/blog')) return link;
-    return { ...link, links: [...link.links, blogLink] };
-  });
+  const headerLinks = (() => {
+    const withoutAboutBlog = nav.header.links.map((link) => {
+      if (link.text !== 'About' || !link.links) return link;
+      return { ...link, links: link.links.filter((item) => item.href !== '/blog') };
+    });
+
+    if (withoutAboutBlog.some((link) => link.href === '/blog' || link.text === 'Blog')) {
+      return withoutAboutBlog;
+    }
+
+    const contactIndex = withoutAboutBlog.findIndex((item) => item.href === '/contact' || item.text === 'Contact');
+    if (contactIndex >= 0) {
+      return [...withoutAboutBlog.slice(0, contactIndex), blogLink, ...withoutAboutBlog.slice(contactIndex)];
+    }
+    return [...withoutAboutBlog, blogLink];
+  })();
 
   const footerLinks = nav.footer.links.map((column) => {
     if (column.title !== 'Company') return column;

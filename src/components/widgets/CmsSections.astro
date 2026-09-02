@@ -190,7 +190,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
 
         {section._type === 'linkedCardsSection' &&
           (section.display === 'directory' || (section.display !== 'cards' && section.items.length === 5) ? (
-            <ServiceDirectory items={section.items} variant={surface === 'white' ? 'light' : 'dark'} />
+            <ServiceDirectory items={section.items} variant={pointVariant(surface)} />
           ) : (
             <div class={cardGridClass(section.items.length)}>
               {section.items.map((card) => (
