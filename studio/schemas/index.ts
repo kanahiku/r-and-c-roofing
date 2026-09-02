@@ -3,12 +3,14 @@ import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
 import { homePage } from './singletons/homePage';
 import { lead } from './documents/lead';
+import { servicePage } from './documents/servicePage';
+import { blogPost } from './documents/blogPost';
 
 // Navigation objects
 import { navLink, navSubLink } from './objects/navLink';
 import { footerColumn, footerLink, socialLink } from './objects/footerColumn';
 
-// Homepage section objects
+// Shared item objects
 import {
   statItem,
   infoCardItem,
@@ -17,11 +19,38 @@ import {
   faqItem,
 } from './objects/homeObjects';
 
+// Shared section objects (reused across page templates)
+import {
+  linkedCard,
+  pageHero,
+  ctaBanner,
+  iconPointsSection,
+  timelineSection,
+  linkedCardsSection,
+  infoCardsSection,
+  editorialSection,
+  comparisonRow,
+  comparisonTableSection,
+  bulletCardItem,
+  bulletCardsSection,
+  checklistItem,
+  checklistSection,
+  yelpReviewItem,
+  yelpReviewsSection,
+  liveReviewsSection,
+  splitContentSection,
+  quoteCardItem,
+  quoteCardsSection,
+  faqsSection,
+} from './objects/sectionObjects';
+
 export const schemaTypes = [
-  // Documents (singletons)
+  // Documents
   siteNavigation,
   siteFooter,
   homePage,
+  servicePage,
+  blogPost,
   lead,
 
   // Objects — nav
@@ -33,10 +62,33 @@ export const schemaTypes = [
   footerLink,
   socialLink,
 
-  // Objects — homepage sections
+  // Objects — items
   statItem,
   infoCardItem,
   serviceItem,
   timelineStep,
   faqItem,
+  linkedCard,
+  quoteCardItem,
+
+  // Objects — page sections
+  pageHero,
+  ctaBanner,
+  iconPointsSection,
+  timelineSection,
+  linkedCardsSection,
+  infoCardsSection,
+  editorialSection,
+  comparisonRow,
+  comparisonTableSection,
+  bulletCardItem,
+  bulletCardsSection,
+  checklistItem,
+  checklistSection,
+  yelpReviewItem,
+  yelpReviewsSection,
+  liveReviewsSection,
+  splitContentSection,
+  quoteCardsSection,
+  faqsSection,
 ];

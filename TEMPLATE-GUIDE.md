@@ -475,7 +475,7 @@ A living reference. When a new content doc arrives, use the **Pattern Selector**
 
 ### Typography Classes (Copy-Paste)
 
-Didact Gothic H1/H2 are Regular (400) only — never medium/bold on `font-heading`. Item titles (icon, image, or card heading + description) and FAQ questions use Manrope Medium. Body is Regular; nav/links Medium; buttons Semibold. Canonical table: `PAGE-BUILDER.md` → Typography Classes.
+DM Sans H1/H2 are Regular (400). Item titles (icon, image, or card heading + description) and FAQ questions use Manrope Medium. Body is Regular; nav/links Medium; buttons Semibold. Canonical table: `PAGE-BUILDER.md` → Typography Classes.
 
 | Role | Classes |
 |------|---------|

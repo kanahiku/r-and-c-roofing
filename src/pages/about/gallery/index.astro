@@ -7,6 +7,7 @@ import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 
 const metadata = {
   title: 'Oahu Roofing Projects & Before and After Photos | R&C Roofing',
@@ -159,7 +160,7 @@ const featuredProjects = [
     </Fragment>
   </WidgetWrapper>
 
-  <Content isReversed title="Before and After">
+  <Content isReversed imageFit="framed" title="Before and After">
     <Fragment slot="content">
       <p class="text-muted">
         Some roofing changes are easier to understand when you can see where the project started and where it finished.
@@ -182,6 +183,8 @@ const featuredProjects = [
       <SectionBg variant="white" />
     </Fragment>
   </Content>
+
+  <RelatedBlogs pageSlug="about/gallery" surface="grey" />
 
   <CTABanner
     title="Have a Roofing Project of Your Own?"

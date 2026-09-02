@@ -4,6 +4,11 @@ export const contactAddress = {
   mapsQuery: '3302 Campbell Ave, Honolulu, HI 96815',
 };
 
+export const contactPhone = {
+  text: '(808) 888-2524',
+  href: 'tel:+18088882524',
+};
+
 export const contactMapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(contactAddress.mapsQuery)}&z=16&output=embed`;
 export const contactDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(contactAddress.mapsQuery)}`;
 

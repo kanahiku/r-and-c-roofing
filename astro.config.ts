@@ -57,13 +57,12 @@ export default defineConfig({
   },
 
   // Native Fonts API: self-hosts + subsets + preloads fonts and generates
-  // metric-adjusted fallbacks. Didact Gothic for headings, Manrope for body text.
+  // metric-adjusted fallbacks. DM Sans for headings, Manrope for body text.
   fonts: [
     {
       provider: fontProviders.google(),
-      // Didact Gothic ships a single 400 face — no bolder weights exist upstream.
-      name: 'Didact Gothic',
-      cssVariable: '--font-didact-gothic',
+      name: 'DM Sans',
+      cssVariable: '--font-dm-sans',
       weights: ['400'],
       styles: ['normal'],
       subsets: ['latin'],
@@ -141,7 +140,7 @@ export default defineConfig({
     // `domains` only matters for remote URLs that fall through to Astro's
     // native <Image /> (i.e. providers Unpic can't detect, like Pixabay).
     // Listed entries are authorized to be processed by Sharp.
-    domains: ['cdn.pixabay.com'],
+    domains: ['cdn.pixabay.com', 'cdn.sanity.io'],
 
     // Emit responsive styles for the native <Image layout=…> used by
     // src/components/common/Image.astro (local images). Utility classes on

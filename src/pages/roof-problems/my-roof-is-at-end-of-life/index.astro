@@ -10,6 +10,7 @@ import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import { exploreFromEol, serviceHeroActions } from '~/data/pages/roofProblems';
 
 const metadata = {
@@ -167,6 +168,8 @@ const nextSteps = [
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
+
+  <RelatedBlogs pageSlug="roof-problems/my-roof-is-at-end-of-life" surface="dark" />
 
   <CTABanner
     title="Not Sure Whether to Repair or Replace?"

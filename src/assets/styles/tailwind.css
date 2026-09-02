@@ -6,8 +6,8 @@
 
 @custom-variant intersect (&:not([no-intersect]));
 
-/* Didact Gothic ships 400 only. Disable faux-bold so leftover font-medium/bold
-   on headings cannot thicken the glyphs. Manrope still has real 200–800 faces. */
+/* Disable faux-bold/italic. Headings use DM Sans Regular; Manrope still has
+   real 200–800 faces for body and UI. */
 @layer base {
   html {
     font-synthesis: none;
@@ -57,7 +57,6 @@
   }
 }
 
-/* Didact Gothic is Regular only — heading class never carries a heavier weight. */
 @utility font-heading {
   font-family: var(--font-heading);
   font-weight: 400;
@@ -415,19 +414,30 @@
   left: 0;
   right: 0;
   bottom: 0 !important;
-  padding: 0 5px;
+  padding: 0 12px;
 }
 
-.dropdown:focus .dropdown-menu,
-.dropdown:focus-within .dropdown-menu,
-.dropdown:hover .dropdown-menu {
-  display: block;
+@media (max-width: 767px) {
+  .dropdown.expanded > .dropdown-menu {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .dropdown:focus .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu,
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 /* Active nav link — top-level */
 nav > ul > li > a.aw-link-active,
 nav > ul > li > a.aw-link-active:hover,
-nav > ul > li > span.aw-link-active {
+nav > ul > li > span.aw-link-active,
+nav > ul > li > div > a.aw-link-active,
+nav > ul > li > div > a.aw-link-active:hover,
+nav > ul > li > div > button.aw-link-active {
   color: var(--aw-color-accent);
 }
 

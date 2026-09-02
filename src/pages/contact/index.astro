@@ -11,6 +11,7 @@ import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import { contactDirectionsHref, contactHelpOptions, contactMapEmbedSrc } from '~/data/pages/contact';
 
 const metadata = {
@@ -96,42 +97,9 @@ const reasons = [
     </Fragment>
   </Hero2>
 
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Get in Touch" classes={{ container: 'mb-[30px]' }} />
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-      {
-        touchpoints.map((item) => (
-          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
-        ))
-      }
-    </div>
-    <div class="mt-8 md:mt-10">
-      <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted mb-6">
-        Need Help After Hours? For after-hours emergency service, please use our website chat feature.
-      </p>
-      <Button variant="ghost-light" text="Open Chat" href="#message" />
-    </div>
-    <p class="mt-6 text-left">
-      <a href="tel:+18088882524" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
-        (808) 888-2524
-      </a>
-      <span class="text-muted"> · </span>
-      <a href="tel:+18082163256" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
-        (808) 216-3256
-      </a>
-      <span class="text-muted"> · </span>
-      <a href="mailto:info@safehomeservice.com" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
-        info@safehomeservice.com
-      </a>
-    </p>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <WidgetWrapper id="message" containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Send Us a Message" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
+  <WidgetWrapper id="message" containerClass="max-w-[1400px] mx-auto">
+    <Headline title="Send Us a Message" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
       Tell us a little about your property and what is happening with the roof. A member of the R&amp;C team can follow
       up using the contact information you provide.
     </p>
@@ -157,10 +125,10 @@ const reasons = [
         />
       </div>
       <div>
-        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] text-white mb-3">
+        <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] text-heading mb-3">
           Find R&amp;C Roofing Contractors
         </h3>
-        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-white/70 mb-4">
+        <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">
           3302 Campbell Ave<br />Honolulu, HI 96815
         </p>
         <div class="rounded-md overflow-hidden border border-accent/60 bg-[#222] aspect-[4/3] min-h-[280px]">
@@ -174,10 +142,37 @@ const reasons = [
           ></iframe>
         </div>
         <div class="mt-6">
-          <Button variant="ghost-dark" text="Get Directions" href={contactDirectionsHref} target="_blank" />
+          <Button variant="ghost-light" text="Get Directions" href={contactDirectionsHref} target="_blank" />
         </div>
       </div>
     </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Get in Touch" classes={{ container: 'mb-[30px]' }} />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {
+        touchpoints.map((item) => (
+          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
+        ))
+      }
+    </div>
+    <p class="mt-8 md:mt-10 text-left">
+      <a href="tel:+18088882524" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
+        (808) 888-2524
+      </a>
+      <span class="text-white/50"> · </span>
+      <a href="tel:+18082163256" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
+        (808) 216-3256
+      </a>
+      <span class="text-white/50"> · </span>
+      <a href="mailto:info@safehomeservice.com" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
+        info@safehomeservice.com
+      </a>
+    </p>
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
@@ -203,7 +198,7 @@ const reasons = [
       </p>
     </Fragment>
     <Fragment slot="image">
-      <HeroImagePlaceholder label="Roof inspection photo placeholder" />
+            <HeroImagePlaceholder fill label="Roof inspection photo placeholder" />
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="white" />
@@ -229,6 +224,8 @@ const reasons = [
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
+
+  <RelatedBlogs pageSlug="contact" surface="dark" />
 
   <CTABanner
     title="Contact R&C Roofing Contractors"

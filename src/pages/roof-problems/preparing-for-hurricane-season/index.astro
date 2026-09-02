@@ -10,6 +10,7 @@ import Timeline from '~/components/ui/Timeline.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import { exploreFromHurricane, serviceHeroActions } from '~/data/pages/roofProblems';
 
 const metadata = {
@@ -162,6 +163,8 @@ const climate = [
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
+
+  <RelatedBlogs pageSlug="roof-problems/preparing-for-hurricane-season" surface="dark" />
 
   <CTABanner
     title="Strengthen Your Roof Before the Next Storm"

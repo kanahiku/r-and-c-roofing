@@ -10,7 +10,7 @@
 - **Framework:** Astro v7 + Tailwind CSS v4
 - **Template:** AstroWind (customised for R&C Roofing)
 - **Path alias:** `~/` maps to `src/`
-- **Fonts:** Didact Gothic (H1/H2, `font-heading`) · Manrope (body, UI, and item titles)
+- **Fonts:** DM Sans (H1/H2, `font-heading`) · Manrope (body, UI, and item titles)
 - **Primary colour:** `#EDD974` (CTA yellow)
 - **Dev server:** `npm run dev` → http://localhost:4321
 
@@ -135,7 +135,7 @@ A section that is **heading + paragraph(s) + CTA** is always **P-03** (`Content.
 
 | Component | Image on the RIGHT (text left) | Image on the LEFT (text right) |
 |-----------|-------------------------------|--------------------------------|
-| `Hero2` (P-01) | Default — always | — |
+| `Hero2` (P-01) | Default — always | `isReversed` |
 | `Content` (P-03) | Omit `isReversed` | Add `isReversed` |
 | `Steps` (P-08) | Omit `isReversed` | Add `isReversed` |
 
@@ -213,15 +213,15 @@ Background snippets go inside `<Fragment slot="bg">` inside `WidgetWrapper`.
 
 Use these exact classes everywhere. Do not invent new sizes.
 
-**Fonts:** Didact Gothic (`font-heading`) for H1 and H2 · Manrope (`font-sans`) for body, UI, and item titles.
+**Fonts:** DM Sans (`font-heading`) for H1 and H2 · Manrope (`font-sans`) for body, UI, and item titles.
 
-Didact Gothic ships a **single Regular (400) face**. Never put `font-medium`, `font-semibold`, or `font-bold` on an H1/H2 — the browser will fake a bold that looks muddy. H1/H2 hierarchy is **size**, not weight. Item titles (icon, image, or card heading + description) use Manrope Medium. Manrope is variable (200–800).
+H1/H2 use DM Sans Regular (400). Hierarchy is **size**, not weight — keep `font-normal` on headings. Item titles (icon, image, or card heading + description) use Manrope Medium. Manrope is variable (200–800).
 
 ### Weight rules
 
 | Element | Font | Weight | Class |
 |---------|------|--------|-------|
-| H1, H2 | Didact Gothic | 400 | `font-heading font-normal` |
+| H1, H2 | DM Sans | 400 | `font-heading font-normal` |
 | Item titles (icon/image/card + heading + description), FAQ questions | Manrope | 500 | `font-medium` |
 | Body paragraphs, card descriptions, FAQ answers, disclaimers | Manrope | 400 | `font-normal` |
 | Nav, text links, uppercase labels | Manrope | 500 | `font-medium` |
@@ -231,9 +231,9 @@ Didact Gothic ships a **single Regular (400) face**. Never put `font-medium`, `f
 
 | Role | Tailwind classes |
 |------|-----------------|
-| **H1** (hero only) | `text-[42px] md:text-[56px] font-normal leading-[115%] tracking-tighter font-heading` |
+| **H1** (hero only) | `text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading` |
 | **Hero visual subheading** | `text-[20px] md:text-[24px] font-normal font-heading leading-[130%] tracking-tight` |
-| **H2** (section title) | `text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading` |
+| **H2** (section title) | `text-[26px] md:text-[40px] font-normal leading-[110%] tracking-tighter font-heading text-heading` |
 | **H3 standard** | `text-[22px] md:text-[26px] font-medium leading-[130%]` |
 | **H3 small** (compact cards) | `text-[18px] md:text-[20px] font-medium leading-[130%]` |
 | **H3 xs** (4-in-row cards) | `text-[16px] md:text-[18px] font-medium leading-[130%]` |
@@ -275,7 +275,9 @@ Read each section of the content doc → find its shape below → use that patte
 | Page-ending call to action with contact info and a button | **P-12** |
 | H2 title + multiple body paragraphs, full width, no image, no grid — content-heavy narrative | **P-13** |
 | 4 icon + heading + description points, 2 × 2 text grid, no cards | **P-14** |
-| *New layout polished and approved* | **P-15 …** *(add to this file)* |
+| Blog listing page: H1 “Blogs” + wrapping 3-column article cards | **P-15** |
+| Related Blogs: up to 3 article cards before the page-ending CTA | **P-15** |
+| *New layout polished and approved* | **P-16 …** *(add to this file)* |
 
 ---
 
@@ -311,10 +313,11 @@ Read each section of the content doc → find its shape below → use that patte
 </Hero2>
 ```
 
-Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cover`). Same size on every page.
+Hero image is **full section height** on split heroes (`object-cover`, flush to the top, bottom, and outer edge). Not a padded square. Homepage overlay heroes have no side image.
 
 **Variants:**
-- Default split (`variant="split"` or omit) → left text / right image
+- Default split (`variant="split"` or omit) → left text / right full-height image
+- Image left → add `isReversed`
 - Full-width pattern (`variant="overlay"`) → homepage-only: the `fancy-two.svg` artwork covers the whole hero, text left, no side image. A left-to-right black scrim keeps the copy readable — no motif tile on top
 - No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
 - No image → use `Hero.astro` instead (left-aligned layout), or `variant="overlay"` on the homepage
@@ -381,7 +384,7 @@ Hero image is always **600 × 600** (`max-w-[600px] aspect-square`, `object-cove
 
 **Content shape:** H2 title, 2–3 paragraphs, CTA, and a required side image  
 **Component:** `Content.astro`  
-**Note:** Title is left-aligned above the text column, not centered above both columns.  
+**Note:** Title is left-aligned above the text column, not centered above both columns. The photo column is **full section height**, flush to the top/bottom and outer edge — not a padded square. Use `imageFit="framed"` only for inset grids (gallery previews).  
 **Image side:** Follow the **Split Image Side Rule** — opposite of the previous split on the page. After a default `Hero2` (image right), the first P-03 is `isReversed` (image left).
 
 ```astro
@@ -810,6 +813,40 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 ---
 
+### P-15 · Blog Article Cards
+
+**Content shape:** H1 “Blogs” + wrapping 3-column grid of article cards (image, date, title, excerpt, “Read article”). Related Blogs on other pages: H2 + max 3 cards.  
+**Components:** `BlogCard.astro`, `RelatedBlogs.astro`  
+**Note:** `/blog` is a catalog, not a marketing hero. Any post type can appear. Entire card is clickable. Related Blogs never shows more than 3 cards.
+
+```astro
+<!-- Main listing: /blog -->
+<WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+  <h1 class="text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading text-heading mb-[30px]">
+    Blogs
+  </h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    {posts.map((post) => (
+      <BlogCard post={post} variant="dark" />
+    ))}
+  </div>
+  <Fragment slot="bg">
+    <SectionBg variant="grey" />
+  </Fragment>
+</WidgetWrapper>
+
+<!-- Related Blogs on any other page (renders nothing if empty) -->
+<RelatedBlogs pageSlug={slug} surface={relatedSurface} />
+```
+
+**Variants:**
+- Grey section → `variant="dark"` on `BlogCard` (black cards, gold “Read article”)
+- White section → `variant="light"` (yellow-tint cards, `text-heading` links)
+- Related blogs on a service page → `RelatedBlogs` with `pageSlug`; on a blog article → `RelatedBlogs` with `post` (excludes the current article)
+- Always cap related cards at 3
+
+---
+
 ## New Page Checklist
 
 1. Create `src/pages/[route]/index.astro`
@@ -827,7 +864,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 When a new layout is polished and approved in the browser:
 
-1. Pick the next number: **P-15**, …
+1. Pick the next number: **P-16**, …
 2. Add a row to the **Pattern Selector** table
 3. Add the pattern entry below P-12 using the same format:
    - `### P-XX · Pattern Name`
@@ -1081,7 +1118,7 @@ import Headline from '~/components/ui/Headline.astro';
 
 The Headline component uses consistent typography:
 
-- **Title (H2):** 26px mobile / 40px desktop, Didact Gothic Regular, tight tracking
+- **Title (H2):** 26px mobile / 40px desktop, DM Sans Regular, tight tracking
 - **Subtitle:** 16px mobile / 17px desktop, Manrope Regular, 160% line height
 
 ### Color Variables

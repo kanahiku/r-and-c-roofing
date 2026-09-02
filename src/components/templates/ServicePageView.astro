@@ -1,0 +1,89 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CmsSections from '~/components/widgets/CmsSections.astro';
+import Image from '~/components/common/Image.astro';
+import { getServicePage } from '~/lib/content';
+import { isDarkSurface, sectionSurface } from '~/lib/content/sectionTheme';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
+
+export interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const page = await getServicePage(slug);
+
+const metadata = {
+  title: page.meta.title,
+  description: page.meta.description,
+  ignoreTitleTemplate: true,
+};
+
+const heroActions = [
+  { variant: 'primary' as const, text: page.hero.ctaText, href: page.hero.ctaHref || '/contact' },
+  ...(page.hero.phoneCtaText && page.hero.phoneCtaHref
+    ? [{ variant: 'ghost-light' as const, text: page.hero.phoneCtaText, href: page.hero.phoneCtaHref }]
+    : []),
+];
+
+const heroImage = page.hero.image;
+const faqSurface = sectionSurface(page.sections.length);
+const relatedSurface = sectionSurface(page.sections.length + (page.faqs ? 1 : 0));
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={heroActions}>
+    <Fragment slot="title">{page.hero.title}</Fragment>
+    <Fragment slot="subtitle">{page.hero.subtitle}</Fragment>
+    <Fragment slot="image">
+      {
+        heroImage ? (
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="eager"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder fill label={page.hero.imagePlaceholder || `${page.hero.title} photo placeholder`} />
+        )
+      }
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <CmsSections sections={page.sections} />
+
+  {
+    page.faqs && (
+      <FAQs isDark={isDarkSurface(faqSurface)} title={page.faqs.title} items={page.faqs.items}>
+        <Fragment slot="bg">
+          <SectionBg variant={faqSurface} />
+        </Fragment>
+      </FAQs>
+    )
+  }
+
+  <RelatedBlogs pageSlug={slug} surface={relatedSurface} />
+
+  <CTABanner
+    title={page.ctaBanner.title}
+    subtitle={page.ctaBanner.subtitle}
+    ctaText={page.ctaBanner.ctaText}
+    ctaHref={page.ctaBanner.ctaHref}
+    showAfterHoursNote={page.ctaBanner.showAfterHoursNote}
+  />
+</Layout>

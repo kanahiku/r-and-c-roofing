@@ -14,6 +14,13 @@ interface ImportMetaEnv {
   readonly NOTIFY_EMAIL?: string;
   readonly SITE_NAME?: string;
   readonly SITE_URL?: string;
+  readonly GOOGLE_PLACES_API_KEY?: string;
+  readonly GOOGLE_PLACE_ID?: string;
+  readonly GOOGLE_REVIEWS_URL?: string;
+  readonly YELP_API_KEY?: string;
+  readonly YELP_BUSINESS_ID?: string;
+  readonly YELP_REVIEWS_URL?: string;
+  readonly REVIEW_CACHE_TTL_MS?: string;
 }
 
 interface ImportMeta {

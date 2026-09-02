@@ -3,14 +3,15 @@ import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import ServiceCard from '~/components/ui/ServiceCard.astro';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import { aboutHrefs, featuredYelpReviews, reviewPlatforms, verifiedQuotes } from '~/data/pages/about';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
+import ReviewsGrid from '~/components/widgets/ReviewsGrid.astro';
+import { aboutHrefs, reviewPlatforms } from '~/data/pages/about';
 
 const metadata = {
   title: 'R&C Roofing Contractors Reviews | Honolulu, HI',
@@ -18,35 +19,6 @@ const metadata = {
     'Read customer reviews of R&C Roofing Contractors from Google, Yelp, and BBB and see what Oahu property owners say about their roofing experience.',
   ignoreTitleTemplate: true,
 };
-
-const byProject = [
-  {
-    title: 'Roof Repair',
-    description: `“${verifiedQuotes[2].quote}” — ${verifiedQuotes[2].name}`,
-    href: aboutHrefs.repair,
-    linkText: 'Explore Roof Repair',
-  },
-  {
-    title: 'Roof Replacement',
-    description: `“${verifiedQuotes[3].quote}” — ${verifiedQuotes[3].name}`,
-    href: aboutHrefs.replacement,
-    linkText: 'Explore Roof Replacement & New Installation',
-  },
-  {
-    title: 'Residential Roofing',
-    description: `“${verifiedQuotes[0].quote}” — ${verifiedQuotes[0].name}`,
-    href: aboutHrefs.residential,
-    linkText: 'Explore Residential Roofing',
-  },
-  {
-    title: 'Commercial Roofing',
-    description: `“${verifiedQuotes[4].quote}” — ${verifiedQuotes[4].name}`,
-    href: aboutHrefs.commercial,
-    linkText: 'Explore Commercial Roofing',
-  },
-];
-
-const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], verifiedQuotes[4], verifiedQuotes[2]];
 ---
 
 <Layout metadata={metadata}>
@@ -75,8 +47,19 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Reviews From Across the Web" classes={{ container: 'mb-[9px]' }} />
+    <Headline title="Featured Customer Reviews" classes={{ container: 'mb-[9px]' }} />
     <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+      Recent Google and Yelp reviews from customers who have worked with R&amp;C Roofing Contractors.
+    </p>
+    <ReviewsGrid showHeader={false} sources={['google', 'yelp']} variant="dark" showCta={false} />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title="Reviews From Across the Web" classes={{ container: 'mb-[9px]' }} />
+    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
       Customer feedback about R&amp;C Roofing Contractors can be found on multiple independent review platforms.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
@@ -86,9 +69,7 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
             <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
               <Icon name={card.icon} class="w-5 h-5 text-accent" aria-hidden="true" />
             </div>
-            <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-2 text-white">
-              {card.title}
-            </h3>
+            <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-2 text-white">{card.title}</h3>
             <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60 flex-1">{card.ratingNote}</p>
             <div class="mt-auto pt-4">
               <Button variant="ghost-dark" text={card.linkText} href={card.href} target="_blank" />
@@ -98,107 +79,13 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
       }
     </div>
     <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Featured Customer Reviews" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
-      Verified Yelp reviews, shown with their original wording and a link back to the source.
-    </p>
-    <div class="columns-1 md:columns-2 gap-x-8 md:gap-x-12">
-      {
-        featuredYelpReviews.map((review) => (
-          <div class="break-inside-avoid mb-8 md:mb-10">
-            <p class="text-[18px] md:text-[20px] font-medium leading-[130%] text-white">{review.name}</p>
-            <p class="mt-1 text-[13px] md:text-[14px] font-medium uppercase tracking-wider text-accent">{review.source}</p>
-            <div class="mt-4 yelp-review-grid" set:html={review.embed} />
-            <a
-              href={review.originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block mt-4 text-[14px] md:text-[15px] font-medium text-accent hover:underline"
-            >
-              View Original Review
-            </a>
-          </div>
-        ))
-      }
-    </div>
-    <Fragment slot="bg">
       <SectionBg variant="dark" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Reviews From Different Roofing Projects" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
-      Customers come to R&amp;C for different reasons. Some are dealing with an active leak. Others need a roof replaced,
-      have questions after strong weather, or simply want to understand what condition their roof is in.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-      {
-        byProject.map((card) => (
-          <ServiceCard
-            title={card.title}
-            description={card.description}
-            href={card.href}
-            linkText={card.linkText}
-            variant="light"
-          />
-        ))
-      }
-    </div>
-    <p class="mt-8 text-[14px] md:text-[15px] font-medium leading-[160%] text-muted text-left">
-      For storm or insurance-related roofing work, see
-      <a href={aboutHrefs.storm} class="text-heading underline underline-offset-2">Storm Damage Roof Inspections</a>
-      and
-      <a href={aboutHrefs.claims} class="text-heading underline underline-offset-2">Insurance Claim Help</a>.
-      Also explore
-      <a href={aboutHrefs.inspections} class="text-heading underline underline-offset-2">Roof Inspections</a>.
-    </p>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="More Customer Feedback" classes={{ container: 'mb-[30px]' }} />
-    <div class="columns-1 sm:columns-2 gap-x-12 md:gap-x-16">
-      {
-        archiveQuotes.map((item) => (
-          <blockquote class="break-inside-avoid mb-8 md:mb-10">
-            <p class="text-[18px] md:text-[20px] font-medium leading-[130%] text-heading">{item.name}</p>
-            <p class="mt-1 text-[13px] md:text-[14px] font-medium uppercase tracking-wider text-muted">{item.source}</p>
-            <p class="mt-3 text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">“{item.quote}”</p>
-            <a
-              href={item.originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block mt-3 text-[14px] md:text-[15px] font-medium text-heading hover:underline"
-            >
-              View Original Review
-            </a>
-          </blockquote>
-        ))
-      }
-    </div>
-    <div class="mt-8 md:mt-10">
-      <Button
-        variant="ghost-light"
-        text="Load More Reviews"
-        href="https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu"
-        target="_blank"
-      />
-    </div>
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
   <Content
     isReversed
+    imageFit="framed"
     title="See the Roofing Work Behind the Reviews"
     callToAction={{ variant: 'ghost-light', text: 'View Project Gallery', href: aboutHrefs.gallery }}
   >
@@ -221,6 +108,8 @@ const archiveQuotes = [verifiedQuotes[1], verifiedQuotes[0], verifiedQuotes[3], 
       <SectionBg variant="white" />
     </Fragment>
   </Content>
+
+  <RelatedBlogs pageSlug="reviews" surface="grey" />
 
   <CTABanner
     title="Have a Roofing Question of Your Own?"

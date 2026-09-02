@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { getHomePermalink } from '~/utils/permalinks';
 import Logo from '~/components/Logo.astro';
+import { contactAddress, contactDirectionsHref, contactPhone } from '~/data/pages/contact';
 
 interface Link {
   text?: string;
@@ -54,11 +55,30 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
   >
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
+        <div class="mb-4">
           <a class="inline-block" href={getHomePermalink()}>
             <Logo />
           </a>
         </div>
+        <address class="not-italic text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60 mb-4">
+          <p class="font-medium text-white text-[15px] md:text-[16px] mb-1">R&amp;C Roofing Contractors</p>
+          <p>
+            <a
+              href={contactDirectionsHref}
+              class="hover:text-white transition duration-150 ease-in-out"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {contactAddress.line1}<br />
+              {contactAddress.city}
+            </a>
+          </p>
+          <p class="mt-2">
+            <a href={contactPhone.href} class="hover:text-white transition duration-150 ease-in-out">
+              {contactPhone.text}
+            </a>
+          </p>
+        </address>
         <div class="text-sm text-white/50 flex gap-1">
           {
             secondaryLinks.map(({ text, href }, index) => (

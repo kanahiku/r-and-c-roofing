@@ -195,8 +195,10 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   content?: string;
   actions?: string | CallToAction[];
   image?: string | unknown;
-  /** `split` = left text / right image. `overlay` = full-width pattern, text left. */
+  /** `split` = text + full-height side image. `overlay` = full-width pattern, text left. */
   variant?: 'split' | 'overlay';
+  /** Image on the left when `variant="split"`. Default is image right. */
+  isReversed?: boolean;
 }
 
 export interface Team extends Omit<Headline, 'classes'>, Widget {
@@ -249,6 +251,8 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
   columns?: number;
   isReversed?: boolean;
   isAfterContent?: boolean;
+  /** `bleed` = full-height photo column (P-03 default). `framed` = inset square for grids. */
+  imageFit?: 'bleed' | 'framed';
   callToAction?: CallToAction;
 }
 

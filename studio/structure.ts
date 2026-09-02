@@ -39,6 +39,17 @@ export const structure = (S: StructureBuilder) =>
 
       S.divider(),
 
+      S.listItem()
+        .title('Blog')
+        .schemaType('blogPost')
+        .child(
+          S.documentTypeList('blogPost')
+            .title('Blog posts')
+            .defaultOrdering([{ field: 'publishDate', direction: 'desc' }])
+        ),
+
+      S.divider(),
+
       // ── Pages ───────────────────────────────────────────────────────────────
       S.listItem()
         .title('Pages')
@@ -53,6 +64,58 @@ export const structure = (S: StructureBuilder) =>
                     .schemaType('homePage')
                     .documentId('singleton-home')
                     .title('Home Page')
+                ),
+              S.listItem()
+                .title('Services')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Service pages')
+                    .filter(
+                      '_type == "servicePage" && slug.current match "services*" && !(slug.current match "services/roofing-materials*")'
+                    )
+                ),
+              S.listItem()
+                .title('Materials')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Material pages')
+                    .filter('_type == "servicePage" && slug.current match "services/roofing-materials*"')
+                ),
+              S.listItem()
+                .title('Claims')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Claim pages')
+                    .filter('_type == "servicePage" && slug.current match "claims*"')
+                ),
+              S.listItem()
+                .title('About')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('About pages')
+                    .filter('_type == "servicePage" && slug.current match "about*"')
+                ),
+              S.listItem()
+                .title('Who we serve')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Who we serve pages')
+                    .filter('_type == "servicePage" && slug.current match "who-we-serve*"')
+                ),
+              S.listItem()
+                .title('Roof inspections')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Roof inspection pages')
+                    .filter('_type == "servicePage" && slug.current match "roof-inspections*"')
+                ),
+              S.listItem()
+                .title('Blog')
+                .schemaType('blogPost')
+                .child(
+                  S.documentTypeList('blogPost')
+                    .title('Blog posts')
+                    .defaultOrdering([{ field: 'publishDate', direction: 'desc' }])
                 ),
             ])
         ),

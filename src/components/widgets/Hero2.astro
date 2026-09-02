@@ -13,6 +13,7 @@ const {
   actions = await Astro.slots.render('actions'),
   image = await Astro.slots.render('image'),
   variant = 'split',
+  isReversed = false,
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
@@ -20,6 +21,7 @@ const {
 const isOverlay = variant === 'overlay';
 const hasStats = isOverlay && Astro.slots.has('stats');
 const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
+const isSplitImage = !isOverlay && hasImage;
 ---
 
 <section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
@@ -36,17 +38,26 @@ const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
       )
     }
   </div>
-  <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6">
-    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+  <div class:list={['relative max-w-[1400px] mx-auto', !isSplitImage && 'px-4 sm:px-6']}>
+    {!isSplitImage && <div class="pt-0 md:pt-[76px] pointer-events-none" />}
     <div
       class:list={[
         isOverlay && hasStats && 'pt-16 md:pt-[120px] pb-12 md:pb-20 min-h-[440px] md:min-h-[560px] flex items-center',
         isOverlay && !hasStats && 'py-16 md:py-[120px] min-h-[560px] md:min-h-[720px] flex items-center',
-        !isOverlay && hasImage && 'py-12 md:py-[100px] lg:flex lg:items-center lg:gap-8',
+        isSplitImage && 'md:flex md:items-stretch md:min-h-[640px] lg:min-h-[760px]',
+        isSplitImage && isReversed && 'md:flex-row-reverse',
         !isOverlay && !hasImage && 'py-12 md:py-[100px]',
       ]}
     >
-      <div class:list={[isOverlay ? 'w-full max-w-2xl text-left' : hasImage ? 'basis-1/2 text-left' : 'w-full max-w-3xl text-left']}>
+      <div
+        class:list={[
+          isOverlay ? 'w-full max-w-2xl text-left' : hasImage ? 'md:basis-1/2 self-center text-left' : 'w-full max-w-3xl text-left',
+          isSplitImage && [
+            'px-4 sm:px-6 py-12 md:pt-[calc(76px+5rem)] md:pb-20 lg:pb-[100px]',
+            isReversed ? 'md:pl-16 lg:pl-24' : 'md:pr-16 lg:pr-24',
+          ],
+        ]}
+      >
         {
           tagline && (
             <p
@@ -59,7 +70,7 @@ const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
           title && (
             <h1
               class:list={[
-                'text-[42px] md:text-[56px] font-normal leading-[115%] tracking-tighter mb-[20px] font-heading intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter',
+                'text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter mb-[20px] font-heading intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter',
                 isOverlay ? 'text-white' : 'text-[#111111] dark:text-gray-200',
               ]}
               set:html={title}
@@ -98,20 +109,20 @@ const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
         {content && <Fragment set:html={content} />}
       </div>
       {
-        !isOverlay && hasImage && (
-          <div class="basis-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
-            <div class="relative w-full max-w-[500px] aspect-square shrink-0 intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+        isSplitImage && (
+          <div class="relative mt-8 md:mt-0 md:basis-1/2 aspect-[4/3] md:aspect-auto">
+            <div class="absolute inset-0 overflow-hidden [&>*]:!h-full [&>*]:!w-full [&>*]:!max-w-none [&>*]:!rounded-none [&>*]:!aspect-auto [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&_img]:rounded-none">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
                   {...image}
-                  class="rounded-md w-full h-full object-cover"
-                  widths={[500, 750, 1000]}
-                  sizes="(max-width: 639px) 100vw, 500px"
+                  class="w-full h-full object-cover"
+                  widths={[400, 768, 1200]}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   loading="eager"
-                  width={500}
-                  height={500}
+                  width={700}
+                  height={700}
                   layout="cover"
                   format="webp"
                 />

@@ -1,0 +1,88 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import CmsSections from '~/components/widgets/CmsSections.astro';
+import Image from '~/components/common/Image.astro';
+import { getFormattedDate } from '~/utils/utils';
+import { getBlogPosts } from '~/lib/content';
+import { sectionSurface } from '~/lib/content/sectionTheme';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const publishDate = new Date(post.publishDate);
+const heroParagraphs = post.heroParagraphs.length ? post.heroParagraphs : post.body;
+const heroImageLabel = post.imagePlaceholder || `${post.title} photo placeholder`;
+
+const metadata = {
+  title: post.meta.title,
+  description: post.meta.description,
+  ignoreTitleTemplate: true,
+};
+const relatedSurface = sectionSurface(post.sections.length);
+---
+
+<Layout metadata={metadata}>
+  <Hero2>
+    <Fragment slot="title">{post.title}</Fragment>
+    <Fragment slot="subtitle">
+      <span class="block text-[14px] md:text-[15px] font-medium text-muted mb-6">
+        {getFormattedDate(publishDate)}
+        {post.author ? ` · ${post.author}` : ''}
+      </span>
+      {heroParagraphs.map((paragraph, index) => (
+        <>
+          {index > 0 && <br />}
+          {index > 0 && <br />}
+          {paragraph}
+        </>
+      ))}
+    </Fragment>
+    <Fragment slot="image">
+      {
+        post.image ? (
+          <Image
+            src={post.image.src}
+            alt={post.image.alt}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="eager"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder fill label={heroImageLabel} />
+        )
+      }
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  {post.sections.length ? <CmsSections sections={post.sections} /> : (
+    <Fragment />
+  )}
+
+  <RelatedBlogs post={post} surface={relatedSurface} />
+
+  <CTABanner
+    title={post.ctaBanner.title}
+    subtitle={post.ctaBanner.subtitle}
+    ctaText={post.ctaBanner.ctaText}
+    ctaHref={post.ctaBanner.ctaHref}
+  />
+</Layout>

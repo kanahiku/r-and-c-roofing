@@ -37,7 +37,7 @@ White → Grey (#FAFAFA) → Black → White → Grey → Black → … → Yell
 ## 1 · Hero Section (always White bg)
 
 - Component: `Hero2`
-- **Default (`variant="split"`):** left content / right image. White with yellow accent motif at **10% opacity**, top-to-bottom fade
+- **Default (`variant="split"`):** left content / right **full-height** image, flush to the section edges. White with yellow accent motif at **10% opacity**, top-to-bottom fade. Image left: `isReversed`.
 - **Homepage only (`variant="overlay"`):** the `fancy-two.svg` artwork covers the full hero, text left, no side image. Readability comes from a left-to-right black scrim — never lay a yellow motif tile over it
 - Left side: H1, subtitle paragraphs, primary CTA button
 - No eyebrow text. No gold bar. No `isDark`.

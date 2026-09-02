@@ -10,6 +10,7 @@ import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import { Icon } from 'astro-icon/components';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import { exploreFromStorm, problemHrefs, serviceHeroActions } from '~/data/pages/roofProblems';
 
 const metadata = {
@@ -175,6 +176,8 @@ const nextSteps = [
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
+
+  <RelatedBlogs pageSlug="roof-problems/storm-damage-on-my-roof" surface="dark" />
 
   <CTABanner
     title="Think the Storm Damaged Your Roof?"

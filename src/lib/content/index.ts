@@ -1,5 +1,12 @@
-import type { HomePageContent, NavigationContent } from './types';
-import { getSanityHomeContent, getSanityNavigationContent } from './sanity';
+import type { BlogPost, HomePageContent, NavigationContent, ServicePageContent } from './types';
+import {
+  getSanityBlogPost,
+  getSanityBlogPosts,
+  getSanityHomeContent,
+  getSanityNavigationContent,
+  getSanityServicePage,
+} from './sanity';
+import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 
 export async function getHomeContent(): Promise<HomePageContent> {
   const page = await getSanityHomeContent();
@@ -14,7 +21,99 @@ export async function getNavigationContent(): Promise<NavigationContent> {
   if (!nav?.header || !nav?.footer) {
     throw new Error('Sanity navigation or footer document is missing.');
   }
-  return nav;
+  return ensureBlogNav(nav);
 }
 
-export type { HomePageContent, NavigationContent };
+function ensureBlogNav(nav: NavigationContent): NavigationContent {
+  const blogLink = { text: 'Blog', href: '/blog' };
+
+  const headerLinks = nav.header.links.map((link) => {
+    if (link.text !== 'About' || !link.links) return link;
+    if (link.links.some((item) => item.href === '/blog')) return link;
+    return { ...link, links: [...link.links, blogLink] };
+  });
+
+  const footerLinks = nav.footer.links.map((column) => {
+    if (column.title !== 'Company') return column;
+    if (column.links.some((item) => item.href === '/blog')) return column;
+    const next = [...column.links];
+    const contactIndex = next.findIndex((item) => item.href === '/contact');
+    if (contactIndex >= 0) next.splice(contactIndex, 0, blogLink);
+    else next.push(blogLink);
+    return { ...column, links: next };
+  });
+
+  return {
+    ...nav,
+    header: { ...nav.header, links: headerLinks },
+    footer: { ...nav.footer, links: footerLinks },
+  };
+}
+
+export async function getServicePage(slug: string): Promise<ServicePageContent> {
+  const page = await getSanityServicePage(slug);
+  if (!page) {
+    throw new Error(`Sanity servicePage document is missing for slug "${slug}".`);
+  }
+  return page;
+}
+
+export function getBlogPermalink(slug: string): string {
+  return `/blog/${slug}`;
+}
+
+function mergeBlogPosts(sanityPosts: BlogPost[], localPosts: BlogPost[]): BlogPost[] {
+  const localBySlug = new Map(localPosts.map((post) => [post.slug, post]));
+  const extras = sanityPosts.filter((post) => !localBySlug.has(post.slug));
+  return [...localPosts, ...extras].sort((a, b) => b.publishDate.localeCompare(a.publishDate));
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  try {
+    const posts = await getSanityBlogPosts();
+    if (posts.length) return mergeBlogPosts(posts, localBlogPosts);
+  } catch (error) {
+    console.warn('Sanity blog posts unavailable; using local articles.', error);
+  }
+  return [...localBlogPosts].sort((a, b) => b.publishDate.localeCompare(a.publishDate));
+}
+
+export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
+  const local = localBlogPosts.find((post) => post.slug === slug);
+  if (local) return local;
+
+  try {
+    const post = await getSanityBlogPost(slug);
+    if (post) return post;
+  } catch (error) {
+    console.warn(`Sanity blog post "${slug}" unavailable; checking local articles.`, error);
+  }
+
+  const posts = await getBlogPosts();
+  return posts.find((post) => post.slug === slug);
+}
+
+export async function getBlogPostsRelatedTo(pageSlug: string): Promise<BlogPost[]> {
+  const key = pageSlug.replace(/^\/+/, '');
+  const posts = await getBlogPosts();
+  return posts.filter((post) => post.relatedPages.includes(key)).slice(0, 3);
+}
+
+export async function getRelatedBlogPosts(post: BlogPost, max = 3): Promise<BlogPost[]> {
+  const keys = new Set(post.relatedPages);
+  if (!keys.size) return [];
+
+  const posts = await getBlogPosts();
+  return posts
+    .filter((item) => item.slug !== post.slug)
+    .map((item) => ({
+      item,
+      score: item.relatedPages.filter((key) => keys.has(key)).length,
+    }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || b.item.publishDate.localeCompare(a.item.publishDate))
+    .slice(0, max)
+    .map(({ item }) => item);
+}
+
+export type { BlogPost, HomePageContent, NavigationContent, ServicePageContent };

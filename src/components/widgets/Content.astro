@@ -17,6 +17,7 @@ const {
   image = await Astro.slots.render('image'),
   isReversed = false,
   isAfterContent = false,
+  imageFit = 'bleed',
 
   id,
   isDark = false,
@@ -34,12 +35,13 @@ const columnsClass =
         : '';
 
 const hasImage = Boolean(image);
+const isBleed = hasImage && imageFit === 'bleed';
 ---
 
 <WidgetWrapper
   id={id}
   isDark={isDark}
-  containerClass={`max-w-[1400px] mx-auto ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${classes?.container ?? ''}`}
+  containerClass={`max-w-[1400px] mx-auto ${isBleed ? 'px-0 py-0 md:px-0 md:py-0 lg:py-0' : ''} ${isAfterContent ? 'pt-0 md:pt-0 lg:pt-0' : ''} ${classes?.container ?? ''}`}
   bg={bg}
 >
   {!hasImage && (
@@ -48,18 +50,36 @@ const hasImage = Boolean(image);
       subtitle={subtitle}
       tagline={tagline}
       classes={{
-      title: 'text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading',
+      title: 'text-[26px] md:text-[40px] font-normal leading-[110%] tracking-tighter font-heading',
       subtitle: 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted dark:text-slate-400',
       }}
     />
   )}
   <div class="mx-auto">
-    <div class:list={[{ 'md:flex md:gap-16': hasImage }, { 'md:flex-row-reverse': hasImage && isReversed }]}>
-      <div class:list={[{ 'md:basis-1/2': hasImage }, 'self-center']}>
-        {/* When there's a side image, render title inline above the content */}
+    <div
+      class:list={[
+        { 'md:flex': hasImage },
+        { 'md:items-stretch md:min-h-[560px] lg:min-h-[700px]': isBleed },
+        { 'md:gap-16': hasImage && !isBleed },
+        { 'md:flex-row-reverse': hasImage && isReversed },
+      ]}
+    >
+      <div
+        class:list={[
+          { 'md:basis-1/2': hasImage },
+          isBleed
+            ? [
+                'self-center py-12 md:py-16 lg:py-20 px-4',
+                isReversed
+                  ? 'md:pr-6 md:pl-16 lg:pl-24'
+                  : 'md:pl-6 md:pr-16 lg:pr-24',
+              ]
+            : 'self-center',
+        ]}
+      >
         {hasImage && title && (
           <h2
-            class={`text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter mb-[20px] font-heading ${classes?.title ?? 'text-heading'}`}
+            class={`text-[26px] md:text-[40px] font-normal leading-[110%] tracking-tighter mb-[20px] font-heading ${classes?.title ?? 'text-heading'}`}
             set:html={title}
           />
         )}
@@ -123,28 +143,49 @@ const hasImage = Boolean(image);
       {
         hasImage && (
           <div
-            aria-hidden="true"
+            aria-hidden={!isBleed}
             class:list={[
-              'mt-10 md:mt-0 md:basis-1/2 flex justify-center',
-              isReversed ? 'md:justify-start' : 'md:justify-end',
+              isBleed
+                ? 'relative mt-8 md:mt-0 md:basis-1/2 aspect-[4/3] md:aspect-auto'
+                : 'mt-10 md:mt-0 md:basis-1/2 flex justify-center',
+              !isBleed && (isReversed ? 'md:justify-start' : 'md:justify-end'),
             ]}
           >
-            <div class="relative w-full max-w-[500px] aspect-square">
-              {typeof image === 'string' ? (
-                <Fragment set:html={image} />
-              ) : (
-                <Image
-                  class="w-full h-full rounded-lg object-cover bg-gray-500 shadow-lg"
-                  width={500}
-                  height={500}
-                  widths={[400, 768]}
-                  sizes="(max-width: 768px) 100vw, 500px"
-                  layout="cover"
-                  format="webp"
-                  {...image}
-                />
-              )}
-            </div>
+            {isBleed ? (
+              <div class="absolute inset-0 overflow-hidden [&>*]:h-full [&>*]:w-full [&_img]:h-full [&_img]:w-full [&_img]:object-cover [&_img]:rounded-none">
+                {typeof image === 'string' ? (
+                  <Fragment set:html={image} />
+                ) : (
+                  <Image
+                    {...image}
+                    class="w-full h-full object-cover"
+                    width={700}
+                    height={700}
+                    widths={[400, 768, 1200]}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    layout="cover"
+                    format="webp"
+                  />
+                )}
+              </div>
+            ) : (
+              <div class="relative w-full max-w-[500px] aspect-square">
+                {typeof image === 'string' ? (
+                  <Fragment set:html={image} />
+                ) : (
+                  <Image
+                    class="w-full h-full rounded-lg object-cover bg-gray-500 shadow-lg"
+                    width={500}
+                    height={500}
+                    widths={[400, 768]}
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    layout="cover"
+                    format="webp"
+                    {...image}
+                  />
+                )}
+              </div>
+            )}
           </div>
         )
       }

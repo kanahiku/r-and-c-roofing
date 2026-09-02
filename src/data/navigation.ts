@@ -4,7 +4,7 @@ export const navigationData: NavigationContent = {
   header: {
     links: [
       {
-        text: 'Roof Inspections',
+        text: 'Inspections',
         href: '/roof-inspections',
         links: [
           { text: 'HAAG Certified Inspection', href: '/roof-inspections/haag-certified-inspection' },
@@ -39,6 +39,17 @@ export const navigationData: NavigationContent = {
               { text: 'Slate & Rubber Slate Roofing', href: '/services/roofing-materials/slate-roofing' },
             ],
           },
+          {
+            title: 'Common Problems',
+            links: [
+              { text: 'My Roof Is Leaking', href: '/roof-problems/my-roof-is-leaking' },
+              { text: 'Storm Damage on My Roof', href: '/roof-problems/storm-damage-on-my-roof' },
+              { text: 'My Roof Is at End of Life', href: '/roof-problems/my-roof-is-at-end-of-life' },
+              { text: 'My Insurance Claim Was Denied', href: '/roof-problems/my-insurance-claim-was-denied' },
+              { text: 'Buying or Selling a Home', href: '/roof-problems/buying-or-selling-a-home' },
+              { text: 'Preparing for Hurricane Season', href: '/roof-problems/preparing-for-hurricane-season' },
+            ],
+          },
         ],
       },
       {
@@ -47,17 +58,6 @@ export const navigationData: NavigationContent = {
         links: [
           { text: 'How the Claim Process Works', href: '/claims/how-the-claim-process-works' },
           { text: 'Denied or Underpaid Claims', href: '/claims/denied-or-underpaid-claims' },
-        ],
-      },
-      {
-        text: 'Common Problems',
-        links: [
-          { text: 'My Roof Is Leaking', href: '/roof-problems/my-roof-is-leaking' },
-          { text: 'Storm Damage on My Roof', href: '/roof-problems/storm-damage-on-my-roof' },
-          { text: 'My Roof Is at End of Life', href: '/roof-problems/my-roof-is-at-end-of-life' },
-          { text: 'My Insurance Claim Was Denied', href: '/roof-problems/my-insurance-claim-was-denied' },
-          { text: 'Buying or Selling a Home', href: '/roof-problems/buying-or-selling-a-home' },
-          { text: 'Preparing for Hurricane Season', href: '/roof-problems/preparing-for-hurricane-season' },
         ],
       },
       {
@@ -76,6 +76,7 @@ export const navigationData: NavigationContent = {
           { text: 'Our Story & Credentials', href: '/about/our-story' },
           { text: 'Project Gallery', href: '/about/gallery' },
           { text: 'Reviews', href: '/reviews' },
+          { text: 'Blog', href: '/blog' },
         ],
       },
       { text: 'Contact', href: '/contact' },
@@ -126,6 +127,7 @@ export const navigationData: NavigationContent = {
           { text: 'Our Story', href: '/about/our-story' },
           { text: 'Project Gallery', href: '/about/gallery' },
           { text: 'Reviews', href: '/reviews' },
+          { text: 'Blog', href: '/blog' },
           { text: 'Claims', href: '/claims' },
           { text: 'Contact', href: '/contact' },
         ],
@@ -137,6 +139,16 @@ export const navigationData: NavigationContent = {
         ariaLabel: 'Facebook',
         icon: 'tabler:brand-facebook',
         href: 'https://www.facebook.com/RCEnterprises808/',
+      },
+      {
+        ariaLabel: 'Instagram',
+        icon: 'tabler:brand-instagram',
+        href: 'https://www.instagram.com/rcroofinghawaii/',
+      },
+      {
+        ariaLabel: 'YouTube',
+        icon: 'tabler:brand-youtube',
+        href: 'https://www.youtube.com/@roofinghawaii5031',
       },
       {
         ariaLabel: 'Yelp',

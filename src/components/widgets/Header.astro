@@ -50,6 +50,9 @@ const {
 const extraActions = (actions ?? []).filter(
   (action) => action.href !== phone?.href && !String(action.href ?? '').startsWith('tel:')
 );
+const phoneAction = phone
+  ? { variant: 'primary' as const, text: phone.text, href: phone.href, icon: 'tabler:phone' }
+  : undefined;
 const phoneLabel = phone ? `Call ${phone.text}` : '';
 const phoneBoxClass =
   'inline-flex items-center justify-center shrink-0 w-10 h-10 rounded-md bg-accent text-black border-2 border-accent hover:bg-accent-hover hover:border-accent-hover transition duration-200';
@@ -76,8 +79,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       ]}
     >
       <div class="flex items-center justify-between w-full md:w-auto">
-        <a class="flex items-center" href={getHomePermalink()}>
-          <Logo />
+        <a class="flex items-center min-w-0" href={getHomePermalink()}>
+          <Logo class="h-6 max-w-[168px] md:h-9 md:max-w-[240px]" />
         </a>
         <div class="flex items-center gap-2 md:hidden">
           {
@@ -101,14 +104,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             links.map(({ text, href, links: childLinks, columns }) => {
               const isDropdown = Boolean(childLinks?.length || columns?.length);
               return (
-              <li class:list={[{ dropdown: isDropdown, mega: Boolean(columns?.length) }]}>
+              <li class:list={[{ dropdown: isDropdown, mega: Boolean(columns?.length), 'md:relative': isDropdown }]}>
                 {isDropdown ? (
                   <>
+                    <div class="flex items-center">
                     {href ? (
                     <a
                       href={href}
                       class:list={[
-                        'text-white/80 hover:text-white px-[8px] py-3 flex items-center whitespace-nowrap',
+                        'text-white/80 hover:text-white px-[8px] py-3 flex items-center flex-1 min-w-0 whitespace-nowrap',
                         { 'aw-link-active': href === currentPath },
                       ]}
                     >
@@ -119,19 +123,34 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       />
                     </a>
                     ) : (
-                    <span class="text-white/80 cursor-default px-[8px] py-3 flex items-center whitespace-nowrap select-none">
+                    <button
+                      type="button"
+                      data-aw-toggle-dropdown
+                      aria-expanded="false"
+                      class="text-white/80 hover:text-white px-[8px] py-3 flex items-center flex-1 min-w-0 whitespace-nowrap select-none text-left"
+                    >
                       {text}{' '}
                       <Icon
                         name="tabler:chevron-down"
                         class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
                       />
-                    </span>
+                    </button>
                     )}
+                    <button
+                      type="button"
+                      data-aw-toggle-dropdown
+                      aria-expanded="false"
+                      aria-label={`Toggle ${text} submenu`}
+                      class="md:hidden shrink-0 p-3 text-white/80 hover:text-white"
+                    >
+                      <Icon name="tabler:chevron-down" class="w-5 h-5 transition-transform duration-200" />
+                    </button>
+                    </div>
                     {columns?.length ? (
-                    <div class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[520px] drop-shadow-xl">
+                    <div class="dropdown-menu mega-menu hidden md:backdrop-blur-md rounded md:absolute md:top-full md:left-1/2 md:-mt-1 pl-4 md:pl-0 font-medium md:bg-[#111111] md:min-w-[760px] md:z-50 drop-shadow-xl">
                       <div class="flex flex-col md:flex-row md:gap-6 md:p-5">
                         {columns.map((col) => (
-                          <div class="md:min-w-[220px]">
+                          <div class="md:min-w-[220px] min-w-0">
                             <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent px-5 md:px-2 pt-3 md:pt-0 pb-1">
                               {col.title}
                             </p>
@@ -140,7 +159,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                                 <li>
                                   <a
                                     class:list={[
-                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 md:px-2 block whitespace-nowrap',
+                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 md:px-2 block whitespace-normal break-words md:whitespace-nowrap',
                                       { 'aw-link-active': href2 === currentPath },
                                     ]}
                                     href={href2}
@@ -155,12 +174,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       </div>
                     </div>
                     ) : (
-                    <ul class="dropdown-menu md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
+                    <ul class="dropdown-menu hidden md:backdrop-blur-md rounded md:absolute pl-4 md:pl-0 font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
                       {childLinks?.map(({ text: text2, href: href2, links: links2 }) => (
                         <li class:list={[{ 'relative group/nested': links2?.length }]}>
                           <a
                             class:list={[
-                              'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
+                              'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 block whitespace-normal break-words md:whitespace-nowrap',
                               { 'aw-link-active': href2 === currentPath },
                               { 'flex items-center justify-between': links2?.length },
                             ]}
@@ -175,12 +194,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                             )}
                           </a>
                           {links2?.length && (
-                            <ul class="md:absolute md:left-full md:top-0 md:hidden group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md rounded font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
+                            <ul class="hidden md:absolute md:left-full md:top-0 group-hover/nested:md:block pl-4 md:pl-0 md:backdrop-blur-md rounded font-medium md:bg-[#111111] md:min-w-[200px] drop-shadow-xl">
                               {links2.map(({ text: text3, href: href3 }) => (
                                 <li>
                                   <a
                                     class:list={[
-                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 block whitespace-nowrap',
+                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 block whitespace-normal break-words md:whitespace-nowrap',
                                       { 'aw-link-active': href3 === currentPath },
                                     ]}
                                     href={href3}
@@ -232,12 +251,13 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             }
           </div>
           {
-            (phone || extraActions.length) && (
+            (phoneAction || extraActions.length) && (
               <span class="ml-4 rtl:ml-0 rtl:mr-4 flex items-center">
-                {phone && (
-                  <a href={phone.href} class={phoneBoxClass} aria-label={phoneLabel}>
-                    <Icon name="tabler:phone" class="w-5 h-5" aria-hidden="true" />
-                  </a>
+                {phoneAction && (
+                  <Button
+                    {...phoneAction}
+                    class="ml-2 py-2.5 px-4 md:px-5 font-semibold shadow-none text-sm w-auto whitespace-nowrap"
+                  />
                 )}
                 {extraActions.map((btnProps) => (
                   <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
@@ -255,6 +275,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   aw-header {
     display: contents;
   }
+
+  @media (min-width: 768px) {
+    li.mega .mega-menu {
+      transform: translateX(calc(-50% + var(--mega-shift, 0px)));
+    }
+  }
+
+  [data-aw-toggle-dropdown][aria-expanded='true'] :global(svg) {
+    transform: rotate(180deg);
+  }
 </style>
 
 <script>
@@ -262,6 +292,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     private onScroll?: () => void;
     private mql?: MediaQueryList;
     private onMqlChange?: () => void;
+    private onResize?: () => void;
     private onPageLoad = () => {
       this.updateActiveLinks();
       this.closeOpenDropdown();
@@ -279,6 +310,17 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       this.updateActiveLinks();
       document.addEventListener('astro:page-load', this.onPageLoad);
 
+      const setDropdownOpen = (li: HTMLElement, open: boolean) => {
+        li.classList.toggle('expanded', open);
+        li.querySelectorAll<HTMLElement>('[data-aw-toggle-dropdown]').forEach((btn) => {
+          btn.setAttribute('aria-expanded', String(open));
+        });
+      };
+
+      const collapseDropdowns = () => {
+        nav?.querySelectorAll<HTMLElement>('li.dropdown.expanded').forEach((li) => setDropdownOpen(li, false));
+      };
+
       const closeMenu = () => {
         toggle?.classList.remove('expanded');
         toggle?.setAttribute('aria-expanded', 'false');
@@ -286,6 +328,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         header?.classList.remove('h-screen', 'expanded', 'bg-black');
         nav?.classList.add('hidden');
         lastChild?.classList.add('hidden');
+        collapseDropdowns();
       };
 
       // Mobile menu toggle.
@@ -298,10 +341,27 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         header?.classList.toggle('bg-black');
         nav?.classList.toggle('hidden');
         lastChild?.classList.toggle('hidden');
+        if (!expanded) collapseDropdowns();
       });
 
-      // Close the mobile menu when a nav link is clicked.
-      nav?.addEventListener('click', closeMenu);
+      // Close the mobile menu when a nav link is clicked. Accordion
+      // chevrons toggle a submenu instead of dismissing the drawer.
+      nav?.addEventListener('click', (e) => {
+        const dropdownToggle = (e.target as HTMLElement)?.closest<HTMLElement>('[data-aw-toggle-dropdown]');
+        if (dropdownToggle) {
+          e.preventDefault();
+          e.stopPropagation();
+          const li = dropdownToggle.closest<HTMLElement>('li.dropdown');
+          if (!li) return;
+          const willOpen = !li.classList.contains('expanded');
+          nav.querySelectorAll<HTMLElement>('li.dropdown.expanded').forEach((open) => {
+            if (open !== li) setDropdownOpen(open, false);
+          });
+          setDropdownOpen(li, willOpen);
+          return;
+        }
+        closeMenu();
+      });
 
       // Desktop dropdowns open on hover/`:focus-within`. When a dropdown link is
       // clicked it keeps focus, and because the header uses `transition:persist`
@@ -317,6 +377,17 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       this.mql = window.matchMedia('(max-width: 767px)');
       this.onMqlChange = () => closeMenu();
       this.mql.addEventListener('change', this.onMqlChange);
+
+      this.querySelectorAll<HTMLElement>('li.mega').forEach((li) => {
+        li.addEventListener('mouseenter', () => this.clampMegaMenu(li));
+        li.addEventListener('focusin', () => this.clampMegaMenu(li));
+      });
+      this.onResize = () => {
+        this.querySelectorAll<HTMLElement>('li.mega:hover, li.mega:focus-within').forEach((li) => {
+          this.clampMegaMenu(li);
+        });
+      };
+      window.addEventListener('resize', this.onResize);
 
       // Sticky header: toggle the `scroll` class past a small threshold.
       if (header?.hasAttribute('data-aw-sticky-header')) {
@@ -342,7 +413,35 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     disconnectedCallback() {
       if (this.onScroll) document.removeEventListener('scroll', this.onScroll);
       if (this.mql && this.onMqlChange) this.mql.removeEventListener('change', this.onMqlChange);
+      if (this.onResize) window.removeEventListener('resize', this.onResize);
       document.removeEventListener('astro:page-load', this.onPageLoad);
+    }
+
+    private clampMegaMenu(li: HTMLElement) {
+      const menu = li.querySelector<HTMLElement>('.mega-menu');
+      if (!menu) return;
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        menu.style.removeProperty('--mega-shift');
+        return;
+      }
+
+      menu.style.setProperty('--mega-shift', '0px');
+      requestAnimationFrame(() => {
+        const pad = 16;
+        const vw = window.innerWidth;
+        const rect = menu.getBoundingClientRect();
+        if (!rect.width) return;
+
+        let shift = 0;
+        if (rect.width >= vw - pad * 2) {
+          shift = pad - rect.left;
+        } else if (rect.left < pad) {
+          shift = pad - rect.left;
+        } else if (rect.right > vw - pad) {
+          shift = vw - pad - rect.right;
+        }
+        menu.style.setProperty('--mega-shift', `${Math.round(shift)}px`);
+      });
     }
 
     // With `transition:persist` the header (and its focus) survives client-side
@@ -369,7 +468,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         const anyChildActive = Array.from(childLinks).some(
           (a) => norm(new URL(a.href).pathname) === current
         );
-        const trigger = li.querySelector<HTMLElement>(':scope > a, :scope > span');
+        const trigger = li.querySelector<HTMLElement>(':scope > a, :scope > span, :scope > div > a, :scope > div > button');
         const triggerHref = trigger instanceof HTMLAnchorElement ? trigger.getAttribute('href') : null;
         const triggerActive = Boolean(triggerHref && norm(triggerHref) === current);
         if (trigger) trigger.classList.toggle('aw-link-active', anyChildActive || triggerActive);

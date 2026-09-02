@@ -34,22 +34,44 @@ const opacityValue = parseMotifOpacity(opacity, opacityFallback);
 const fadeStyle = fadeMask
   ? `-webkit-mask-image: ${fadeMask}; mask-image: ${fadeMask};`
   : '';
+
+/**
+ * `cover` + `center` rescales/re-crops whenever the section height changes
+ * (FAQ accordion). Paint the motif into a width-locked frame matching the
+ * SVG aspect ratio, pinned to the top, so expand/collapse cannot move it.
+ */
+const pinToAspectFrame = size === 'cover' || size === 'contain';
+const frameW = pattern.width || 1440;
+const frameH = pattern.height || 800;
+const motifSize = pinToAspectFrame ? '100% 100%' : size;
+const motifPosition = pinToAspectFrame ? 'top' : position;
+
 const motifStyle = [
   `opacity: ${opacityValue}`,
   `background-color: ${color}`,
   `-webkit-mask-image: url('${pattern.src}')`,
   `mask-image: url('${pattern.src}')`,
-  `-webkit-mask-size: ${size}`,
-  `mask-size: ${size}`,
+  `-webkit-mask-size: ${motifSize}`,
+  `mask-size: ${motifSize}`,
   `-webkit-mask-repeat: ${repeat}`,
   `mask-repeat: ${repeat}`,
-  `-webkit-mask-position: ${position}`,
-  `mask-position: ${position}`,
+  `-webkit-mask-position: ${motifPosition}`,
+  `mask-position: ${motifPosition}`,
   `-webkit-mask-mode: ${maskMode}`,
   `mask-mode: ${maskMode}`,
 ].join('; ');
 ---
 
-<div class:list={['absolute inset-0 overflow-hidden pointer-events-none', className]} style={fadeStyle} aria-hidden="true">
-  <div class="absolute inset-0" style={motifStyle}></div>
+<div class:list={['absolute inset-0 overflow-hidden pointer-events-none', className]} aria-hidden="true">
+  {
+    pinToAspectFrame ? (
+      <div class="absolute top-0 left-0 w-full" style={`${fadeStyle} aspect-ratio: ${frameW} / ${frameH};`}>
+        <div class="absolute inset-0" style={motifStyle}></div>
+      </div>
+    ) : (
+      <div class="absolute inset-0" style={fadeStyle}>
+        <div class="absolute inset-0" style={motifStyle}></div>
+      </div>
+    )
+  }
 </div>

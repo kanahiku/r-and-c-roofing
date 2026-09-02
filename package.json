@@ -20,7 +20,8 @@
     "fix": "npm run fix:eslint && npm run fix:prettier",
     "fix:eslint": "eslint --fix .",
     "fix:prettier": "prettier -w .",
-    "migrate:to-sanity": "tsx scripts/migrate-to-sanity.ts",
+    "migrate:to-sanity": "tsx --env-file=.env scripts/migrate-to-sanity.ts",
+    "migrate:services": "tsx --env-file=.env scripts/migrate-services-to-sanity.ts",
     "studio": "cd studio && npm run dev"
   },
   "dependencies": {

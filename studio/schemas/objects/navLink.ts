@@ -27,7 +27,7 @@ export const navLink = defineType({
     defineField({
       name: 'columns',
       title: 'Mega-menu columns',
-      description: 'Optional two-column mega menu (used by Services). Takes precedence over Sub-links.',
+      description: 'Optional mega-menu columns (used by Services). Takes precedence over Sub-links.',
       type: 'array',
       of: [
         {
