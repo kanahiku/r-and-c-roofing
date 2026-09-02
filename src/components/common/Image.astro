@@ -6,6 +6,9 @@
  *   • Detectable CDN URL (Unsplash, Cloudinary, Imgix…) → rewritten with
  *     CDN-side parameters via `transformUrl` from `unpic` and emitted as a
  *     plain <img> served straight from the source. No download, no Sharp.
+ *   • Sanity CDN (`cdn.sanity.io`) → same plain <img> path, using Sanity's
+ *     own `w`/`h`/`fit` params. Not passed through Unpic (it treats Sanity as
+ *     Imgix) and not loaded with `crossorigin` (Sanity 403s those requests).
  *   • Local image (ESM import or `~/assets/...` path) → delegated to Astro's
  *     native <Image /> from `astro:assets`, which optimizes through Sharp and
  *     emits responsive `srcset` + styles for the chosen `layout` (enabled by
@@ -61,10 +64,18 @@ rest.decoding ??= 'async';
 // --- Resolve src (handles `~/assets/...` paths) ----------------------------
 const resolved = await findImage(src);
 
+const isSanityUrl =
+  typeof resolved === 'string' && /^https?:\/\/cdn\.sanity\.io\//.test(resolved);
+
+// Unpic mis-detects cdn.sanity.io as Imgix. Sanity also 403s CORS requests
+// (`crossorigin="anonymous"`), so those assets are rendered as a plain <img>.
 const isCdnUrl =
   typeof resolved === 'string' &&
   (resolved.startsWith('http://') || resolved.startsWith('https://')) &&
+  !isSanityUrl &&
   parseUrl(resolved) !== undefined;
+
+const isRemoteImg = isCdnUrl || isSanityUrl;
 
 // Infer missing dimension(s) from ESM-imported ImageMetadata. If only one of
 // width/height is provided, derive the other from the source aspect ratio.
@@ -118,16 +129,28 @@ const cdnLayoutStyle = (): string => {
   }
   return decls.join(';');
 };
-const cdnStyle = isCdnUrl ? [cdnLayoutStyle(), rest.style].filter(Boolean).join(';') || undefined : undefined;
+const cdnStyle = isRemoteImg ? [cdnLayoutStyle(), rest.style].filter(Boolean).join(';') || undefined : undefined;
+
+const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string => {
+  const url = new URL(resolved as string);
+  if (variantWidth) url.searchParams.set('w', String(variantWidth));
+  if (variantHeight) url.searchParams.set('h', String(variantHeight));
+  if (layout === 'cover' && variantWidth && variantHeight) url.searchParams.set('fit', 'crop');
+  else if (variantWidth || variantHeight) url.searchParams.set('fit', 'max');
+  url.searchParams.set('auto', 'format');
+  return url.toString();
+};
 
 // --- CDN-side srcset -------------------------------------------------------
 const buildCdnUrl = (variantWidth?: number, variantHeight?: number): string | undefined =>
-  transformUrl({
-    url: resolved as string,
-    width: variantWidth,
-    height: variantHeight,
-    fallback: 'astro',
-  })?.toString();
+  isSanityUrl
+    ? sanityImageUrl(variantWidth, variantHeight)
+    : transformUrl({
+        url: resolved as string,
+        width: variantWidth,
+        height: variantHeight,
+        fallback: 'astro',
+      })?.toString();
 
 /**
  * Densify the user-provided srcset breakpoints so the browser can match the
@@ -146,24 +169,23 @@ const expandWidths = (raw?: number[]): number[] | undefined => {
 const heightFromWidth = (variantWidth: number): number | undefined =>
   aspectRatio ? Math.round(variantWidth / aspectRatio) : undefined;
 
-const cdnSrc = isCdnUrl ? buildCdnUrl(w, h) : undefined;
-const cdnWidths = isCdnUrl ? expandWidths(widths) : undefined;
+const cdnSrc = isRemoteImg ? buildCdnUrl(w, h) : undefined;
+const cdnWidths = isRemoteImg ? expandWidths(widths) : undefined;
 const cdnSrcSet =
-  isCdnUrl && cdnWidths?.length
+  isRemoteImg && cdnWidths?.length
     ? cdnWidths.map((bw) => `${buildCdnUrl(bw, heightFromWidth(bw))} ${bw}w`).join(', ')
     : undefined;
 ---
 
 {
-  isCdnUrl ? (
+  isRemoteImg ? (
     <img
       src={cdnSrc}
       srcset={cdnSrcSet}
       width={w}
       height={h}
       alt={alt}
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      {...(isCdnUrl ? { crossorigin: 'anonymous', referrerpolicy: 'no-referrer' } : {})}
       {...rest}
       style={cdnStyle}
     />

@@ -36,15 +36,14 @@ const fadeStyle = fadeMask
   : '';
 
 /**
- * `cover` + `center` rescales/re-crops whenever the section height changes
- * (FAQ accordion). Paint the motif into a width-locked frame matching the
- * SVG aspect ratio, pinned to the top, so expand/collapse cannot move it.
+ * `cover` + `center` rescales whenever the section height changes (FAQ).
+ * Size to width only and pin to the top so the pattern stays put.
+ * The fade stays on this full-section layer so it still runs top → bottom
+ * across the visible block, not across the SVG artboard.
  */
-const pinToAspectFrame = size === 'cover' || size === 'contain';
-const frameW = pattern.width || 1440;
-const frameH = pattern.height || 800;
-const motifSize = pinToAspectFrame ? '100% 100%' : size;
-const motifPosition = pinToAspectFrame ? 'top' : position;
+const lockToWidth = size === 'cover' || size === 'contain';
+const motifSize = lockToWidth ? '100% auto' : size;
+const motifPosition = lockToWidth ? 'top' : position;
 
 const motifStyle = [
   `opacity: ${opacityValue}`,
@@ -62,16 +61,10 @@ const motifStyle = [
 ].join('; ');
 ---
 
-<div class:list={['absolute inset-0 overflow-hidden pointer-events-none', className]} aria-hidden="true">
-  {
-    pinToAspectFrame ? (
-      <div class="absolute top-0 left-0 w-full" style={`${fadeStyle} aspect-ratio: ${frameW} / ${frameH};`}>
-        <div class="absolute inset-0" style={motifStyle}></div>
-      </div>
-    ) : (
-      <div class="absolute inset-0" style={fadeStyle}>
-        <div class="absolute inset-0" style={motifStyle}></div>
-      </div>
-    )
-  }
+<div
+  class:list={['absolute inset-0 overflow-hidden pointer-events-none', className]}
+  style={fadeStyle}
+  aria-hidden="true"
+>
+  <div class="absolute inset-0" style={motifStyle}></div>
 </div>

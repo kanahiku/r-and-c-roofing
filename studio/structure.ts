@@ -110,6 +110,13 @@ export const structure = (S: StructureBuilder) =>
                     .filter('_type == "servicePage" && slug.current match "roof-inspections*"')
                 ),
               S.listItem()
+                .title('Common problems')
+                .child(
+                  S.documentTypeList('servicePage')
+                    .title('Common problem pages')
+                    .filter('_type == "servicePage" && slug.current match "roof-problems*"')
+                ),
+              S.listItem()
                 .title('Blog')
                 .schemaType('blogPost')
                 .child(

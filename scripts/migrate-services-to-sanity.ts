@@ -3,6 +3,7 @@
  *
  * Usage:
  *   npm run migrate:services
+ *   npm run migrate:services -- roof-problems
  *
  * Requires SANITY_PROJECT_ID, SANITY_DATASET, SANITY_WRITE_TOKEN in .env
  */
@@ -14,6 +15,7 @@ import { claimPages } from '../src/data/pages/claimPages.ts';
 import { aboutPages } from '../src/data/pages/aboutPages.ts';
 import { whoWeServePages } from '../src/data/pages/whoWeServePages.ts';
 import { inspectionPages } from '../src/data/pages/inspectionPages.ts';
+import { roofProblemPages } from '../src/data/pages/roofProblemPages.ts';
 
 const projectId = process.env.SANITY_PROJECT_ID;
 const dataset = process.env.SANITY_DATASET ?? 'production';
@@ -122,7 +124,23 @@ function toSanityDoc(page: ServicePageSeed) {
 }
 
 async function run() {
-  const pages = [...servicePages, ...materialPages, ...claimPages, ...aboutPages, ...whoWeServePages, ...inspectionPages];
+  const allPages = [
+    ...servicePages,
+    ...materialPages,
+    ...claimPages,
+    ...aboutPages,
+    ...whoWeServePages,
+    ...inspectionPages,
+    ...roofProblemPages,
+  ];
+  const slugPrefix = process.argv[2];
+  const pages = slugPrefix ? allPages.filter((page) => page.slug.startsWith(slugPrefix)) : allPages;
+
+  if (!pages.length) {
+    console.error(`No CMS pages matched slug prefix "${slugPrefix}".`);
+    process.exit(1);
+  }
+
   console.log(`\nMigrating ${pages.length} CMS pages to ${projectId} / ${dataset}\n`);
 
   for (const page of pages) {
