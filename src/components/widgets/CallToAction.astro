@@ -2,7 +2,7 @@
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { CallToAction, Widget } from '~/types';
 import Headline from '~/components/ui/Headline.astro';
-import Button from '~/components/ui/Button.astro';
+import CTAActions from '~/components/ui/CTAActions.astro';
 
 interface Props extends Widget {
   title?: string;
@@ -40,19 +40,14 @@ const {
       }}
     />
     {
-      actions && (
-        <div class="max-w-xs sm:max-w-md flex flex-nowrap flex-col sm:flex-row justify-start gap-4 mt-[30px]">
-          {Array.isArray(actions) ? (
-            actions.map((action) => (
-              <div class="flex w-full sm:w-auto">
-                <Button {...(action || {})} class="w-full sm:mb-0" />
-              </div>
-            ))
-          ) : (
+      actions &&
+        (Array.isArray(actions) ? (
+          <CTAActions actions={actions} class="mt-[30px]" />
+        ) : (
+          <div class="mt-[30px]">
             <Fragment set:html={actions} />
-          )}
-        </div>
-      )
+          </div>
+        ))
     }
   </div>
 </WidgetWrapper>

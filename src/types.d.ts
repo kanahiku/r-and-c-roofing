@@ -167,11 +167,15 @@ export interface Disclaimer {
 
 // COMPONENTS
 export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'link';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost-light' | 'ghost-dark' | 'link';
   text?: string;
   icon?: string;
   classes?: Record<string, string>;
   type?: 'button' | 'submit' | 'reset';
+  /** Hide the inspection/estimate line. Use in the header and other compact chrome. */
+  hideNote?: boolean;
+  /** Color for the primary-CTA micro-copy. Default follows light sections + `.dark`. */
+  noteTone?: 'light' | 'onDark' | 'cta';
 }
 
 export interface Collapse {

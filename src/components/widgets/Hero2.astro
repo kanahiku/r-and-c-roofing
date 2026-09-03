@@ -1,6 +1,6 @@
 ---
 import Image from '~/components/common/Image.astro';
-import Button from '~/components/ui/Button.astro';
+import CTAActions from '~/components/ui/CTAActions.astro';
 import overlayImage from '~/assets/images/patterns/hero-image.svg';
 
 import type { Hero as Props } from '~/types';
@@ -106,19 +106,16 @@ const isSplitImage = !isOverlay && hasImage;
           }
 
           {
-            actions && (
-              <div class="max-w-xs sm:max-w-md flex flex-nowrap flex-col sm:flex-row justify-start gap-4 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
-                {Array.isArray(actions) ? (
-                  actions.map((action) => (
-                    <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
-                    </div>
-                  ))
-                ) : (
-                  <Fragment set:html={actions} />
-                )}
-              </div>
-            )
+            actions &&
+              (Array.isArray(actions) ? (
+                <CTAActions
+                  actions={actions}
+                  noteTone={isOverlay ? 'onDark' : 'light'}
+                  class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                />
+              ) : (
+                <Fragment set:html={actions} />
+              ))
           }
         </div>
         {content && <Fragment set:html={content} />}

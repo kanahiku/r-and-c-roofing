@@ -117,7 +117,7 @@ export default {
       if (sentToday >= dailyLimit) {
         console.warn(`Resend skipped: ${site.slug} hit daily cap (${dailyLimit})`);
       } else {
-        const notifyTo = 'info@safehomeservice.com';
+        const notifyTo = env.NOTIFY_EMAIL || site.notify_email;
         const from = env.RESEND_FROM || site.from_email;
 
         const sent = await sendResend(env.RESEND_API_KEY, {

@@ -87,6 +87,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import ProjectsSection from '~/components/widgets/ProjectsSection.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import Timeline from '~/components/ui/Timeline.astro';
+import Button from '~/components/ui/Button.astro';
 import Image from '~/components/common/Image.astro';
 ---
 ```
@@ -130,6 +131,8 @@ Every section on every page must follow these rules. Do not deviate.
 | Secondary/exploratory action (Learn More, View Gallery, Explore) | **Ghost** (`btn btn-secondary`) |
 | Header row CTA (P-04 pattern) | Match the section's primary intent |
 | Multiple CTAs in one section | ❌ **Not allowed** — pick the most important action |
+
+**Primary CTA micro-copy (required, sitewide):** Every primary conversion button must show this line underneath: *Free inspection and estimate. Written reports available for a fee.* Use `<Button variant="primary">` — never a raw `btn-primary` anchor — so `CTANote` is included automatically. Same line appears under the P-12 `CTABanner` button. Do not hide it on page CTAs. Compact chrome only (header phone button) may pass `hideNote`.
 
 **Choosing between Primary and Ghost:**
 - **Primary:** Use when the section's goal is conversion (contact, schedule, buy)
@@ -375,7 +378,7 @@ Hero image is **full section height** on split heroes (`object-cover`, flush to 
 
   <!-- Optional CTA below items — omit if not in doc -->
   <div class="mt-8">
-    <a href="/page" class="btn-primary">CTA Text</a>
+    <Button variant="primary" text="CTA Text" href="/page" />
   </div>
 
   <Fragment slot="bg">
@@ -433,16 +436,16 @@ Hero image is **full section height** on split heroes (`object-cover`, flush to 
 **Pattern:** Flex row — paste inside any `WidgetWrapper` as the first element, replacing `<Headline>`
 
 ```astro
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+<div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8 md:mb-12">
   <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
     Section Title
   </h2>
-  <a href="/page" class="btn-primary shrink-0">CTA Text</a>
+  <Button variant="primary" text="CTA Text" href="/page" class="shrink-0" />
 </div>
 ```
 
 **Variants:**
-- Ghost CTA → `class="btn btn-secondary shrink-0"`
+- Ghost CTA → `<Button variant="ghost-light" text="CTA Text" href="/page" class="shrink-0" />`
 - No CTA needed → use `<Headline title="Section Title" />` instead
 
 ---
@@ -559,11 +562,11 @@ Hero image is **full section height** on split heroes (`object-cover`, flush to 
 <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
 
   <!-- Header row with CTA — or swap for <Headline> if no CTA needed -->
-  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
+  <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8 md:mb-12">
     <h2 class="text-[26px] md:text-[40px] font-normal leading-[120%] tracking-tighter font-heading text-heading">
       Section Title
     </h2>
-    <a href="/page" class="btn-primary shrink-0">CTA Text</a>
+    <Button variant="primary" text="CTA Text" href="/page" class="shrink-0" />
   </div>
 
   <div class="flex flex-col md:flex-row gap-10 md:gap-16">
@@ -737,6 +740,8 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 | `ctaHref` | `string` | `"/contact"` | Button link |
 | `showAfterHoursNote` | `boolean` | `false` | Show after-hours contact note (homepage only) |
 
+The banner button always includes the inspection/estimate micro-copy via `CTANote`. Do not add that sentence to `subtitle` as well.
+
 **Examples:**
 
 ```astro
@@ -792,7 +797,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 **Variants:**
 - White bg → change bg snippet to white
-- Add a CTA below the body → append `<div class="mt-8 md:mt-10"><a href="/page" class="btn-primary">CTA Text</a></div>` after the `<div class="... space-y-5">` block
+- Add a CTA below the body → append `<div class="mt-8 md:mt-10"><Button variant="primary" text="CTA Text" href="/page" /></div>` after the `<div class="... space-y-5">` block
 - Tighter paragraph spacing → change `space-y-5` to `space-y-4`
 - Use when a doc section has 4+ paragraphs and no natural card/image/list shape
 
@@ -1041,6 +1046,14 @@ import Button from '~/components/ui/Button.astro';
 | `icon` | string | — | Tabler icon name (appears after text) |
 | `target` | `_blank`, etc. | — | Link target |
 | `type` | `button`, `submit`, `reset` | — | Renders as `<button>` instead of `<a>` |
+| `hideNote` | boolean | `false` | Hide the inspection/estimate line. Header chrome only |
+| `noteTone` | `light`, `onDark`, `cta` | `light` | Micro-copy color. `onDark` for overlay heroes; `cta` is used by `CTABanner` |
+
+**Primary CTA micro-copy:** `variant="primary"` always renders this line under the button (from `CTANote` / `src/config/cta.ts`):
+
+> Free inspection and estimate. Written reports available for a fee.
+
+Do not use a raw `<a class="btn-primary">` for conversion CTAs — the note will be missing. Handmade conversion buttons (P-12 banner, blog sidebar) must include `<CTANote />` beside the button.
 
 ### Button Variants
 
@@ -1058,10 +1071,7 @@ import Button from '~/components/ui/Button.astro';
 ```astro
 <Button variant="primary" text="Schedule a Roof Inspection" href="/contact" />
 ```
-Or as a plain anchor:
-```astro
-<a href="/contact" class="btn-primary">Schedule a Roof Inspection</a>
-```
+The inspection/estimate line is included automatically. Do not recreate it by hand.
 
 **Secondary button (on white/grey background):**
 ```astro

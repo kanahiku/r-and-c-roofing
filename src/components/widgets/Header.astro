@@ -256,11 +256,16 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 {phoneAction && (
                   <Button
                     {...phoneAction}
+                    hideNote
                     class="ml-2 py-2.5 px-4 md:px-5 font-semibold shadow-none text-sm w-auto whitespace-nowrap"
                   />
                 )}
                 {extraActions.map((btnProps) => (
-                  <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                  <Button
+                    {...btnProps}
+                    hideNote
+                    class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto"
+                  />
                 ))}
               </span>
             )

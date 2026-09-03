@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 import type { CallToAction as Props } from '~/types';
+import CTANote from '~/components/ui/CTANote.astro';
 
 const {
   variant = 'secondary',
@@ -10,6 +11,8 @@ const {
   icon = '',
   class: className = '',
   type,
+  hideNote = false,
+  noteTone = 'light',
   ...rest
 } = Astro.props;
 
@@ -21,20 +24,35 @@ const variants: Record<string, string> = {
   'ghost-dark': 'btn-ghost-dark',
   link: 'btn-link',
 };
+
+const showNote = variant === 'primary' && !hideNote;
+const isNativeButton = type === 'button' || type === 'submit' || type === 'reset';
+const buttonClass = twMerge(variants[variant] || '', className, showNote && 'w-auto self-start');
 ---
 
 {
-  type === 'button' || type === 'submit' || type === 'reset' ? (
-    <button type={type} class={twMerge(variants[variant] || '', className)} {...rest}>
+  showNote ? (
+    <div class="flex flex-col gap-1.5 w-full">
+      {isNativeButton ? (
+        <button type={type} class={buttonClass} {...rest}>
+          <Fragment set:html={text} />
+          {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+        </button>
+      ) : (
+        <a class={buttonClass} {...(target ? { target: target, rel: 'noopener noreferrer' } : {})} {...rest}>
+          <Fragment set:html={text} />
+          {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+        </a>
+      )}
+      <CTANote tone={noteTone} />
+    </div>
+  ) : isNativeButton ? (
+    <button type={type} class={buttonClass} {...rest}>
       <Fragment set:html={text} />
       {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
     </button>
   ) : (
-    <a
-      class={twMerge(variants[variant] || '', className)}
-      {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
-      {...rest}
-    >
+    <a class={buttonClass} {...(target ? { target: target, rel: 'noopener noreferrer' } : {})} {...rest}>
       <Fragment set:html={text} />
       {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
     </a>

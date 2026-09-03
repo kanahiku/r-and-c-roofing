@@ -1,5 +1,6 @@
 ---
 import type { TocItem } from '~/lib/content/blogArticle';
+import CTANote from '~/components/ui/CTANote.astro';
 
 export interface Props {
   toc: TocItem[];
@@ -81,12 +82,15 @@ const isSticky = variant === 'sticky';
           R&amp;C Roofing can inspect the roof, document what is going on, and help you decide what work should come
           next.
         </p>
-        <a
-          href={ctaHref}
-          class="inline-flex w-full items-center justify-center px-5 py-3 rounded-md bg-black text-white font-semibold text-[14px] leading-snug hover:bg-zinc-900 transition-colors duration-200"
-        >
-          {ctaText}
-        </a>
+        <div class="flex flex-col gap-1.5">
+          <a
+            href={ctaHref}
+            class="inline-flex w-auto self-start items-center justify-center px-5 py-3 rounded-md bg-black text-white font-semibold text-[14px] leading-snug hover:bg-zinc-900 transition-colors duration-200"
+          >
+            {ctaText}
+          </a>
+          <CTANote />
+        </div>
       </div>
     )
   }

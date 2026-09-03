@@ -3,6 +3,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { getContactHelpOptions } from '~/lib/content';
+import { getNotifyEmail } from '~/lib/notifyEmail';
 import { sanityWriteClient } from '~/lib/sanity/writeClient';
 
 function asString(value: unknown) {
@@ -58,11 +59,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     const submittedAt = new Date().toISOString();
     const siteName = import.meta.env.SITE_NAME || 'R&C Roofing Contractors';
-    const notifyEmail = 'info@safehomeservice.com';
+    const notifyEmail = getNotifyEmail();
     const from = import.meta.env.RESEND_FROM || `${siteName} <beth.t@example.com>`;
     const apiKey = import.meta.env.RESEND_API_KEY;
 
-    if (!apiKey) {
+    if (!apiKey || !isEmail(notifyEmail)) {
       return json({ error: 'Email service is not configured' }, 500);
     }
 
