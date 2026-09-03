@@ -21,7 +21,7 @@ vercel_url:      https://r-and-c-roofing.vercel.app
 custom_domain:   randcroofing.com          # blank until purchased
 form_slug:       rc-roofing
 form_worker:     https://massic-forms.kanahiku.workers.dev
-notify_email:
+notify_email:    info@safehomeservice.com
 resend_from:     R&C Roofing <onboarding@resend.dev>
 ```
 
@@ -265,6 +265,6 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 | Vercel | `https://r-and-c-roofing.vercel.app` (project `r-and-c-roofing`, team Kanahiku) |
 | D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded |
 | workers.dev | Subdomain `kanahiku` registered. Intended URL: `https://massic-forms.kanahiku.workers.dev` |
-| Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Dummy Turnstile secret set. Resend sending key on Worker. `NOTIFY_EMAIL=tools@kanahiku.com` (test mode). |
+| Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Dummy Turnstile secret set. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
 | Custom domain | Not connected. When `randcroofing.com` is ready, run Phase 2 |
-| Resend | No custom domain. From `onboarding@resend.dev` → `tools@kanahiku.com` until `randcroofing.com` is verified. |
+| Resend | No custom domain. From `onboarding@resend.dev` → `info@safehomeservice.com` until `randcroofing.com` is verified. |

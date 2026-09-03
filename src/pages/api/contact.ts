@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const submittedAt = new Date().toISOString();
     const siteName = import.meta.env.SITE_NAME || 'R&C Roofing Contractors';
-    const notifyEmail = import.meta.env.NOTIFY_EMAIL || 'info@safehomeservice.com';
+    const notifyEmail = 'info@safehomeservice.com';
     const from = import.meta.env.RESEND_FROM || `${siteName} <beth.t@example.com>`;
     const apiKey = import.meta.env.RESEND_API_KEY;
 
