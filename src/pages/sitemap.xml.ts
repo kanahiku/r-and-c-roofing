@@ -1,8 +1,8 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { SITE } from 'astrowind:config';
 import { getPublicContentPaths } from '~/lib/content';
+import { canonicalSiteOrigin, isIndexableHost } from '~/lib/indexing';
 
 function escapeXml(value: string) {
   return value
@@ -13,14 +13,24 @@ function escapeXml(value: string) {
     .replace(/'/g, '&apos;');
 }
 
-function siteOrigin() {
-  const fromEnv = import.meta.env.SITE_URL?.replace(/\/+$/, '');
-  const fromConfig = typeof SITE.site === 'string' ? SITE.site.replace(/\/+$/, '') : '';
-  return fromEnv || fromConfig || 'https://randcroofing.com';
-}
+const emptySitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+</urlset>
+`;
 
-export const GET: APIRoute = async () => {
-  const origin = siteOrigin();
+export const GET: APIRoute = async ({ request }) => {
+  if (!isIndexableHost(request.headers.get('host'))) {
+    return new Response(emptySitemap, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=0, must-revalidate',
+        'X-Robots-Tag': 'noindex, nofollow',
+      },
+    });
+  }
+
+  const origin = canonicalSiteOrigin();
   const paths = [...new Set(await getPublicContentPaths())];
   const urls = paths
     .map((path) => {

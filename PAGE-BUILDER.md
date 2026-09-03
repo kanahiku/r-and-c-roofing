@@ -920,6 +920,22 @@ The banner button always includes the inspection/estimate micro-copy via `CTANot
 
 ---
 
+## Launch Indexing Checklist
+
+Before sharing or launching a client site, verify staging and production indexing behavior:
+
+1. Staging/temp URLs must be blocked from indexing with at least one hard signal: `X-Robots-Tag: noindex, nofollow`, a `<meta name="robots" content="noindex,nofollow">`, or `robots.txt` with `Disallow: /`.
+2. Temp hosts must not expose production sitemaps. Prefer an empty sitemap or no sitemap on staging/preview URLs.
+3. The production domain must automatically remove the block at launch. Do not rely on a manual env flag that someone can forget to change.
+4. Verify both hosts before launch:
+   - Temp URL: page response includes noindex and `/robots.txt` disallows crawling.
+   - Live domain: page response has no noindex header/meta and `/robots.txt` allows crawling with the production sitemap.
+5. Confirm the allowed production hosts match the actual launch domains, usually both apex and `www`.
+
+**Why this matters:** If staging is indexable, it can compete with the real site in search. If the noindex block remains after launch, the live site can stay invisible for weeks.
+
+---
+
 ## Adding New Patterns
 
 When a new layout is polished and approved in the browser:

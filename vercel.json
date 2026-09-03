@@ -9,6 +9,40 @@
   ],
   "headers": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<host>.+)\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "missing": [
+        {
+          "type": "host",
+          "value": "randcroofing.com"
+        },
+        {
+          "type": "host",
+          "value": "www.randcroofing.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/_astro/(.*)",
       "headers": [
         {

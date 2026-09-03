@@ -74,6 +74,13 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
 
       'astro:build:done': async ({ logger }) => {
         const buildLogger = logger.fork('astrowind');
+        const dynamicRobots = new URL('src/pages/robots.txt.ts', cfg.root);
+
+        if (fs.existsSync(dynamicRobots)) {
+          buildLogger.info('Skipping static robots.txt update; src/pages/robots.txt.ts is host-aware.');
+          return;
+        }
+
         buildLogger.info('Updating `robots.txt` with `sitemap-index.xml` ...');
 
         try {
