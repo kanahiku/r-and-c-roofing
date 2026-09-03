@@ -147,10 +147,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                     </button>
                     </div>
                     {columns?.length ? (
-                    <div class="dropdown-menu mega-menu hidden md:backdrop-blur-md rounded md:absolute md:top-full md:left-1/2 md:-mt-1 pl-4 md:pl-0 font-medium md:bg-[#111111] md:min-w-[760px] md:z-50 drop-shadow-xl">
-                      <div class="flex flex-col md:flex-row md:gap-6 md:p-5">
+                    <div class="dropdown-menu mega-menu hidden md:backdrop-blur-md rounded md:absolute md:top-full md:left-1/2 md:-mt-1 pl-4 md:pl-0 font-medium md:bg-[#111111] md:w-[900px] md:max-w-[calc(100vw-2rem)] md:z-50 drop-shadow-xl">
+                      <div class="mega-menu-columns flex flex-col md:grid md:gap-8 md:p-5" style={`--mega-columns: ${columns.length}`}>
                         {columns.map((col) => (
-                          <div class="md:min-w-[220px] min-w-0">
+                          <div class="min-w-0">
                             <p class="text-[11px] font-semibold uppercase tracking-[0.08em] text-accent px-5 md:px-2 pt-3 md:pt-0 pb-1">
                               {col.title}
                             </p>
@@ -159,7 +159,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                                 <li>
                                   <a
                                     class:list={[
-                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 md:px-2 block whitespace-normal break-words md:whitespace-nowrap',
+                                      'first:rounded-t last:rounded-b hover:bg-accent/[0.12] hover:text-white text-white/80 py-2 px-5 md:px-2 block whitespace-normal break-words',
                                       { 'aw-link-active': href2 === currentPath },
                                     ]}
                                     href={href2}
@@ -282,6 +282,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   }
 
   @media (min-width: 768px) {
+    .mega-menu-columns {
+      grid-template-columns: repeat(var(--mega-columns), minmax(0, 1fr));
+    }
+
     li.mega .mega-menu {
       transform: translateX(calc(-50% + var(--mega-shift, 0px)));
     }
