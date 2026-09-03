@@ -14,6 +14,7 @@ const {
   image = await Astro.slots.render('image'),
   variant = 'split',
   isReversed = false,
+  overlapHeader = true,
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
@@ -25,7 +26,7 @@ const isSplitImage = !isOverlay && hasImage;
 ---
 
 <section
-  class:list={['relative md:-mt-[76px] not-prose', isOverlay && 'min-h-[70vh] flex flex-col']}
+  class:list={['relative not-prose', overlapHeader && 'md:-mt-[76px]', isOverlay && 'min-h-[70vh] flex flex-col']}
   {...id ? { id } : {}}
 >
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -54,7 +55,7 @@ const isSplitImage = !isOverlay && hasImage;
       !isSplitImage && 'px-4 sm:px-6',
     ]}
   >
-    {!isSplitImage && <div class="pt-0 md:pt-[76px] pointer-events-none" />}
+    {!isSplitImage && overlapHeader && <div class="pt-0 md:pt-[76px] pointer-events-none" />}
     <div
       class:list={[
         isOverlay && hasStats && 'flex-1 flex items-center pt-16 md:pt-[140px] pb-12 md:pb-16',
@@ -68,7 +69,8 @@ const isSplitImage = !isOverlay && hasImage;
         class:list={[
           isOverlay ? 'w-full max-w-2xl text-left' : hasImage ? 'md:basis-1/2 self-center text-left' : 'w-full max-w-3xl text-left',
           isSplitImage && [
-            'px-4 sm:px-6 py-12 md:pt-[calc(76px+5rem)] md:pb-20 lg:pb-[100px]',
+            'px-4 sm:px-6 py-12 md:pb-20 lg:pb-[100px]',
+            overlapHeader ? 'md:pt-[calc(76px+5rem)]' : 'md:pt-20',
             isReversed ? 'md:pl-16 lg:pl-24' : 'md:pr-16 lg:pr-24',
           ],
         ]}

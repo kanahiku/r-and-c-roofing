@@ -28,6 +28,13 @@ export const aboutPages: ServicePageSeed[] = [
     },
     sections: [
       {
+        _type: 'editorialSection',
+        heading: 'Philosophy',
+        paragraphs: [
+          'We are not trying to sell you the biggest job we can get approved. If a repair will do, we will tell you a repair will do. That matters most with our kupuna, who are the most likely to be talked into work they do not need, and it is the reason a lot of our work arrives by word of mouth.',
+        ],
+      },
+      {
         _type: 'splitContentSection',
         heading: 'Experience Has Shaped How We Make Decisions',
         paragraphs: [
@@ -35,6 +42,13 @@ export const aboutPages: ServicePageSeed[] = [
           'A ceiling stain may point to a localized issue, while leaks in different areas tell a different story. The right answer is not always the biggest answer. Our team walks you through different materials to find the exact solution that fits your property, delivering quality workmanship in a safe environment.',
         ],
         imagePlaceholder: 'R&C Roofing crew standing in front of branded company truck',
+      },
+      {
+        _type: 'editorialSection',
+        heading: 'The People on Your Roof',
+        paragraphs: [
+          'We hire slowly. We look for experienced journeymen and for people who fit the way this team works, and we would rather stay the size we are than put someone on your roof who does not meet that standard.',
+        ],
       },
       {
         _type: 'splitContentSection',
@@ -46,6 +60,13 @@ export const aboutPages: ServicePageSeed[] = [
         ctaText: 'Explore HAAG Certified Roof Inspections',
         ctaHref: '/roof-inspections/haag-certified-inspection',
         imagePlaceholder: 'HAAG inspection photo placeholder',
+      },
+      {
+        _type: 'editorialSection',
+        heading: 'Institutional Work',
+        paragraphs: [
+          'Our work is not only residential. We have been trusted with roofing projects at Chaminade University, the Hawaii State Public Library System and Honolulu Airport.',
+        ],
       },
       {
         _type: 'iconPointsSection',

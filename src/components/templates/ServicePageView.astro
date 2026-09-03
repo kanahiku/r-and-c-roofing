@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import HeroSubtitle from '~/components/ui/HeroSubtitle.astro';
+import InspectionFeeBanner from '~/components/ui/InspectionFeeBanner.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -39,10 +40,13 @@ const heroActions = [
 const heroImage = page.hero.image;
 const faqSurface = sectionSurface(page.sections.length);
 const relatedSurface = sectionSurface(page.sections.length + (page.faqs ? 1 : 0));
+const showInspectionFeeBanner = slug.startsWith('roof-inspections/');
 ---
 
 <Layout metadata={metadata}>
-  <Hero2 actions={heroActions.length ? heroActions : undefined}>
+  {showInspectionFeeBanner && <InspectionFeeBanner />}
+
+  <Hero2 actions={heroActions.length ? heroActions : undefined} overlapHeader={!showInspectionFeeBanner}>
     <Fragment slot="title">{page.hero.title}</Fragment>
     <Fragment slot="subtitle">
       <HeroSubtitle visualSubheading={page.hero.visualSubheading} subtitle={page.hero.subtitle} />

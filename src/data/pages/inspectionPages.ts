@@ -38,6 +38,24 @@ export const inspectionPages: ServicePageSeed[] = [
     },
     sections: [
       {
+        _type: 'infoCardsSection',
+        heading: 'What It Costs',
+        items: [
+          {
+            title: 'Inspections and estimates are free',
+            description:
+              'We will walk your roof, tell you what we find, and give you a price for the work at no charge.',
+            icon: 'tabler:clipboard-check',
+          },
+          {
+            title: 'Written reports have a fee',
+            description:
+              'If you need a written report, for an insurance claim, a property sale, or your own records, there is a fee for that report. We will tell you the cost before we start so there are no surprises.',
+            icon: 'tabler:file-text',
+          },
+        ],
+      },
+      {
         _type: 'iconPointsSection',
         heading: 'When to Call for an Inspection',
         intro:
@@ -143,7 +161,7 @@ export const inspectionPages: ServicePageSeed[] = [
         {
           question: 'How much does a roof inspection cost?',
           answer:
-            'Pricing depends entirely on the property and the type of inspection requested. Contact us directly to confirm availability and pricing for your specific situation.',
+            'Inspections and estimates are free. If you need a written report for an insurance claim, a property sale, or your own records, there is a fee. We will tell you the cost before we start so there are no surprises.',
         },
       ],
     },

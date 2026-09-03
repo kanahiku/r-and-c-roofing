@@ -203,6 +203,8 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   variant?: 'split' | 'overlay';
   /** Image on the left when `variant="split"`. Default is image right. */
   isReversed?: boolean;
+  /** Pull hero under the sticky header. Disable when another block sits above the hero. */
+  overlapHeader?: boolean;
 }
 
 export interface Team extends Omit<Headline, 'classes'>, Widget {

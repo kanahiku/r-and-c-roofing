@@ -1,7 +1,6 @@
 ---
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import MotifLayer from '~/components/ui/MotifLayer.astro';
-import CTANote from '~/components/ui/CTANote.astro';
 import { MOTIF, MOTIF_COLOR_VARS, MOTIF_OPACITY_VARS } from '~/config/motif';
 
 export interface Props {
@@ -58,7 +57,6 @@ const {
         </div>
         <div class="flex flex-col gap-1.5 w-full sm:w-auto sm:max-w-xs">
           <a href={ctaHref} class="inline-flex w-auto self-start sm:self-end items-center justify-center px-6 py-3 rounded-md bg-black text-white font-semibold text-[15px] leading-snug hover:bg-zinc-900 transition-colors duration-200">{ctaText}</a>
-          <CTANote tone="cta" class="sm:text-right" />
         </div>
       </div>
     </div>

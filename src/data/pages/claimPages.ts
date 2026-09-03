@@ -28,6 +28,24 @@ export const claimPages: ServicePageSeed[] = [
     },
     sections: [
       {
+        _type: 'infoCardsSection',
+        heading: 'How We Price a Claim',
+        items: [
+          {
+            title: 'Built in Xactimate',
+            description:
+              'We build our estimates in Xactimate, the same software most insurance adjusters use. Your adjuster sees our numbers in a format they already work with, line by line, priced the same way they price it. That makes the conversation about the work rather than about whose spreadsheet is right.',
+            icon: 'tabler:calculator',
+          },
+          {
+            title: 'Your insurer decides coverage',
+            description:
+              'It does not change what your policy covers, and it is not a guarantee of any outcome. Your insurer decides that. It just means both sides are looking at the same thing.',
+            icon: 'tabler:file-text',
+          },
+        ],
+      },
+      {
         _type: 'comparisonTableSection',
         heading: 'Contractor Support vs. Insurance Adjusting',
         intro:
