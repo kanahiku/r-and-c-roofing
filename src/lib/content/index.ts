@@ -1,14 +1,25 @@
-import type { BlogPost, HomePageContent, NavigationContent, ServicePageContent } from './types';
+import type {
+  BlogPost,
+  ContactPageContent,
+  HomePageContent,
+  NavigationContent,
+  ReviewsPageContent,
+  ServicePageContent,
+} from './types';
 import {
   getSanityBlogPost,
   getSanityBlogPosts,
   getSanityBlogPostSlugs,
+  getSanityContactHelpOptions,
+  getSanityContactPage,
   getSanityHomeContent,
   getSanityNavigationContent,
+  getSanityReviewsPage,
   getSanityServicePage,
   getSanityServicePageSlugs,
 } from './sanity';
 import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
+import { contactHelpOptions as localContactHelpOptions } from '../../data/pages/contact';
 
 export async function getHomeContent(): Promise<HomePageContent> {
   const page = await getSanityHomeContent();
@@ -16,6 +27,24 @@ export async function getHomeContent(): Promise<HomePageContent> {
     throw new Error('Sanity homePage document is missing (singleton-home).');
   }
   return page;
+}
+
+export async function getContactPage(): Promise<ContactPageContent> {
+  return getSanityContactPage();
+}
+
+export async function getReviewsPage(): Promise<ReviewsPageContent> {
+  return getSanityReviewsPage();
+}
+
+export async function getContactHelpOptions() {
+  try {
+    const options = await getSanityContactHelpOptions();
+    if (options.length) return options;
+  } catch (error) {
+    console.warn('Sanity contact help options unavailable; using local fallback.', error);
+  }
+  return localContactHelpOptions;
 }
 
 export async function getNavigationContent(): Promise<NavigationContent> {
@@ -107,10 +136,32 @@ export function getBlogPermalink(slug: string): string {
   return `/blog/${slug}`;
 }
 
+function overlayCmsFields(local: BlogPost, sanity: BlogPost): BlogPost {
+  return {
+    ...local,
+    title: sanity.title || local.title,
+    excerpt: sanity.excerpt || local.excerpt,
+    publishDate: sanity.publishDate || local.publishDate,
+    author: sanity.author || local.author,
+    image: sanity.image?.src ? sanity.image : local.image,
+    relatedPages: sanity.relatedPages.length ? sanity.relatedPages : local.relatedPages,
+    contentBlocks: sanity.contentBlocks?.length ? sanity.contentBlocks : local.contentBlocks,
+  };
+}
+
 function mergeBlogPosts(sanityPosts: BlogPost[], localPosts: BlogPost[]): BlogPost[] {
   const localBySlug = new Map(localPosts.map((post) => [post.slug, post]));
-  const extras = sanityPosts.filter((post) => !localBySlug.has(post.slug));
-  return [...localPosts, ...extras].sort((a, b) => b.publishDate.localeCompare(a.publishDate));
+  const sanityBySlug = new Map(sanityPosts.map((post) => [post.slug, post]));
+  const slugs = new Set([...localBySlug.keys(), ...sanityBySlug.keys()]);
+
+  return [...slugs]
+    .map((slug) => {
+      const sanity = sanityBySlug.get(slug);
+      const local = localBySlug.get(slug);
+      if (sanity && local) return overlayCmsFields(local, sanity);
+      return (sanity ?? local)!;
+    })
+    .sort((a, b) => b.publishDate.localeCompare(a.publishDate));
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -125,17 +176,15 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
   const local = localBlogPosts.find((post) => post.slug === slug);
-  if (local) return local;
-
+  let sanity: BlogPost | undefined;
   try {
-    const post = await getSanityBlogPost(slug);
-    if (post) return post;
+    sanity = (await getSanityBlogPost(slug)) ?? undefined;
   } catch (error) {
     console.warn(`Sanity blog post "${slug}" unavailable; checking local articles.`, error);
   }
 
-  const posts = await getBlogPosts();
-  return posts.find((post) => post.slug === slug);
+  if (sanity && local) return overlayCmsFields(local, sanity);
+  return sanity ?? local;
 }
 
 export async function getBlogPostsRelatedTo(pageSlug: string): Promise<BlogPost[]> {
@@ -161,4 +210,11 @@ export async function getRelatedBlogPosts(post: BlogPost, max = 3): Promise<Blog
     .map(({ item }) => item);
 }
 
-export type { BlogPost, HomePageContent, NavigationContent, ServicePageContent };
+export type {
+  BlogPost,
+  ContactPageContent,
+  HomePageContent,
+  NavigationContent,
+  ReviewsPageContent,
+  ServicePageContent,
+};

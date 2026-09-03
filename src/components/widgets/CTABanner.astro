@@ -47,7 +47,7 @@ const {
           <p class="font-semibold text-black text-[16px] md:text-[17px]">R&amp;C Roofing Contractors</p>
           <p>3302 Campbell Ave, Honolulu, HI 96815</p>
           <p>(808) 888-2524</p>
-          {extraLines.map((line) => (
+          {extraLines?.map((line) => (
             <p set:html={line} />
           ))}
           {license && <p>{license}</p>}

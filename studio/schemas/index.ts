@@ -2,6 +2,8 @@
 import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
 import { homePage } from './singletons/homePage';
+import { contactPage } from './singletons/contactPage';
+import { reviewsPage } from './singletons/reviewsPage';
 import { lead } from './documents/lead';
 import { servicePage } from './documents/servicePage';
 import { blogPost } from './documents/blogPost';
@@ -42,6 +44,10 @@ import {
   quoteCardItem,
   quoteCardsSection,
   faqsSection,
+  formHelpOption,
+  contactLink,
+  reviewPlatformItem,
+  previewImageItem,
 } from './objects/sectionObjects';
 
 export const schemaTypes = [
@@ -49,6 +55,8 @@ export const schemaTypes = [
   siteNavigation,
   siteFooter,
   homePage,
+  contactPage,
+  reviewsPage,
   servicePage,
   blogPost,
   lead,
@@ -91,4 +99,8 @@ export const schemaTypes = [
   splitContentSection,
   quoteCardsSection,
   faqsSection,
+  formHelpOption,
+  contactLink,
+  reviewPlatformItem,
+  previewImageItem,
 ];

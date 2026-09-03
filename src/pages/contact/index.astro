@@ -8,89 +8,61 @@ import ServiceCard from '~/components/ui/ServiceCard.astro';
 import Button from '~/components/ui/Button.astro';
 import FormContainer from '~/components/ui/Form.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import HeroSubtitle from '~/components/ui/HeroSubtitle.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
-import { contactDirectionsHref, contactHelpOptions, contactMapEmbedSrc } from '~/data/pages/contact';
+import Image from '~/components/common/Image.astro';
+import { getContactPage } from '~/lib/content';
+import { contactAddress, mapsDirectionsHref, mapsEmbedSrc } from '~/data/pages/contact';
+
+const page = await getContactPage();
+const mapsQuery = page.form.mapsQuery || contactAddress.mapsQuery;
+const heroImage = page.hero.image;
+const splitImage = page.unsureSection.image;
 
 const metadata = {
-  title: 'Contact R&C Roofing Contractors | Honolulu, HI',
-  description:
-    'Contact R&C Roofing Contractors in Honolulu for roof inspections, repairs, replacements, storm damage, commercial roofing, gutters, and other roofing needs.',
+  title: page.meta.title,
+  description: page.meta.description,
   ignoreTitleTemplate: true,
 };
 
-const touchpoints = [
-  {
-    title: 'Call Us',
-    description: '(808) 888-2524. Alternate phone: (808) 216-3256.',
-    icon: 'tabler:phone',
-  },
-  {
-    title: 'Email Us',
-    description: 'info@safehomeservice.com',
-    icon: 'tabler:mail',
-  },
-  {
-    title: 'Visit Us',
-    description: 'R&C Roofing Contractors, 3302 Campbell Ave, Honolulu, HI 96815.',
-    icon: 'tabler:map-pin',
-  },
-  {
-    title: 'Business Hours',
-    description: 'Monday to Friday: 8:00 a.m. to 4:30 p.m. Saturday: Closed. Sunday: Closed.',
-    icon: 'tabler:clock',
-  },
-];
-
-const reasons = [
-  {
-    title: 'My Roof Is Leaking',
-    description: 'Water coming through the ceiling or showing up after rain? Start by finding the source of the leak.',
-    href: '/roof-problems/my-roof-is-leaking',
-    linkText: 'My Roof Is Leaking',
-  },
-  {
-    title: 'My Roof Was Damaged by a Storm',
-    description:
-      'If the problem appeared after strong wind or severe weather, the roof may need to be evaluated for storm-related damage.',
-    href: '/roof-problems/storm-damage-on-my-roof',
-    linkText: 'Storm Damage on My Roof',
-  },
-  {
-    title: 'I Am Trying to Decide Whether to Repair or Replace',
-    description:
-      'The decision should be based on the condition and extent of the roofing problem rather than age alone.',
-    href: '/roof-problems/my-roof-is-at-end-of-life',
-    linkText: 'My Roof Is at End of Life',
-  },
-  {
-    title: 'I Need a Roof Inspection',
-    description:
-      "R&C provides roof inspections for roofing concerns, property transactions, storm damage, and other situations where you need a clearer understanding of the roof's condition.",
-    href: '/roof-inspections',
-    linkText: 'Roof Inspections',
-  },
+const heroActions = [
+  ...(page.hero.ctaText
+    ? [{ variant: 'primary' as const, text: page.hero.ctaText, href: page.hero.ctaHref || '/contact' }]
+    : []),
+  ...(page.hero.phoneCtaText && page.hero.phoneCtaHref
+    ? [{ variant: 'ghost-light' as const, text: page.hero.phoneCtaText, href: page.hero.phoneCtaHref }]
+    : []),
 ];
 ---
 
 <Layout metadata={metadata}>
-  <Hero2 actions={[{ variant: 'primary', text: 'Call (808) 888-2524', href: 'tel:+18088882524' }]}>
-    <Fragment slot="title">Contact R&amp;C Roofing Contractors</Fragment>
+  <Hero2 actions={heroActions.length ? heroActions : undefined}>
+    <Fragment slot="title">{page.hero.title}</Fragment>
     <Fragment slot="subtitle">
-      <span
-        class="block text-[20px] md:text-[24px] font-normal font-heading text-heading mb-6 leading-[130%] tracking-tight"
-      >
-        Tell Us What Is Happening With Your Roof
-      </span>
-      Have a roof leak, storm damage, an aging roof, or another roofing question?
-      <br /><br />
-      Tell us what you are seeing and how we can reach you. You do not need to know which roofing service you need before
-      contacting R&amp;C. We can start with the condition of the roof and determine what should be considered next.
+      <HeroSubtitle visualSubheading={page.hero.visualSubheading} subtitle={page.hero.subtitle} />
     </Fragment>
     <Fragment slot="image">
-      <HeroImagePlaceholder label="Contact page photo placeholder" />
+      {
+        heroImage ? (
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="eager"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder label={page.hero.imagePlaceholder || 'Contact page photo placeholder'} />
+        )
+      }
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
@@ -98,11 +70,14 @@ const reasons = [
   </Hero2>
 
   <WidgetWrapper id="message" containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Send Us a Message" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
-      Tell us a little about your property and what is happening with the roof. A member of the R&amp;C team can follow
-      up using the contact information you provide.
-    </p>
+    <Headline title={page.form.heading} classes={{ container: 'mb-[9px]' }} />
+    {
+      page.form.intro && (
+        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+          {page.form.intro}
+        </p>
+      )
+    }
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
       <div class="rounded-lg bg-white p-4 sm:p-6 lg:p-8">
         <FormContainer
@@ -114,27 +89,29 @@ const reasons = [
             {
               type: 'select',
               name: 'topic',
-              label: 'What Can We Help You With? *',
+              label: page.form.topicLabel || 'What Can We Help You With? *',
               required: true,
-              placeholder: 'Select a topic',
-              options: contactHelpOptions,
+              placeholder: page.form.topicPlaceholder || 'Select a topic',
+              options: page.form.helpOptions,
             },
           ]}
-          textarea={{ label: 'Tell Us What Is Happening', name: 'message', rows: 5 }}
-          button="Send Message"
+          textarea={{ label: page.form.messageLabel || 'Tell Us What Is Happening', name: 'message', rows: 5 }}
+          button={page.form.submitLabel || 'Send Message'}
         />
       </div>
       <div>
         <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] text-heading mb-3">
-          Find R&amp;C Roofing Contractors
+          {page.form.mapHeading || 'Find R&C Roofing Contractors'}
         </h3>
         <p class="text-[14px] md:text-[15px] font-medium leading-[160%] text-muted mb-4">
-          3302 Campbell Ave<br />Honolulu, HI 96815
+          {page.form.addressLine1 || contactAddress.line1}
+          <br />
+          {page.form.addressLine2 || contactAddress.city}
         </p>
         <div class="rounded-md overflow-hidden border border-accent/60 bg-[#222] aspect-[4/3] min-h-[280px]">
           <iframe
-            title="Map of R&C Roofing Contractors at 3302 Campbell Ave, Honolulu"
-            src={contactMapEmbedSrc}
+            title={`Map of R&C Roofing Contractors at ${mapsQuery}`}
+            src={mapsEmbedSrc(mapsQuery)}
             class="w-full h-full min-h-[280px]"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -142,7 +119,12 @@ const reasons = [
           ></iframe>
         </div>
         <div class="mt-6">
-          <Button variant="ghost-light" text="Get Directions" href={contactDirectionsHref} target="_blank" />
+          <Button
+            variant="ghost-light"
+            text={page.form.directionsLabel || 'Get Directions'}
+            href={mapsDirectionsHref(mapsQuery)}
+            target="_blank"
+          />
         </div>
       </div>
     </div>
@@ -152,27 +134,28 @@ const reasons = [
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Get in Touch" classes={{ container: 'mb-[30px]' }} />
+    <Headline isDark={true} title={page.touchpoints.heading} classes={{ container: 'mb-[30px]' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {
-        touchpoints.map((item) => (
+        page.touchpoints.items.map((item) => (
           <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
         ))
       }
     </div>
-    <p class="mt-8 md:mt-10 text-left">
-      <a href="tel:+18088882524" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-        (808) 888-2524
-      </a>
-      <span class="text-white/50"> · </span>
-      <a href="tel:+18082163256" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-        (808) 216-3256
-      </a>
-      <span class="text-white/50"> · </span>
-      <a href="mailto:info@safehomeservice.com" class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-        info@safehomeservice.com
-      </a>
-    </p>
+    {
+      page.touchpoints.links?.length ? (
+        <p class="mt-8 md:mt-10 text-left">
+          {page.touchpoints.links.map((link, index) => (
+            <>
+              {index > 0 && <span class="text-white/50"> · </span>}
+              <a href={link.href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
+                {link.text}
+              </a>
+            </>
+          ))}
+        </p>
+      ) : null
+    }
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>
@@ -180,25 +163,50 @@ const reasons = [
 
   <Content
     isReversed
-    title="Not Sure Which Roofing Service You Need?"
-    callToAction={{ variant: 'ghost-light', text: 'Schedule a Roof Inspection', href: '#message' }}
+    title={page.unsureSection.heading}
+    callToAction={
+      page.unsureSection.ctaText
+        ? { variant: 'ghost-light', text: page.unsureSection.ctaText, href: page.unsureSection.ctaHref || '#message' }
+        : undefined
+    }
   >
     <Fragment slot="content">
-      <p class="text-muted">That is okay.</p>
-      <p class="mt-4 text-muted">
-        A roof problem does not automatically tell you what the solution should be. A leak may call for a localized
-        repair, while broader deterioration may require a different approach. In some cases, the roof may need to be
-        monitored rather than immediately repaired or replaced.
-      </p>
-      <p class="mt-4 text-muted">Start by telling R&amp;C what you are seeing.</p>
-      <p class="mt-4">
-        <a href="/roof-inspections" class="text-heading font-medium text-[14px] md:text-[15px] hover:underline">
-          Explore Roof Inspections
-        </a>
-      </p>
+      {
+        page.unsureSection.paragraphs.map((paragraph, index) => (
+          <p class:list={[index > 0 && 'mt-4', 'text-muted']}>{paragraph}</p>
+        ))
+      }
+      {
+        page.unsureSection.linkText && page.unsureSection.linkHref && (
+          <p class="mt-4">
+            <a
+              href={page.unsureSection.linkHref}
+              class="text-heading font-medium text-[14px] md:text-[15px] hover:underline"
+            >
+              {page.unsureSection.linkText}
+            </a>
+          </p>
+        )
+      }
     </Fragment>
     <Fragment slot="image">
-            <HeroImagePlaceholder fill label="Roof inspection photo placeholder" />
+      {
+        splitImage ? (
+          <Image
+            src={splitImage.src}
+            alt={splitImage.alt}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder fill label={page.unsureSection.imagePlaceholder || 'Roof inspection photo placeholder'} />
+        )
+      }
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="white" />
@@ -206,10 +214,10 @@ const reasons = [
   </Content>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Common Reasons People Contact R&amp;C" classes={{ container: 'mb-[30px]' }} />
+    <Headline title={page.reasons.heading} classes={{ container: 'mb-[30px]' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
       {
-        reasons.map((card) => (
+        page.reasons.items.map((card) => (
           <ServiceCard
             title={card.title}
             description={card.description}
@@ -228,16 +236,12 @@ const reasons = [
   <RelatedBlogs pageSlug="contact" surface="dark" />
 
   <CTABanner
-    title="Contact R&C Roofing Contractors"
-    subtitle="R&amp;C Roofing Contractors can evaluate the roof and help determine what roofing work should be considered next."
-    ctaText="Call R&C Roofing"
-    ctaHref="tel:+18088882524"
-    extraLines={[
-      'Alternate Phone: (808) 216-3256',
-      'Email: info@safehomeservice.com',
-      'Monday to Friday: 8:00 a.m. to 4:30 p.m.',
-      'Saturday to Sunday: Closed',
-    ]}
-    license="Hawaii Contractor License C-33642"
+    title={page.ctaBanner.title}
+    subtitle={page.ctaBanner.subtitle}
+    ctaText={page.ctaBanner.ctaText}
+    ctaHref={page.ctaBanner.ctaHref}
+    extraLines={page.ctaBanner.extraLines}
+    license={page.ctaBanner.license}
+    showAfterHoursNote={page.ctaBanner.showAfterHoursNote}
   />
 </Layout>

@@ -290,7 +290,8 @@ Read each section of the content doc → find its shape below → use that patte
 | 4 icon + heading + description points, 2 × 2 text grid, no cards | **P-14** |
 | Blog listing page: H1 “Blogs” + wrapping 3-column article cards | **P-15** |
 | Related Blogs: up to 3 article cards before the page-ending CTA | **P-15** |
-| *New layout polished and approved* | **P-16 …** *(add to this file)* |
+| Blog article: sticky left sidebar + sequential article body (heading, paragraph, image, table) | **P-16** |
+| *New layout polished and approved* | **P-17 …** *(add to this file)* |
 
 ---
 
@@ -860,12 +861,53 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 ---
 
+### P-16 · Blog Article
+
+**Content shape:** Individual blog post. Sticky left sidebar (table of contents, compact CTA) + right-column article that renders content in document order: H1, date/author, optional cover image, lead paragraphs, then H2 → paragraphs → image → table (and other blocks) as the CMS serves them.  
+**Components:** `src/pages/blog/[slug]/index.astro`, `BlogSidebar.astro`, `BlogArticleBody.astro`  
+**Note:** Blog articles are **not** marketing pages. Do not use P-01 `Hero2`, `CmsSections`, split side-images, or alternating white/grey/black section wrappers for the body.
+
+```astro
+<section class="relative">
+  <SectionBg variant="white" />
+  <div class="relative max-w-[1400px] mx-auto px-4 md:px-6 py-8 md:py-16 lg:py-20">
+    <div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12 xl:gap-16 lg:items-start">
+      <BlogSidebar toc={toc} />
+      <article class="min-w-0">
+        <h1 class="text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading text-heading mb-4">
+          {post.title}
+        </h1>
+        <p class="text-[14px] md:text-[15px] font-medium text-muted mb-8">
+          {getFormattedDate(publishDate)} · {post.author}
+        </p>
+        {post.image?.src && <BlogArticleImage image={post.image} eager class="mb-8 mt-0" />}
+        <!-- lead paragraphs, then sequential H2 / para / image / table blocks -->
+        <BlogArticleBody post={post} />
+      </article>
+    </div>
+  </div>
+</section>
+
+<RelatedBlogs post={post} surface="grey" />
+<CTABanner title={post.ctaBanner.title} subtitle={post.ctaBanner.subtitle} />
+```
+
+**Variants:**
+- Desktop (`lg+`): left sidebar is `sticky top-24`, so it stays in view while the article scrolls
+- Mobile: article first; compact “On this page” list after the lead paragraphs
+- Sidebar CTA uses the post’s `ctaBanner` title/button; the full P-12 banner still ends the page
+- Flatten CMS sections into the article column — never a full-width split, card grid, or icon band
+- Cover image is the listing thumbnail and the photo at the top of the article. Omit it when there is no uploaded image — never show a placeholder box
+- Extra photos go in **Article body** (image button in the toolbar). Insert as many as the story needs, in order with the copy. Do not insert placeholder images in the article
+
+---
+
 ## New Page Checklist
 
 1. Create `src/pages/[route]/index.astro`
 2. Add metadata (title, description, `ignoreTitleTemplate: true`)
 3. Wrap everything in `<Layout metadata={metadata}>`
-4. First section → always **P-01 Hero**
+4. First section → always **P-01 Hero** *(blog articles are the exception: use **P-16**)*
 5. Scan each doc section → match shape to Pattern Selector → paste snippet → fill copy
 6. Alternate backgrounds: white → grey → white → grey
 7. Last section → always **P-12 Final CTA**
@@ -877,7 +919,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 
 When a new layout is polished and approved in the browser:
 
-1. Pick the next number: **P-16**, …
+1. Pick the next number: **P-17**, …
 2. Add a row to the **Pattern Selector** table
 3. Add the pattern entry below P-12 using the same format:
    - `### P-XX · Pattern Name`

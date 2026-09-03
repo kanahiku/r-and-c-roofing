@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import HeroSubtitle from '~/components/ui/HeroSubtitle.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -27,7 +28,9 @@ const metadata = {
 };
 
 const heroActions = [
-  { variant: 'primary' as const, text: page.hero.ctaText, href: page.hero.ctaHref || '/contact' },
+  ...(page.hero.ctaText
+    ? [{ variant: 'primary' as const, text: page.hero.ctaText, href: page.hero.ctaHref || '/contact' }]
+    : []),
   ...(page.hero.phoneCtaText && page.hero.phoneCtaHref
     ? [{ variant: 'ghost-light' as const, text: page.hero.phoneCtaText, href: page.hero.phoneCtaHref }]
     : []),
@@ -39,9 +42,11 @@ const relatedSurface = sectionSurface(page.sections.length + (page.faqs ? 1 : 0)
 ---
 
 <Layout metadata={metadata}>
-  <Hero2 actions={heroActions}>
+  <Hero2 actions={heroActions.length ? heroActions : undefined}>
     <Fragment slot="title">{page.hero.title}</Fragment>
-    <Fragment slot="subtitle">{page.hero.subtitle}</Fragment>
+    <Fragment slot="subtitle">
+      <HeroSubtitle visualSubheading={page.hero.visualSubheading} subtitle={page.hero.subtitle} />
+    </Fragment>
     <Fragment slot="image">
       {
         heroImage ? (
@@ -87,5 +92,7 @@ const relatedSurface = sectionSurface(page.sections.length + (page.faqs ? 1 : 0)
     ctaText={page.ctaBanner.ctaText}
     ctaHref={page.ctaBanner.ctaHref}
     showAfterHoursNote={page.ctaBanner.showAfterHoursNote}
+    extraLines={page.ctaBanner.extraLines}
+    license={page.ctaBanner.license}
   />
 </Layout>

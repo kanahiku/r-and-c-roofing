@@ -2,10 +2,8 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
-import { contactHelpOptions } from '~/data/pages/contact';
+import { getContactHelpOptions } from '~/lib/content';
 import { sanityWriteClient } from '~/lib/sanity/writeClient';
-
-const TOPIC_LABELS = Object.fromEntries(contactHelpOptions.map((option) => [option.value, option.label]));
 
 function asString(value: unknown) {
   return typeof value === 'string' ? value.trim() : '';
@@ -46,7 +44,9 @@ export const POST: APIRoute = async ({ request }) => {
     const zip = asString(payload.zip);
     const topic = asString(payload.topic);
     const message = asString(payload.message);
-    const topicLabel = TOPIC_LABELS[topic] || topic || 'Not provided';
+    const helpOptions = await getContactHelpOptions();
+    const topicLabels = Object.fromEntries(helpOptions.map((option) => [option.value, option.label]));
+    const topicLabel = topicLabels[topic] || topic || 'Not provided';
 
     if (!name || !email || !phone || !zip || !topic) {
       return json({ error: 'Missing required fields' }, 400);

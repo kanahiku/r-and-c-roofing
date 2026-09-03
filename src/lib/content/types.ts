@@ -165,9 +165,10 @@ export interface LinkedCardItem {
 
 export interface PageHero {
   title: string;
+  visualSubheading?: string;
   subtitle: string;
-  ctaText: string;
-  ctaHref: string;
+  ctaText?: string;
+  ctaHref?: string;
   phoneCtaText?: string;
   phoneCtaHref?: string;
   image?: ContentImage;
@@ -180,6 +181,8 @@ export interface CtaBannerContent {
   ctaText?: string;
   ctaHref?: string;
   showAfterHoursNote?: boolean;
+  extraLines?: string[];
+  license?: string;
 }
 
 export interface IconPointsSection {
@@ -281,6 +284,8 @@ export interface SplitContentSection {
   paragraphs: string[];
   ctaText?: string;
   ctaHref?: string;
+  linkText?: string;
+  linkHref?: string;
   image?: ContentImage;
   imagePlaceholder?: string;
 }
@@ -329,6 +334,75 @@ export interface ServicePageContent {
   ctaBanner: CtaBannerContent;
 }
 
+export interface FormHelpOption {
+  label: string;
+  value: string;
+}
+
+export interface ContactLinkItem {
+  text: string;
+  href: string;
+}
+
+export interface ContactPageContent {
+  meta: {
+    title: string;
+    description: string;
+  };
+  hero: PageHero;
+  form: {
+    heading: string;
+    intro?: string;
+    topicLabel?: string;
+    topicPlaceholder?: string;
+    helpOptions: FormHelpOption[];
+    messageLabel?: string;
+    submitLabel?: string;
+    mapHeading?: string;
+    addressLine1?: string;
+    addressLine2?: string;
+    mapsQuery?: string;
+    directionsLabel?: string;
+  };
+  touchpoints: {
+    heading: string;
+    items: InfoCardItem[];
+    links?: ContactLinkItem[];
+  };
+  unsureSection: SplitContentSection;
+  reasons: LinkedCardsSection;
+  ctaBanner: CtaBannerContent;
+}
+
+export interface ReviewPlatformItem {
+  title: string;
+  ratingNote: string;
+  href: string;
+  linkText: string;
+  icon?: string;
+}
+
+export interface ReviewsPageContent {
+  meta: {
+    title: string;
+    description: string;
+  };
+  hero: PageHero;
+  liveReviews: {
+    heading: string;
+    intro?: string;
+  };
+  platforms: {
+    heading: string;
+    intro?: string;
+    items: ReviewPlatformItem[];
+  };
+  gallerySection: SplitContentSection & {
+    previewImages?: ContentImage[];
+  };
+  ctaBanner: CtaBannerContent;
+}
+
 // ─── Blog ─────────────────────────────────────────────────────────────────────
 
 export interface BlogPost {
@@ -350,4 +424,67 @@ export interface BlogPost {
   ctaBanner: CtaBannerContent;
   /** Fallback plain paragraphs when a CMS post has no structured sections. */
   body: string[];
+  /** Article body in document order, including inline images from Sanity. */
+  contentBlocks?: BlogContentBlock[];
+}
+
+export type BlogContentBlock =
+  | BlogContentParagraph
+  | BlogContentHeading
+  | BlogContentImage
+  | BlogContentList
+  | BlogContentTable
+  | BlogContentCallout;
+
+export interface BlogContentParagraph {
+  _type: 'paragraph';
+  _key: string;
+  /** Plain text — used for excerpts, lead paragraphs, and TOC. */
+  text: string;
+  /** HTML string with inline formatting (bold, italic, links). Use set:html to render. */
+  html: string;
+  quote?: boolean;
+}
+
+export interface BlogContentHeading {
+  _type: 'heading';
+  _key: string;
+  level: 2 | 3;
+  text: string;
+}
+
+export interface BlogContentImage {
+  _type: 'image';
+  _key: string;
+  image: ContentImage;
+  caption?: string;
+}
+
+export interface BlogContentList {
+  _type: 'list';
+  _key: string;
+  listType: 'bullet' | 'number';
+  items: BlogContentListItem[];
+}
+
+export interface BlogContentListItem {
+  _key: string;
+  /** HTML string with inline formatting. Use set:html to render. */
+  html: string;
+  level: number;
+}
+
+export interface BlogContentTable {
+  _type: 'table';
+  _key: string;
+  caption?: string;
+  headerRow: string[];
+  rows: { _key: string; cells: string[] }[];
+}
+
+export interface BlogContentCallout {
+  _type: 'callout';
+  _key: string;
+  calloutType: 'tip' | 'info' | 'warning' | 'note';
+  text: string;
 }

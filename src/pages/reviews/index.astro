@@ -6,40 +6,52 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import HeroSubtitle from '~/components/ui/HeroSubtitle.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import ReviewsGrid from '~/components/widgets/ReviewsGrid.astro';
-import { aboutHrefs, reviewPlatforms } from '~/data/pages/about';
+import Image from '~/components/common/Image.astro';
+import { getReviewsPage } from '~/lib/content';
+import { aboutHrefs } from '~/data/pages/about';
+
+const page = await getReviewsPage();
+const heroImage = page.hero.image;
+const galleryPreviews = Array.from({ length: 4 }, (_, index) => page.gallerySection.previewImages?.[index]);
 
 const metadata = {
-  title: 'R&C Roofing Contractors Reviews | Honolulu, HI',
-  description:
-    'Read customer reviews of R&C Roofing Contractors from Google, Yelp, and BBB and see what Oahu property owners say about their roofing experience.',
+  title: page.meta.title,
+  description: page.meta.description,
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
   <Hero2>
-    <Fragment slot="title">R&amp;C Roofing Contractors Reviews</Fragment>
+    <Fragment slot="title">{page.hero.title}</Fragment>
     <Fragment slot="subtitle">
-      <span
-        class="block text-[20px] md:text-[24px] font-normal font-heading text-heading mb-6 leading-[130%] tracking-tight"
-      >
-        What Customers Say About Working With R&amp;C
-      </span>
-      Choosing a roofing contractor usually means trusting someone with a part of your property you cannot easily
-      evaluate on your own.
-      <br /><br />
-      That is why customer experience matters.
-      <br /><br />
-      Read feedback from people who have worked with R&amp;C Roofing Contractors on roof repairs, replacements,
-      storm-related roofing concerns, and other roofing projects on Oahu.
+      <HeroSubtitle visualSubheading={page.hero.visualSubheading} subtitle={page.hero.subtitle} />
     </Fragment>
     <Fragment slot="image">
-      <HeroImagePlaceholder label="Customer and project photo placeholder" />
+      {
+        heroImage ? (
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="eager"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder label={page.hero.imagePlaceholder || 'Customer and project photo placeholder'} />
+        )
+      }
     </Fragment>
     <Fragment slot="bg">
       <SectionBg variant="hero" />
@@ -47,10 +59,14 @@ const metadata = {
   </Hero2>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
-    <Headline title="Featured Customer Reviews" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
-      Recent Google and Yelp reviews from customers who have worked with R&amp;C Roofing Contractors.
-    </p>
+    <Headline title={page.liveReviews.heading} classes={{ container: 'mb-[9px]' }} />
+    {
+      page.liveReviews.intro && (
+        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
+          {page.liveReviews.intro}
+        </p>
+      )
+    }
     <ReviewsGrid showHeader={false} sources={['google', 'yelp']} variant="dark" showCta={false} />
     <Fragment slot="bg">
       <SectionBg variant="grey" />
@@ -58,17 +74,23 @@ const metadata = {
   </WidgetWrapper>
 
   <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
-    <Headline isDark={true} title="Reviews From Across the Web" classes={{ container: 'mb-[9px]' }} />
-    <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
-      Customer feedback about R&amp;C Roofing Contractors can be found on multiple independent review platforms.
-    </p>
+    <Headline isDark={true} title={page.platforms.heading} classes={{ container: 'mb-[9px]' }} />
+    {
+      page.platforms.intro && (
+        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70 text-left max-w-3xl mb-[30px]">
+          {page.platforms.intro}
+        </p>
+      )
+    }
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
       {
-        reviewPlatforms.map((card) => (
+        page.platforms.items.map((card) => (
           <div class="rounded-lg border border-accent/60 bg-[#222] p-4 md:p-5 flex flex-col h-full">
-            <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
-              <Icon name={card.icon} class="w-5 h-5 text-accent" aria-hidden="true" />
-            </div>
+            {card.icon && (
+              <div class="mb-4 w-10 h-10 rounded-md border border-accent/60 flex items-center justify-center">
+                <Icon name={card.icon} class="w-5 h-5 text-accent" aria-hidden="true" />
+              </div>
+            )}
             <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] mb-2 text-white">{card.title}</h3>
             <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-white/60 flex-1">{card.ratingNote}</p>
             <div class="mt-auto pt-4">
@@ -86,22 +108,47 @@ const metadata = {
   <Content
     isReversed
     imageFit="framed"
-    title="See the Roofing Work Behind the Reviews"
-    callToAction={{ variant: 'ghost-light', text: 'View Project Gallery', href: aboutHrefs.gallery }}
+    title={page.gallerySection.heading}
+    callToAction={
+      page.gallerySection.ctaText
+        ? {
+            variant: 'ghost-light',
+            text: page.gallerySection.ctaText,
+            href: page.gallerySection.ctaHref || aboutHrefs.gallery,
+          }
+        : undefined
+    }
   >
     <Fragment slot="content">
-      <p class="text-muted">Customer feedback tells one part of the story. The finished work tells another.</p>
-      <p class="mt-4 text-muted">
-        Explore completed R&amp;C roofing projects across Oahu, including before-and-after photos, project locations,
-        roofing materials, and the work completed.
-      </p>
+      {
+        page.gallerySection.paragraphs.map((paragraph, index) => (
+          <p class:list={[index > 0 && 'mt-4', 'text-muted']}>{paragraph}</p>
+        ))
+      }
     </Fragment>
     <Fragment slot="image">
       <div class="grid grid-cols-2 gap-3">
-        <HeroImagePlaceholder label="Gallery preview 1" />
-        <HeroImagePlaceholder label="Gallery preview 2" />
-        <HeroImagePlaceholder label="Gallery preview 3" />
-        <HeroImagePlaceholder label="Gallery preview 4" />
+        {
+          galleryPreviews.map((image, index) =>
+            image ? (
+              <div class="rounded-md overflow-hidden aspect-square">
+                <Image
+                  src={image.src}
+                  alt={image.alt || `Gallery preview ${index + 1}`}
+                  class="w-full h-full object-cover"
+                  widths={[280, 480, 720]}
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  width={480}
+                  height={480}
+                  layout="cover"
+                  format="webp"
+                />
+              </div>
+            ) : (
+              <HeroImagePlaceholder label={`Gallery preview ${index + 1}`} />
+            )
+          )
+        }
       </div>
     </Fragment>
     <Fragment slot="bg">
@@ -112,9 +159,12 @@ const metadata = {
   <RelatedBlogs pageSlug="reviews" surface="grey" />
 
   <CTABanner
-    title="Have a Roofing Question of Your Own?"
-    subtitle="If something is happening with your roof, you do not need to know the solution before you call.<br /><br />R&amp;C can evaluate the roof and help determine what roofing work should be considered next."
-    ctaText="Schedule a Roof Inspection"
-    license="Hawaii Contractor License C-33642"
+    title={page.ctaBanner.title}
+    subtitle={page.ctaBanner.subtitle}
+    ctaText={page.ctaBanner.ctaText}
+    ctaHref={page.ctaBanner.ctaHref}
+    extraLines={page.ctaBanner.extraLines}
+    license={page.ctaBanner.license}
+    showAfterHoursNote={page.ctaBanner.showAfterHoursNote}
   />
 </Layout>

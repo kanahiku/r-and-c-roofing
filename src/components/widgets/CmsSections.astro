@@ -91,6 +91,19 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
             {section.paragraphs.map((paragraph, paragraphIndex) => (
               <p class:list={[paragraphIndex > 0 && 'mt-4', isDark ? 'text-white/70' : 'text-muted']}>{paragraph}</p>
             ))}
+            {section.linkText && section.linkHref && (
+              <p class="mt-4">
+                <a
+                  href={section.linkHref}
+                  class:list={[
+                    'font-medium text-[14px] md:text-[15px] hover:underline',
+                    isDark ? 'text-accent' : 'text-heading',
+                  ]}
+                >
+                  {section.linkText}
+                </a>
+              </p>
+            )}
           </Fragment>
           <Fragment slot="image">
             {section.image?.src ? (

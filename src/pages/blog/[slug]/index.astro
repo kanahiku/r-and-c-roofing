@@ -1,15 +1,15 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
-import CmsSections from '~/components/widgets/CmsSections.astro';
-import Image from '~/components/common/Image.astro';
+import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
+import BlogArticleImage from '~/components/blog/BlogArticleImage.astro';
+import BlogArticleBody from '~/components/blog/BlogArticleBody.astro';
+import BlogSidebar from '~/components/blog/BlogSidebar.astro';
+import { Icon } from 'astro-icon/components';
 import { getFormattedDate } from '~/utils/utils';
 import { getBlogPost } from '~/lib/content';
-import { sectionSurface } from '~/lib/content/sectionTheme';
-import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
+import { getArticleToc, getLeadInlineImages, shouldUsePortableBody } from '~/lib/content/blogArticle';
 
 export const prerender = false;
 
@@ -22,63 +22,82 @@ if (!post) {
 }
 
 const publishDate = new Date(post.publishDate);
-const heroParagraphs = post.heroParagraphs.length ? post.heroParagraphs : post.body;
-const heroImageLabel = post.imagePlaceholder || `${post.title} photo placeholder`;
+const usePortableBody = shouldUsePortableBody(post);
+const leadParagraphs = usePortableBody ? [] : post.heroParagraphs.length ? post.heroParagraphs : post.body;
+const leadImages = getLeadInlineImages(post);
+const toc = getArticleToc(post);
 
 const metadata = {
   title: post.meta.title,
   description: post.meta.description,
   ignoreTitleTemplate: true,
 };
-const relatedSurface = sectionSurface(post.sections.length);
 ---
 
 <Layout metadata={metadata}>
-  <Hero2>
-    <Fragment slot="title">{post.title}</Fragment>
-    <Fragment slot="subtitle">
-      <span class="block text-[14px] md:text-[15px] font-medium text-muted mb-6">
-        {getFormattedDate(publishDate)}
-        {post.author ? ` · ${post.author}` : ''}
-      </span>
-      {heroParagraphs.map((paragraph, index) => (
-        <>
-          {index > 0 && <br />}
-          {index > 0 && <br />}
-          {paragraph}
-        </>
-      ))}
-    </Fragment>
-    <Fragment slot="image">
-      {
-        post.image ? (
-          <Image
-            src={post.image.src}
-            alt={post.image.alt}
-            class="w-full h-full object-cover"
-            widths={[400, 768, 1200]}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            loading="eager"
-            width={700}
-            height={700}
-            layout="cover"
-            format="webp"
-          />
-        ) : (
-          <HeroImagePlaceholder fill label={heroImageLabel} />
-        )
-      }
-    </Fragment>
-    <Fragment slot="bg">
-      <SectionBg variant="hero" />
-    </Fragment>
-  </Hero2>
+  <section class="relative">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-[1]" aria-hidden="true">
+      <SectionBg variant="white" />
+    </div>
+    <div class="relative max-w-[1400px] mx-auto px-4 md:px-6 py-8 md:py-16 lg:py-20">
+      <div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12 xl:gap-16 lg:items-start">
+        <BlogSidebar
+          toc={toc}
+          ctaTitle={post.ctaBanner.title}
+          ctaText={post.ctaBanner.ctaText}
+          ctaHref={post.ctaBanner.ctaHref}
+        />
 
-  {post.sections.length ? <CmsSections sections={post.sections} /> : (
-    <Fragment />
-  )}
+        <article class="min-w-0">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-1 text-[14px] md:text-[15px] font-medium text-heading hover:underline mb-6"
+          >
+            <Icon name="tabler:chevron-left" class="w-4 h-4" aria-hidden="true" />
+            All articles
+          </a>
 
-  <RelatedBlogs post={post} surface={relatedSurface} />
+          <h1 class="text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading text-heading mb-4">
+            {post.title}
+          </h1>
+          <p class="text-[14px] md:text-[15px] font-medium text-muted mb-8">
+            <time datetime={post.publishDate}>{getFormattedDate(publishDate)}</time>
+            {post.author ? ` · ${post.author}` : ''}
+          </p>
+
+          {post.image?.src && <BlogArticleImage image={post.image} eager class="mb-8 mt-0" />}
+
+          {
+            leadParagraphs.length > 0 && (
+              <div class="space-y-5">
+                {leadParagraphs.map((paragraph) => (
+                  <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">{paragraph}</p>
+                ))}
+              </div>
+            )
+          }
+
+          {
+            leadImages.map((imageBlock) => (
+              <BlogArticleImage image={imageBlock.image} caption={imageBlock.caption} />
+            ))
+          }
+
+          {
+            toc.length > 0 && (
+              <div class="mt-10">
+                <BlogSidebar variant="inline" toc={toc} />
+              </div>
+            )
+          }
+
+          <BlogArticleBody post={post} />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <RelatedBlogs post={post} surface="grey" />
 
   <CTABanner
     title={post.ctaBanner.title}

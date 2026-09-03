@@ -6,6 +6,8 @@ const SINGLETONS: Record<string, string> = {
   siteNavigation: 'singleton-navigation',
   siteFooter: 'singleton-footer',
   homePage: 'singleton-home',
+  contactPage: 'singleton-contact',
+  reviewsPage: 'singleton-reviews',
 };
 
 export const structure = (S: StructureBuilder) =>
@@ -64,6 +66,22 @@ export const structure = (S: StructureBuilder) =>
                     .schemaType('homePage')
                     .documentId('singleton-home')
                     .title('Home Page')
+                ),
+              S.listItem()
+                .title('Contact')
+                .child(
+                  S.document()
+                    .schemaType('contactPage')
+                    .documentId('singleton-contact')
+                    .title('Contact Page')
+                ),
+              S.listItem()
+                .title('Reviews')
+                .child(
+                  S.document()
+                    .schemaType('reviewsPage')
+                    .documentId('singleton-reviews')
+                    .title('Reviews Page')
                 ),
               S.listItem()
                 .title('Services')

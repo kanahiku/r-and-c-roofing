@@ -9,8 +9,16 @@ export const contactPhone = {
   href: 'tel:+18088882524',
 };
 
-export const contactMapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(contactAddress.mapsQuery)}&z=16&output=embed`;
-export const contactDirectionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(contactAddress.mapsQuery)}`;
+export function mapsEmbedSrc(query: string) {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=16&output=embed`;
+}
+
+export function mapsDirectionsHref(query: string) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+}
+
+export const contactMapEmbedSrc = mapsEmbedSrc(contactAddress.mapsQuery);
+export const contactDirectionsHref = mapsDirectionsHref(contactAddress.mapsQuery);
 
 export const contactHelpOptions = [
   { label: 'Roof Inspection', value: 'roof-inspection' },

@@ -1,13 +1,32 @@
 import { sanityClient } from '../sanity/client';
+import {
+  resolveContentImage,
+  resolveContentImageOrEmpty,
+  type SanityImageFields,
+} from '../sanity/image';
 import type {
+  BlogContentBlock,
   BlogPost,
+  ContactPageContent,
   ContentImage,
+  FormHelpOption,
   HomePageContent,
   NavigationContent,
+  ReviewsPageContent,
   ServicePageContent,
   ServiceSection,
   SplitContentSection,
 } from './types';
+
+const IMAGE_PROJECTION = /* groq */ `
+  "src": coalesce(image.asset->url, imageUrl, ""),
+  "alt": coalesce(image.alt, imageAlt, ""),
+  "crop": image.crop,
+  "hotspot": image.hotspot,
+  "asset": image.asset
+`;
+
+type FetchedImage = ContentImage & SanityImageFields;
 
 const HOME_QUERY = /* groq */ `
   *[_type == "homePage" && _id == "singleton-home"][0] {
@@ -22,7 +41,10 @@ const HOME_QUERY = /* groq */ `
       phoneCtaHref,
       "heroImage": {
         "src": coalesce(heroImage.asset->url, heroImageUrl, ""),
-        "alt": coalesce(heroImage.alt, "")
+        "alt": coalesce(heroImage.alt, ""),
+        "crop": heroImage.crop,
+        "hotspot": heroImage.hotspot,
+        "asset": heroImage.asset
       }
     },
     "statsBar": statsBar[] { stat, label },
@@ -33,8 +55,7 @@ const HOME_QUERY = /* groq */ `
       ctaText,
       ctaHref,
       "image": {
-        "src": coalesce(image.asset->url, imageUrl, ""),
-        "alt": coalesce(image.alt, imageAlt, "")
+        ${IMAGE_PROJECTION}
       }
     },
     servicesSection {
@@ -69,7 +90,23 @@ const HOME_QUERY = /* groq */ `
 `;
 
 export async function getSanityHomeContent(): Promise<HomePageContent> {
-  return sanityClient.fetch<HomePageContent>(HOME_QUERY);
+  const page = await sanityClient.fetch<
+    HomePageContent & {
+      hero: HomePageContent['hero'] & { heroImage: FetchedImage };
+      whyInspect: HomePageContent['whyInspect'] & { image: FetchedImage };
+    }
+  >(HOME_QUERY);
+  return {
+    ...page,
+    hero: {
+      ...page.hero,
+      heroImage: resolveContentImageOrEmpty(page.hero?.heroImage),
+    },
+    whyInspect: {
+      ...page.whyInspect,
+      image: resolveContentImageOrEmpty(page.whyInspect?.image),
+    },
+  };
 }
 
 const NAVIGATION_QUERY = /* groq */ `
@@ -110,6 +147,7 @@ const SERVICE_PAGE_QUERY = /* groq */ `
     meta,
     hero {
       title,
+      visualSubheading,
       subtitle,
       ctaText,
       ctaHref,
@@ -117,8 +155,7 @@ const SERVICE_PAGE_QUERY = /* groq */ `
       phoneCtaHref,
       imagePlaceholder,
       "image": {
-        "src": coalesce(image.asset->url, imageUrl, ""),
-        "alt": coalesce(image.alt, imageAlt, "")
+        ${IMAGE_PROJECTION}
       }
     },
     "sections": sections[_type != "faqsSection"] {
@@ -135,11 +172,12 @@ const SERVICE_PAGE_QUERY = /* groq */ `
       column3,
       ctaText,
       ctaHref,
+      linkText,
+      linkHref,
       sources,
       imagePlaceholder,
       "image": {
-        "src": coalesce(image.asset->url, imageUrl, ""),
-        "alt": coalesce(image.alt, imageAlt, "")
+        ${IMAGE_PROJECTION}
       },
       "items": select(
         _type == "linkedCardsSection" => items[] { title, description, linkText, href },
@@ -161,9 +199,60 @@ const SERVICE_PAGE_QUERY = /* groq */ `
       subtitle,
       ctaText,
       ctaHref,
-      showAfterHoursNote
+      showAfterHoursNote,
+      extraLines,
+      license
     }
   }
+`;
+
+function normalizeHeroImage<T extends { image?: FetchedImage | ContentImage }>(hero: T): T {
+  return { ...hero, image: resolveContentImage(hero.image as FetchedImage | undefined) };
+}
+
+function normalizeSplit(section: SplitContentSection & { image?: FetchedImage | ContentImage }): SplitContentSection {
+  return { ...section, image: resolveContentImage(section.image as FetchedImage | undefined) };
+}
+
+function resolveSectionImage<T extends { image?: FetchedImage | ContentImage }>(section: T): T {
+  return { ...section, image: resolveContentImage(section.image as FetchedImage | undefined) };
+}
+
+const HERO_PROJECTION = /* groq */ `
+  title,
+  visualSubheading,
+  subtitle,
+  ctaText,
+  ctaHref,
+  phoneCtaText,
+  phoneCtaHref,
+  imagePlaceholder,
+  "image": {
+    ${IMAGE_PROJECTION}
+  }
+`;
+
+const SPLIT_PROJECTION = /* groq */ `
+  heading,
+  paragraphs,
+  ctaText,
+  ctaHref,
+  linkText,
+  linkHref,
+  imagePlaceholder,
+  "image": {
+    ${IMAGE_PROJECTION}
+  }
+`;
+
+const CTA_BANNER_PROJECTION = /* groq */ `
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  showAfterHoursNote,
+  extraLines,
+  license
 `;
 
 export async function getSanityServicePage(slug: string): Promise<ServicePageContent | null> {
@@ -173,41 +262,319 @@ export async function getSanityServicePage(slug: string): Promise<ServicePageCon
   return {
     ...page,
     sections: ((page.sections ?? []) as ServiceSection[]).map((section) => {
-      if (section._type !== 'splitContentSection') return section;
-      const split = section as SplitContentSection;
-      return { ...split, image: split.image?.src ? split.image : undefined };
+      const withImage = resolveSectionImage(section as ServiceSection & { image?: FetchedImage });
+      if (withImage._type !== 'splitContentSection') return withImage;
+      return normalizeSplit(withImage as SplitContentSection);
     }),
     faqs: page.faqs?.items?.length ? page.faqs : undefined,
-    hero: {
-      ...page.hero,
-      image: page.hero?.image?.src ? page.hero.image : undefined,
+    hero: normalizeHeroImage(page.hero),
+  };
+}
+
+const CONTACT_PAGE_QUERY = /* groq */ `
+  *[_type == "contactPage" && _id == "singleton-contact"][0] {
+    meta,
+    hero { ${HERO_PROJECTION} },
+    form {
+      heading,
+      intro,
+      topicLabel,
+      topicPlaceholder,
+      "helpOptions": helpOptions[] { label, value },
+      messageLabel,
+      submitLabel,
+      mapHeading,
+      addressLine1,
+      addressLine2,
+      mapsQuery,
+      directionsLabel
+    },
+    touchpoints {
+      heading,
+      "items": items[] { title, description, icon },
+      "links": links[] { text, href }
+    },
+    unsureSection { ${SPLIT_PROJECTION} },
+    reasons {
+      heading,
+      intro,
+      display,
+      "items": items[] { title, description, linkText, href }
+    },
+    ctaBanner { ${CTA_BANNER_PROJECTION} }
+  }
+`;
+
+export async function getSanityContactPage(): Promise<ContactPageContent> {
+  const page = await sanityClient.fetch<ContactPageContent | null>(CONTACT_PAGE_QUERY);
+  if (!page) {
+    throw new Error('Sanity contactPage document is missing (singleton-contact).');
+  }
+  return {
+    ...page,
+    hero: normalizeHeroImage(page.hero),
+    unsureSection: normalizeSplit({ ...page.unsureSection, _type: 'splitContentSection' }),
+    reasons: { ...page.reasons, _type: 'linkedCardsSection' },
+  };
+}
+
+const CONTACT_HELP_OPTIONS_QUERY = /* groq */ `
+  *[_type == "contactPage" && _id == "singleton-contact"][0].form.helpOptions[] { label, value }
+`;
+
+export async function getSanityContactHelpOptions(): Promise<FormHelpOption[]> {
+  const options = await sanityClient.fetch<FormHelpOption[] | null>(CONTACT_HELP_OPTIONS_QUERY);
+  return (options ?? []).filter((option) => option?.label && option?.value);
+}
+
+const REVIEWS_PAGE_QUERY = /* groq */ `
+  *[_type == "reviewsPage" && _id == "singleton-reviews"][0] {
+    meta,
+    hero { ${HERO_PROJECTION} },
+    liveReviews { heading, intro },
+    platforms {
+      heading,
+      intro,
+      "items": items[] { title, ratingNote, href, linkText, icon }
+    },
+    gallerySection {
+      heading,
+      paragraphs,
+      ctaText,
+      ctaHref,
+      "previewImages": previewImages[] {
+        ${IMAGE_PROJECTION}
+      }
+    },
+    ctaBanner { ${CTA_BANNER_PROJECTION} }
+  }
+`;
+
+export async function getSanityReviewsPage(): Promise<ReviewsPageContent> {
+  const page = await sanityClient.fetch<ReviewsPageContent | null>(REVIEWS_PAGE_QUERY);
+  if (!page) {
+    throw new Error('Sanity reviewsPage document is missing (singleton-reviews).');
+  }
+  return {
+    ...page,
+    hero: normalizeHeroImage(page.hero),
+    gallerySection: {
+      ...page.gallerySection,
+      _type: 'splitContentSection',
+      previewImages: (page.gallerySection.previewImages ?? [])
+        .map((image) => resolveContentImage(image as FetchedImage))
+        .filter((image): image is ContentImage => Boolean(image?.src)),
     },
   };
 }
 
-type SanityPortableBlock = {
-  _type?: string;
-  children?: Array<{ text?: string }>;
+type SanityMarkDef = {
+  _type: string;
+  _key: string;
+  href?: string;
+  blank?: boolean;
 };
 
-type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body'> & {
+type SanitySpan = {
+  _type: string;
+  _key?: string;
+  text?: string;
+  marks?: string[];
+};
+
+type SanityPortableBlock = {
+  _type?: string;
+  _key?: string;
+  style?: string;
+  listItem?: 'bullet' | 'number';
+  level?: number;
+  children?: SanitySpan[];
+  markDefs?: SanityMarkDef[];
+  // image fields
+  src?: string;
+  alt?: string;
+  caption?: string;
+  // table fields
+  headerRow?: string[];
+  rows?: Array<{ _key?: string; cells?: string[] }>;
+  // callout fields (projected as calloutType from the "type" Sanity field)
+  calloutType?: string;
+  text?: string;
+} & SanityImageFields;
+
+type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'contentBlocks'> & {
   image?: ContentImage;
   relatedPages?: string[] | null;
   body?: SanityPortableBlock[] | null;
 };
 
-function portableTextToParagraphs(body: SanityPortableBlock[] | null | undefined): string[] {
+function portableBlockText(block: SanityPortableBlock): string {
+  return Array.isArray(block.children) ? block.children.map((child) => child.text ?? '').join('') : '';
+}
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function spansToHtml(
+  children: SanitySpan[] | undefined,
+  markDefs: SanityMarkDef[] | undefined
+): string {
+  if (!Array.isArray(children)) return '';
+  const defsMap = new Map((markDefs ?? []).map((d) => [d._key, d]));
+
+  return children
+    .map((span) => {
+      if (span._type !== 'span') return '';
+      let html = escapeHtml(span.text ?? '');
+      for (const mark of span.marks ?? []) {
+        const def = defsMap.get(mark);
+        if (def?._type === 'link') {
+          const targetAttr = def.blank !== false ? ' target="_blank" rel="noopener noreferrer"' : '';
+          html = `<a href="${escapeHtml(def.href ?? '')}"${targetAttr}>${html}</a>`;
+        } else if (mark === 'strong') {
+          html = `<strong>${html}</strong>`;
+        } else if (mark === 'em') {
+          html = `<em>${html}</em>`;
+        } else if (mark === 'underline') {
+          html = `<u>${html}</u>`;
+        } else if (mark === 'strike-through') {
+          html = `<s>${html}</s>`;
+        } else if (mark === 'code') {
+          html = `<code>${html}</code>`;
+        }
+      }
+      return html;
+    })
+    .join('');
+}
+
+function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefined): BlogContentBlock[] {
   if (!Array.isArray(body)) return [];
-  return body
-    .filter((block) => block?._type === 'block')
-    .map((block) =>
-      Array.isArray(block.children) ? block.children.map((child) => child.text ?? '').join('') : ''
-    )
-    .map((text) => text.trim())
-    .filter(Boolean);
+
+  const result: BlogContentBlock[] = [];
+
+  // Buffer for consecutive list items of the same type
+  let listBuffer: { _key: string; html: string; level: number }[] = [];
+  let listType: 'bullet' | 'number' | null = null;
+  let listStartKey = '';
+
+  function flushList() {
+    if (!listBuffer.length || !listType) return;
+    result.push({ _type: 'list', _key: `list-${listStartKey}`, listType, items: listBuffer });
+    listBuffer = [];
+    listType = null;
+    listStartKey = '';
+  }
+
+  body.forEach((block, index) => {
+    const key = block._key || `block-${index}`;
+
+    // ── Image ─────────────────────────────────────────────────────────────────
+    if (block._type === 'image') {
+      flushList();
+      const image = resolveContentImage({
+        src: block.src,
+        alt: block.alt,
+        crop: block.crop,
+        hotspot: block.hotspot,
+        asset: block.asset,
+      });
+      if (!image?.src) return;
+      const caption = typeof block.caption === 'string' ? block.caption.trim() : '';
+      result.push({ _type: 'image', _key: key, image, ...(caption ? { caption } : {}) });
+      return;
+    }
+
+    // ── Table ─────────────────────────────────────────────────────────────────
+    if (block._type === 'table') {
+      flushList();
+      const headerRow = (block.headerRow ?? []).filter(Boolean);
+      if (headerRow.length < 2) return;
+      result.push({
+        _type: 'table',
+        _key: key,
+        ...(block.caption ? { caption: block.caption } : {}),
+        headerRow,
+        rows: (block.rows ?? []).map((row, ri) => ({
+          _key: row._key || `row-${ri}`,
+          cells: row.cells ?? [],
+        })),
+      });
+      return;
+    }
+
+    // ── Callout ───────────────────────────────────────────────────────────────
+    if (block._type === 'callout') {
+      flushList();
+      if (!block.text?.trim()) return;
+      const calloutType = (['tip', 'info', 'warning', 'note'] as const).includes(
+        block.calloutType as 'tip' | 'info' | 'warning' | 'note'
+      )
+        ? (block.calloutType as 'tip' | 'info' | 'warning' | 'note')
+        : 'note';
+      result.push({ _type: 'callout', _key: key, calloutType, text: block.text.trim() });
+      return;
+    }
+
+    // ── Standard block ────────────────────────────────────────────────────────
+    if (block._type !== 'block') return;
+
+    const text = portableBlockText(block).trim();
+    if (!text) return;
+
+    const html = spansToHtml(block.children, block.markDefs) || escapeHtml(text);
+
+    // Headings
+    if (block.style === 'h1' || block.style === 'h2') {
+      flushList();
+      result.push({ _type: 'heading', _key: key, level: 2, text });
+      return;
+    }
+    if (block.style === 'h3' || block.style === 'h4') {
+      flushList();
+      result.push({ _type: 'heading', _key: key, level: 3, text });
+      return;
+    }
+
+    // List items
+    if (block.listItem === 'bullet' || block.listItem === 'number') {
+      if (listType !== block.listItem) {
+        flushList();
+        listType = block.listItem;
+        listStartKey = key;
+      }
+      listBuffer.push({ _key: key, html, level: block.level ?? 1 });
+      return;
+    }
+
+    // Paragraph / blockquote
+    flushList();
+    result.push({
+      _type: 'paragraph',
+      _key: key,
+      text,
+      html,
+      ...(block.style === 'blockquote' ? { quote: true } : {}),
+    });
+  });
+
+  flushList();
+  return result;
+}
+
+function portableTextToParagraphs(body: SanityPortableBlock[] | null | undefined): string[] {
+  return portableTextToContentBlocks(body)
+    .filter((block): block is Extract<BlogContentBlock, { _type: 'paragraph' }> => block._type === 'paragraph')
+    .map((block) => block.text); // plain text only — used for excerpts and lead paragraphs
 }
 
 function normalizeBlogPost(post: SanityBlogPost): BlogPost {
+  const contentBlocks = portableTextToContentBlocks(post.body);
   const body = portableTextToParagraphs(post.body);
   const excerpt = post.excerpt || body[0] || '';
   return {
@@ -216,7 +583,7 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     excerpt,
     publishDate: post.publishDate,
     author: post.author,
-    image: post.image?.src ? post.image : undefined,
+    image: resolveContentImage(post.image as FetchedImage | undefined),
     relatedPages: (post.relatedPages ?? []).map((key) => key.replace(/^\/+/, '')).filter(Boolean),
     meta: {
       title: post.title,
@@ -241,10 +608,11 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
       ctaHref: '/contact',
     },
     body,
+    contentBlocks,
   };
 }
 
-const BLOG_POST_PROJECTION = /* groq */ `
+const BLOG_POST_CARD_PROJECTION = /* groq */ `
   title,
   "slug": slug.current,
   excerpt,
@@ -252,15 +620,46 @@ const BLOG_POST_PROJECTION = /* groq */ `
   author,
   "image": {
     "src": coalesce(image.asset->url, imageUrl, ""),
-    "alt": coalesce(image.alt, imageAlt, title)
+    "alt": coalesce(image.alt, imageAlt, title),
+    "crop": image.crop,
+    "hotspot": image.hotspot,
+    "asset": image.asset
   },
-  relatedPages,
-  body
+  relatedPages
+`;
+
+const BLOG_POST_PROJECTION = /* groq */ `
+  ${BLOG_POST_CARD_PROJECTION},
+  body[] {
+    ...,
+    _type == "image" => {
+      ...,
+      "src": asset->url,
+      "alt": coalesce(alt, ""),
+      caption,
+      crop,
+      hotspot,
+      asset
+    },
+    _type == "callout" => {
+      _type,
+      _key,
+      "calloutType": type,
+      text
+    },
+    _type == "table" => {
+      _type,
+      _key,
+      caption,
+      headerRow,
+      "rows": rows[] { _key, cells }
+    }
+  }
 `;
 
 const BLOG_POSTS_QUERY = /* groq */ `
   *[_type == "blogPost" && defined(slug.current)] | order(publishDate desc) {
-    ${BLOG_POST_PROJECTION}
+    ${BLOG_POST_CARD_PROJECTION}
   }
 `;
 
@@ -272,7 +671,7 @@ const BLOG_POST_BY_SLUG_QUERY = /* groq */ `
 
 const BLOG_POSTS_RELATED_TO_QUERY = /* groq */ `
   *[_type == "blogPost" && defined(slug.current) && $pageSlug in relatedPages] | order(publishDate desc) [0...3] {
-    ${BLOG_POST_PROJECTION}
+    ${BLOG_POST_CARD_PROJECTION}
   }
 `;
 

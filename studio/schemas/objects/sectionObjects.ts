@@ -33,8 +33,19 @@ export const pageHero = defineType({
   type: 'object',
   fields: [
     defineField({ name: 'title', title: 'Heading', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'visualSubheading',
+      title: 'Visual subheading',
+      type: 'string',
+      description: 'Optional line between the H1 and body copy. Leave empty to hide it.',
+    }),
     defineField({ name: 'subtitle', title: 'Subtitle', type: 'text', rows: 4, validation: (r) => r.required() }),
-    defineField({ name: 'ctaText', title: 'Primary CTA label', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'ctaText',
+      title: 'Primary CTA label',
+      type: 'string',
+      description: 'Leave empty on informational pages (reviews, gallery) to hide the hero button.',
+    }),
     defineField({ name: 'ctaHref', title: 'Primary CTA URL', type: 'string', initialValue: '/contact' }),
     defineField({ name: 'phoneCtaText', title: 'Phone CTA label', type: 'string', initialValue: 'Call Now' }),
     defineField({
@@ -80,6 +91,19 @@ export const ctaBanner = defineType({
       title: 'Show after-hours note?',
       type: 'boolean',
       initialValue: false,
+    }),
+    defineField({
+      name: 'extraLines',
+      title: 'Extra contact lines',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Optional lines under the address (alternate phone, email, hours).',
+    }),
+    defineField({
+      name: 'license',
+      title: 'License line',
+      type: 'string',
+      description: 'e.g. Hawaii Contractor License C-33642',
     }),
   ],
 });
@@ -451,6 +475,13 @@ export const splitContentSection = defineType({
     defineField({ name: 'ctaText', title: 'CTA label', type: 'string' }),
     defineField({ name: 'ctaHref', title: 'CTA URL', type: 'string' }),
     defineField({
+      name: 'linkText',
+      title: 'Text link label',
+      type: 'string',
+      description: 'Optional text link under the paragraphs (in addition to the CTA button).',
+    }),
+    defineField({ name: 'linkHref', title: 'Text link URL', type: 'string' }),
+    defineField({
       name: 'image',
       title: 'Side image (upload)',
       type: 'image',
@@ -510,6 +541,75 @@ export const quoteCardsSection = defineType({
     prepare({ title, n }) {
       const count = Array.isArray(n) ? n.length : 0;
       return { title: title || 'Quote cards', subtitle: `${count} quote${count === 1 ? '' : 's'}` };
+    },
+  },
+});
+
+export const formHelpOption = defineType({
+  name: 'formHelpOption',
+  title: 'Form help option',
+  type: 'object',
+  fields: [
+    defineField({ name: 'label', title: 'Label', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'value', title: 'Value', type: 'string', validation: (r) => r.required() }),
+  ],
+  preview: { select: { title: 'label', subtitle: 'value' } },
+});
+
+export const contactLink = defineType({
+  name: 'contactLink',
+  title: 'Contact link',
+  type: 'object',
+  fields: [
+    defineField({ name: 'text', title: 'Label', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'href', title: 'URL', type: 'string', validation: (r) => r.required() }),
+  ],
+  preview: { select: { title: 'text', subtitle: 'href' } },
+});
+
+export const reviewPlatformItem = defineType({
+  name: 'reviewPlatformItem',
+  title: 'Review platform',
+  type: 'object',
+  fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'ratingNote', title: 'Description', type: 'text', rows: 3, validation: (r) => r.required() }),
+    defineField({ name: 'href', title: 'URL', type: 'url', validation: (r) => r.required() }),
+    defineField({ name: 'linkText', title: 'Button label', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'string',
+      description: 'Tabler icon name, e.g. tabler:brand-google',
+    }),
+  ],
+  preview: { select: { title: 'title', subtitle: 'href' } },
+});
+
+export const previewImageItem = defineType({
+  name: 'previewImageItem',
+  title: 'Preview image',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'image',
+      title: 'Image (upload)',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+    }),
+    defineField({
+      name: 'imageUrl',
+      title: 'Image URL',
+      type: 'url',
+      description: 'Used if no image is uploaded.',
+    }),
+    defineField({ name: 'imageAlt', title: 'Alt text (when using a URL)', type: 'string' }),
+  ],
+  preview: {
+    select: { media: 'image', title: 'image.alt', url: 'imageUrl' },
+    prepare({ media, title, url }) {
+      return { title: title || url || 'Preview image', media };
     },
   },
 });

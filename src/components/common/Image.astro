@@ -93,6 +93,51 @@ if (resolved && typeof resolved === 'object' && 'width' in resolved && 'height' 
 
 const aspectRatio = w && h ? w / h : undefined;
 
+const sanityCoverObjectPosition = (): string | undefined => {
+  if (!isSanityUrl || layout !== 'cover') return undefined;
+  const url = new URL(resolved as string);
+  const fpx = url.searchParams.get('fp-x');
+  const fpy = url.searchParams.get('fp-y');
+  if (fpx == null || fpy == null) return undefined;
+
+  const rect = url.searchParams.get('rect');
+  const dimMatch = url.pathname.match(/-(\d+)x(\d+)\.[a-z]+$/i);
+  if (rect && dimMatch) {
+    const assetW = Number(dimMatch[1]);
+    const assetH = Number(dimMatch[2]);
+    const [left, top, width, height] = rect.split(',').map(Number);
+    if (width > 0 && height > 0) {
+      const x = Math.min(1, Math.max(0, (Number(fpx) * assetW - left) / width));
+      const y = Math.min(1, Math.max(0, (Number(fpy) * assetH - top) / height));
+      return `object-position:${(x * 100).toFixed(2)}% ${(y * 100).toFixed(2)}%`;
+    }
+  }
+
+  return `object-position:${Number(fpx) * 100}% ${Number(fpy) * 100}%`;
+};
+
+const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string => {
+  const url = new URL(resolved as string);
+  const hasEditorCrop = url.searchParams.has('rect');
+
+  if (variantWidth) url.searchParams.set('w', String(variantWidth));
+
+  // Studio crop is already `rect` on the URL. Don't recrop to a different
+  // aspect ratio here — CSS object-fit covers the slot from that crop.
+  if (hasEditorCrop) {
+    url.searchParams.set('fit', 'max');
+    url.searchParams.delete('h');
+  } else if (layout === 'cover' && variantWidth && variantHeight) {
+    url.searchParams.set('h', String(variantHeight));
+    url.searchParams.set('fit', 'crop');
+  } else if (variantWidth || variantHeight) {
+    if (variantHeight) url.searchParams.set('h', String(variantHeight));
+    url.searchParams.set('fit', 'max');
+  }
+  url.searchParams.set('auto', 'format');
+  return url.toString();
+};
+
 // --- Local images: native <Image layout> ----------------------------------
 // `cover` has no native layout equivalent; render it as `none` plus an
 // object-fit style (the usage's own classes usually cover this too).
@@ -117,6 +162,10 @@ const cdnLayoutStyle = (): string => {
       break;
     case 'cover':
       decls.push('width:100%', 'height:100%', 'object-fit:cover');
+      {
+        const position = sanityCoverObjectPosition();
+        if (position) decls.push(position);
+      }
       break;
     case 'none':
       break;
@@ -130,16 +179,6 @@ const cdnLayoutStyle = (): string => {
   return decls.join(';');
 };
 const cdnStyle = isRemoteImg ? [cdnLayoutStyle(), rest.style].filter(Boolean).join(';') || undefined : undefined;
-
-const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string => {
-  const url = new URL(resolved as string);
-  if (variantWidth) url.searchParams.set('w', String(variantWidth));
-  if (variantHeight) url.searchParams.set('h', String(variantHeight));
-  if (layout === 'cover' && variantWidth && variantHeight) url.searchParams.set('fit', 'crop');
-  else if (variantWidth || variantHeight) url.searchParams.set('fit', 'max');
-  url.searchParams.set('auto', 'format');
-  return url.toString();
-};
 
 // --- CDN-side srcset -------------------------------------------------------
 const buildCdnUrl = (variantWidth?: number, variantHeight?: number): string | undefined =>

@@ -424,9 +424,11 @@
 }
 
 @media (min-width: 768px) {
-  .dropdown:focus .dropdown-menu,
-  .dropdown:focus-within .dropdown-menu,
-  .dropdown:hover .dropdown-menu {
+  /* Hover-only on desktop. :focus / :focus-within would pin the menu
+     open after a click on the parent nav link. Keyboard still works via
+     :focus-visible on the trigger (Tab), not mouse-click focus. */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown:has(:focus-visible) > .dropdown-menu {
     display: block;
   }
 }
