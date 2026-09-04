@@ -74,7 +74,6 @@ export const navigationData: NavigationContent = {
         text: 'About',
         links: [
           { text: 'Our Story & Credentials', href: '/about/our-story' },
-          { text: 'Project Gallery', href: '/about/gallery' },
           { text: 'Reviews', href: '/reviews' },
         ],
       },
@@ -125,7 +124,6 @@ export const navigationData: NavigationContent = {
         title: 'Company',
         links: [
           { text: 'Our Story', href: '/about/our-story' },
-          { text: 'Project Gallery', href: '/about/gallery' },
           { text: 'Reviews', href: '/reviews' },
           { text: 'Blog', href: '/blog' },
           { text: 'Claims', href: '/claims' },
@@ -133,7 +131,11 @@ export const navigationData: NavigationContent = {
         ],
       },
     ],
-    secondaryLinks: [{ text: 'Privacy Policy', href: '/privacy-policy' }],
+    secondaryLinks: [
+      { text: 'Privacy Policy', href: '/privacy-policy' },
+      { text: 'Terms of Service', href: '/terms-of-service' },
+      { text: 'Accessibility', href: '/accessibility' },
+    ],
     socialLinks: [
       {
         ariaLabel: 'Facebook',

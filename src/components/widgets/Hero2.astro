@@ -1,7 +1,9 @@
 ---
 import Image from '~/components/common/Image.astro';
+import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import CTAActions from '~/components/ui/CTAActions.astro';
 import overlayImage from '~/assets/images/patterns/hero-image.svg';
+import type { ContentImage } from '~/lib/content/types';
 
 import type { Hero as Props } from '~/types';
 
@@ -12,6 +14,7 @@ const {
   content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
   image = await Astro.slots.render('image'),
+  imageMobile,
   variant = 'split',
   isReversed = false,
   overlapHeader = true,
@@ -23,6 +26,18 @@ const isOverlay = variant === 'overlay';
 const hasStats = isOverlay && Astro.slots.has('stats');
 const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
 const isSplitImage = !isOverlay && hasImage;
+
+const asContentImage = (value: unknown): ContentImage | undefined => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  const src = 'src' in value && typeof value.src === 'string' ? value.src.trim() : '';
+  if (!src) return undefined;
+  const alt = 'alt' in value && typeof value.alt === 'string' ? value.alt : '';
+  return { src, alt };
+};
+
+const overlayDesktop = isOverlay ? asContentImage(image) : undefined;
+const overlayMobile = isOverlay ? asContentImage(imageMobile) : undefined;
+const hasOverlayPhoto = Boolean(overlayDesktop || overlayMobile);
 ---
 
 <section
@@ -34,7 +49,28 @@ const isSplitImage = !isOverlay && hasImage;
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
     {
-      isOverlay && !bg && (
+      isOverlay && hasOverlayPhoto && (
+        <>
+          <ArtDirectedImage
+            desktop={overlayDesktop}
+            mobile={overlayMobile}
+            class="absolute inset-0 h-full w-full object-cover object-center"
+            widths={[768, 1200, 1600, 1920]}
+            mobileWidths={[400, 640, 828, 1080]}
+            sizes="100vw"
+            mobileSizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+            width={1920}
+            layout="cover"
+            format="webp"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent"></div>
+        </>
+      )
+    }
+    {
+      isOverlay && !hasOverlayPhoto && !bg && (
         <>
           <img
             src={overlayImage.src}
@@ -150,7 +186,7 @@ const isSplitImage = !isOverlay && hasImage;
   {
     hasStats && (
       <div class="relative bg-[rgb(14_13_7_/_0.1)] backdrop-blur-[15px]">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-[22px]">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-2 md:py-[22px]">
           <slot name="stats" />
         </div>
       </div>

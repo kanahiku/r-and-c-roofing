@@ -52,7 +52,7 @@ The live site is ISR: **Publish in Sanity goes live without a developer deploy.*
 | Blog post with slug `my-article` | `/blog/my-article` | Nothing. Template is `src/pages/blog/[slug]/index.astro` |
 | Service / page document with slug `services/new-offer` | `/services/new-offer` | Nothing. Unknown slugs use the CMS catch-all |
 
-Only add a new `src/pages/.../index.astro` for routes that are **not** a Sanity `blogPost` or `servicePage` (contact, reviews, privacy, or a new layout the CMS cannot render). Reserved slugs: `contact`, `blog`, `reviews`, `privacy-policy`.
+Only add a new `src/pages/.../index.astro` for routes that are **not** a Sanity `blogPost` or `servicePage` (contact, reviews, privacy, terms, accessibility, or a new layout the CMS cannot render). Reserved slugs: `contact`, `blog`, `reviews`, `privacy-policy`, `terms-of-service`, `accessibility`.
 
 After Publish, a Sanity webhook should `POST /api/revalidate` so cached HTML refreshes immediately. Without the webhook, pages refresh within 5 minutes (`isr.expiration`).
 
@@ -335,7 +335,7 @@ Hero image is **full section height** on split heroes (`object-cover`, flush to 
 **Variants:**
 - Default split (`variant="split"` or omit) → left text / right full-height image
 - Image left → add `isReversed`
-- Full-width pattern (`variant="overlay"`) → homepage-only: the `fancy-two.svg` artwork covers the whole hero, text left, no side image. A left-to-right black scrim keeps the copy readable — no motif tile on top
+- Full-width overlay (`variant="overlay"`) → homepage-only: Sanity desktop + optional mobile photos cover the whole hero, text left, no side image. A left-to-right black scrim keeps the copy readable — no motif tile on top. If no CMS photo is set, the `fancy-two.svg` artwork is the fallback
 - No final photo yet → keep the split: omit `image={{}}` and use `<HeroImagePlaceholder />` in `slot="image"`
 - No image → use `Hero.astro` instead (left-aligned layout), or `variant="overlay"` on the homepage
 - No badges → omit `<Fragment slot="content">`
@@ -736,7 +736,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 |------|------|---------|-------------|
 | `title` | `string` | (required) | H2 heading text |
 | `subtitle` | `string` | (required) | Supporting text, can include `<br />` for line breaks |
-| `ctaText` | `string` | `"Schedule a Roof Inspection"` | Button text |
+| `ctaText` | `string` | `"Schedule Consultation"` | Button text |
 | `ctaHref` | `string` | `"/contact"` | Button link |
 | `showAfterHoursNote` | `boolean` | `false` | Show after-hours contact note (homepage only) |
 
@@ -894,13 +894,13 @@ The banner button always includes the inspection/estimate micro-copy via `CTANot
 </section>
 
 <RelatedBlogs post={post} surface="grey" />
-<CTABanner title={post.ctaBanner.title} subtitle={post.ctaBanner.subtitle} />
+<CTABanner title={post.ctaBanner.title} subtitle={post.ctaBanner.subtitle} ctaText="Schedule Consultation" />
 ```
 
 **Variants:**
 - Desktop (`lg+`): left sidebar is `sticky top-24`, so it stays in view while the article scrolls
 - Mobile: article first; compact “On this page” list after the lead paragraphs
-- Sidebar CTA uses the post’s `ctaBanner` title/button; the full P-12 banner still ends the page
+- Sidebar yellow banner: heading, **Schedule Consultation** button, and CTA note only — no body copy. The full P-12 banner still ends the page
 - Flatten CMS sections into the article column — never a full-width split, card grid, or icon band
 - Cover image is the listing thumbnail and the photo at the top of the article. Omit it when there is no uploaded image — never show a placeholder box
 - Extra photos go in **Article body** (image button in the toolbar). Insert as many as the story needs, in order with the copy. Do not insert placeholder images in the article
@@ -1085,7 +1085,7 @@ Do not use a raw `<a class="btn-primary">` for conversion CTAs — the note will
 
 **Primary button (main CTA):**
 ```astro
-<Button variant="primary" text="Schedule a Roof Inspection" href="/contact" />
+<Button variant="primary" text="Schedule Consultation" href="/contact" />
 ```
 The inspection/estimate line is included automatically. Do not recreate it by hand.
 

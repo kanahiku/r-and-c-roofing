@@ -11,9 +11,9 @@ interface ImportMetaEnv {
   readonly SANITY_WRITE_TOKEN?: string;
   readonly ISR_BYPASS_TOKEN?: string;
   readonly SANITY_REVALIDATE_SECRET?: string;
-  readonly RESEND_API_KEY?: string;
-  readonly RESEND_FROM?: string;
-  readonly NOTIFY_EMAIL?: string;
+  readonly PUBLIC_FORM_ENDPOINT?: string;
+  readonly PUBLIC_TURNSTILE_SITE_KEY?: string;
+  readonly PUBLIC_SITE_SLUG?: string;
   readonly SITE_NAME?: string;
   readonly SITE_URL?: string;
   readonly GOOGLE_PLACES_API_KEY?: string;

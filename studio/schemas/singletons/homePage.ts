@@ -65,16 +65,33 @@ export const homePage = defineType({
         defineField({ name: 'phoneCtaHref', title: 'Phone CTA URL', type: 'string' }),
         defineField({
           name: 'heroImage',
-          title: 'Hero Image (upload)',
+          title: 'Desktop hero image',
           type: 'image',
           options: { hotspot: true },
+          description:
+            'Full-bleed overlay on tablet and desktop (768px and up). Landscape crop, hotspot on the subject.',
           fields: [defineField({ name: 'alt', title: 'Alt Text', type: 'string' })],
         }),
         defineField({
           name: 'heroImageUrl',
-          title: 'Hero Image URL (paste a URL instead of uploading)',
+          title: 'Desktop hero image URL',
           type: 'url',
-          description: 'Used as fallback if no image is uploaded above.',
+          description: 'Used as fallback if no desktop image is uploaded above.',
+        }),
+        defineField({
+          name: 'heroImageMobile',
+          title: 'Mobile hero image',
+          type: 'image',
+          options: { hotspot: true },
+          description:
+            'Full-bleed overlay on phones (below 768px). Use a tighter portrait crop. If empty, the desktop image is used.',
+          fields: [defineField({ name: 'alt', title: 'Alt Text', type: 'string' })],
+        }),
+        defineField({
+          name: 'heroImageMobileUrl',
+          title: 'Mobile hero image URL',
+          type: 'url',
+          description: 'Used as fallback if no mobile image is uploaded above.',
         }),
       ],
     }),

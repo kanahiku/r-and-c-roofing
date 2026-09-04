@@ -18,7 +18,7 @@ client:          R&C Roofing Contractors
 github:          kanahiku/r-and-c-roofing
 vercel_project:  r-and-c-roofing
 vercel_url:      https://r-and-c-roofing.vercel.app
-custom_domain:   randcroofing.com          # blank until purchased
+custom_domain:   roofinspectionhawaii.com
 form_slug:       rc-roofing
 form_worker:     https://massic-forms.kanahiku.workers.dev
 notify_email:    info@safehomeservice.com
@@ -125,7 +125,7 @@ Local `.env` keeps `PUBLIC_FORM_ENDPOINT=http://localhost:8787/submit` and `npm 
 
 Do this **in addition to** Phase 1. Do not skip the Worker; the form still posts to the shared form host.
 
-Worked example: `randcroofing.com` → existing Vercel project `r-and-c-roofing`.
+Worked example: `roofinspectionhawaii.com` → existing Vercel project `r-and-c-roofing`.
 
 ### A. Registrar (Namecheap)
 
@@ -266,5 +266,5 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 | D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded |
 | workers.dev | Subdomain `kanahiku` registered. Intended URL: `https://massic-forms.kanahiku.workers.dev` |
 | Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Dummy Turnstile secret set. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
-| Custom domain | Not connected. When `randcroofing.com` is ready, run Phase 2 |
-| Resend | No custom domain. From `onboarding@resend.dev` → `info@safehomeservice.com` until `randcroofing.com` is verified. |
+| Custom domain | Not connected yet. When `roofinspectionhawaii.com` is added on Vercel, run Phase 2 |
+| Resend | No custom domain. From `onboarding@resend.dev` → `info@safehomeservice.com` until `roofinspectionhawaii.com` is verified. |

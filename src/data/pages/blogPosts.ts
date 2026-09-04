@@ -221,7 +221,7 @@ export const blogPosts: BlogPost[] = [
       title: 'Find Out What Your Roof Actually Needs',
       subtitle:
         'A generic mainland roofing strategy does not work in Hawaii. Your property requires a contractor who understands the specific environmental loads of your neighborhood. If you have concerns about weather damage, noticed a leak, or simply want to understand the current condition of your aging roof, start with a professional assessment. We evaluate the damage first before recommending a replacement.',
-      ctaText: 'Schedule a Roof Inspection',
+      ctaText: 'Schedule Consultation',
       ctaHref: '/contact',
     },
     body: [
@@ -431,7 +431,7 @@ export const blogPosts: BlogPost[] = [
       title: 'You Deserve Clear Facts Before You Spend',
       subtitle:
         'If you have noticed a problem with your roof, stop wondering about the worst-case scenario. R&C Roofing is ready to help you find the right solution for your property.',
-      ctaText: 'Schedule Inspection',
+      ctaText: 'Schedule Consultation',
       ctaHref: '/contact',
     },
     body: [
@@ -590,7 +590,7 @@ export const blogPosts: BlogPost[] = [
       title: 'Keep Your Build on Schedule',
       subtitle:
         'If you are currently scheduling sub-trades for an upcoming build or need a dependable roofing partner for your current project pipeline, connect with our team. Let us review your plans and show you how streamlined roofing coordination protects your bottom line.',
-      ctaText: 'Schedule Contractor Consultation',
+      ctaText: 'Schedule Consultation',
       ctaHref: '/contact',
     },
     body: [

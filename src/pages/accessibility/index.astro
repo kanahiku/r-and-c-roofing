@@ -1,0 +1,108 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+
+const metadata = {
+  title: 'Accessibility Statement | R&C Roofing Contractors',
+  description:
+    'Read the R&C Roofing Contractors accessibility statement for roofinspectionhawaii.com, including our WCAG 2.1 AA approach and how to request help accessing the site.',
+  ignoreTitleTemplate: true,
+};
+
+const headingClass =
+  'text-[22px] md:text-[26px] font-normal leading-[130%] tracking-tight font-heading text-heading mb-4';
+const bodyClass = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted';
+const listClass = `${bodyClass} mt-4 space-y-1 list-disc pl-5`;
+const linkClass = 'text-heading font-medium hover:underline';
+---
+
+<Layout metadata={metadata}>
+  <Hero2>
+    <Fragment slot="title">Accessibility Statement</Fragment>
+    <Fragment slot="subtitle">Last reviewed: September 4, 2026</Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <div class="max-w-3xl space-y-10 md:space-y-14">
+      <section>
+        <h2 class={headingClass}>Our commitment</h2>
+        <p class={bodyClass}>
+          R&amp;C Roofing Contractors is committed to improving the accessibility and usability of roofinspectionhawaii.com for
+          all visitors, including people who use assistive technology. Accessibility is an ongoing effort, and we
+          continue to make improvements to the site over time.
+        </p>
+      </section>
+
+      <section>
+        <h2 class={headingClass}>Our approach</h2>
+        <p class={bodyClass}>
+          As we build and maintain this website, our team works toward the Web Content Accessibility Guidelines (WCAG)
+          2.1 Level AA as a reference standard. We do not claim full conformance, and accessibility work on the site is
+          ongoing. Steps we take include:
+        </p>
+        <ul class={listClass}>
+          <li>Writing descriptive text for images that carry meaning</li>
+          <li>Using clear headings and page structure so content is easier to navigate</li>
+          <li>Aiming for readable text sizes and sufficient contrast</li>
+          <li>Supporting keyboard navigation where possible</li>
+          <li>Labeling form fields so they are easier to complete</li>
+          <li>Respecting reduced motion settings in your browser or operating system</li>
+        </ul>
+        <p class={`${bodyClass} mt-4`}>
+          We review the site periodically and address accessibility issues as we find them or as they are reported to
+          us.
+        </p>
+      </section>
+
+      <section>
+        <h2 class={headingClass}>Areas we are still working on</h2>
+        <p class={bodyClass}>
+          Parts of this website include content or tools provided by other companies, such as maps, scheduling, chat, and
+          review services. We have limited control over how those tools behave, and their accessibility may vary. Some
+          older documents and images on the site may also not yet meet the standards we are working toward. These are
+          areas we continue to work on.
+        </p>
+      </section>
+
+      <section>
+        <h2 class={headingClass}>If you need help</h2>
+        <div class={`${bodyClass} space-y-5`}>
+          <p>
+            If you have difficulty accessing any part of this website, or if you would like information in a different
+            format, please contact us and we will do our best to help. You can reach us at
+            <a class={linkClass} href="mailto:info@safehomeservice.com">info@safehomeservice.com</a> or
+            <a class={linkClass} href="tel:+18088882524">(808) 888-2524</a>. Please tell us the page you were on and what
+            you were trying to do, so we can assist you and improve the site.
+          </p>
+          <p>
+            We aim to respond to accessibility requests promptly, and we are happy to provide the information or complete
+            the request by phone, email, or in person where that is easier for you.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class={headingClass}>Feedback</h2>
+        <p class={bodyClass}>
+          We welcome feedback on the accessibility of this website. Your comments help us identify problems and
+          prioritize improvements. Please send any suggestions to
+          <a class={linkClass} href="mailto:info@safehomeservice.com">info@safehomeservice.com</a>.
+        </p>
+      </section>
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title="Need Help With Your Roof?"
+    subtitle="If you have questions about a roofing project, or want to understand the condition of your roof, R&amp;C Roofing Contractors can help."
+  />
+</Layout>

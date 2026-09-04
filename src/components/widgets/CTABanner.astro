@@ -2,6 +2,7 @@
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import MotifLayer from '~/components/ui/MotifLayer.astro';
 import { MOTIF, MOTIF_COLOR_VARS, MOTIF_OPACITY_VARS } from '~/config/motif';
+import { PRIMARY_CTA_LABEL } from '~/config/cta';
 
 export interface Props {
   title: string;
@@ -16,7 +17,7 @@ export interface Props {
 const {
   title,
   subtitle,
-  ctaText = 'Schedule a Roof Inspection',
+  ctaText = PRIMARY_CTA_LABEL,
   ctaHref = '/contact',
   showAfterHoursNote = false,
   license,

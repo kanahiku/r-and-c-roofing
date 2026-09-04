@@ -8,7 +8,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CmsSections from '~/components/widgets/CmsSections.astro';
-import Image from '~/components/common/Image.astro';
+import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import { getServicePage } from '~/lib/content';
 import type { ServicePageContent } from '~/lib/content/types';
 import { isDarkSurface, sectionSurface } from '~/lib/content/sectionTheme';
@@ -38,6 +38,7 @@ const heroActions = [
 ];
 
 const heroImage = page.hero.image;
+const heroImageMobile = page.hero.imageMobile;
 const faqSurface = sectionSurface(page.sections.length);
 const relatedSurface = sectionSurface(page.sections.length + (page.faqs ? 1 : 0));
 const showInspectionFeeBanner = slug.startsWith('roof-inspections/');
@@ -53,10 +54,10 @@ const showInspectionFeeBanner = slug.startsWith('roof-inspections/');
     </Fragment>
     <Fragment slot="image">
       {
-        heroImage ? (
-          <Image
-            src={heroImage.src}
-            alt={heroImage.alt}
+        heroImage || heroImageMobile ? (
+          <ArtDirectedImage
+            desktop={heroImage}
+            mobile={heroImageMobile}
             class="w-full h-full object-cover"
             widths={[400, 768, 1200]}
             sizes="(max-width: 768px) 100vw, 50vw"

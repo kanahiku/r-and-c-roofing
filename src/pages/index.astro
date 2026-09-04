@@ -14,9 +14,9 @@ import InfoCard from '~/components/ui/InfoCard.astro';
 
 import { getHomeContent } from '~/lib/content';
 
-import achievementHawaiiBest from '~/assets/images/achievements/r-c-roofing-contractors-roofing-contractor-in-honolulu-hi.image.74377991fdf859f8e79407a88c8ef4677add71ebf7dd4d598bd921dc1e0ee0ad02file_uploadHawaiisBest2023logoFIRSTPLACE-6220366.Woblo.webp';
-import achievementBBB from '~/assets/images/achievements/r-c-roofing-contractors-roofing-contractor-in-honolulu-hi.image.415e6e4191400e10c7ae56acccd083a6BBBRCRoofingContractors-6220365.Woblo.webp';
-import achievementTorch from '~/assets/images/achievements/r-c-roofing-contractors-roofing-contractor-in-honolulu-hi.image.2cd1e450d55bb0570c63c444b47ceb22bbbtorchawards2017finalist-6220366.Woblo.webp';
+import awardLogoOne from '~/assets/images/achievements/award-logo-one.svg';
+import awardLogoTwo from '~/assets/images/achievements/award-logo-two.svg';
+import awardLogoThree from '~/assets/images/achievements/award-logo-three.svg';
 
 const page = await getHomeContent();
 
@@ -33,6 +33,9 @@ const heroActions = [
     : []),
 ];
 
+const heroDesktop = page.hero.heroImage.src ? page.hero.heroImage : undefined;
+const heroMobile = page.hero.heroImageMobile?.src ? page.hero.heroImageMobile : undefined;
+
 const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
   title: step.title,
   description: step.description,
@@ -42,7 +45,7 @@ const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
 
 <Layout metadata={metadata}>
   <!-- P-01 Hero — overlay variant (homepage only) -->
-  <Hero2 variant="overlay" actions={heroActions}>
+  <Hero2 variant="overlay" actions={heroActions} image={heroDesktop} imageMobile={heroMobile}>
     <Fragment slot="title">
       {page.hero.titleLine1}<br />{page.hero.titleLine2}
     </Fragment>
@@ -54,31 +57,31 @@ const roofDamageSteps = (page.roofDamageProcess.steps ?? []).map((step) => ({
     <Fragment slot="content">
       <div class="flex flex-wrap items-center gap-5 mt-6">
         <img
-          src={achievementHawaiiBest.src}
+          src={awardLogoOne.src}
           alt="Hawaii's Best 2023 First Place"
-          class="h-14 w-auto max-w-[100px] object-contain"
+          class="h-14 w-auto object-contain"
         />
         <img
-          src={achievementBBB.src}
+          src={awardLogoTwo.src}
           alt="BBB Accredited Business"
-          class="h-14 w-auto max-w-[100px] object-contain"
+          class="h-14 w-auto object-contain"
         />
         <img
-          src={achievementTorch.src}
+          src={awardLogoThree.src}
           alt="BBB Torch Awards 2017 Finalist"
-          class="h-14 w-auto max-w-[100px] object-contain"
+          class="h-14 w-auto object-contain"
         />
       </div>
     </Fragment>
 
     <Fragment slot="stats">
-      <div class="grid grid-cols-2 gap-y-6 md:flex md:items-center md:justify-between">
+      <div class="grid grid-cols-2 gap-y-4 md:flex md:items-center md:justify-between md:gap-y-0">
         {page.statsBar.map(({ stat, label }) => (
-          <div class="flex flex-col items-center justify-start text-center">
-            <span class="text-[30px] md:text-[42px] font-normal font-heading leading-[150%] tracking-[-1px] text-accent">
+          <div class="flex flex-col items-center justify-center text-center px-3 py-1 md:px-0 md:py-0">
+            <span class="text-[22px] md:text-[42px] font-normal font-heading leading-[110%] tracking-tighter text-accent">
               {stat}
             </span>
-            <span class="text-[12px] md:text-[14px] font-normal uppercase tracking-[2px] leading-[190%] text-white/80 md:whitespace-nowrap">
+            <span class="mt-0.5 text-[13px] md:text-[14px] font-medium uppercase tracking-wider leading-[140%] text-white/80 md:whitespace-nowrap">
               {label}
             </span>
           </div>

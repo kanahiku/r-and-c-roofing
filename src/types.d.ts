@@ -199,7 +199,9 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   content?: string;
   actions?: string | CallToAction[];
   image?: string | unknown;
-  /** `split` = text + full-height side image. `overlay` = full-width pattern, text left. */
+  /** Optional phone-only crop. Falls back to `image` below the `md` breakpoint. */
+  imageMobile?: string | unknown;
+  /** `split` = text + full-height side image. `overlay` = full-width CMS photo, text left. */
   variant?: 'split' | 'overlay';
   /** Image on the left when `variant="split"`. Default is image right. */
   isReversed?: boolean;

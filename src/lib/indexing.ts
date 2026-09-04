@@ -1,6 +1,6 @@
 import { SITE } from 'astrowind:config';
 
-const FALLBACK_ORIGIN = 'https://randcroofing.com';
+const FALLBACK_ORIGIN = 'https://roofinspectionhawaii.com';
 
 function hostnameOf(value: string): string | null {
   try {
@@ -39,7 +39,7 @@ export function canonicalSiteOrigin(): string {
 
 export function indexableHosts(): Set<string> {
   const hosts = new Set<string>();
-  const hostname = hostnameOf(canonicalSiteOrigin()) ?? 'randcroofing.com';
+  const hostname = hostnameOf(canonicalSiteOrigin()) ?? 'roofinspectionhawaii.com';
   hosts.add(hostname);
   if (hostname.startsWith('www.')) {
     hosts.add(hostname.slice(4));
@@ -51,7 +51,7 @@ export function indexableHosts(): Set<string> {
 
 /**
  * Indexing is allowed only on the real domain. Temp hosts (*.vercel.app, localhost)
- * stay noindex/disallow. Connecting randcroofing.com lifts the block automatically;
+ * stay noindex/disallow. Connecting roofinspectionhawaii.com lifts the block automatically;
  * no env flag to forget at launch.
  */
 export function isIndexableHost(hostHeader: string | null | undefined): boolean {

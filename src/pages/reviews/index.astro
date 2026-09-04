@@ -13,12 +13,19 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import ReviewsGrid from '~/components/widgets/ReviewsGrid.astro';
 import Image from '~/components/common/Image.astro';
+import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import { getReviewsPage } from '~/lib/content';
 import { aboutHrefs } from '~/data/pages/about';
 
 const page = await getReviewsPage();
 const heroImage = page.hero.image;
+const heroImageMobile = page.hero.imageMobile;
 const galleryPreviews = Array.from({ length: 4 }, (_, index) => page.gallerySection.previewImages?.[index]);
+const galleryCtaHref = page.gallerySection.ctaHref || aboutHrefs.gallery;
+const galleryCta =
+  page.gallerySection.ctaText && galleryCtaHref !== aboutHrefs.gallery && galleryCtaHref !== '/gallery'
+    ? { variant: 'ghost-light' as const, text: page.gallerySection.ctaText, href: galleryCtaHref }
+    : undefined;
 
 const metadata = {
   title: page.meta.title,
@@ -35,10 +42,10 @@ const metadata = {
     </Fragment>
     <Fragment slot="image">
       {
-        heroImage ? (
-          <Image
-            src={heroImage.src}
-            alt={heroImage.alt}
+        heroImage || heroImageMobile ? (
+          <ArtDirectedImage
+            desktop={heroImage}
+            mobile={heroImageMobile}
             class="w-full h-full object-cover"
             widths={[400, 768, 1200]}
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -109,15 +116,7 @@ const metadata = {
     isReversed
     imageFit="framed"
     title={page.gallerySection.heading}
-    callToAction={
-      page.gallerySection.ctaText
-        ? {
-            variant: 'ghost-light',
-            text: page.gallerySection.ctaText,
-            href: page.gallerySection.ctaHref || aboutHrefs.gallery,
-          }
-        : undefined
-    }
+    callToAction={galleryCta}
   >
     <Fragment slot="content">
       {

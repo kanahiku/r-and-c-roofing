@@ -31,38 +31,13 @@ const {
 
 const isHorizontal = variant === 'horizontal';
 const stepCount = items.length;
-
-const plainText = (value?: string) => String(value ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-const contentScores = items.map((item) => {
-  const title = plainText(item.title);
-  const description = plainText(item.description);
-  return title.length * 1.6 + description.length;
-});
-const averageScore = contentScores.reduce((sum, score) => sum + score, 0) / Math.max(contentScores.length, 1);
-
-const columnWeights = contentScores.map((score) => {
-  const ratio = averageScore > 0 ? score / averageScore : 1;
-  return Math.round(Math.min(1.5, Math.max(0.72, ratio)) * 100);
-});
-const weightSum = columnWeights.reduce((sum, weight) => sum + weight, 0) || 1;
-
-const baseCopyCh = stepCount <= 2 ? 40 : stepCount === 3 ? 34 : stepCount === 4 ? 30 : stepCount === 5 ? 24 : 20;
-const copyMaxCh = contentScores.map((score) => {
-  const ratio = averageScore > 0 ? score / averageScore : 1;
-  const bump = ratio > 1.2 ? 5 : ratio < 0.8 ? -3 : 0;
-  return Math.max(16, baseCopyCh + bump);
-});
-
-const desktopGapRem = stepCount >= 6 ? 1.25 : stepCount === 5 ? 1.5 : stepCount <= 2 ? 3 : stepCount === 3 ? 2.5 : 2;
-const trackList = columnWeights.map((weight) => `minmax(0, ${weight}fr)`).join(' ');
+const desktopGapRem = stepCount >= 6 ? 1.5 : 2;
 const iconCenter = '1.25rem';
-const lastColumnWidth =
-  stepCount > 1
-    ? `(100% - ${(stepCount - 1) * desktopGapRem}rem) * ${columnWeights[stepCount - 1]} / ${weightSum}`
-    : '0';
 const railLeft = stepCount > 1 ? iconCenter : '0';
-const railRight = stepCount > 1 ? `calc(${lastColumnWidth} - ${iconCenter})` : '0';
+const railRight =
+  stepCount > 1
+    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) / ${stepCount} - ${iconCenter})`
+    : '0';
 
 const iconBoxClass = isDark
   ? 'bg-timeline-icon-bg-dark shadow-[0_0_0_8px_var(--aw-color-bg-section-dark)]'
@@ -84,7 +59,7 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
       class={twMerge(isHorizontal ? 'rc-tl w-full' : 'flex flex-col', containerClass)}
       style={
         isHorizontal
-          ? `--timeline-tracks: ${trackList}; --timeline-gap: ${desktopGapRem}rem`
+          ? `--timeline-tracks: repeat(${stepCount}, minmax(0, 1fr)); --timeline-gap: ${desktopGapRem}rem`
           : undefined
       }
     >
@@ -130,17 +105,16 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
                   </div>
                 )}
                 {!isLast && (
-                  <div class={twMerge('rc-tl-connector w-px flex-1 min-h-8', lineColors)} />
+                  <div class={twMerge('rc-tl-connector w-px flex-1 min-h-12', lineColors)} />
                 )}
               </div>
 
               <div
                 class:list={[
                   'rc-tl-copy min-w-0 pt-1',
-                  !isLast && !isHorizontal && 'pb-8',
+                  !isLast && !isHorizontal && 'pb-12',
                   !isLast && isHorizontal && 'rc-tl-copy-pad',
                 ]}
-                style={isHorizontal ? `--timeline-copy: ${copyMaxCh[index]}ch` : undefined}
               >
                 {isHorizontal && (
                   <p
@@ -182,10 +156,15 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
   .rc-tl-track {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 
   .rc-tl-item {
     display: flex;
+  }
+
+  .rc-tl-item:not(:last-child) .rc-tl-copy-pad {
+    padding-bottom: 3rem;
   }
 
   .rc-tl-mark {
@@ -202,7 +181,7 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: 2.5rem;
-      row-gap: 2.5rem;
+      row-gap: 2.75rem;
     }
 
     .rc-tl-item {
@@ -210,6 +189,11 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
       flex-direction: column;
       align-items: flex-start;
       min-width: 0;
+      width: 100%;
+    }
+
+    .rc-tl-item:not(:last-child) .rc-tl-copy-pad {
+      padding-bottom: 0;
     }
 
     .rc-tl-mark {
@@ -225,7 +209,7 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
       padding-top: 0;
       padding-bottom: 0;
       width: 100%;
-      max-width: min(100%, var(--timeline-copy, 30ch));
+      max-width: none;
       text-align: left;
     }
 

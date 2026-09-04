@@ -52,10 +52,11 @@ export default defineConfig({
     '/services/roofing-materials/tile-roofing-clay-and-concrete': '/services/roofing-materials/tile-roofing',
     '/services/roofing-materials/slate-and-rubber-slate-roofing': '/services/roofing-materials/slate-roofing',
     '/privacy': '/privacy-policy',
-    '/terms': '/privacy-policy',
-    '/terms-of-service': '/privacy-policy',
-    '/accessibility-statement': '/privacy-policy',
+    '/terms': '/terms-of-service',
+    '/accessibility-statement': '/accessibility',
     '/about/reviews': '/reviews',
+    '/about/gallery': '/about/our-story',
+    '/gallery': '/about/our-story',
   },
 
   // Prefetch links as they enter the viewport for snappier navigations

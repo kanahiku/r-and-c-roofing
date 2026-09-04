@@ -52,7 +52,69 @@ export async function getNavigationContent(): Promise<NavigationContent> {
   if (!nav?.header || !nav?.footer) {
     throw new Error('Sanity navigation or footer document is missing.');
   }
-  return ensureBlogNav(nav);
+  return stripHiddenNavLinks(ensureLegalFooterLinks(ensureBlogNav(nav)));
+}
+
+const LEGAL_FOOTER_LINKS = [
+  { text: 'Privacy Policy', href: '/privacy-policy' },
+  { text: 'Terms of Service', href: '/terms-of-service' },
+  { text: 'Accessibility', href: '/accessibility' },
+];
+
+const HIDDEN_NAV_HREFS = new Set(['/about/gallery', '/gallery']);
+
+function navHrefKey(href?: string) {
+  if (!href) return '';
+  const path = href.trim();
+  if (!path) return '';
+  return path.replace(/\/+$/, '') || '/';
+}
+
+function isHiddenNavHref(href?: string) {
+  return HIDDEN_NAV_HREFS.has(navHrefKey(href));
+}
+
+function stripHiddenNavLinks(nav: NavigationContent): NavigationContent {
+  const stripItems = <T extends { href?: string }>(items?: T[]) =>
+    (items ?? []).filter((item) => !isHiddenNavHref(item.href));
+
+  return {
+    ...nav,
+    header: {
+      ...nav.header,
+      links: stripItems(nav.header.links).map((link) => ({
+        ...link,
+        links: link.links ? stripItems(link.links) : undefined,
+        columns: link.columns?.map((column) => ({
+          ...column,
+          links: stripItems(column.links),
+        })),
+      })),
+    },
+    footer: {
+      ...nav.footer,
+      links: nav.footer.links.map((column) => ({
+        ...column,
+        links: stripItems(column.links),
+      })),
+      secondaryLinks: stripItems(nav.footer.secondaryLinks),
+    },
+  };
+}
+
+function ensureLegalFooterLinks(nav: NavigationContent): NavigationContent {
+  const existing = nav.footer.secondaryLinks ?? [];
+  const byHref = new Map(existing.map((link) => [link.href, link]));
+  const merged = LEGAL_FOOTER_LINKS.map((link) => byHref.get(link.href) ?? link);
+
+  for (const link of existing) {
+    if (!merged.some((item) => item.href === link.href)) merged.push(link);
+  }
+
+  return {
+    ...nav,
+    footer: { ...nav.footer, secondaryLinks: merged },
+  };
 }
 
 function ensureBlogNav(nav: NavigationContent): NavigationContent {
@@ -121,7 +183,7 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   return [...new Set([...localSlugs, ...sanitySlugs])];
 }
 
-const STATIC_PATHS = ['/', '/blog', '/contact', '/reviews', '/privacy-policy'];
+const STATIC_PATHS = ['/', '/blog', '/contact', '/reviews', '/privacy-policy', '/terms-of-service', '/accessibility'];
 
 export async function getPublicContentPaths(): Promise<string[]> {
   const [pageSlugs, postSlugs] = await Promise.all([getServicePageSlugs(), getBlogPostSlugs()]);
@@ -129,7 +191,7 @@ export async function getPublicContentPaths(): Promise<string[]> {
     ...STATIC_PATHS,
     ...pageSlugs.map((slug) => `/${slug.replace(/^\/+/, '')}`),
     ...postSlugs.map((slug) => `/blog/${slug.replace(/^\/+/, '')}`),
-  ];
+  ].filter((path) => !isHiddenNavHref(path));
 }
 
 export function getBlogPermalink(slug: string): string {

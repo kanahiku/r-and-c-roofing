@@ -5,6 +5,7 @@ import SectionBg from '~/components/ui/SectionBg.astro';
 import BlogCard from '~/components/ui/BlogCard.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
 import { getBlogPosts } from '~/lib/content';
+import { PRIMARY_CTA_LABEL } from '~/config/cta';
 
 export const prerender = false;
 
@@ -46,6 +47,6 @@ const metadata = {
   <CTABanner
     title="Have a Roofing Question of Your Own?"
     subtitle="If you are dealing with a leak, an aging roof, storm damage, or another roofing concern, start by finding out what condition the roof is in."
-    ctaText="Schedule a Roof Inspection"
+    ctaText={PRIMARY_CTA_LABEL}
   />
 </Layout>

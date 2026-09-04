@@ -10,6 +10,7 @@ import { Icon } from 'astro-icon/components';
 import { getFormattedDate } from '~/utils/utils';
 import { getBlogPost } from '~/lib/content';
 import { getArticleToc, getLeadInlineImages, shouldUsePortableBody } from '~/lib/content/blogArticle';
+import { PRIMARY_CTA_LABEL } from '~/config/cta';
 
 export const prerender = false;
 
@@ -44,7 +45,6 @@ const metadata = {
         <BlogSidebar
           toc={toc}
           ctaTitle={post.ctaBanner.title}
-          ctaText={post.ctaBanner.ctaText}
           ctaHref={post.ctaBanner.ctaHref}
         />
 
@@ -102,7 +102,7 @@ const metadata = {
   <CTABanner
     title={post.ctaBanner.title}
     subtitle={post.ctaBanner.subtitle}
-    ctaText={post.ctaBanner.ctaText}
+    ctaText={PRIMARY_CTA_LABEL}
     ctaHref={post.ctaBanner.ctaHref}
   />
 </Layout>

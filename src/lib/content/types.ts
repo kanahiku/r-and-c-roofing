@@ -107,6 +107,7 @@ export interface HomePageContent {
     phoneCtaText?: string;
     phoneCtaHref?: string;
     heroImage: ContentImage;
+    heroImageMobile?: ContentImage;
   };
 
   statsBar: StatItem[];
@@ -172,6 +173,7 @@ export interface PageHero {
   phoneCtaText?: string;
   phoneCtaHref?: string;
   image?: ContentImage;
+  imageMobile?: ContentImage;
   imagePlaceholder?: string;
 }
 

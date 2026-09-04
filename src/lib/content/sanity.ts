@@ -26,6 +26,14 @@ const IMAGE_PROJECTION = /* groq */ `
   "asset": image.asset
 `;
 
+const IMAGE_MOBILE_PROJECTION = /* groq */ `
+  "src": coalesce(imageMobile.asset->url, imageMobileUrl, ""),
+  "alt": coalesce(imageMobile.alt, imageMobileAlt, ""),
+  "crop": imageMobile.crop,
+  "hotspot": imageMobile.hotspot,
+  "asset": imageMobile.asset
+`;
+
 type FetchedImage = ContentImage & SanityImageFields;
 
 const HOME_QUERY = /* groq */ `
@@ -45,6 +53,13 @@ const HOME_QUERY = /* groq */ `
         "crop": heroImage.crop,
         "hotspot": heroImage.hotspot,
         "asset": heroImage.asset
+      },
+      "heroImageMobile": {
+        "src": coalesce(heroImageMobile.asset->url, heroImageMobileUrl, ""),
+        "alt": coalesce(heroImageMobile.alt, heroImage.alt, ""),
+        "crop": heroImageMobile.crop,
+        "hotspot": heroImageMobile.hotspot,
+        "asset": heroImageMobile.asset
       }
     },
     "statsBar": statsBar[] { stat, label },
@@ -92,7 +107,7 @@ const HOME_QUERY = /* groq */ `
 export async function getSanityHomeContent(): Promise<HomePageContent> {
   const page = await sanityClient.fetch<
     HomePageContent & {
-      hero: HomePageContent['hero'] & { heroImage: FetchedImage };
+      hero: HomePageContent['hero'] & { heroImage: FetchedImage; heroImageMobile?: FetchedImage };
       whyInspect: HomePageContent['whyInspect'] & { image: FetchedImage };
     }
   >(HOME_QUERY);
@@ -101,6 +116,7 @@ export async function getSanityHomeContent(): Promise<HomePageContent> {
     hero: {
       ...page.hero,
       heroImage: resolveContentImageOrEmpty(page.hero?.heroImage),
+      heroImageMobile: resolveContentImage(page.hero?.heroImageMobile),
     },
     whyInspect: {
       ...page.whyInspect,
@@ -156,6 +172,9 @@ const SERVICE_PAGE_QUERY = /* groq */ `
       imagePlaceholder,
       "image": {
         ${IMAGE_PROJECTION}
+      },
+      "imageMobile": {
+        ${IMAGE_MOBILE_PROJECTION}
       }
     },
     "sections": sections[_type != "faqsSection"] {
@@ -206,8 +225,14 @@ const SERVICE_PAGE_QUERY = /* groq */ `
   }
 `;
 
-function normalizeHeroImage<T extends { image?: FetchedImage | ContentImage }>(hero: T): T {
-  return { ...hero, image: resolveContentImage(hero.image as FetchedImage | undefined) };
+function normalizeHeroImage<T extends { image?: FetchedImage | ContentImage; imageMobile?: FetchedImage | ContentImage }>(
+  hero: T
+): T {
+  return {
+    ...hero,
+    image: resolveContentImage(hero.image as FetchedImage | undefined),
+    imageMobile: resolveContentImage(hero.imageMobile as FetchedImage | undefined),
+  };
 }
 
 function normalizeSplit(section: SplitContentSection & { image?: FetchedImage | ContentImage }): SplitContentSection {
@@ -229,6 +254,9 @@ const HERO_PROJECTION = /* groq */ `
   imagePlaceholder,
   "image": {
     ${IMAGE_PROJECTION}
+  },
+  "imageMobile": {
+    ${IMAGE_MOBILE_PROJECTION}
   }
 `;
 
@@ -604,7 +632,7 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
       title: 'Need This Looked at on Your Roof?',
       subtitle:
         'R&C Roofing Contractors can inspect the roof, document what is going on, and help you decide what work should come next.',
-      ctaText: 'Schedule a Roof Inspection',
+      ctaText: 'Schedule Consultation',
       ctaHref: '/contact',
     },
     body,
