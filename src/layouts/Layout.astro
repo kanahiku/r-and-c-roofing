@@ -33,6 +33,7 @@ const { language, textDirection } = I18N;
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
     <GoogleTagManager placement="head" />
+    <SiteVerification />
     <CommonMeta />
     <Favicons />
     <Font cssVariable="--font-dm-sans" preload />
@@ -40,7 +41,6 @@ const { language, textDirection } = I18N;
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
-    <SiteVerification />
     <Analytics />
     <JsonLd />
 
