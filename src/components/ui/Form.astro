@@ -7,10 +7,18 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
 
 const fieldClass =
   'py-3 px-4 block w-full text-[14px] md:text-[15px] rounded-md border border-black/15 bg-white text-heading';
+const errorClass = 'mt-2 text-[13px] md:text-[14px] font-medium text-red-700 hidden';
+const fieldMax: Record<string, number> = {
+  name: 120,
+  email: 254,
+  phone: 40,
+  zip: 10,
+};
 ---
 
 <form
   id="contact-form"
+  novalidate
   data-endpoint={FORM_ENDPOINT}
   data-site={SITE_SLUG}
   data-turnstile-sitekey={TURNSTILE_SITE_KEY}
@@ -26,7 +34,13 @@ const fieldClass =
               </label>
             )}
             {type === 'select' ? (
-              <select id={name} name={name} required={required} class={fieldClass}>
+              <select
+                id={name}
+                name={name}
+                required={required}
+                aria-describedby={`${name}-error`}
+                class={fieldClass}
+              >
                 <option value="">{placeholder || 'Select an option'}</option>
                 {(options ?? []).map((option) => (
                   <option value={option.value}>{option.label}</option>
@@ -40,9 +54,12 @@ const fieldClass =
                 autocomplete={autocomplete}
                 placeholder={placeholder}
                 required={required}
+                maxlength={fieldMax[name] ?? undefined}
+                aria-describedby={`${name}-error`}
                 class={fieldClass}
               />
             )}
+            <p id={`${name}-error`} class={errorClass} data-field-error={name} role="alert"></p>
           </div>
         )
       )
@@ -59,8 +76,16 @@ const fieldClass =
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
+          maxlength={5000}
+          aria-describedby={`${textarea.name ? textarea.name : 'message'}-error`}
           class={fieldClass}
         />
+        <p
+          id={`${textarea.name ? textarea.name : 'message'}-error`}
+          class={errorClass}
+          data-field-error={textarea.name ? textarea.name : 'message'}
+          role="alert"
+        ></p>
       </div>
     )
   }
@@ -111,14 +136,68 @@ const fieldClass =
 </form>
 
 <script>
+  import { FIELD_ERRORS, fieldFromApiError, validateContactFields, type ContactFieldName } from '~/lib/form-validation';
+
   type TurnstileApi = {
     render: (el: HTMLElement, opts: Record<string, unknown>) => string;
     reset: (id: string) => void;
     getResponse: (id: string) => string;
   };
 
+  const INVALID_FIELD_CLASS = 'border-red-600';
+  const VALID_FIELD_CLASS = 'border-black/15';
+
   function asText(value: FormDataEntryValue | null) {
     return typeof value === 'string' ? value.trim() : '';
+  }
+
+  function fieldControl(form: HTMLFormElement, name: string) {
+    return form.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${name}"]`);
+  }
+
+  function setFieldError(form: HTMLFormElement, name: string, message: string) {
+    const field = fieldControl(form, name);
+    const errorEl = form.querySelector<HTMLElement>(`[data-field-error="${name}"]`);
+    if (field) {
+      field.setAttribute('aria-invalid', 'true');
+      field.classList.add(INVALID_FIELD_CLASS);
+      field.classList.remove(VALID_FIELD_CLASS);
+    }
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  function clearFieldError(form: HTMLFormElement, name: string) {
+    const field = fieldControl(form, name);
+    const errorEl = form.querySelector<HTMLElement>(`[data-field-error="${name}"]`);
+    if (field) {
+      field.removeAttribute('aria-invalid');
+      field.classList.remove(INVALID_FIELD_CLASS);
+      field.classList.add(VALID_FIELD_CLASS);
+    }
+    if (errorEl) {
+      errorEl.textContent = '';
+      errorEl.classList.add('hidden');
+    }
+  }
+
+  function clearAllFieldErrors(form: HTMLFormElement) {
+    form.querySelectorAll<HTMLElement>('[data-field-error]').forEach((errorEl) => {
+      const name = errorEl.dataset.fieldError;
+      if (name) clearFieldError(form, name);
+    });
+  }
+
+  function showFieldErrors(form: HTMLFormElement, errors: Partial<Record<ContactFieldName, string>>) {
+    const names = Object.keys(errors) as ContactFieldName[];
+    names.forEach((name) => {
+      const message = errors[name];
+      if (message) setFieldError(form, name, message);
+    });
+    const first = names[0] ? fieldControl(form, names[0]) : null;
+    first?.focus();
   }
 
   function composeMessage(form: HTMLFormElement, data: FormData) {
@@ -186,6 +265,17 @@ const fieldClass =
       }
     }
 
+    form.addEventListener('input', (event) => {
+      const target = event.target as HTMLElement | null;
+      const name = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement ? target.name : '';
+      if (name && name !== 'website') clearFieldError(form, name);
+    });
+
+    form.addEventListener('change', (event) => {
+      const target = event.target as HTMLElement | null;
+      if (target instanceof HTMLSelectElement && target.name) clearFieldError(form, target.name);
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
@@ -193,10 +283,49 @@ const fieldClass =
 
       if (asText(data.get('website'))) return;
 
+      clearAllFieldErrors(form);
+      status.classList.add('hidden');
+      status.textContent = '';
+
+      const hasZipField = Boolean(fieldControl(form, 'zip'));
+      const hasTopicField = Boolean(fieldControl(form, 'topic'));
+      const messageField = fieldControl(form, 'message');
+      const errors = validateContactFields({
+        name: asText(data.get('name')),
+        email: asText(data.get('email')),
+        phone: asText(data.get('phone')),
+        zip: asText(data.get('zip')),
+        topic: asText(data.get('topic')),
+        message: asText(data.get('message')),
+        hasZipField,
+        hasTopicField,
+        hasMessageField: Boolean(messageField),
+        messageRequired: Boolean(messageField?.hasAttribute('required')),
+      });
+
+      if (Object.keys(errors).length) {
+        showFieldErrors(form, errors);
+        return;
+      }
+
       const endpoint = form.dataset.endpoint;
       const site = form.dataset.site;
       const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
       const turnstileToken = widgetId && turnstile ? turnstile.getResponse(widgetId) : asText(data.get('cf-turnstile-response'));
+
+      if (!endpoint || !site) {
+        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
+        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+        status.classList.remove('hidden');
+        return;
+      }
+
+      if (!turnstileToken) {
+        status.textContent = 'Please complete the spam check before sending.';
+        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+        status.classList.remove('hidden');
+        return;
+      }
 
       if (submitButton) submitButton.disabled = true;
       status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-muted';
@@ -204,9 +333,6 @@ const fieldClass =
       status.classList.remove('hidden');
 
       try {
-        if (!endpoint || !site) throw new Error('Form is not configured');
-        if (!turnstileToken) throw new Error('Spam check is required');
-
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -221,22 +347,34 @@ const fieldClass =
           }),
         });
 
-        const payload = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+        const payload = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
         if (res.ok && payload?.ok) {
           status.textContent = "Thanks! We'll be in touch soon.";
           status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-heading';
           form.reset();
+          clearAllFieldErrors(form);
           if (widgetId && turnstile) turnstile.reset(widgetId);
-        } else {
-          throw new Error();
+          return;
         }
+
+        const apiError = payload?.error || '';
+        const field = apiError ? fieldFromApiError(apiError) : null;
+        if (field) {
+          status.classList.add('hidden');
+          status.textContent = '';
+          showFieldErrors(form, { [field]: FIELD_ERRORS[field] });
+          return;
+        }
+
+        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
+        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
       } catch {
         status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
         status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
       } finally {
         if (submitButton) submitButton.disabled = false;
-        status.classList.remove('hidden');
+        if (status.textContent) status.classList.remove('hidden');
       }
     });
   }
