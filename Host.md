@@ -22,7 +22,7 @@ custom_domain:   roofinspectionhawaii.com
 form_slug:       rc-roofing
 form_worker:     https://massic-forms.kanahiku.workers.dev
 notify_email:    info@safehomeservice.com
-resend_from:     R&C Roofing <onboarding@resend.dev>
+resend_from:     R&C Roofing <hello@roofinspectionhawaii.com>
 ```
 
 ---
@@ -266,5 +266,5 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 | D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded |
 | workers.dev | Subdomain `kanahiku` registered. Intended URL: `https://massic-forms.kanahiku.workers.dev` |
 | Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Dummy Turnstile secret set. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
-| Custom domain | Not connected yet. When `roofinspectionhawaii.com` is added on Vercel, run Phase 2 |
-| Resend | No custom domain. From `onboarding@resend.dev` → `info@safehomeservice.com` until `roofinspectionhawaii.com` is verified. |
+| Custom domain | Live: `https://www.roofinspectionhawaii.com`. DNS is at **GoDaddy** (`ns65/ns66.domaincontrol.com`), not Cloudflare. |
+| Resend | Domain `roofinspectionhawaii.com` **verified**. Worker sends from `hello@roofinspectionhawaii.com` to `info@safehomeservice.com`. DNS is at GoDaddy. |

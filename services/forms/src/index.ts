@@ -120,14 +120,18 @@ export default {
         const notifyTo = env.NOTIFY_EMAIL || site.notify_email;
         const from = env.RESEND_FROM || site.from_email;
 
-        const sent = await sendResend(env.RESEND_API_KEY, {
-          from,
-          to: notifyTo,
-          replyTo: parsed.email,
-          subject: `New website inquiry — ${parsed.name}`,
-          html: emailHtml(site.name, parsed),
-          text: emailText(site.name, parsed),
-        });
+        const sent = await sendResend(
+          env.RESEND_API_KEY,
+          {
+            from,
+            to: notifyTo,
+            replyTo: parsed.email,
+            subject: `New website inquiry — ${parsed.name}`,
+            html: emailHtml(site.name, parsed),
+            text: emailText(site.name, parsed),
+          },
+          `contact-form/${id}`
+        );
 
         if (sent) {
           await env.DB.prepare('UPDATE leads SET email_sent_at = ? WHERE id = ?')
@@ -300,18 +304,22 @@ function hasRealResendKey(apiKey?: string): boolean {
 
 async function sendResend(
   apiKey: string | undefined,
-  email: { from: string; to: string; replyTo: string; subject: string; html: string; text: string }
+  email: { from: string; to: string; replyTo: string; subject: string; html: string; text: string },
+  idempotencyKey?: string
 ): Promise<boolean> {
   if (!hasRealResendKey(apiKey)) {
     console.warn('Resend skipped: set a real RESEND_API_KEY on the Worker');
     return false;
   }
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+  };
+  if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       from: email.from,
       to: [email.to],
