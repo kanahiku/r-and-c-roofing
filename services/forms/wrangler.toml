@@ -14,4 +14,4 @@ database_id = "376bc987-bf24-4f8c-88e0-64ce2daacf61"
 [vars]
 RESEND_FROM = "R&C Roofing <hello@roofinspectionhawaii.com>"
 # Notify emails per site per UTC day. Extra leads still save; visitor still sees success.
-RESEND_DAILY_LIMIT = "20"
+RESEND_DAILY_LIMIT = "100"
