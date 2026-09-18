@@ -1,12 +1,13 @@
 ---
 import CardWrapper from './CardWrapper.astro';
+import type { CardVariant } from '~/config/theme';
 
 export interface Props {
   title: string;
   description: string;
   href: string;
   linkText?: string;
-  variant?: 'dark' | 'light';
+  variant?: CardVariant;
   size?: 'sm' | 'md' | 'lg';
   class?: string;
 }
@@ -21,9 +22,30 @@ const {
   class: className = '',
 } = Astro.props;
 
-const headingClass = variant === 'dark' ? 'text-card-heading-dark' : 'text-card-heading-light';
-const bodyClass = variant === 'dark' ? 'text-card-body-dark' : 'text-card-body-light';
-const linkClass = variant === 'dark' ? 'text-card-link-dark' : 'text-card-link-light';
+const headingClasses: Record<CardVariant, string> = {
+  dark: 'text-card-heading-dark',
+  light: 'text-card-heading-light',
+  outlined: 'text-card-heading-outlined',
+  glass: 'text-card-heading-glass',
+};
+
+const bodyClasses: Record<CardVariant, string> = {
+  dark: 'text-card-body-dark',
+  light: 'text-card-body-light',
+  outlined: 'text-card-body-outlined',
+  glass: 'text-card-body-glass',
+};
+
+const linkClasses: Record<CardVariant, string> = {
+  dark: 'text-card-link-dark',
+  light: 'text-card-link-light',
+  outlined: 'text-card-link-outlined',
+  glass: 'text-card-link-glass',
+};
+
+const headingClass = headingClasses[variant];
+const bodyClass = bodyClasses[variant];
+const linkClass = linkClasses[variant];
 ---
 
 <CardWrapper variant={variant} size={size} href={href} class={className}>

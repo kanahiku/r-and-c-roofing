@@ -1,4 +1,5 @@
 import type { NavigationContent } from '~/lib/content/types';
+import { CONTACT, SOCIAL } from '~/config';
 
 export const navigationData: NavigationContent = {
   header: {
@@ -82,8 +83,8 @@ export const navigationData: NavigationContent = {
     ],
     actions: [] as NavigationContent['header']['actions'],
     phone: {
-      text: '(808) 888-2524',
-      href: 'tel:+18088882524',
+      text: CONTACT.phone.display,
+      href: CONTACT.phone.href,
     },
   },
 
@@ -136,28 +137,7 @@ export const navigationData: NavigationContent = {
       { text: 'Terms of Service', href: '/terms-of-service' },
       { text: 'Accessibility', href: '/accessibility' },
     ],
-    socialLinks: [
-      {
-        ariaLabel: 'Facebook',
-        icon: 'tabler:brand-facebook',
-        href: 'https://www.facebook.com/RCEnterprises808/',
-      },
-      {
-        ariaLabel: 'Instagram',
-        icon: 'tabler:brand-instagram',
-        href: 'https://www.instagram.com/rcroofinghawaii/',
-      },
-      {
-        ariaLabel: 'YouTube',
-        icon: 'tabler:brand-youtube',
-        href: 'https://www.youtube.com/@roofinghawaii5031',
-      },
-      {
-        ariaLabel: 'Yelp',
-        icon: 'tabler:star',
-        href: 'https://www.yelp.com/biz/r-and-c-roofing-contractors-honolulu',
-      },
-    ],
-    footNote: `&copy; ${new Date().getFullYear()} R&C Roofing. All rights reserved.`,
+    socialLinks: SOCIAL.nav as unknown as NavigationContent['footer']['socialLinks'],
+    footNote: `&copy; ${new Date().getFullYear()} ${CONTACT.businessName}. All rights reserved.`,
   },
 };

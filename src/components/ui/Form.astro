@@ -2,6 +2,7 @@
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
+import { CONTACT } from '~/config/contact';
 
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 
@@ -22,6 +23,8 @@ const fieldMax: Record<string, number> = {
   data-endpoint={FORM_ENDPOINT}
   data-site={SITE_SLUG}
   data-turnstile-sitekey={TURNSTILE_SITE_KEY}
+  data-phone-display={CONTACT.phone.display}
+  data-phone-href={CONTACT.phone.href}
 >
   {
     inputs &&
@@ -245,6 +248,24 @@ const fieldMax: Record<string, number> = {
     });
   }
 
+  function showCallError(status: HTMLElement, phoneDisplay: string, phoneHref: string) {
+    const message: Node[] = [document.createTextNode('Something went wrong. Please try again or call ')];
+
+    if (phoneDisplay && phoneHref) {
+      const link = document.createElement('a');
+      link.href = phoneHref;
+      link.textContent = phoneDisplay;
+      link.className = 'underline hover:no-underline';
+      message.push(link);
+    } else {
+      message.push(document.createTextNode('us'));
+    }
+
+    message.push(document.createTextNode('.'));
+    status.replaceChildren(...message);
+    status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+  }
+
   async function bindContactForm() {
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const status = document.getElementById('form-status');
@@ -254,6 +275,8 @@ const fieldMax: Record<string, number> = {
 
     const slot = form.querySelector<HTMLElement>('[data-turnstile]');
     const sitekey = form.dataset.turnstileSitekey || '';
+    const phoneDisplay = form.dataset.phoneDisplay || '';
+    const phoneHref = form.dataset.phoneHref || '';
     let widgetId = '';
 
     if (slot && sitekey) {
@@ -314,8 +337,7 @@ const fieldMax: Record<string, number> = {
       const turnstileToken = widgetId && turnstile ? turnstile.getResponse(widgetId) : asText(data.get('cf-turnstile-response'));
 
       if (!endpoint || !site) {
-        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
-        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+        showCallError(status, phoneDisplay, phoneHref);
         status.classList.remove('hidden');
         return;
       }
@@ -367,11 +389,9 @@ const fieldMax: Record<string, number> = {
           return;
         }
 
-        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
-        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+        showCallError(status, phoneDisplay, phoneHref);
       } catch {
-        status.textContent = 'Something went wrong. Please try again or call (808) 888-2524.';
-        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+        showCallError(status, phoneDisplay, phoneHref);
       } finally {
         if (submitButton) submitButton.disabled = false;
         if (status.textContent) status.classList.remove('hidden');

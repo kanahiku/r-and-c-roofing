@@ -1,7 +1,9 @@
+import { CONTACT } from '~/config/contact';
+
 export function serviceHeroActions(primaryText: string) {
   return [
     { variant: 'primary' as const, text: primaryText, href: '/contact' },
-    { variant: 'ghost-light' as const, text: 'Call Now', href: 'tel:+18088882524' },
+    { variant: 'ghost-light' as const, text: 'Call Now', href: CONTACT.phone.href },
   ];
 }
 

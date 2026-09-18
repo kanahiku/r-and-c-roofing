@@ -1,4 +1,5 @@
 import type { HomePageContent } from '~/lib/content/types';
+import { CONTACT } from '~/config/contact';
 
 export const homePageData: HomePageContent = {
   meta: {
@@ -14,8 +15,8 @@ export const homePageData: HomePageContent = {
       'We evaluate the damage first before recommending a replacement. Get honest roofing answers for your Oahu property.',
     ctaText: 'Schedule Inspection',
     ctaHref: '/contact',
-    phoneCtaText: 'Call (808) 888-2524',
-    phoneCtaHref: 'tel:+18088882524',
+    phoneCtaText: `Call ${CONTACT.phone.display}`,
+    phoneCtaHref: CONTACT.phone.href,
     heroImage: {
       src: 'https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&fit=crop&w=2070&q=80',
       alt: 'Roof inspection on Oahu home',

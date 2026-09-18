@@ -4,6 +4,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import { CONTACT } from '~/config/contact';
 
 const metadata = {
   title: 'Accessibility Statement | R&C Roofing Contractors',
@@ -76,8 +77,8 @@ const linkClass = 'text-heading font-medium hover:underline';
           <p>
             If you have difficulty accessing any part of this website, or if you would like information in a different
             format, please contact us and we will do our best to help. You can reach us at
-            <a class={linkClass} href="mailto:info@safehomeservice.com">info@safehomeservice.com</a> or
-            <a class={linkClass} href="tel:+18088882524">(808) 888-2524</a>. Please tell us the page you were on and what
+            <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> or
+            <a class={linkClass} href={CONTACT.phone.href}>{CONTACT.phone.display}</a>. Please tell us the page you were on and what
             you were trying to do, so we can assist you and improve the site.
           </p>
           <p>
@@ -92,7 +93,7 @@ const linkClass = 'text-heading font-medium hover:underline';
         <p class={bodyClass}>
           We welcome feedback on the accessibility of this website. Your comments help us identify problems and
           prioritize improvements. Please send any suggestions to
-          <a class={linkClass} href="mailto:info@safehomeservice.com">info@safehomeservice.com</a>.
+          <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>.
         </p>
       </section>
     </div>

@@ -1,14 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
 import CardWrapper from './CardWrapper.astro';
+import type { CardVariant } from '~/config/theme';
 
 export interface Props {
   title: string;
   description: string;
   icon?: string;
-  variant?: 'dark' | 'light';
+  variant?: CardVariant;
   size?: 'sm' | 'md' | 'lg';
   border?: boolean;
+  href?: string;
   class?: string;
 }
 
@@ -19,16 +21,39 @@ const {
   variant = 'dark',
   size = 'md',
   border = true,
+  href,
   class: className = '',
 } = Astro.props;
 
-const headingClass = variant === 'dark' ? 'text-card-heading-dark' : 'text-card-heading-light';
-const bodyClass = variant === 'dark' ? 'text-card-body-dark' : 'text-card-body-light';
-const iconMark =
-  variant === 'dark' ? 'border border-accent/60' : 'bg-[#222]';
+const headingClasses: Record<CardVariant, string> = {
+  dark: 'text-card-heading-dark',
+  light: 'text-card-heading-light',
+  outlined: 'text-card-heading-outlined',
+  glass: 'text-card-heading-glass',
+};
+
+const bodyClasses: Record<CardVariant, string> = {
+  dark: 'text-card-body-dark',
+  light: 'text-card-body-light',
+  outlined: 'text-card-body-outlined',
+  glass: 'text-card-body-glass',
+};
+
+// Icon mark: dark bg square for light cards; accent-bordered square for dark/glass
+const iconMarks: Record<CardVariant, string> = {
+  dark: 'border border-accent/60',
+  light: 'bg-[#222]',
+  outlined: 'bg-[#222]',
+  glass: 'border border-accent/60',
+};
+
+const headingClass = headingClasses[variant];
+const bodyClass = bodyClasses[variant];
+const iconMark = iconMarks[variant];
+const hasDescriptionSlot = Astro.slots.has('description');
 ---
 
-<CardWrapper variant={variant} size={size} border={border} class={className}>
+<CardWrapper variant={variant} size={size} border={border} href={href} class={className}>
   {
     icon && (
       <div class:list={['mb-4 w-10 h-10 rounded-md flex items-center justify-center shrink-0', iconMark]}>
@@ -40,6 +65,6 @@ const iconMark =
     {title}
   </h3>
   <p class:list={['text-[14px] md:text-[15px] font-normal leading-[160%]', bodyClass]}>
-    {description}
+    {hasDescriptionSlot ? <slot name="description" /> : description}
   </p>
 </CardWrapper>

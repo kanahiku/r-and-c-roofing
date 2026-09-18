@@ -7,9 +7,11 @@ import {
   exploreFromTrustees,
 } from './whoWeServe';
 
+import { CONTACT } from '~/config/contact';
+
 const phone = {
   phoneCtaText: 'Call Now',
-  phoneCtaHref: 'tel:+18088882524',
+  phoneCtaHref: CONTACT.phone.href,
 } as const;
 
 const contactCta = { ctaHref: '/contact' as const };

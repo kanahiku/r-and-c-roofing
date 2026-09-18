@@ -15,6 +15,7 @@ import CTABanner from '~/components/widgets/CTABanner.astro';
 import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
 import Image from '~/components/common/Image.astro';
 import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
+import { CONTACT } from '~/config/contact';
 import { getContactPage } from '~/lib/content';
 import { contactAddress, mapsDirectionsHref, mapsEmbedSrc } from '~/data/pages/contact';
 
@@ -38,6 +39,20 @@ const heroActions = [
     ? [{ variant: 'ghost-light' as const, text: page.hero.phoneCtaText, href: page.hero.phoneCtaHref }]
     : []),
 ];
+
+const touchpointLinkClass =
+  'font-medium text-white/80 underline decoration-white/30 underline-offset-4 transition-colors duration-150 group-hover:text-accent hover:text-accent hover:decoration-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+const alternatePhone = CONTACT.alternatePhones[0];
+
+function isCallTouchpoint(title: string) {
+  const normalizedTitle = title.toLowerCase();
+  return normalizedTitle.includes('call');
+}
+
+function isEmailTouchpoint(title: string) {
+  const normalizedTitle = title.toLowerCase();
+  return normalizedTitle.includes('email');
+}
 ---
 
 <Layout metadata={metadata}>
@@ -139,25 +154,31 @@ const heroActions = [
     <Headline isDark={true} title={page.touchpoints.heading} classes={{ container: 'mb-[30px]' }} />
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {
-        page.touchpoints.items.map((item) => (
-          <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
-        ))
+        page.touchpoints.items.map((item) =>
+          isCallTouchpoint(item.title) ? (
+            <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" class="group">
+              <Fragment slot="description">
+                <a href={CONTACT.phone.href} class={touchpointLinkClass}>{CONTACT.phone.display}</a>
+                {alternatePhone && (
+                  <span class="block mt-1">
+                    Alternate phone:{' '}
+                    <a href={alternatePhone.href} class={touchpointLinkClass}>{alternatePhone.display}</a>
+                  </span>
+                )}
+              </Fragment>
+            </InfoCard>
+          ) : isEmailTouchpoint(item.title) ? (
+            <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" class="group">
+              <Fragment slot="description">
+                <a href={`mailto:${CONTACT.email}`} class={touchpointLinkClass}>{CONTACT.email}</a>
+              </Fragment>
+            </InfoCard>
+          ) : (
+            <InfoCard title={item.title} description={item.description} icon={item.icon} variant="dark" />
+          )
+        )
       }
     </div>
-    {
-      page.touchpoints.links?.length ? (
-        <p class="mt-8 md:mt-10 text-left">
-          {page.touchpoints.links.map((link, index) => (
-            <>
-              {index > 0 && <span class="text-white/50"> · </span>}
-              <a href={link.href} class="text-accent font-medium text-[14px] md:text-[15px] hover:underline">
-                {link.text}
-              </a>
-            </>
-          ))}
-        </p>
-      ) : null
-    }
     <Fragment slot="bg">
       <SectionBg variant="dark" />
     </Fragment>

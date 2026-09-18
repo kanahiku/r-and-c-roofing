@@ -4,6 +4,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CTABanner from '~/components/widgets/CTABanner.astro';
+import { CONTACT } from '~/config/contact';
 
 const metadata = {
   title: 'Privacy Policy | R&C Roofing Contractors',
@@ -127,11 +128,11 @@ const linkClass = 'text-heading font-medium hover:underline';
             contact preferences, please contact us directly:
           </p>
           <p>
-            R&amp;C Roofing Contractors<br />
-            3302 Campbell Ave<br />
-            Honolulu, HI 96815<br />
-            Email: <a class={linkClass} href="mailto:info@safehomeservice.com">info@safehomeservice.com</a><br />
-            Phone: <a class={linkClass} href="tel:+18088882524">(808) 888-2524</a><br />
+            {CONTACT.businessName}<br />
+            {CONTACT.address.street}<br />
+            {CONTACT.address.cityLine}<br />
+            Email: <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><br />
+            Phone: <a class={linkClass} href={CONTACT.phone.href}>{CONTACT.phone.display}</a><br />
             Alternate Phone: <a class={linkClass} href="tel:+18082163256">(808) 216-3256</a>
           </p>
         </div>

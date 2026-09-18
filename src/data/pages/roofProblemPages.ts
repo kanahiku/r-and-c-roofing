@@ -8,9 +8,11 @@ import {
   exploreFromStorm,
 } from './roofProblems';
 
+import { CONTACT } from '~/config/contact';
+
 const phone = {
   phoneCtaText: 'Call Now',
-  phoneCtaHref: 'tel:+18088882524',
+  phoneCtaHref: CONTACT.phone.href,
 } as const;
 
 const contactCta = { ctaHref: '/contact' as const };
@@ -30,7 +32,7 @@ export const roofProblemPages: ServicePageSeed[] = [
       subtitle:
         'If water is entering your property, it rarely stops on its own and dry weather only hides the underlying issue. Get the roof checked promptly by licensed local professionals—backed by Hawaii License C-33642.',
       ctaText: 'Call About a Roof Leak',
-      ctaHref: 'tel:+18088882524',
+      ctaHref: CONTACT.phone.href,
       phoneCtaText: 'Schedule an Inspection Online',
       phoneCtaHref: '/contact',
       imagePlaceholder: 'Roof leak photo placeholder',

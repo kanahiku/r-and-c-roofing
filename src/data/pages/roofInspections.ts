@@ -1,6 +1,8 @@
+import { CONTACT } from '~/config/contact';
+
 export const inspectionHeroActions = [
   { variant: 'primary', text: 'Schedule Inspection', href: '/contact' },
-  { variant: 'ghost-light', text: 'Call Now', href: 'tel:+18088882524' },
+  { variant: 'ghost-light', text: 'Call Now', href: CONTACT.phone.href },
 ];
 
 export const inspectionServices = [
