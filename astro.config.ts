@@ -54,7 +54,6 @@ export default defineConfig({
     '/privacy': '/privacy-policy',
     '/terms': '/terms-of-service',
     '/accessibility-statement': '/accessibility',
-    '/about/reviews': '/reviews',
     '/about/gallery': '/about/our-story',
     '/gallery': '/about/our-story',
   },

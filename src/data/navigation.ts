@@ -13,6 +13,7 @@ export const navigationData: NavigationContent = {
           { text: 'Pre-Listing / Seller\u2019s Roof Inspection', href: '/roof-inspections/pre-listing-roof-inspection' },
           { text: 'Storm & Wind Damage Inspection', href: '/roof-inspections/storm-and-wind-damage-inspection' },
           { text: 'Annual Maintenance Inspection', href: '/roof-inspections/annual-maintenance-inspection' },
+          { text: 'My Roof Is at End of Life', href: '/roof-problems/my-roof-is-at-end-of-life' },
         ],
       },
       {

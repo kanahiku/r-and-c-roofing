@@ -52,7 +52,9 @@ export async function getNavigationContent(): Promise<NavigationContent> {
   if (!nav?.header || !nav?.footer) {
     throw new Error('Sanity navigation or footer document is missing.');
   }
-  return stripHiddenNavLinks(ensureLegalFooterLinks(ensureBlogNav(nav)));
+  return stripHiddenNavLinks(
+    normalizeNavHrefs(ensureEndOfLifeInspectionLink(ensureLegalFooterLinks(ensureBlogNav(nav))))
+  );
 }
 
 const LEGAL_FOOTER_LINKS = [
@@ -63,6 +65,13 @@ const LEGAL_FOOTER_LINKS = [
 
 const HIDDEN_NAV_HREFS = new Set(['/about/gallery', '/gallery']);
 
+const LEGACY_NAV_HREFS = new Map([['/about/reviews', '/reviews']]);
+
+const END_OF_LIFE_INSPECTION_LINK = {
+  text: 'My Roof Is at End of Life',
+  href: '/roof-problems/my-roof-is-at-end-of-life',
+};
+
 function navHrefKey(href?: string) {
   if (!href) return '';
   const path = href.trim();
@@ -72,6 +81,41 @@ function navHrefKey(href?: string) {
 
 function isHiddenNavHref(href?: string) {
   return HIDDEN_NAV_HREFS.has(navHrefKey(href));
+}
+
+function normalizeNavHref(href?: string) {
+  if (!href) return href;
+  const key = navHrefKey(href);
+  return LEGACY_NAV_HREFS.get(key) ?? href;
+}
+
+function normalizeNavHrefs(nav: NavigationContent): NavigationContent {
+  const normalizeItems = <T extends { href?: string }>(items?: T[]) =>
+    (items ?? []).map((item) => ({ ...item, href: normalizeNavHref(item.href) }));
+
+  return {
+    ...nav,
+    header: {
+      ...nav.header,
+      links: normalizeItems(nav.header.links).map((link) => ({
+        ...link,
+        links: link.links ? normalizeItems(link.links) : undefined,
+        columns: link.columns?.map((column) => ({
+          ...column,
+          links: normalizeItems(column.links),
+        })),
+      })),
+      actions: normalizeItems(nav.header.actions),
+    },
+    footer: {
+      ...nav.footer,
+      links: nav.footer.links.map((column) => ({
+        ...column,
+        links: normalizeItems(column.links),
+      })),
+      secondaryLinks: normalizeItems(nav.footer.secondaryLinks),
+    },
+  };
 }
 
 function stripHiddenNavLinks(nav: NavigationContent): NavigationContent {
@@ -98,6 +142,20 @@ function stripHiddenNavLinks(nav: NavigationContent): NavigationContent {
         links: stripItems(column.links),
       })),
       secondaryLinks: stripItems(nav.footer.secondaryLinks),
+    },
+  };
+}
+
+function ensureEndOfLifeInspectionLink(nav: NavigationContent): NavigationContent {
+  return {
+    ...nav,
+    header: {
+      ...nav.header,
+      links: nav.header.links.map((link) => {
+        if (link.text !== 'Inspections' || !link.links) return link;
+        if (link.links.some((item) => navHrefKey(item.href) === END_OF_LIFE_INSPECTION_LINK.href)) return link;
+        return { ...link, links: [...link.links, END_OF_LIFE_INSPECTION_LINK] };
+      }),
     },
   };
 }
