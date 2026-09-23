@@ -24,6 +24,12 @@ export const infoCardItem = defineType({
       type: 'string',
       description: 'Tabler icon name, e.g. tabler:droplet',
     }),
+    defineField({
+      name: 'href',
+      title: 'Optional link',
+      type: 'string',
+      description: 'If set, the card title links to this path (e.g. /services/roofing-materials/silicone-roof-coating).',
+    }),
   ],
   preview: { select: { title: 'title', subtitle: 'icon' } },
 });

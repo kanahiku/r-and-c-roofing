@@ -19,6 +19,8 @@ export const relatedPageOptions = [
   { title: 'Materials — Stone-Coated Steel Roofing', value: 'services/roofing-materials/stone-coated-steel-roofing' },
   { title: 'Materials — Tile Roofing', value: 'services/roofing-materials/tile-roofing' },
   { title: 'Materials — Slate Roofing', value: 'services/roofing-materials/slate-roofing' },
+  { title: 'Materials — Silicone Roof Coating', value: 'services/roofing-materials/silicone-roof-coating' },
+  { title: 'Materials — Modified Bitumen Roofing', value: 'services/roofing-materials/modified-bitumen-roofing' },
 
   { title: 'Problems — My Roof Is Leaking', value: 'roof-problems/my-roof-is-leaking' },
   { title: 'Problems — Storm Damage on My Roof', value: 'roof-problems/storm-damage-on-my-roof' },

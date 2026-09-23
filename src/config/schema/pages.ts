@@ -486,6 +486,36 @@ export const pages: PageSchema[] = [
       { name: 'Slate & Rubber Slate Roofing', path: '/services/roofing-materials/slate-roofing' },
     ],
   },
+  {
+    name: 'Silicone Roof Coating',
+    path: '/services/roofing-materials/silicone-roof-coating',
+    schemaType: 'Service',
+    serviceType: 'Silicone Roof Coating',
+    description:
+      'Explore silicone roof coating for Oahu commercial and multi-unit properties. Learn about seamless waterproofing, ponding water resistance, and restoration with R&C.',
+    faq: null,
+    breadcrumb: [
+      HOME,
+      SERVICES,
+      MATERIALS,
+      { name: 'Silicone Roof Coating', path: '/services/roofing-materials/silicone-roof-coating' },
+    ],
+  },
+  {
+    name: 'Modified Bitumen Roofing',
+    path: '/services/roofing-materials/modified-bitumen-roofing',
+    schemaType: 'Service',
+    serviceType: 'Modified Bitumen Roofing Installation',
+    description:
+      'Explore modified bitumen roofing for Oahu commercial and multi-unit properties. Learn about multi-ply durability, low-slope protection, and installation with R&C.',
+    faq: null,
+    breadcrumb: [
+      HOME,
+      SERVICES,
+      MATERIALS,
+      { name: 'Modified Bitumen Roofing', path: '/services/roofing-materials/modified-bitumen-roofing' },
+    ],
+  },
 
   {
     name: 'Roofing Services',

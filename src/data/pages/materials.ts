@@ -9,6 +9,8 @@ export const materialHrefs = {
   stone: '/services/roofing-materials/stone-coated-steel-roofing',
   tile: '/services/roofing-materials/tile-roofing',
   slate: '/services/roofing-materials/slate-roofing',
+  silicone: '/services/roofing-materials/silicone-roof-coating',
+  modifiedBitumen: '/services/roofing-materials/modified-bitumen-roofing',
 };
 
 export const materialCards = {
@@ -45,6 +47,20 @@ export const materialCards = {
     href: materialHrefs.slate,
     linkText: 'Explore Slate Roofing',
   },
+  silicone: {
+    title: 'Silicone Roof Coating',
+    description:
+      'Seamless waterproofing for commercial and multi-unit low-slope roofs, with strong ponding water resistance and UV-reflective restoration.',
+    href: materialHrefs.silicone,
+    linkText: 'Explore Silicone Roof Coating',
+  },
+  modifiedBitumen: {
+    title: 'Modified Bitumen Roofing',
+    description:
+      'Durable, multi-ply asphalt and rubberized membrane systems engineered for heavy foot traffic and traditional commercial low-slope applications.',
+    href: materialHrefs.modifiedBitumen,
+    linkText: 'Explore Modified Bitumen Roofing',
+  },
 };
 
 export const hubMaterialCards = [
@@ -52,6 +68,8 @@ export const hubMaterialCards = [
   materialCards.asphalt,
   materialCards.stone,
   materialCards.tile,
+  materialCards.silicone,
+  materialCards.modifiedBitumen,
 ];
 
 const coastalExplore = {

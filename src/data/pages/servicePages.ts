@@ -10,7 +10,7 @@ const contactCta = { ctaHref: '/contact' as const };
 
 type SeedHero = Omit<PageHero, 'image'> & { imagePlaceholder: string };
 
-type SeedPoint = { title: string; description: string; icon: string };
+type SeedPoint = { title: string; description: string; icon: string; href?: string };
 type SeedCard = { title: string; description: string; href: string; linkText: string };
 type SeedFaq = { question: string; answer: string };
 
@@ -829,11 +829,13 @@ export const servicePages: ServicePageSeed[] = [
             description:
               'Seamless elastomeric and reflective coatings that protect existing commercial surfaces and lower interior building temperatures.',
             icon: 'tabler:paint',
+            href: '/services/roofing-materials/silicone-roof-coating',
           },
           {
             title: 'Modified Bitumen Roofing',
             description: 'Multi-layer durable systems built for high-traffic commercial roofs and heavy asset placement.',
             icon: 'tabler:layers-intersect',
+            href: '/services/roofing-materials/modified-bitumen-roofing',
           },
           {
             title: 'Commercial Metal Retrofits',

@@ -64,6 +64,29 @@ const exploreSlate = {
   linkText: 'Explore Slate Roofing',
 };
 
+const exploreModifiedBitumen = {
+  title: 'Modified Bitumen Roofing',
+  description:
+    'Durable, multi-ply asphalt and rubberized membrane systems engineered for heavy foot traffic and traditional commercial low-slope applications.',
+  href: '/services/roofing-materials/modified-bitumen-roofing',
+  linkText: 'Explore Modified Bitumen Roofing',
+};
+
+const exploreSiliconeAsphalt = {
+  title: 'Asphalt Shingle Roofing',
+  description: 'Versatile and dependable shingle systems tailored for sloped residential properties across Oahu.',
+  href: '/services/roofing-materials/asphalt-shingle-roofing',
+  linkText: 'Explore Asphalt Shingle Roofing',
+};
+
+const exploreSilicone = {
+  title: 'Silicone Roof Coating',
+  description:
+    'Seamless liquid-applied restoration membranes engineered to waterproof and extend the lifespan of existing flat roofs.',
+  href: '/services/roofing-materials/silicone-roof-coating',
+  linkText: 'Explore Silicone Roof Coating',
+};
+
 export const materialPages: ServicePageSeed[] = [
   {
     _id: 'service-page-materials-hub',
@@ -119,6 +142,20 @@ export const materialPages: ServicePageSeed[] = [
             href: '/services/roofing-materials/tile-roofing',
             linkText: 'Explore Tile Roofing',
           },
+          {
+            title: 'Silicone Roof Coating',
+            description:
+              'Seamless waterproofing for commercial and multi-unit low-slope roofs, with strong ponding water resistance and UV-reflective restoration.',
+            href: '/services/roofing-materials/silicone-roof-coating',
+            linkText: 'Explore Silicone Roof Coating',
+          },
+          {
+            title: 'Modified Bitumen Roofing',
+            description:
+              'Durable, multi-ply asphalt and rubberized membrane systems engineered for heavy foot traffic and traditional commercial low-slope applications.',
+            href: '/services/roofing-materials/modified-bitumen-roofing',
+            linkText: 'Explore Modified Bitumen Roofing',
+          },
         ],
       },
       {
@@ -153,6 +190,18 @@ export const materialPages: ServicePageSeed[] = [
             cell1: 'Homes and buildings structurally suited for a heavy-weight tile system.',
             cell2: 'Distinctive, traditional tile architectural profile.',
             cell3: 'Structural weight capacity, roof pitch, and specialized installation requirements.',
+          },
+          {
+            feature: 'Silicone Roof Coating',
+            cell1: 'Commercial and multi-unit low-slope roofs that can be restored with a seamless coating instead of a full tear-off.',
+            cell2: 'A monolithic, UV-reflective membrane rather than a shingle, tile, or standing-seam look.',
+            cell3: 'Substrate condition, adhesion, ponding water, and whether restoration is viable versus replacement.',
+          },
+          {
+            feature: 'Modified Bitumen',
+            cell1: 'Commercial low-slope decks that need a heavy multi-ply membrane for traffic and weather protection.',
+            cell2: 'A layered asphalt membrane system rather than a coating, shingle, or architectural metal look.',
+            cell3: 'Deck preparation, ply bonding, drainage design, and whether torch-applied or self-adhered installation is appropriate.',
           },
         ],
       },
@@ -848,6 +897,274 @@ export const materialPages: ServicePageSeed[] = [
       subtitle:
         'Get expert guidance and objective structural facts for your natural or synthetic slate roofing project.',
       ctaText: 'Discuss a Slate Roofing Project',
+      ctaHref: '/contact',
+    },
+  },
+  {
+    _id: 'service-page-silicone-roof-coating',
+    title: 'Silicone Roof Coating',
+    slug: 'services/roofing-materials/silicone-roof-coating',
+    meta: {
+      title: 'Silicone Roof Coating Oahu | R&C Roofing Contractors',
+      description:
+        'Explore silicone roof coating for Oahu commercial and multi-unit properties. Learn about seamless waterproofing, ponding water resistance, and restoration with R&C.',
+    },
+    hero: {
+      title: 'Silicone Roof Coating on Oahu',
+      subtitle:
+        'Explore high-performance silicone roof coating systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by Hawaii License C-33642.',
+      ctaText: 'Discuss a Silicone Coating Project',
+      ...contactCta,
+      ...phone,
+      imagePlaceholder: 'Silicone roof coating photo placeholder',
+    },
+    sections: [
+      {
+        _type: 'editorialSection',
+        heading: 'Is Silicone Roof Coating Right for Your Property?',
+        paragraphs: [
+          'Silicone roof coatings provide a seamless membrane to restore aging commercial flat and low-slope roofs, offering UV reflection, strong ponding water resistance, and cost-effective asset extension.',
+          'Because coating performance depends on substrate integrity and adhesion, we evaluate your property first to determine whether a restoration coating is viable or if a full roof replacement is required.',
+        ],
+      },
+      {
+        _type: 'comparisonTableSection',
+        heading: 'Comparing Silicone Coatings to Other Materials',
+        intro:
+          'To decide if a silicone roof coating is right for your project, it helps to see how they compare against alternative systems:',
+        featureLabel: 'Material Comparison',
+        column1: 'When to Choose Silicone Coatings',
+        column2: 'When to Consider Alternatives',
+        rows: [
+          {
+            feature: 'vs. Modified Bitumen',
+            cell1:
+              'You want to restore an existing low-slope membrane with a seamless, UV-reflective monolithic barrier without a full tear-off.',
+            cell2:
+              'You are constructing a brand new low-slope deck or require a heavy multi-ply torch-applied membrane system.',
+          },
+          {
+            feature: 'vs. Asphalt Shingle',
+            cell1:
+              'Your property features a low-slope or flat commercial roof design where traditional overlapping shingles are not applicable.',
+            cell2: 'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
+          },
+          {
+            feature: 'vs. Metal Roofing',
+            cell1:
+              'You need to waterproof an existing aging metal roof system and prevent fastener leaks without replacing panels.',
+            cell2:
+              'You are installing a brand new architectural metal roof deck designed for long-term structural exposure.',
+          },
+        ],
+      },
+      {
+        _type: 'infoCardsSection',
+        heading: 'Silicone Coating Options: Restoration vs. Prime-and-Coat Systems',
+        intro: 'Modern silicone roof coatings are applied in specialized configurations to suit various commercial asset goals:',
+        items: [
+          {
+            title: 'Standard Silicone Restoration Coatings',
+            description:
+              'High-solids silicone formulas that cure via atmospheric moisture to form a breathable, highly reflective waterproof barrier over approved low-slope substrates.',
+            icon: 'tabler:paint',
+          },
+          {
+            title: 'Primed Substrate Coating Systems',
+            description:
+              'Specialized primer-and-coating applications engineered for difficult or weathered substrates to ensure maximum long-term membrane adhesion and structural bonding.',
+            icon: 'tabler:layers-linked',
+          },
+        ],
+      },
+      {
+        _type: 'iconPointsSection',
+        heading: "Silicone Roof Coating and Oahu's Microclimates",
+        intro: "A silicone roof coating must be specified and applied to handle Hawaii's unique environmental factors:",
+        layout: 'band',
+        items: [
+          {
+            title: 'Intense UV & Solar Heat Gain',
+            description:
+              'Constant year-round tropical sun accelerates membrane degradation on flat roofs, making high solar reflectance essential for reducing interior cooling loads and building temperatures.',
+            icon: 'tabler:sun',
+          },
+          {
+            title: 'Ponding Water Durability',
+            description:
+              'Unlike traditional coatings that break down under standing water, high-solids silicone holds up well to standing water and heavy valley downpours without softening or blistering.',
+            icon: 'tabler:droplet',
+          },
+          {
+            title: 'Salt-Air & Humidity Resistance',
+            description:
+              'Coastal exposure and high island humidity require robust chemical formulations that resist airborne salt degradation and mold growth across low-slope commercial decks.',
+            icon: 'tabler:ripple',
+          },
+        ],
+      },
+      {
+        _type: 'linkedCardsSection',
+        heading: 'Explore Other Roofing Materials',
+        intro: 'Compare silicone roof coatings side-by-side with other available material options for your Oahu property:',
+        display: 'cards',
+        items: [exploreModifiedBitumen, exploreMetal, exploreSiliconeAsphalt, exploreTile],
+      },
+      {
+        _type: 'iconPointsSection',
+        heading: 'Why Oahu Property Owners Trust R&C Roofing',
+        layout: 'grid',
+        items: [
+          licensedWhy,
+          experienceWhy,
+          {
+            title: 'Code-Compliant Installation',
+            description:
+              "We ensure precise surface preparation, flashing detailing, and dry-film thickness standards to maximize your coating's performance.",
+            icon: 'tabler:building',
+          },
+          inspectionWhy,
+        ],
+      },
+    ],
+    ctaBanner: {
+      title: 'Find Out if Silicone Roof Coatings Fit Your Property',
+      subtitle: 'Get expert guidance and objective facts for your commercial roof restoration project.',
+      ctaText: 'Discuss a Silicone Coating Project',
+      ctaHref: '/contact',
+    },
+  },
+  {
+    _id: 'service-page-modified-bitumen-roofing',
+    title: 'Modified Bitumen Roofing',
+    slug: 'services/roofing-materials/modified-bitumen-roofing',
+    meta: {
+      title: 'Modified Bitumen Roofing Oahu | R&C Roofing Contractors',
+      description:
+        'Explore modified bitumen roofing for Oahu commercial and multi-unit properties. Learn about multi-ply durability, low-slope protection, and installation with R&C.',
+    },
+    hero: {
+      title: 'Modified Bitumen Roofing on Oahu',
+      subtitle:
+        'Explore heavy-duty modified bitumen roofing systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by Hawaii License C-33642.',
+      ctaText: 'Discuss a Bitumen Project',
+      ...contactCta,
+      ...phone,
+      imagePlaceholder: 'Modified bitumen roofing photo placeholder',
+    },
+    sections: [
+      {
+        _type: 'editorialSection',
+        heading: 'Is Modified Bitumen Roofing Right for Your Property?',
+        paragraphs: [
+          'Modified bitumen roofing provides a durable, multi-ply asphalt membrane system designed to handle heavy foot traffic and demanding low-slope commercial applications.',
+          'Because system performance depends on deck preparation and proper ply bonding, we evaluate your property first to determine whether a modified bitumen assembly is ideal or if alternative restoration is better suited.',
+        ],
+      },
+      {
+        _type: 'comparisonTableSection',
+        heading: 'Comparing Modified Bitumen to Other Materials',
+        intro:
+          'To decide if modified bitumen roofing is right for your project, it helps to see how they compare against alternative systems:',
+        featureLabel: 'Material Comparison',
+        column1: 'When to Choose Modified Bitumen',
+        column2: 'When to Consider Alternatives',
+        rows: [
+          {
+            feature: 'vs. Silicone Coating',
+            cell1:
+              'You require a multi-ply, heavy-duty membrane system capable of supporting frequent maintenance traffic on low-slope commercial decks.',
+            cell2:
+              'You want to restore an existing aging roof membrane with a seamless, liquid-applied reflective coating without a full tear-off.',
+          },
+          {
+            feature: 'vs. Asphalt Shingle',
+            cell1:
+              'Your property features a commercial low-slope or flat deck design where traditional overlapping shingles are not applicable.',
+            cell2: 'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
+          },
+          {
+            feature: 'vs. Metal Roofing',
+            cell1:
+              'You need a robust multi-ply membrane system tailored specifically for flat or minimal-slope commercial roof architecture.',
+            cell2:
+              'You are installing a brand new architectural standing seam metal roof designed for steep-slope water shedding.',
+          },
+        ],
+      },
+      {
+        _type: 'infoCardsSection',
+        heading: 'Modified Bitumen Options: Torch-Applied vs. Self-Adhered Systems',
+        intro: 'Modern modified bitumen roofs are applied in specialized configurations to suit various commercial asset goals:',
+        items: [
+          {
+            title: 'Torch-Applied Membrane Systems',
+            description:
+              'Reinforced multi-ply systems bonded via heat application to create a monolithic, watertight seal across low-slope commercial roof decks.',
+            icon: 'tabler:flame',
+          },
+          {
+            title: 'Self-Adhered Cold-Applied Systems',
+            description:
+              'Specialized adhesive-backed membrane plies engineered for sensitive locations or projects where torch application is restricted.',
+            icon: 'tabler:layers-linked',
+          },
+        ],
+      },
+      {
+        _type: 'iconPointsSection',
+        heading: "Modified Bitumen Roofing and Oahu's Microclimates",
+        intro: "A modified bitumen roof must be specified and installed to handle Hawaii's unique environmental factors:",
+        layout: 'band',
+        items: [
+          {
+            title: 'Intense UV & Solar Heat Gain',
+            description:
+              'Constant year-round tropical sun requires high-reflectance cap sheets or granules to minimize thermal shock and premature surface aging on flat roofs.',
+            icon: 'tabler:sun',
+          },
+          {
+            title: 'Ponding Water & Drainage',
+            description:
+              'Multi-ply reinforcement and proper tapered insulation design prevent standing water from compromising the membrane seams during heavy valley downpours.',
+            icon: 'tabler:droplet',
+          },
+          {
+            title: 'Salt-Air & Humidity Resistance',
+            description:
+              'Coastal exposure and high island humidity require robust asphalt-polymer formulations that resist environmental degradation across commercial structures.',
+            icon: 'tabler:ripple',
+          },
+        ],
+      },
+      {
+        _type: 'linkedCardsSection',
+        heading: 'Explore Other Roofing Materials',
+        intro: 'Compare modified bitumen roofing side-by-side with other available material options for your Oahu property:',
+        display: 'cards',
+        items: [exploreSilicone, exploreMetal, exploreSiliconeAsphalt, exploreTile],
+      },
+      {
+        _type: 'iconPointsSection',
+        heading: 'Why Oahu Property Owners Trust R&C Roofing',
+        layout: 'grid',
+        items: [
+          licensedWhy,
+          experienceWhy,
+          {
+            title: 'Code-Compliant Installation',
+            description:
+              "We ensure precise seam welding, flashing detailing, and perimeter anchoring standards to maximize your roof's performance.",
+            icon: 'tabler:building',
+          },
+          inspectionWhy,
+        ],
+      },
+    ],
+    ctaBanner: {
+      title: 'Find Out if Modified Bitumen Roofing Fits Your Property',
+      subtitle: 'Get expert guidance and objective facts for your commercial roofing project.',
+      ctaText: 'Discuss a Bitumen Project',
       ctaHref: '/contact',
     },
   },
