@@ -414,7 +414,11 @@ async function drainContactOutbox(env: Env): Promise<void> {
       allowed_origins: '[]',
       pdf_daily_limit: null,
     };
-    await deliverLeadEmail(env, site, row, row.leadId, row.attempts);
+    try {
+      await deliverLeadEmail(env, site, row, row.leadId, row.attempts);
+    } catch (error) {
+      console.error(`Outbox delivery failed for ${row.leadId}`, error);
+    }
   }
 }
 
@@ -772,11 +776,18 @@ async function sendResend(
   };
   if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
 
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(payload),
-  });
+  let res: Response;
+  try {
+    res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10_000),
+    });
+  } catch (error) {
+    console.error('Resend request failed', error);
+    return { ok: false, error: 'Unable to reach email service right now' };
+  }
   if (!res.ok) {
     const errText = await res.text();
     console.error('Resend failed', res.status, errText);
