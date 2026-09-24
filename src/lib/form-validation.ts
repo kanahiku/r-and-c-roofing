@@ -174,6 +174,40 @@ export function validateContactFields(values: {
   return errors;
 }
 
+export interface SubmitError {
+  /** Sentence shown in the form status line. */
+  message: string;
+  /** Append the "call us" fallback — only for problems the visitor cannot fix. */
+  offerPhone: boolean;
+}
+
+/**
+ * Turns a Worker error (or transport failure) into something a visitor can act on.
+ * Errors that map to a specific field are handled by `fieldFromApiError` instead.
+ * Keep the matched strings in sync with `services/forms/src/index.ts`.
+ */
+export function submitErrorMessage(apiError: string, httpStatus?: number): SubmitError {
+  const text = apiError.toLowerCase();
+
+  if (text.includes('spam check')) {
+    return { message: 'Your spam check expired. Please complete it again and resend.', offerPhone: false };
+  }
+
+  if (text.includes('origin not allowed') || text.includes('unknown site') || text.includes('missing site')) {
+    return { message: 'This form is not set up correctly, so your message was not sent.', offerPhone: true };
+  }
+
+  if (httpStatus === 0) {
+    return { message: 'We could not reach our server. Check your connection and try again.', offerPhone: true };
+  }
+
+  if (httpStatus && httpStatus >= 500) {
+    return { message: 'Our server could not save your message. Please try again in a moment.', offerPhone: true };
+  }
+
+  return { message: 'Something went wrong and your message was not sent.', offerPhone: true };
+}
+
 export function fieldFromApiError(error: string): ContactFieldName | null {
   const text = error.toLowerCase();
   if (text.includes('street')) return 'street';

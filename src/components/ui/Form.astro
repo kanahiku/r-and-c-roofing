@@ -152,7 +152,13 @@ const widthClass = {
 </form>
 
 <script>
-  import { FIELD_ERRORS, fieldFromApiError, validateContactFields, type ContactFieldName } from '~/lib/form-validation';
+  import {
+    FIELD_ERRORS,
+    fieldFromApiError,
+    submitErrorMessage,
+    validateContactFields,
+    type ContactFieldName,
+  } from '~/lib/form-validation';
 
   type TurnstileApi = {
     render: (el: HTMLElement, opts: Record<string, unknown>) => string;
@@ -272,22 +278,52 @@ const widthClass = {
     });
   }
 
-  function showCallError(status: HTMLElement, phoneDisplay: string, phoneHref: string) {
-    const message: Node[] = [document.createTextNode('Something went wrong. Please try again or call ')];
+  function showSubmitError(
+    status: HTMLElement,
+    text: string,
+    offerPhone: boolean,
+    phoneDisplay: string,
+    phoneHref: string
+  ) {
+    const message: Node[] = [document.createTextNode(text)];
 
-    if (phoneDisplay && phoneHref) {
-      const link = document.createElement('a');
-      link.href = phoneHref;
-      link.textContent = phoneDisplay;
-      link.className = 'underline hover:no-underline';
-      message.push(link);
-    } else {
-      message.push(document.createTextNode('us'));
+    if (offerPhone) {
+      message.push(document.createTextNode(' You can also call '));
+      if (phoneDisplay && phoneHref) {
+        const link = document.createElement('a');
+        link.href = phoneHref;
+        link.textContent = phoneDisplay;
+        link.className = 'underline hover:no-underline';
+        message.push(link);
+      } else {
+        message.push(document.createTextNode('us'));
+      }
+      message.push(document.createTextNode('.'));
     }
 
-    message.push(document.createTextNode('.'));
     status.replaceChildren(...message);
     status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+    status.classList.remove('hidden');
+  }
+
+  async function awaitTurnstileToken(
+    turnstile: TurnstileApi | undefined,
+    widgetId: string,
+    form: HTMLFormElement,
+    timeoutMs = 4000
+  ) {
+    const read = () =>
+      widgetId && turnstile
+        ? turnstile.getResponse(widgetId)
+        : asText(new FormData(form).get('cf-turnstile-response'));
+
+    const deadline = Date.now() + timeoutMs;
+    let token = read();
+    while (!token && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      token = read();
+    }
+    return token || '';
   }
 
   async function bindContactForm() {
@@ -302,6 +338,7 @@ const widthClass = {
     const phoneDisplay = form.dataset.phoneDisplay || '';
     const phoneHref = form.dataset.phoneHref || '';
     let widgetId = '';
+    let turnstileUnavailable = false;
 
     if (slot && sitekey) {
       try {
@@ -309,6 +346,14 @@ const widthClass = {
         widgetId = turnstile.render(slot, { sitekey });
       } catch (error) {
         console.error(error);
+        turnstileUnavailable = true;
+        showSubmitError(
+          status,
+          'The spam check could not load, usually because a browser extension or network is blocking it.',
+          true,
+          phoneDisplay,
+          phoneHref
+        );
       }
     }
 
@@ -370,18 +415,15 @@ const widthClass = {
       const endpoint = form.dataset.endpoint;
       const site = form.dataset.site;
       const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
-      const turnstileToken = widgetId && turnstile ? turnstile.getResponse(widgetId) : asText(data.get('cf-turnstile-response'));
 
       if (!endpoint || !site) {
-        showCallError(status, phoneDisplay, phoneHref);
-        status.classList.remove('hidden');
-        return;
-      }
-
-      if (!turnstileToken) {
-        status.textContent = 'Please complete the spam check before sending.';
-        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
-        status.classList.remove('hidden');
+        showSubmitError(
+          status,
+          'This form is not set up correctly, so your message was not sent.',
+          true,
+          phoneDisplay,
+          phoneHref
+        );
         return;
       }
 
@@ -389,6 +431,24 @@ const widthClass = {
       status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-muted';
       status.textContent = 'Sending…';
       status.classList.remove('hidden');
+
+      // After a failed attempt the widget is reset, so its replacement token can
+      // take a moment to arrive. Wait for it instead of blaming the visitor.
+      const turnstileToken = await awaitTurnstileToken(turnstile, widgetId, form);
+
+      if (!turnstileToken) {
+        if (submitButton) submitButton.disabled = false;
+        showSubmitError(
+          status,
+          turnstileUnavailable
+            ? 'The spam check could not load, so your message was not sent.'
+            : 'Please complete the spam check before sending.',
+          turnstileUnavailable,
+          phoneDisplay,
+          phoneHref
+        );
+        return;
+      }
 
       let succeeded = false;
 
@@ -433,9 +493,11 @@ const widthClass = {
           return;
         }
 
-        showCallError(status, phoneDisplay, phoneHref);
+        const { message, offerPhone } = submitErrorMessage(apiError, res.status);
+        showSubmitError(status, message, offerPhone, phoneDisplay, phoneHref);
       } catch {
-        showCallError(status, phoneDisplay, phoneHref);
+        const { message, offerPhone } = submitErrorMessage('', 0);
+        showSubmitError(status, message, offerPhone, phoneDisplay, phoneHref);
       } finally {
         if (submitButton) submitButton.disabled = false;
         if (status.textContent) status.classList.remove('hidden');
