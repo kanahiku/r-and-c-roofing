@@ -53,6 +53,20 @@ npx wrangler deploy
 curl https://massic-forms.<subdomain>.workers.dev/health
 ```
 
+### Production Worker ownership
+
+`r-and-c-roofing/services/forms` is the **only** production source for the shared
+`massic-forms` Worker. Other website repos use uniquely named development
+Workers so deploying a client repo cannot overwrite another site's routes.
+
+The production Worker:
+
+- reads each site's recipient, sender, origins, and limits from the shared D1 `sites` row
+- uses `TURNSTILE_SECRET_<SITE_SLUG>` per website
+- supports `RESEND_API_KEY_<SITE_SLUG>` with `RESEND_API_KEY` as a migration fallback
+- saves contact leads and an email outbox atomically, then retries failed notifications every five minutes
+- exposes `/health`; `contactEmailQueue` should normally be `0`
+
 Worker env (safe to commit in `wrangler.toml` `[vars]`):
 
 - `RESEND_FROM` — start as `Client Name <onboarding@resend.dev>`

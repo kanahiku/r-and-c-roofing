@@ -11,6 +11,7 @@
     "db:leads:local": "wrangler d1 execute massic-forms --local --command \"SELECT created_at, name, email, phone, street, address_line2, city, state, zip, email_sent_at FROM leads ORDER BY created_at DESC LIMIT 5\"",
     "db:migrate": "wrangler d1 execute massic-forms --remote --file=./schema.sql",
     "db:migrate:address": "wrangler d1 execute massic-forms --remote --file=./migrations/001_lead_address.sql",
+    "db:migrate:outbox": "wrangler d1 execute massic-forms --remote --file=./migrations/002_contact_outbox.sql",
     "db:seed": "wrangler d1 execute massic-forms --remote --file=./seed.sql"
   },
   "devDependencies": {
