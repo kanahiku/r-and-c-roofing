@@ -90,8 +90,6 @@ const widthClass = {
     )
   }
 
-  <div class="mt-6 min-h-[65px]" data-turnstile></div>
-
   {
     textarea && (
       <div>
@@ -139,9 +137,11 @@ const widthClass = {
     )
   }
 
+  <div class="mt-6" data-turnstile></div>
+
   {
     button && (
-      <div class="mt-10">
+      <div class="mt-6">
         <Button variant="primary" type="submit">
           {button}
         </Button>
