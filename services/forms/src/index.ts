@@ -358,7 +358,10 @@ function parseOrigins(raw: string): string[] {
 }
 
 async function verifyTurnstile(token: string, secret: string, request: Request): Promise<boolean> {
-  if (!secret) return false;
+  if (!secret) {
+    console.error('Turnstile failed: TURNSTILE_SECRET is not set on the Worker');
+    return false;
+  }
   const ip = request.headers.get('CF-Connecting-IP') || '';
   const body = new URLSearchParams({ secret, response: token });
   if (ip) body.set('remoteip', ip);
@@ -367,8 +370,15 @@ async function verifyTurnstile(token: string, secret: string, request: Request):
     method: 'POST',
     body,
   });
-  if (!res.ok) return false;
-  const data = (await res.json()) as { success?: boolean };
+  if (!res.ok) {
+    console.error('Turnstile siteverify HTTP error', res.status);
+    return false;
+  }
+  const data = (await res.json()) as { success?: boolean; hostname?: string; 'error-codes'?: string[] };
+  if (data.success !== true) {
+    // timeout-or-duplicate = expired or reused token. invalid-input-secret = key/secret mismatch.
+    console.error('Turnstile rejected', JSON.stringify(data['error-codes'] ?? []), 'hostname:', data.hostname ?? '—');
+  }
   return data.success === true;
 }
 

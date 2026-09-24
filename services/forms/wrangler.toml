@@ -3,6 +3,10 @@ main = "src/index.ts"
 compatibility_date = "2026-01-15"
 workers_dev = true
 
+# Keeps console logs queryable in the dashboard for lead/Turnstile debugging.
+[observability]
+enabled = true
+
 # Replace database_id after: npx wrangler d1 create massic-forms
 [[d1_databases]]
 binding = "DB"

@@ -390,6 +390,8 @@ const widthClass = {
       status.textContent = 'Sending…';
       status.classList.remove('hidden');
 
+      let succeeded = false;
+
       try {
         const res = await fetch(endpoint, {
           method: 'POST',
@@ -413,6 +415,7 @@ const widthClass = {
         const payload = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
 
         if (res.ok && payload?.ok) {
+          succeeded = true;
           status.textContent = "Thanks! We'll be in touch soon.";
           status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-heading';
           form.reset();
@@ -436,6 +439,9 @@ const widthClass = {
       } finally {
         if (submitButton) submitButton.disabled = false;
         if (status.textContent) status.classList.remove('hidden');
+        // A token is single-use and expires after ~5 minutes. Without this, every
+        // retry after a failure resends the spent token and is rejected as duplicate.
+        if (!succeeded && widgetId && turnstile) turnstile.reset(widgetId);
       }
     });
   }
