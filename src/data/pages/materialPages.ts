@@ -44,7 +44,8 @@ const exploreAsphalt = {
 
 const exploreStone = {
   title: 'Stone-Coated Steel Roofing',
-  description: 'Combines heavy-duty steel strength with the textured, traditional appearance of shake or tile profiles.',
+  description:
+    'Combines heavy-duty steel strength with the textured, traditional appearance of shake or tile profiles.',
   href: '/services/roofing-materials/stone-coated-steel-roofing',
   linkText: 'Explore Stone-Coated Steel Roofing',
 };
@@ -95,7 +96,7 @@ export const materialPages: ServicePageSeed[] = [
     meta: {
       title: 'Roofing Materials Oahu | Compare Roof Options | R&C Roofing',
       description:
-        'Compare roofing materials for Oahu properties, including metal, asphalt shingles, stone-coated steel, and clay or concrete tile. Explore your options with R&C Roofing.',
+        'Compare roofing materials for Oahu properties: asphalt shingles, silicone coating, modified bitumen, metal, tile and more. Explore your options with R&C Roofing.',
     },
     hero: {
       title: 'Roofing Materials for Oahu Properties',
@@ -136,7 +137,7 @@ export const materialPages: ServicePageSeed[] = [
             linkText: 'Explore Stone-Coated Steel Roofing',
           },
           {
-            title: 'Clay & Concrete Tile Roofing',
+            title: 'Tile Roofing',
             description:
               "Distinctive island styling that creates a classic architectural look, requiring careful review of your home's structural load capacity.",
             href: '/services/roofing-materials/tile-roofing',
@@ -145,7 +146,7 @@ export const materialPages: ServicePageSeed[] = [
           {
             title: 'Silicone Roof Coating',
             description:
-              'Seamless waterproofing for commercial and multi-unit low-slope roofs, with strong ponding water resistance and UV-reflective restoration.',
+              'High-solids, seamless elastomeric membranes engineered to waterproof, reflect UV rays, and extend the lifespan of commercial flat and low-slope roofs.',
             href: '/services/roofing-materials/silicone-roof-coating',
             linkText: 'Explore Silicone Roof Coating',
           },
@@ -168,22 +169,30 @@ export const materialPages: ServicePageSeed[] = [
         column3: 'Key Considerations',
         rows: [
           {
-            feature: 'Metal Roofing',
-            cell1: 'Properties wanting a durable, modern metal system for replacement or new construction.',
-            cell2: 'Available in different profiles and modern finishes.',
-            cell3: 'Roof design, finish quality, coastal salt-air exposure, and system specs.',
-          },
-          {
             feature: 'Asphalt Shingles',
             cell1: 'Homes looking for a familiar, cost-effective residential roofing solution.',
             cell2: 'Traditional shingle profile with wide style choices.',
             cell3: 'Product selection, roof slope, local wind exposure, and budget.',
           },
           {
-            feature: 'Stone-Coated Steel',
-            cell1: 'Property owners wanting steel strength with a textured residential look.',
-            cell2: 'Profiles resembling tile, shake, or traditional shingles.',
-            cell3: 'System selection, roof design, structural load, and project requirements.',
+            feature: 'Silicone Coating',
+            cell1:
+              'Commercial and multi-unit properties wanting a seamless, reflective waterproof restoration barrier over flat or low-slope decks.',
+            cell2: 'Monolithic, smooth UV-reflective surface finish.',
+            cell3: 'Existing membrane adhesion, substrate moisture levels, and flashing compatibility.',
+          },
+          {
+            feature: 'Modified Bitumen',
+            cell1:
+              'Commercial buildings and multi-unit properties requiring a heavy-duty, multi-ply low-slope membrane.',
+            cell2: 'Multi-ply asphalt cap sheet or granular surfaced membrane.',
+            cell3: 'Deck preparation, ply bonding, drainage slope, and system specifications.',
+          },
+          {
+            feature: 'Metal Roofing',
+            cell1: 'Properties wanting a durable, modern metal system for replacement or new construction.',
+            cell2: 'Available in different profiles and modern finishes.',
+            cell3: 'Roof design, finish quality, coastal salt-air exposure, and system specs.',
           },
           {
             feature: 'Clay & Concrete Tile',
@@ -192,16 +201,16 @@ export const materialPages: ServicePageSeed[] = [
             cell3: 'Structural weight capacity, roof pitch, and specialized installation requirements.',
           },
           {
-            feature: 'Silicone Roof Coating',
-            cell1: 'Commercial and multi-unit low-slope roofs that can be restored with a seamless coating instead of a full tear-off.',
-            cell2: 'A monolithic, UV-reflective membrane rather than a shingle, tile, or standing-seam look.',
-            cell3: 'Substrate condition, adhesion, ponding water, and whether restoration is viable versus replacement.',
+            feature: 'Stone-Coated Steel',
+            cell1: 'Property owners wanting steel strength with a textured residential look.',
+            cell2: 'Profiles resembling tile, shake, or traditional shingles.',
+            cell3: 'System selection, roof design, structural load, and project requirements.',
           },
           {
-            feature: 'Modified Bitumen',
-            cell1: 'Commercial low-slope decks that need a heavy multi-ply membrane for traffic and weather protection.',
-            cell2: 'A layered asphalt membrane system rather than a coating, shingle, or architectural metal look.',
-            cell3: 'Deck preparation, ply bonding, drainage design, and whether torch-applied or self-adhered installation is appropriate.',
+            feature: 'Slate & Rubber Slate',
+            cell1: 'Properties seeking high-end luxury natural stone or synthetic slate roofing aesthetics.',
+            cell2: 'Distinctive, elegant natural slate or molded synthetic slate profile.',
+            cell3: 'Structural load capacity for natural slate, slope requirements, and specialized fastening.',
           },
         ],
       },
@@ -251,7 +260,7 @@ export const materialPages: ServicePageSeed[] = [
         {
           question: 'What roofing materials does R&C install on Oahu?',
           answer:
-            'We work with a variety of proven residential and commercial systems, including metal roofing, asphalt shingles, stone-coated steel, and clay or concrete tile.',
+            'We work with a variety of proven residential and commercial systems, including asphalt shingles, silicone roof coatings, modified bitumen, metal roofing, clay and concrete tile, stone-coated steel, and slate.',
         },
         {
           question: 'What is the best roofing material for a home on Oahu?',
@@ -307,7 +316,7 @@ export const materialPages: ServicePageSeed[] = [
         heading: 'Is Metal Roofing Right for Your Property?',
         paragraphs: [
           'Metal roofing can be a strong option for a new roof or replacement project, but choosing "metal" is only the beginning.',
-          'The type of metal, panel system, finish, roof design, property location, and installation details all matter. This is especially important on Oahu, where properties experience varying levels of coastal salt-air exposure, valley rainfall, wind, and intense tropical sun. We evaluate your property to ensure a metal system fits your specific building and budget.',
+          'The type of metal, panel system, finish, roof design, property location, and installation details all matter. This is especially important on Oahu, where properties experience varying levels of coastal salt-air exposure, valley rainfall, wind, and intense tropical sun. We evaluate your property to ensure a metal system fits your specific building and budget. Beyond single-family homes, our team handles large-scale commercial and multi-unit projects across the islands such as our large multi-unit metal roofing project on Maui, which required rigorous engineering for demanding coastal conditions.',
         ],
       },
       {
@@ -328,13 +337,17 @@ export const materialPages: ServicePageSeed[] = [
           },
           {
             feature: 'vs. Stone-Coated Steel',
-            cell1: 'You want clean architectural lines (such as standing seam) with maximum contemporary visual appeal.',
-            cell2: 'You prefer a textured roof finish that closely mimics traditional clay tile, wood shake, or standard shingles.',
+            cell1:
+              'You want clean architectural lines (such as standing seam) with maximum contemporary visual appeal.',
+            cell2:
+              'You prefer a textured roof finish that closely mimics traditional clay tile, wood shake, or standard shingles.',
           },
           {
             feature: 'vs. Tile Roofing',
-            cell1: 'You need a lightweight roofing system that does not require heavy structural framing or load reinforcements.',
-            cell2: 'Your building architecture specifically requires heavy clay or concrete tiles for a traditional island aesthetic.',
+            cell1:
+              'You need a lightweight roofing system that does not require heavy structural framing or load reinforcements.',
+            cell2:
+              'Your building architecture specifically requires heavy clay or concrete tiles for a traditional island aesthetic.',
           },
         ],
       },
@@ -358,7 +371,8 @@ export const materialPages: ServicePageSeed[] = [
           },
           {
             title: 'Thermal Performance',
-            description: 'Specialized cool-roof coatings help reflect tropical UV rays and reduce interior building heat gain.',
+            description:
+              'Specialized cool-roof coatings help reflect tropical UV rays and reduce interior building heat gain.',
             icon: 'tabler:sun',
           },
         ],
@@ -379,7 +393,8 @@ export const materialPages: ServicePageSeed[] = [
           experienceWhy,
           {
             title: 'System-Specific Expertise',
-            description: "We match the exact metal alloy, fastener type, and finish coating to your neighborhood's microclimate.",
+            description:
+              "We match the exact metal alloy, fastener type, and finish coating to your neighborhood's microclimate.",
             icon: 'tabler:settings',
           },
           inspectionWhy,
@@ -433,7 +448,8 @@ export const materialPages: ServicePageSeed[] = [
             feature: 'vs. Metal Roofing',
             cell1:
               'You want a familiar residential shingle profile, lower initial project costs, and straightforward repairability.',
-            cell2: 'You want a modern architectural metal look or a maximum-longevity system designed for decades of service.',
+            cell2:
+              'You want a modern architectural metal look or a maximum-longevity system designed for decades of service.',
           },
           {
             feature: 'vs. Stone-Coated Steel',
@@ -442,7 +458,8 @@ export const materialPages: ServicePageSeed[] = [
           },
           {
             feature: 'vs. Tile Roofing',
-            cell1: 'Your roof structure requires a lightweight roofing material without heavy framing load reinforcements.',
+            cell1:
+              'Your roof structure requires a lightweight roofing material without heavy framing load reinforcements.',
             cell2: 'You prefer a distinctive, high-end clay, concrete, or slate architectural profile.',
           },
         ],
@@ -450,7 +467,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'infoCardsSection',
         heading: 'Asphalt Shingle Options: Architectural vs. Traditional',
-        intro: 'Modern asphalt shingles come in different profiles designed to suit various aesthetic and performance goals:',
+        intro:
+          'Modern asphalt shingles come in different profiles designed to suit various aesthetic and performance goals:',
         items: [
           {
             title: 'Architectural (Dimensional) Shingles',
@@ -469,7 +487,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'iconPointsSection',
         heading: "Asphalt Shingle Roofing and Oahu's Microclimates",
-        intro: "An asphalt shingle roof must be specified and installed to handle Hawaii's unique environmental factors:",
+        intro:
+          "An asphalt shingle roof must be specified and installed to handle Hawaii's unique environmental factors:",
         layout: 'band',
         items: [
           {
@@ -508,7 +527,8 @@ export const materialPages: ServicePageSeed[] = [
           experienceWhy,
           {
             title: 'Code-Compliant Installation',
-            description: "We ensure precise fastening, flashing, and ventilation setup to maximize your shingle roof's lifespan.",
+            description:
+              "We ensure precise fastening, flashing, and ventilation setup to maximize your shingle roof's lifespan.",
             icon: 'tabler:building',
           },
           inspectionWhy,
@@ -574,7 +594,8 @@ export const materialPages: ServicePageSeed[] = [
             feature: 'vs. Real Tile',
             cell1:
               'You want the classic look of a tile roof without the heavy structural weight that requires building load reinforcements.',
-            cell2: 'You want genuine, traditional clay or concrete materials for historical or architectural alignment.',
+            cell2:
+              'You want genuine, traditional clay or concrete materials for historical or architectural alignment.',
           },
         ],
       },
@@ -659,7 +680,7 @@ export const materialPages: ServicePageSeed[] = [
         heading: 'Is Tile Roofing Right for Your Property?',
         paragraphs: [
           'Tile roofing creates a striking architectural look, but choosing tile involves more than picking a color or profile.',
-          "Because tile systems carry significant weight, structural load capacity, roof pitch, neighborhood weather exposure, and proper underlayment installation must all be carefully evaluated. We inspect your property to determine whether a clay or concrete tile system is structurally appropriate for your building.",
+          'Because tile systems carry significant weight, structural load capacity, roof pitch, neighborhood weather exposure, and proper underlayment installation must all be carefully evaluated. We inspect your property to determine whether a clay or concrete tile system is structurally appropriate for your building. In addition to residential homes, our team handles complex commercial and institutional projects such as our comprehensive tile roof replacement project at Chaminade University, which required strict structural coordination and adherence to institutional building standards.',
         ],
       },
       {
@@ -673,7 +694,8 @@ export const materialPages: ServicePageSeed[] = [
         rows: [
           {
             feature: 'vs. Asphalt Shingles',
-            cell1: 'You want a distinctive, high-end traditional aesthetic and a system designed for exceptional longevity.',
+            cell1:
+              'You want a distinctive, high-end traditional aesthetic and a system designed for exceptional longevity.',
             cell2:
               'Your current roof structure cannot support extra weight without expensive engineering upgrades, or you want a lower initial project cost.',
           },
@@ -685,7 +707,8 @@ export const materialPages: ServicePageSeed[] = [
           },
           {
             feature: 'vs. Stone-Coated Steel',
-            cell1: 'You want authentic, traditional clay or concrete materials for historical or architectural alignment.',
+            cell1:
+              'You want authentic, traditional clay or concrete materials for historical or architectural alignment.',
             cell2:
               'You want the heavy-tile look without the substantial weight and structural load requirements of concrete or clay.',
           },
@@ -694,7 +717,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'infoCardsSection',
         heading: 'Clay Tile vs. Concrete Tile',
-        intro: 'Both materials deliver a classic tile profile, but they are manufactured differently to suit different project goals:',
+        intro:
+          'Both materials deliver a classic tile profile, but they are manufactured differently to suit different project goals:',
         items: [
           {
             title: 'Clay Tile',
@@ -871,7 +895,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'linkedCardsSection',
         heading: 'Explore Other Roofing Materials',
-        intro: 'Compare slate and rubber slate side-by-side with other available material options for your Oahu property:',
+        intro:
+          'Compare slate and rubber slate side-by-side with other available material options for your Oahu property:',
         display: 'cards',
         items: [exploreMetal, exploreAsphalt, exploreStone, exploreTile],
       },
@@ -947,7 +972,8 @@ export const materialPages: ServicePageSeed[] = [
             feature: 'vs. Asphalt Shingle',
             cell1:
               'Your property features a low-slope or flat commercial roof design where traditional overlapping shingles are not applicable.',
-            cell2: 'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
+            cell2:
+              'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
           },
           {
             feature: 'vs. Metal Roofing',
@@ -961,7 +987,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'infoCardsSection',
         heading: 'Silicone Coating Options: Restoration vs. Prime-and-Coat Systems',
-        intro: 'Modern silicone roof coatings are applied in specialized configurations to suit various commercial asset goals:',
+        intro:
+          'Modern silicone roof coatings are applied in specialized configurations to suit various commercial asset goals:',
         items: [
           {
             title: 'Standard Silicone Restoration Coatings',
@@ -1006,7 +1033,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'linkedCardsSection',
         heading: 'Explore Other Roofing Materials',
-        intro: 'Compare silicone roof coatings side-by-side with other available material options for your Oahu property:',
+        intro:
+          'Compare silicone roof coatings side-by-side with other available material options for your Oahu property:',
         display: 'cards',
         items: [exploreModifiedBitumen, exploreMetal, exploreSiliconeAsphalt, exploreTile],
       },
@@ -1081,7 +1109,8 @@ export const materialPages: ServicePageSeed[] = [
             feature: 'vs. Asphalt Shingle',
             cell1:
               'Your property features a commercial low-slope or flat deck design where traditional overlapping shingles are not applicable.',
-            cell2: 'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
+            cell2:
+              'Your building features a standard sloped residential roof design suited for traditional shingle assemblies.',
           },
           {
             feature: 'vs. Metal Roofing',
@@ -1095,7 +1124,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'infoCardsSection',
         heading: 'Modified Bitumen Options: Torch-Applied vs. Self-Adhered Systems',
-        intro: 'Modern modified bitumen roofs are applied in specialized configurations to suit various commercial asset goals:',
+        intro:
+          'Modern modified bitumen roofs are applied in specialized configurations to suit various commercial asset goals:',
         items: [
           {
             title: 'Torch-Applied Membrane Systems',
@@ -1114,7 +1144,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'iconPointsSection',
         heading: "Modified Bitumen Roofing and Oahu's Microclimates",
-        intro: "A modified bitumen roof must be specified and installed to handle Hawaii's unique environmental factors:",
+        intro:
+          "A modified bitumen roof must be specified and installed to handle Hawaii's unique environmental factors:",
         layout: 'band',
         items: [
           {
@@ -1140,7 +1171,8 @@ export const materialPages: ServicePageSeed[] = [
       {
         _type: 'linkedCardsSection',
         heading: 'Explore Other Roofing Materials',
-        intro: 'Compare modified bitumen roofing side-by-side with other available material options for your Oahu property:',
+        intro:
+          'Compare modified bitumen roofing side-by-side with other available material options for your Oahu property:',
         display: 'cards',
         items: [exploreSilicone, exploreMetal, exploreSiliconeAsphalt, exploreTile],
       },

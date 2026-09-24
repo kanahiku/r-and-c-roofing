@@ -2,9 +2,8 @@ export interface Env {
   DB: D1Database;
   TURNSTILE_SECRET: string;
   RESEND_API_KEY: string;
-  /** Inbox that receives lead emails. Required in Resend test mode (must be the Resend account email). */
+  /** Inbox that receives lead emails. Overrides the site row. Required in Resend test mode. */
   NOTIFY_EMAIL?: string;
-  NOTIFY_EMAIL_OVERRIDE?: string;
   /** Defaults to Resend's test sender until a client domain is verified. */
   RESEND_FROM?: string;
   /** Extra origins as JSON array or comma-separated list. */
@@ -27,13 +26,82 @@ interface Submission {
   name: string;
   email: string;
   phone: string;
+  street: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip: string;
   message: string;
   website: string;
   turnstileToken: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX = { name: 120, email: 254, phone: 40, message: 5000 };
+const ZIP_RE = /^\d{5}(?:-\d{4})?$/;
+const MAX = {
+  name: 120,
+  email: 254,
+  phone: 40,
+  street: 120,
+  address2: 80,
+  city: 80,
+  state: 2,
+  zip: 10,
+  message: 5000,
+};
+const US_STATE_CODES = new Set([
+  'AL',
+  'AK',
+  'AZ',
+  'AR',
+  'CA',
+  'CO',
+  'CT',
+  'DE',
+  'DC',
+  'FL',
+  'GA',
+  'HI',
+  'ID',
+  'IL',
+  'IN',
+  'IA',
+  'KS',
+  'KY',
+  'LA',
+  'ME',
+  'MD',
+  'MA',
+  'MI',
+  'MN',
+  'MS',
+  'MO',
+  'MT',
+  'NE',
+  'NV',
+  'NH',
+  'NJ',
+  'NM',
+  'NY',
+  'NC',
+  'ND',
+  'OH',
+  'OK',
+  'OR',
+  'PA',
+  'RI',
+  'SC',
+  'SD',
+  'TN',
+  'TX',
+  'UT',
+  'VT',
+  'VA',
+  'WA',
+  'WV',
+  'WI',
+  'WY',
+]);
 const DEFAULT_RESEND_DAILY_LIMIT = 20;
 
 /** Always allowed so local + Vercel preview/prod work before a custom domain exists. */
@@ -105,10 +173,26 @@ export default {
       const createdAt = new Date().toISOString();
 
       await env.DB.prepare(
-        `INSERT INTO leads (id, site_slug, name, email, phone, message, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`
+        `INSERT INTO leads (
+           id, site_slug, name, email, phone,
+           street, address_line2, city, state, zip,
+           message, created_at
+         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       )
-        .bind(id, site.slug, parsed.name, parsed.email, parsed.phone || null, parsed.message, createdAt)
+        .bind(
+          id,
+          site.slug,
+          parsed.name,
+          parsed.email,
+          parsed.phone || null,
+          parsed.street,
+          parsed.address2 || null,
+          parsed.city,
+          parsed.state,
+          parsed.zip,
+          parsed.message,
+          createdAt
+        )
         .run();
 
       const dailyLimit = parseDailyLimit(env.RESEND_DAILY_LIMIT);
@@ -229,11 +313,22 @@ function isValidPhone(phone: string): boolean {
   return digits.length >= 10 && digits.length <= 15;
 }
 
+function formatAddress(lead: Pick<Submission, 'street' | 'address2' | 'city' | 'state' | 'zip'>): string {
+  const cityLine = [lead.city, lead.state].filter(Boolean).join(', ');
+  const locality = [cityLine, lead.zip].filter(Boolean).join(' ');
+  return [lead.street, lead.address2, locality].filter(Boolean).join('\n');
+}
+
 function validate(body: Record<string, string>): Submission | { error: string } {
   const site = (body.site || '').trim();
   const name = (body.name || '').trim();
   const email = (body.email || '').trim();
   const phone = (body.phone || '').trim();
+  const street = (body.street || '').trim();
+  const address2 = (body.address2 || body.address_line2 || '').trim();
+  const city = (body.city || '').trim();
+  const state = (body.state || '').trim().toUpperCase();
+  const zip = (body.zip || '').trim();
   const message = (body.message || '').trim();
   const website = (body.website || '').trim();
   const turnstileToken = (body['cf-turnstile-response'] || body.turnstileToken || '').trim();
@@ -242,10 +337,15 @@ function validate(body: Record<string, string>): Submission | { error: string } 
   if (name.length < 1 || name.length > MAX.name) return { error: 'Enter your name' };
   if (!EMAIL_RE.test(email) || email.length > MAX.email) return { error: 'Enter a valid email' };
   if (!isValidPhone(phone) || phone.length > MAX.phone) return { error: 'Enter a valid phone number' };
+  if (street.length < 1 || street.length > MAX.street) return { error: 'Enter a street address' };
+  if (address2.length > MAX.address2) return { error: 'Enter a valid apt/suite' };
+  if (city.length < 1 || city.length > MAX.city) return { error: 'Enter a city' };
+  if (!US_STATE_CODES.has(state)) return { error: 'Select a state' };
+  if (!ZIP_RE.test(zip) || zip.length > MAX.zip) return { error: 'Enter a valid ZIP code' };
   if (message.length < 1 || message.length > MAX.message) return { error: 'Enter a message' };
   if (!turnstileToken) return { error: 'Spam check is required' };
 
-  return { site, name, email, phone, message, website, turnstileToken };
+  return { site, name, email, phone, street, address2, city, state, zip, message, website, turnstileToken };
 }
 
 function parseOrigins(raw: string): string[] {
@@ -345,11 +445,13 @@ function escapeHtml(value: string): string {
 }
 
 function emailHtml(siteName: string, lead: Submission): string {
+  const address = formatAddress(lead);
   return `
     <p>New inquiry from <strong>${escapeHtml(siteName)}</strong></p>
     <p><strong>Name:</strong> ${escapeHtml(lead.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(lead.email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(lead.phone || '—')}</p>
+    <p><strong>Address:</strong><br />${escapeHtml(address).replace(/\n/g, '<br />')}</p>
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(lead.message).replace(/\n/g, '<br />')}</p>
   `;
@@ -361,6 +463,8 @@ function emailText(siteName: string, lead: Submission): string {
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
     `Phone: ${lead.phone || '—'}`,
+    `Address:`,
+    formatAddress(lead),
     '',
     lead.message,
   ].join('\n');

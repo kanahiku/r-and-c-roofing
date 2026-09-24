@@ -324,6 +324,8 @@ export const comparisonTableSection = defineType({
       title: 'Rows',
       type: 'array',
       of: [{ type: 'comparisonRow' }],
+      description:
+        'On the Roofing Materials hub, these rows are replaced by the global Roofing materials catalog. Edit the catalog instead.',
       validation: (r) => r.min(1),
     }),
   ],

@@ -1,9 +1,5 @@
 import { sanityClient } from '../sanity/client';
-import {
-  resolveContentImage,
-  resolveContentImageOrEmpty,
-  type SanityImageFields,
-} from '../sanity/image';
+import { resolveContentImage, resolveContentImageOrEmpty, type SanityImageFields } from '../sanity/image';
 import type {
   BlogContentBlock,
   BlogPost,
@@ -13,6 +9,7 @@ import type {
   HomePageContent,
   NavigationContent,
   ReviewsPageContent,
+  RoofingMaterialItem,
   ServicePageContent,
   ServiceSection,
   SplitContentSection,
@@ -148,12 +145,46 @@ const NAVIGATION_QUERY = /* groq */ `
       "secondaryLinks": secondaryLinks[] { text, href },
       "socialLinks": socialLinks[] { ariaLabel, icon, href },
       footNote
+    },
+    "materials": *[_type == "roofingMaterials" && _id == "singleton-roofing-materials"][0].items[] {
+      navTitle,
+      title,
+      description,
+      linkText,
+      comparisonLabel,
+      comparisonCell1,
+      comparisonCell2,
+      comparisonCell3,
+      "href": "/" + page->slug.current
     }
   }
 `;
 
 export async function getSanityNavigationContent(): Promise<NavigationContent> {
-  return sanityClient.fetch<NavigationContent>(NAVIGATION_QUERY);
+  const result = await sanityClient.fetch<NavigationContent & { materials?: RoofingMaterialItem[] }>(NAVIGATION_QUERY);
+  const materials = validRoofingMaterials(result.materials);
+  if (!materials.length) return result;
+
+  return {
+    ...result,
+    header: {
+      ...result.header,
+      links: result.header.links.map((link) => ({
+        ...link,
+        columns: link.columns?.map((column) => {
+          if (column.title !== 'Materials') return column;
+          const hub = column.links.find((item) => normalizePath(item.href) === ROOFING_MATERIALS_HUB);
+          return {
+            ...column,
+            links: [
+              ...(hub ? [hub] : [{ text: 'Roofing Materials', href: ROOFING_MATERIALS_HUB }]),
+              ...materials.map((material) => ({ text: material.navTitle, href: material.href })),
+            ],
+          };
+        }),
+      })),
+    },
+  };
 }
 
 const SERVICE_PAGE_QUERY = /* groq */ `
@@ -226,9 +257,9 @@ const SERVICE_PAGE_QUERY = /* groq */ `
   }
 `;
 
-function normalizeHeroImage<T extends { image?: FetchedImage | ContentImage; imageMobile?: FetchedImage | ContentImage }>(
-  hero: T
-): T {
+function normalizeHeroImage<
+  T extends { image?: FetchedImage | ContentImage; imageMobile?: FetchedImage | ContentImage },
+>(hero: T): T {
   return {
     ...hero,
     image: resolveContentImage(hero.image as FetchedImage | undefined),
@@ -285,19 +316,119 @@ const CTA_BANNER_PROJECTION = /* groq */ `
 `;
 
 export async function getSanityServicePage(slug: string): Promise<ServicePageContent | null> {
-  const page = await sanityClient.fetch<ServicePageContent | null>(SERVICE_PAGE_QUERY, { slug });
+  const [page, rawMaterials] = await Promise.all([
+    sanityClient.fetch<ServicePageContent | null>(SERVICE_PAGE_QUERY, { slug }),
+    sanityClient.fetch<RoofingMaterialItem[] | null>(ROOFING_MATERIALS_QUERY),
+  ]);
   if (!page) return null;
 
+  const materials = validRoofingMaterials(rawMaterials);
   return {
     ...page,
     sections: ((page.sections ?? []) as ServiceSection[]).map((section) => {
       const withImage = resolveSectionImage(section as ServiceSection & { image?: FetchedImage });
+      const materialSection = resolveRoofingMaterialsSection(withImage, slug, materials);
+      if (materialSection) return materialSection;
+      const comparisonSection = resolveRoofingMaterialsComparison(withImage, slug, materials);
+      if (comparisonSection) return comparisonSection;
       if (withImage._type !== 'splitContentSection') return withImage;
       return normalizeSplit(withImage as SplitContentSection);
     }),
     faqs: page.faqs?.items?.length ? page.faqs : undefined,
     hero: normalizeHeroImage(page.hero),
   };
+}
+
+const ROOFING_MATERIALS_HUB = '/services/roofing-materials';
+
+const ROOFING_MATERIALS_QUERY = /* groq */ `
+  *[_type == "roofingMaterials" && _id == "singleton-roofing-materials"][0].items[] {
+    navTitle,
+    title,
+    description,
+    linkText,
+    comparisonLabel,
+    comparisonCell1,
+    comparisonCell2,
+    comparisonCell3,
+    "href": "/" + page->slug.current
+  }
+`;
+
+function normalizePath(path?: string) {
+  if (!path) return '';
+  return `/${path.replace(/^\/+|\/+$/g, '')}`;
+}
+
+function validRoofingMaterials(materials?: RoofingMaterialItem[] | null): RoofingMaterialItem[] {
+  return (materials ?? []).filter(
+    (material) =>
+      material?.navTitle &&
+      material?.title &&
+      material?.description &&
+      material?.linkText &&
+      normalizePath(material?.href).startsWith(`${ROOFING_MATERIALS_HUB}/`)
+  );
+}
+
+function resolveRoofingMaterialsSection(
+  section: ServiceSection,
+  slug: string,
+  materials: RoofingMaterialItem[]
+): ServiceSection | null {
+  if (!materials.length) return null;
+
+  const currentPath = normalizePath(slug);
+  if (currentPath !== ROOFING_MATERIALS_HUB && !currentPath.startsWith(`${ROOFING_MATERIALS_HUB}/`)) return null;
+
+  const heading = 'heading' in section ? section.heading.trim().toLowerCase() : '';
+  const sectionType = (section as { _type: string })._type;
+  const isCatalogSection =
+    sectionType === 'roofingMaterialsSection' ||
+    (sectionType === 'linkedCardsSection' &&
+      (heading === 'choose your roofing material' || heading === 'explore other roofing materials'));
+  if (!isCatalogSection) return null;
+
+  const dynamicSection = section as ServiceSection & {
+    heading: string;
+    intro?: string;
+    display?: 'cards' | 'directory';
+  };
+
+  return {
+    _type: 'linkedCardsSection',
+    heading: dynamicSection.heading,
+    intro: dynamicSection.intro,
+    display: dynamicSection.display ?? 'cards',
+    items: materials
+      .filter((material) => normalizePath(material.href) !== currentPath)
+      .map(({ title, description, href, linkText }) => ({ title, description, href, linkText })),
+  };
+}
+
+function resolveRoofingMaterialsComparison(
+  section: ServiceSection,
+  slug: string,
+  materials: RoofingMaterialItem[]
+): ServiceSection | null {
+  if (!materials.length) return null;
+  if (normalizePath(slug) !== ROOFING_MATERIALS_HUB) return null;
+  if (section._type !== 'comparisonTableSection') return null;
+
+  const heading = section.heading.trim().toLowerCase();
+  if (heading !== 'compare your options at a glance') return null;
+
+  const rows = materials
+    .filter((material) => material.comparisonCell1 && material.comparisonCell2)
+    .map((material) => ({
+      feature: material.comparisonLabel || material.title,
+      cell1: material.comparisonCell1 as string,
+      cell2: material.comparisonCell2 as string,
+      cell3: material.comparisonCell3,
+    }));
+
+  if (!rows.length) return null;
+  return { ...section, rows };
 }
 
 const CONTACT_PAGE_QUERY = /* groq */ `
@@ -442,17 +573,10 @@ function portableBlockText(block: SanityPortableBlock): string {
 }
 
 function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function spansToHtml(
-  children: SanitySpan[] | undefined,
-  markDefs: SanityMarkDef[] | undefined
-): string {
+function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef[] | undefined): string {
   if (!Array.isArray(children)) return '';
   const defsMap = new Map((markDefs ?? []).map((d) => [d._key, d]));
 

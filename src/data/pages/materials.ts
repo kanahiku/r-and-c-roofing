@@ -30,14 +30,15 @@ export const materialCards = {
   },
   stone: {
     title: 'Stone-Coated Steel Roofing',
-    description: 'Combines heavy-duty steel strength with the textured, traditional appearance of shake or tile profiles.',
+    description:
+      'Combines heavy-duty steel strength with the textured, traditional appearance of shake or tile profiles.',
     href: materialHrefs.stone,
     linkText: 'Explore Stone-Coated Steel Roofing',
   },
   tile: {
-    title: 'Clay & Concrete Tile Roofing',
+    title: 'Tile Roofing',
     description:
-      'Distinctive island styling that creates a classic architectural look, requiring careful review of your home\'s structural load capacity.',
+      "Distinctive island styling that creates a classic architectural look, requiring careful review of your home's structural load capacity.",
     href: materialHrefs.tile,
     linkText: 'Explore Tile Roofing',
   },
@@ -50,7 +51,7 @@ export const materialCards = {
   silicone: {
     title: 'Silicone Roof Coating',
     description:
-      'Seamless waterproofing for commercial and multi-unit low-slope roofs, with strong ponding water resistance and UV-reflective restoration.',
+      'High-solids, seamless elastomeric membranes engineered to waterproof, reflect UV rays, and extend the lifespan of commercial flat and low-slope roofs.',
     href: materialHrefs.silicone,
     linkText: 'Explore Silicone Roof Coating',
   },

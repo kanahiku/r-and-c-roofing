@@ -72,6 +72,7 @@ export const servicePage = defineType({
         { type: 'liveReviewsSection' },
         { type: 'splitContentSection' },
         { type: 'quoteCardsSection' },
+        { type: 'roofingMaterialsSection' },
       ],
     }),
     defineField({

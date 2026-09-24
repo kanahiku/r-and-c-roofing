@@ -8,6 +8,7 @@ const SINGLETONS: Record<string, string> = {
   homePage: 'singleton-home',
   contactPage: 'singleton-contact',
   reviewsPage: 'singleton-reviews',
+  roofingMaterials: 'singleton-roofing-materials',
 };
 
 export const structure = (S: StructureBuilder) =>
@@ -31,6 +32,15 @@ export const structure = (S: StructureBuilder) =>
             .schemaType('siteFooter')
             .documentId('singleton-footer')
             .title('Footer')
+        ),
+
+      S.listItem()
+        .title('Roofing Materials')
+        .child(
+          S.document()
+            .schemaType('roofingMaterials')
+            .documentId('singleton-roofing-materials')
+            .title('Roofing Materials')
         ),
 
       S.divider(),

@@ -13,8 +13,16 @@ const fieldMax: Record<string, number> = {
   name: 120,
   email: 254,
   phone: 40,
+  street: 120,
+  address2: 80,
+  city: 80,
   zip: 10,
 };
+const widthClass = {
+  full: 'sm:col-span-6',
+  half: 'sm:col-span-3',
+  third: 'sm:col-span-2',
+} as const;
 ---
 
 <form
@@ -27,45 +35,50 @@ const fieldMax: Record<string, number> = {
   data-phone-href={CONTACT.phone.href}
 >
   {
-    inputs &&
-      inputs.map(({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required, options }) =>
-        name && (
-          <div class="mb-6">
-            {label && (
-              <label for={name} class="block text-[14px] md:text-[15px] font-medium text-heading mb-2">
-                {label}
-              </label>
-            )}
-            {type === 'select' ? (
-              <select
-                id={name}
-                name={name}
-                required={required}
-                aria-describedby={`${name}-error`}
-                class={fieldClass}
-              >
-                <option value="">{placeholder || 'Select an option'}</option>
-                {(options ?? []).map((option) => (
-                  <option value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            ) : (
-              <input
-                type={type}
-                name={name}
-                id={name}
-                autocomplete={autocomplete}
-                placeholder={placeholder}
-                required={required}
-                maxlength={fieldMax[name] ?? undefined}
-                aria-describedby={`${name}-error`}
-                class={fieldClass}
-              />
-            )}
-            <p id={`${name}-error`} class={errorClass} data-field-error={name} role="alert"></p>
-          </div>
-        )
-      )
+    inputs && (
+      <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-4">
+        {inputs.map(
+          ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required, options, width = 'full' }) =>
+            name && (
+              <div class:list={['mb-6', widthClass[width] ?? widthClass.full]}>
+                {label && (
+                  <label for={name} class="block text-[14px] md:text-[15px] font-medium text-heading mb-2">
+                    {label}
+                  </label>
+                )}
+                {type === 'select' ? (
+                  <select
+                    id={name}
+                    name={name}
+                    autocomplete={autocomplete === 'on' ? undefined : autocomplete}
+                    required={required}
+                    aria-describedby={`${name}-error`}
+                    class={fieldClass}
+                  >
+                    <option value="">{placeholder || 'Select an option'}</option>
+                    {(options ?? []).map((option) => (
+                      <option value={option.value}>{option.label}</option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={type}
+                    name={name}
+                    id={name}
+                    autocomplete={autocomplete}
+                    placeholder={placeholder}
+                    required={required}
+                    maxlength={fieldMax[name] ?? undefined}
+                    aria-describedby={`${name}-error`}
+                    class={fieldClass}
+                  />
+                )}
+                <p id={`${name}-error`} class={errorClass} data-field-error={name} role="alert"></p>
+              </div>
+            )
+        )}
+      </div>
+    )
   }
 
   {
@@ -203,14 +216,25 @@ const fieldMax: Record<string, number> = {
     first?.focus();
   }
 
-  function composeMessage(form: HTMLFormElement, data: FormData) {
+  function composeAddress(data: FormData) {
+    const street = asText(data.get('street'));
+    const address2 = asText(data.get('address2'));
+    const city = asText(data.get('city'));
+    const state = asText(data.get('state'));
     const zip = asText(data.get('zip'));
+    const cityLine = [city, state].filter(Boolean).join(', ');
+    const locality = [cityLine, zip].filter(Boolean).join(' ');
+    return [street, address2, locality].filter(Boolean).join('\n');
+  }
+
+  function composeMessage(form: HTMLFormElement, data: FormData) {
+    const address = composeAddress(data);
     const topicField = form.querySelector<HTMLSelectElement>('[name="topic"]');
     const topicValue = asText(data.get('topic'));
     const topicLabel = topicField?.selectedOptions[0]?.text?.trim() || topicValue;
     const message = asText(data.get('message'));
     const lines: string[] = [];
-    if (zip) lines.push(`ZIP: ${zip}`);
+    if (address) lines.push(`Address:\n${address}`);
     if (topicLabel) lines.push(`Topic: ${topicLabel}`);
     if (message) lines.push(message);
     return lines.join('\n\n') || 'Contact form submission';
@@ -311,15 +335,27 @@ const fieldMax: Record<string, number> = {
       status.textContent = '';
 
       const hasZipField = Boolean(fieldControl(form, 'zip'));
+      const hasStreetField = Boolean(fieldControl(form, 'street'));
+      const hasAddress2Field = Boolean(fieldControl(form, 'address2'));
+      const hasCityField = Boolean(fieldControl(form, 'city'));
+      const hasStateField = Boolean(fieldControl(form, 'state'));
       const hasTopicField = Boolean(fieldControl(form, 'topic'));
       const messageField = fieldControl(form, 'message');
       const errors = validateContactFields({
         name: asText(data.get('name')),
         email: asText(data.get('email')),
         phone: asText(data.get('phone')),
+        street: asText(data.get('street')),
+        address2: asText(data.get('address2')),
+        city: asText(data.get('city')),
+        state: asText(data.get('state')),
         zip: asText(data.get('zip')),
         topic: asText(data.get('topic')),
         message: asText(data.get('message')),
+        hasStreetField,
+        hasAddress2Field,
+        hasCityField,
+        hasStateField,
         hasZipField,
         hasTopicField,
         hasMessageField: Boolean(messageField),
@@ -363,6 +399,11 @@ const fieldMax: Record<string, number> = {
             name: asText(data.get('name')),
             email: asText(data.get('email')),
             phone: asText(data.get('phone')),
+            street: asText(data.get('street')),
+            address2: asText(data.get('address2')),
+            city: asText(data.get('city')),
+            state: asText(data.get('state')),
+            zip: asText(data.get('zip')),
             message: composeMessage(form, data),
             website: asText(data.get('website')),
             turnstileToken,

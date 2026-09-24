@@ -18,6 +18,7 @@ import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import { CONTACT } from '~/config/contact';
 import { getContactPage } from '~/lib/content';
 import { contactAddress, mapsDirectionsHref, mapsEmbedSrc } from '~/data/pages/contact';
+import { US_STATES } from '~/lib/form-validation';
 
 const page = await getContactPage();
 const mapsQuery = page.form.mapsQuery || contactAddress.mapsQuery;
@@ -102,7 +103,40 @@ function isEmailTouchpoint(title: string) {
             { type: 'text', name: 'name', label: 'Name *', autocomplete: 'name', required: true },
             { type: 'email', name: 'email', label: 'Email *', autocomplete: 'email', required: true },
             { type: 'tel', name: 'phone', label: 'Phone *', autocomplete: 'tel', required: true },
-            { type: 'text', name: 'zip', label: 'ZIP Code *', autocomplete: 'postal-code', required: true },
+            { type: 'text', name: 'street', label: 'Street Address *', autocomplete: 'address-line1', required: true },
+            {
+              type: 'text',
+              name: 'address2',
+              label: 'Apt / Suite',
+              autocomplete: 'address-line2',
+              placeholder: 'Optional',
+            },
+            {
+              type: 'text',
+              name: 'city',
+              label: 'City *',
+              autocomplete: 'address-level2',
+              required: true,
+              width: 'third',
+            },
+            {
+              type: 'select',
+              name: 'state',
+              label: 'State *',
+              autocomplete: 'address-level1',
+              required: true,
+              placeholder: 'Select a state',
+              options: [...US_STATES],
+              width: 'third',
+            },
+            {
+              type: 'text',
+              name: 'zip',
+              label: 'ZIP Code *',
+              autocomplete: 'postal-code',
+              required: true,
+              width: 'third',
+            },
             {
               type: 'select',
               name: 'topic',

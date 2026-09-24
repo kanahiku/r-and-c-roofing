@@ -79,7 +79,8 @@ export const inspectionPages: ServicePageSeed[] = [
           },
           {
             title: 'Aging Materials',
-            description: 'We determine if an older roof needs replacement or targeted maintenance.',
+            description:
+              'If your roof is getting older and you are wondering whether it has reached the end of its serviceable years, check our guide on [My Roof Is at End of Life](/roof-problems/my-roof-is-at-end-of-life) to see what signs to look for and how we evaluate replacement options.',
             icon: 'tabler:calendar',
           },
           {

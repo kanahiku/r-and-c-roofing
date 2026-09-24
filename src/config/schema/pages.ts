@@ -106,7 +106,11 @@ export const pages: PageSchema[] = [
         a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute the necessary repairs or full replacement.',
       },
     ],
-    breadcrumb: [HOME, ROOF_INSPECTIONS, { name: 'HAAG Certified Inspection', path: '/roof-inspections/haag-certified-inspection' }],
+    breadcrumb: [
+      HOME,
+      ROOF_INSPECTIONS,
+      { name: 'HAAG Certified Inspection', path: '/roof-inspections/haag-certified-inspection' },
+    ],
   },
   {
     name: 'Pre-Purchase Roof Inspection',
@@ -149,7 +153,7 @@ export const pages: PageSchema[] = [
     schemaType: 'Service',
     serviceType: 'Pre-Listing Roof Inspection',
     description:
-      "Selling a home on Oahu? A pre-listing roof inspection from R&C helps you understand visible roof conditions before putting your property on the market.",
+      'Selling a home on Oahu? A pre-listing roof inspection from R&C helps you understand visible roof conditions before putting your property on the market.',
     faq: [
       {
         q: 'Do I have to repair everything R&C finds?',
@@ -372,7 +376,10 @@ export const pages: PageSchema[] = [
     description:
       'Prepare your Oahu roof for hurricane season. Learn what weather risks to expect, how to inspect for wind vulnerabilities, and how R&C Roofing helps protect your home.',
     faq: null,
-    breadcrumb: [HOME, { name: 'Preparing for Hurricane Season', path: '/roof-problems/preparing-for-hurricane-season' }],
+    breadcrumb: [
+      HOME,
+      { name: 'Preparing for Hurricane Season', path: '/roof-problems/preparing-for-hurricane-season' },
+    ],
   },
 
   {
@@ -391,11 +398,11 @@ export const pages: PageSchema[] = [
     schemaType: 'Service',
     serviceType: 'Roofing Material Consultation',
     description:
-      'Compare roofing materials for Oahu properties, including metal, asphalt shingles, stone-coated steel, and clay or concrete tile. Explore your options with R&C Roofing.',
+      'Compare roofing materials for Oahu properties: asphalt shingles, silicone coating, modified bitumen, metal, tile and more. Explore your options with R&C Roofing.',
     faq: [
       {
         q: 'What roofing materials does R&C install on Oahu?',
-        a: 'We work with a variety of proven residential and commercial systems, including metal roofing, asphalt shingles, stone-coated steel, and clay or concrete tile.',
+        a: 'We work with a variety of proven residential and commercial systems, including asphalt shingles, silicone roof coatings, modified bitumen, metal roofing, clay and concrete tile, stone-coated steel, and slate.',
       },
       {
         q: 'What is the best roofing material for a home on Oahu?',
@@ -407,7 +414,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can I change to a different roofing material during a replacement?',
-        a: "Often yes, but it depends on your existing roof structure, roof pitch, and weight capacity. We evaluate these factors before recommending a material switch.",
+        a: 'Often yes, but it depends on your existing roof structure, roof pitch, and weight capacity. We evaluate these factors before recommending a material switch.',
       },
       {
         q: 'Should I choose my roofing material before scheduling an inspection?',
@@ -424,7 +431,12 @@ export const pages: PageSchema[] = [
     description:
       'Explore metal roofing for Oahu homes and properties. Learn what to consider for coastal exposure, roof design, cost, installation, and material selection with R&C Roofing.',
     faq: null,
-    breadcrumb: [HOME, SERVICES, MATERIALS, { name: 'Metal Roofing', path: '/services/roofing-materials/metal-roofing' }],
+    breadcrumb: [
+      HOME,
+      SERVICES,
+      MATERIALS,
+      { name: 'Metal Roofing', path: '/services/roofing-materials/metal-roofing' },
+    ],
   },
   {
     name: 'Asphalt Shingle Roofing',
@@ -600,7 +612,11 @@ export const pages: PageSchema[] = [
     description:
       'Need new gutters on Oahu? R&C Roofing Contractors provides gutter installation and gutter services for Hawaii homes and properties. Request an estimate.',
     faq: null,
-    breadcrumb: [HOME, SERVICES, { name: 'Gutter Installation & Repair', path: '/services/gutter-installation-and-repair' }],
+    breadcrumb: [
+      HOME,
+      SERVICES,
+      { name: 'Gutter Installation & Repair', path: '/services/gutter-installation-and-repair' },
+    ],
   },
 
   {

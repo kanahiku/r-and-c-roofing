@@ -1,4 +1,16 @@
+# Copy to .dev.vars (gitignored). Used by `wrangler dev` only — never deployed.
+#
+# Three ways to run the form locally:
+#
+# 1. No email at all (default, safest). Leave the placeholder RESEND_API_KEY below.
+#    The Worker skips Resend and still writes the lead to local D1.
+# 2. Real email to a safe inbox. Put a real re_... key here and set
+#    NOTIFY_EMAIL to your own address or delivered@resend.dev.
+# 3. Never point local dev at the deployed Worker — that mails the client
+#    and writes to production D1. Keep PUBLIC_FORM_ENDPOINT on localhost:8787.
+
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
 RESEND_API_KEY=re_xxxxxxxx
-NOTIFY_EMAIL=info@safehomeservice.com
+NOTIFY_EMAIL=delivered@resend.dev
+
 # Daily notify cap lives in wrangler.toml as RESEND_DAILY_LIMIT (default 20 per site).

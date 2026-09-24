@@ -1,14 +1,95 @@
 /** Keep in sync with `services/forms/src/index.ts` so the UI rejects the same values the API would. */
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const MAX = { name: 120, email: 254, phone: 40, message: 5000 };
+export const ZIP_RE = /^\d{5}(?:-\d{4})?$/;
+export const MAX = {
+  name: 120,
+  email: 254,
+  phone: 40,
+  street: 120,
+  address2: 80,
+  city: 80,
+  state: 2,
+  zip: 10,
+  message: 5000,
+};
 
-export type ContactFieldName = 'name' | 'email' | 'phone' | 'zip' | 'topic' | 'message';
+export const US_STATES = [
+  { value: 'AL', label: 'Alabama' },
+  { value: 'AK', label: 'Alaska' },
+  { value: 'AZ', label: 'Arizona' },
+  { value: 'AR', label: 'Arkansas' },
+  { value: 'CA', label: 'California' },
+  { value: 'CO', label: 'Colorado' },
+  { value: 'CT', label: 'Connecticut' },
+  { value: 'DE', label: 'Delaware' },
+  { value: 'DC', label: 'District of Columbia' },
+  { value: 'FL', label: 'Florida' },
+  { value: 'GA', label: 'Georgia' },
+  { value: 'HI', label: 'Hawaii' },
+  { value: 'ID', label: 'Idaho' },
+  { value: 'IL', label: 'Illinois' },
+  { value: 'IN', label: 'Indiana' },
+  { value: 'IA', label: 'Iowa' },
+  { value: 'KS', label: 'Kansas' },
+  { value: 'KY', label: 'Kentucky' },
+  { value: 'LA', label: 'Louisiana' },
+  { value: 'ME', label: 'Maine' },
+  { value: 'MD', label: 'Maryland' },
+  { value: 'MA', label: 'Massachusetts' },
+  { value: 'MI', label: 'Michigan' },
+  { value: 'MN', label: 'Minnesota' },
+  { value: 'MS', label: 'Mississippi' },
+  { value: 'MO', label: 'Missouri' },
+  { value: 'MT', label: 'Montana' },
+  { value: 'NE', label: 'Nebraska' },
+  { value: 'NV', label: 'Nevada' },
+  { value: 'NH', label: 'New Hampshire' },
+  { value: 'NJ', label: 'New Jersey' },
+  { value: 'NM', label: 'New Mexico' },
+  { value: 'NY', label: 'New York' },
+  { value: 'NC', label: 'North Carolina' },
+  { value: 'ND', label: 'North Dakota' },
+  { value: 'OH', label: 'Ohio' },
+  { value: 'OK', label: 'Oklahoma' },
+  { value: 'OR', label: 'Oregon' },
+  { value: 'PA', label: 'Pennsylvania' },
+  { value: 'RI', label: 'Rhode Island' },
+  { value: 'SC', label: 'South Carolina' },
+  { value: 'SD', label: 'South Dakota' },
+  { value: 'TN', label: 'Tennessee' },
+  { value: 'TX', label: 'Texas' },
+  { value: 'UT', label: 'Utah' },
+  { value: 'VT', label: 'Vermont' },
+  { value: 'VA', label: 'Virginia' },
+  { value: 'WA', label: 'Washington' },
+  { value: 'WV', label: 'West Virginia' },
+  { value: 'WI', label: 'Wisconsin' },
+  { value: 'WY', label: 'Wyoming' },
+] as const;
+
+export const US_STATE_CODES = new Set<string>(US_STATES.map((state) => state.value));
+
+export type ContactFieldName =
+  | 'name'
+  | 'email'
+  | 'phone'
+  | 'street'
+  | 'address2'
+  | 'city'
+  | 'state'
+  | 'zip'
+  | 'topic'
+  | 'message';
 export type ContactFieldErrors = Partial<Record<ContactFieldName, string>>;
 
 export const FIELD_ERRORS: Record<ContactFieldName, string> = {
   name: 'Enter Valid Name',
   email: 'Enter Valid Email',
   phone: 'Enter Valid Phone Number',
+  street: 'Enter Street Address',
+  address2: 'Enter Apt/Suite',
+  city: 'Enter City',
+  state: 'Select a State',
   zip: 'Enter Valid ZIP Code',
   topic: 'Select a Topic',
   message: 'Enter Valid Message',
@@ -24,13 +105,29 @@ export function isValidPhone(phone: string): boolean {
   return digits.length >= 10 && digits.length <= 15;
 }
 
+export function isValidZip(zip: string): boolean {
+  return ZIP_RE.test(zip);
+}
+
+export function isValidState(state: string): boolean {
+  return US_STATE_CODES.has(state.toUpperCase());
+}
+
 export function validateContactFields(values: {
   name: string;
   email: string;
   phone: string;
+  street?: string;
+  address2?: string;
+  city?: string;
+  state?: string;
   zip?: string;
   topic?: string;
   message?: string;
+  hasStreetField?: boolean;
+  hasAddress2Field?: boolean;
+  hasCityField?: boolean;
+  hasStateField?: boolean;
   hasZipField?: boolean;
   hasTopicField?: boolean;
   hasMessageField?: boolean;
@@ -46,7 +143,25 @@ export function validateContactFields(values: {
     errors.phone = FIELD_ERRORS.phone;
   }
 
-  if (values.hasZipField && !values.zip) errors.zip = FIELD_ERRORS.zip;
+  if (values.hasStreetField && (!values.street || values.street.length > MAX.street)) {
+    errors.street = FIELD_ERRORS.street;
+  }
+
+  if (values.hasAddress2Field && values.address2 && values.address2.length > MAX.address2) {
+    errors.address2 = FIELD_ERRORS.address2;
+  }
+
+  if (values.hasCityField && (!values.city || values.city.length > MAX.city)) {
+    errors.city = FIELD_ERRORS.city;
+  }
+
+  if (values.hasStateField && !isValidState(values.state || '')) {
+    errors.state = FIELD_ERRORS.state;
+  }
+
+  if (values.hasZipField && (!values.zip || !isValidZip(values.zip))) {
+    errors.zip = FIELD_ERRORS.zip;
+  }
 
   if (values.hasTopicField && !values.topic) errors.topic = FIELD_ERRORS.topic;
 
@@ -61,6 +176,11 @@ export function validateContactFields(values: {
 
 export function fieldFromApiError(error: string): ContactFieldName | null {
   const text = error.toLowerCase();
+  if (text.includes('street')) return 'street';
+  if (text.includes('apt') || text.includes('suite')) return 'address2';
+  if (text.includes('city')) return 'city';
+  if (text.includes('state')) return 'state';
+  if (text.includes('zip')) return 'zip';
   if (text.includes('phone')) return 'phone';
   if (text.includes('email')) return 'email';
   if (text.includes('name')) return 'name';

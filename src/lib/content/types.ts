@@ -59,6 +59,20 @@ export interface NavigationContent {
   };
 }
 
+// ─── Roofing material catalog ────────────────────────────────────────────────
+
+export interface RoofingMaterialItem {
+  navTitle: string;
+  title: string;
+  description: string;
+  href: string;
+  linkText: string;
+  comparisonLabel?: string;
+  comparisonCell1?: string;
+  comparisonCell2?: string;
+  comparisonCell3?: string;
+}
+
 // ─── Homepage section types ───────────────────────────────────────────────────
 
 export interface StatItem {

@@ -4,6 +4,7 @@ import { siteFooter } from './singletons/footer';
 import { homePage } from './singletons/homePage';
 import { contactPage } from './singletons/contactPage';
 import { reviewsPage } from './singletons/reviewsPage';
+import { roofingMaterials, roofingMaterialsSection } from './singletons/roofingMaterials';
 import { lead } from './documents/lead';
 import { servicePage } from './documents/servicePage';
 import { blogPost } from './documents/blogPost';
@@ -57,6 +58,7 @@ export const schemaTypes = [
   homePage,
   contactPage,
   reviewsPage,
+  roofingMaterials,
   servicePage,
   blogPost,
   lead,
@@ -98,6 +100,7 @@ export const schemaTypes = [
   liveReviewsSection,
   splitContentSection,
   quoteCardsSection,
+  roofingMaterialsSection,
   faqsSection,
   formHelpOption,
   contactLink,

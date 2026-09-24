@@ -18,6 +18,7 @@ import ReviewsGrid from '~/components/widgets/ReviewsGrid.astro';
 import type { ServiceSection } from '~/lib/content/types';
 import type { ReviewSource } from '~/lib/reviews';
 import { cardVariant, introClass, isDarkSurface, pointVariant, sectionSurface } from '~/lib/content/sectionTheme';
+import { inlineLinkClass, inlineMarkdownHtml } from '~/lib/content/inlineMarkdown';
 
 export interface Props {
   sections: ServiceSection[];
@@ -154,10 +155,10 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
                 class:list={[
                   'text-[16px] md:text-[17px] font-normal leading-[160%] text-left max-w-3xl mb-[30px]',
                   introColor,
+                  inlineLinkClass(isDark),
                 ]}
-              >
-                {section.intro}
-              </p>
+                set:html={inlineMarkdownHtml(section.intro ?? '')}
+              />
             )}
           </>
         )}

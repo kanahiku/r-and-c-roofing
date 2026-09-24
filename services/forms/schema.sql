@@ -13,6 +13,11 @@ CREATE TABLE IF NOT EXISTS leads (
   name TEXT NOT NULL,
   email TEXT NOT NULL,
   phone TEXT,
+  street TEXT,
+  address_line2 TEXT,
+  city TEXT,
+  state TEXT,
+  zip TEXT,
   message TEXT NOT NULL,
   created_at TEXT NOT NULL,
   email_sent_at TEXT,
@@ -21,3 +26,5 @@ CREATE TABLE IF NOT EXISTS leads (
 
 CREATE INDEX IF NOT EXISTS leads_site_created ON leads (site_slug, created_at DESC);
 CREATE INDEX IF NOT EXISTS leads_site_email_sent ON leads (site_slug, email_sent_at);
+CREATE INDEX IF NOT EXISTS leads_site_zip ON leads (site_slug, zip);
+CREATE INDEX IF NOT EXISTS leads_site_state ON leads (site_slug, state);

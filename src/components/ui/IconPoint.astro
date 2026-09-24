@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { inlineLinkClass, inlineMarkdownHtml } from '~/lib/content/inlineMarkdown';
 
 export interface Props {
   title: string;
@@ -14,6 +15,7 @@ const { title, description, icon, variant = 'light', orientation = 'inline', ali
 
 const headingClass = variant === 'dark' ? 'text-white' : 'text-heading';
 const bodyClass = variant === 'dark' ? 'text-white/70' : 'text-muted';
+const linkClass = inlineLinkClass(variant === 'dark');
 const iconMark = variant === 'dark' ? 'border border-accent/60' : 'bg-[#222]';
 const isStack = orientation === 'stack';
 const isStart = align === 'start';
@@ -41,8 +43,6 @@ const isStart = align === 'start';
     <h3 class:list={['text-[16px] md:text-[18px] font-sans font-medium leading-[130%] mb-0.5', headingClass]}>
       {title}
     </h3>
-    <p class:list={['text-[13px] md:text-[14px] font-normal leading-[160%]', bodyClass]}>
-      {description}
-    </p>
+    <p class:list={['text-[13px] md:text-[14px] font-normal leading-[160%]', bodyClass, linkClass]} set:html={inlineMarkdownHtml(description)} />
   </div>
 </div>

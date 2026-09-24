@@ -340,7 +340,7 @@ export const roofProblemPages: ServicePageSeed[] = [
         _type: 'iconPointsSection',
         heading: 'Repair, Replace, or Keep Monitoring?',
         intro:
-          'A roof inspection helps determine which path makes the most sense based on the actual condition of your property:',
+          'A [roof inspection](/roof-inspections) helps determine which path makes the most sense based on the actual condition of your property:',
         layout: 'grid',
         items: [
           {

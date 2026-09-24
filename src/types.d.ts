@@ -152,6 +152,8 @@ export interface Input {
   placeholder?: string;
   required?: boolean;
   options?: Array<{ label: string; value: string }>;
+  /** Grid width on `sm+`. Default is full row. */
+  width?: 'full' | 'half' | 'third';
 }
 
 export interface Textarea {
