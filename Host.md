@@ -298,6 +298,6 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 | Vercel | `https://r-and-c-roofing.vercel.app` (project `r-and-c-roofing`, team Kanahiku) |
 | D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded. Leads store `street`, `address_line2`, `city`, `state`, `zip`. |
 | workers.dev | Subdomain `kanahiku` registered. Intended URL: `https://massic-forms.kanahiku.workers.dev` |
-| Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Real Turnstile widget `R&C Roofing contact` (managed). Secret on Worker. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
+| Worker | Live and canonical from this repo: `https://massic-forms.kanahiku.workers.dev`. Per-site Turnstile secrets, D1 sender/recipient routing, and a five-minute contact-email retry queue are enabled. |
 | Custom domain | Live: `https://www.roofinspectionhawaii.com`. DNS is at **GoDaddy** (`ns65/ns66.domaincontrol.com`), not Cloudflare. |
 | Resend | Domain `roofinspectionhawaii.com` **verified**. Worker sends from `hello@roofinspectionhawaii.com` to `info@safehomeservice.com`. DNS is at GoDaddy. |
