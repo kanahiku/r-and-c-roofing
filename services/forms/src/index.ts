@@ -1,5 +1,6 @@
 export interface Env {
   DB: D1Database;
+  /** Legacy fallback for sites not yet migrated to a dedicated binding. */
   TURNSTILE_SECRET: string;
   RESEND_API_KEY: string;
   /** Inbox that receives lead emails. Overrides the site row. Required in Resend test mode. */
@@ -142,7 +143,7 @@ export default {
     try {
       const body = await readBody(request);
 
-      if (body.website) {
+      if ((body.website || '').trim().length > 0) {
         return withCors(origin, patterns, json({ ok: true }));
       }
 
@@ -151,9 +152,7 @@ export default {
         return withCors(origin, patterns, json({ ok: false, error: parsed.error }, 400));
       }
 
-      const site = await env.DB.prepare('SELECT * FROM sites WHERE slug = ?')
-        .bind(parsed.site)
-        .first<SiteRow>();
+      const site = await env.DB.prepare('SELECT * FROM sites WHERE slug = ?').bind(parsed.site).first<SiteRow>();
 
       if (!site) {
         return withCors(origin, patterns, json({ ok: false, error: 'Unknown site' }, 400));
@@ -164,7 +163,13 @@ export default {
         return json({ ok: false, error: 'Origin not allowed' }, 403);
       }
 
-      const turnstileOk = await verifyTurnstile(parsed.turnstileToken, env.TURNSTILE_SECRET, request);
+      const turnstileSecret = turnstileSecretForSite(env, site.slug);
+      if (!turnstileSecret) {
+        console.error(`Turnstile is not configured for ${site.slug}`);
+        return withCors(origin, allowed, json({ ok: false, error: 'Spam check is not configured' }, 500));
+      }
+
+      const turnstileOk = await verifyTurnstile(parsed.turnstileToken, turnstileSecret, request, site.slug, origin);
       if (!turnstileOk) {
         return withCors(origin, allowed, json({ ok: false, error: 'Spam check failed' }, 400));
       }
@@ -357,13 +362,44 @@ function parseOrigins(raw: string): string[] {
   }
 }
 
-async function verifyTurnstile(token: string, secret: string, request: Request): Promise<boolean> {
-  if (!secret) {
-    console.error('Turnstile failed: TURNSTILE_SECRET is not set on the Worker');
+function turnstileSecretBinding(siteSlug: string): string {
+  return `TURNSTILE_SECRET_${siteSlug.replace(/[^a-zA-Z0-9]/g, '_').toUpperCase()}`;
+}
+
+function turnstileSecretForSite(env: Env, siteSlug: string): string {
+  const binding = turnstileSecretBinding(siteSlug);
+  const value = (env as unknown as Record<string, unknown>)[binding];
+  if (typeof value === 'string' && value) return value;
+
+  if (env.TURNSTILE_SECRET) {
+    console.warn(`Turnstile: ${siteSlug} is using legacy TURNSTILE_SECRET; migrate it to ${binding}`);
+    return env.TURNSTILE_SECRET;
+  }
+
+  return '';
+}
+
+async function verifyTurnstile(
+  token: string,
+  secret: string,
+  request: Request,
+  expectedAction: string,
+  requestOrigin: string
+): Promise<boolean> {
+  let expectedHostname = '';
+  try {
+    expectedHostname = new URL(requestOrigin).hostname;
+  } catch {
+    console.error('Turnstile rejected: request Origin is missing or invalid');
     return false;
   }
+
   const ip = request.headers.get('CF-Connecting-IP') || '';
-  const body = new URLSearchParams({ secret, response: token });
+  const body = new URLSearchParams({
+    secret,
+    response: token,
+    idempotency_key: crypto.randomUUID(),
+  });
   if (ip) body.set('remoteip', ip);
 
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -374,12 +410,28 @@ async function verifyTurnstile(token: string, secret: string, request: Request):
     console.error('Turnstile siteverify HTTP error', res.status);
     return false;
   }
-  const data = (await res.json()) as { success?: boolean; hostname?: string; 'error-codes'?: string[] };
+  const data = (await res.json()) as {
+    success?: boolean;
+    hostname?: string;
+    action?: string;
+    'error-codes'?: string[];
+  };
   if (data.success !== true) {
-    // timeout-or-duplicate = expired or reused token. invalid-input-secret = key/secret mismatch.
     console.error('Turnstile rejected', JSON.stringify(data['error-codes'] ?? []), 'hostname:', data.hostname ?? '—');
+    return false;
   }
-  return data.success === true;
+
+  if (data.action !== expectedAction) {
+    console.error('Turnstile rejected: action mismatch', data.action ?? '—', 'expected:', expectedAction);
+    return false;
+  }
+
+  if (data.hostname !== expectedHostname) {
+    console.error('Turnstile rejected: hostname mismatch', data.hostname ?? '—', 'expected:', expectedHostname);
+    return false;
+  }
+
+  return true;
 }
 
 function parseDailyLimit(raw?: string): number {
@@ -447,11 +499,7 @@ async function sendResend(
 }
 
 function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function emailHtml(siteName: string, lead: Submission): string {

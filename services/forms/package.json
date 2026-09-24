@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "wrangler dev --port 8787",
     "deploy": "wrangler deploy",
+    "turnstile:create": "node ./scripts/setup-turnstile.mjs",
     "db:migrate:local": "wrangler d1 execute massic-forms --local --file=./schema.sql",
     "db:seed:local": "wrangler d1 execute massic-forms --local --file=./seed.sql",
     "db:leads:local": "wrangler d1 execute massic-forms --local --command \"SELECT created_at, name, email, phone, street, address_line2, city, state, zip, email_sent_at FROM leads ORDER BY created_at DESC LIMIT 5\"",

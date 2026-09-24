@@ -9,7 +9,9 @@
 # 3. Never point local dev at the deployed Worker — that mails the client
 #    and writes to production D1. Keep PUBLIC_FORM_ENDPOINT on localhost:8787.
 
-TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# The Worker derives this binding from PUBLIC_SITE_SLUG=rc-roofing.
+# Use Cloudflare's always-pass testing secret locally.
+TURNSTILE_SECRET_RC_ROOFING=1x0000000000000000000000000000000AA
 RESEND_API_KEY=re_xxxxxxxx
 NOTIFY_EMAIL=delivered@resend.dev
 

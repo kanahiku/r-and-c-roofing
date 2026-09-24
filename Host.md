@@ -39,14 +39,14 @@ Do these before the first Worker deploy.
 | D1 | One shared DB for all sites: `npx wrangler d1 create massic-forms` (or Cloudflare MCP `d1_database_create`). Paste `database_id` into `services/forms/wrangler.toml`. |
 | Vercel | Agency team. GitHub connected. One project per site. |
 | Resend | Agency (or per-client) account. Until a domain is verified, you may only send **from** `onboarding@resend.dev` **to** the Resend signup email. |
-| Turnstile | Agency Cloudflare account → Turnstile. Dummy keys are fine for local / first Vercel URL. Real widget before you care about spam. |
+| Turnstile | Agency Cloudflare account → Turnstile. Create one managed widget per client site; do not share one key pair across unrelated clients. |
 
 Shared form service commands (from `services/forms/`):
 
 ```bash
 npx wrangler d1 execute massic-forms --remote --file=./schema.sql
 npx wrangler d1 execute massic-forms --remote --file=./seed.sql   # first site only; later sites: INSERT a row
-npx wrangler secret put TURNSTILE_SECRET
+npm run turnstile:create -- --slug client-slug --name "Client contact" --domain example.com --domain www.example.com
 npx wrangler secret put RESEND_API_KEY
 npx wrangler secret put NOTIFY_EMAIL          # Resend-account inbox until domain is verified
 npx wrangler deploy
@@ -59,7 +59,7 @@ Worker env (safe to commit in `wrangler.toml` `[vars]`):
 
 Secrets (never in git, never on Vercel):
 
-- `RESEND_API_KEY`, `TURNSTILE_SECRET`, `NOTIFY_EMAIL`
+- `RESEND_API_KEY`, `NOTIFY_EMAIL`, and one `TURNSTILE_SECRET_<SITE_SLUG>` per client
 
 ---
 
@@ -97,9 +97,26 @@ Set on the **site** project, then redeploy. These are public (baked into HTML).
 | `PUBLIC_SITE_SLUG` | same as D1 `slug` |
 | `SITE_URL` | `https://<project>.vercel.app` until the custom domain is live |
 
-Never put `RESEND_API_KEY` or `TURNSTILE_SECRET` on Vercel.
+Never put `RESEND_API_KEY` or a Turnstile secret on Vercel. Only the public site key belongs there.
 
 Local `.env` keeps `PUBLIC_FORM_ENDPOINT=http://localhost:8787/submit` and `npm run forms:dev`.
+
+### Local testing without emailing the client
+
+Run the form against the **local** Worker + local D1 so no mail is sent and production rows stay clean.
+
+```bash
+npm run forms:db:setup   # once — creates + seeds local D1
+npm run forms:dev        # Worker on http://localhost:8787
+npm run dev              # site on http://localhost:4321
+npm run forms:leads      # last 5 leads from local D1
+```
+
+- `services/forms/.dev.vars` keeps `RESEND_API_KEY=re_xxxxxxxx`. The Worker treats any placeholder key as "no key", logs `Resend skipped`, and still saves the lead. `email_sent_at` stays `NULL`.
+- Turnstile uses the dummy key/secret pair locally, so the spam check always passes.
+- To check the email body itself, put a real `re_...` key in `.dev.vars` and set `NOTIFY_EMAIL` to your own inbox or `delivered@resend.dev`. Never the client address.
+- `.dev.vars` is gitignored and is **not** read by `wrangler deploy`, so this can never leak into production.
+- Leaving `PUBLIC_FORM_ENDPOINT` unset in dev already falls back to `localhost:8787`. Pointing it at the deployed Worker mails the client and writes to production D1 — including from a Vercel **preview** deploy.
 
 ### 3. Resend (no domain)
 
@@ -110,7 +127,9 @@ Local `.env` keeps `PUBLIC_FORM_ENDPOINT=http://localhost:8787/submit` and `npm 
 ### 4. Turnstile on `*.vercel.app`
 
 - Dummy keys always pass and show a “testing only” banner.
-- For a real widget: hostname = the production `*.vercel.app` host (and later the custom domain). Site key → Vercel `PUBLIC_TURNSTILE_SITE_KEY`. Secret → Worker `TURNSTILE_SECRET`. Redeploy both.
+- For a real widget, list the exact stable Vercel hostname and later the custom domains. Wildcards are not Turnstile hostnames.
+- Run `npm run turnstile:create` from `services/forms`. It creates the widget and stores its secret as `TURNSTILE_SECRET_<SITE_SLUG>` without printing it.
+- Put the command's public site key in Vercel as `PUBLIC_TURNSTILE_SITE_KEY`, then redeploy the site.
 
 ### 5. Confirm
 
@@ -191,7 +210,7 @@ Do **not** send every client from one agency domain.
 
 ### E. Turnstile hostname
 
-Edit the widget → add `example.com` and `www.example.com`. Keep `*.vercel.app` if previews still use the form.
+Edit that client's widget → add the exact hosts that serve its form: `example.com`, `www.example.com`, and the stable Vercel project hostname if needed. Preview hostnames must be added individually. The Worker also checks that the validated token hostname equals the submitting page's `Origin`.
 
 ### F. Form origin allowlist
 
@@ -240,7 +259,7 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 - [ ] Cloudflare login email verified (Workers 10034 otherwise)
 - [ ] Shared D1 exists; `sites` row for this `slug`
 - [ ] Worker deployed; `/health` ok
-- [ ] `TURNSTILE_SECRET` + `RESEND_API_KEY` + `NOTIFY_EMAIL` on the Worker
+- [ ] Dedicated `TURNSTILE_SECRET_<SITE_SLUG>` + `RESEND_API_KEY` + `NOTIFY_EMAIL` on the Worker
 - [ ] Vercel: `PUBLIC_FORM_ENDPOINT`, `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_SITE_SLUG`
 - [ ] Test submit on `*.vercel.app`; lead in D1
 
@@ -263,8 +282,8 @@ If the Worker’s `DEFAULT_ORIGIN_PATTERNS` does not already include this domain
 | Item | Status |
 |---|---|
 | Vercel | `https://r-and-c-roofing.vercel.app` (project `r-and-c-roofing`, team Kanahiku) |
-| D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded |
+| D1 | `massic-forms` (`376bc987-bf24-4f8c-88e0-64ce2daacf61`), slug `rc-roofing` seeded. Leads store `street`, `address_line2`, `city`, `state`, `zip`. |
 | workers.dev | Subdomain `kanahiku` registered. Intended URL: `https://massic-forms.kanahiku.workers.dev` |
-| Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Dummy Turnstile secret set. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
+| Worker | Live: `https://massic-forms.kanahiku.workers.dev`. Real Turnstile widget `R&C Roofing contact` (managed). Secret on Worker. Resend sending key on Worker. `NOTIFY_EMAIL=info@safehomeservice.com`. |
 | Custom domain | Live: `https://www.roofinspectionhawaii.com`. DNS is at **GoDaddy** (`ns65/ns66.domaincontrol.com`), not Cloudflare. |
 | Resend | Domain `roofinspectionhawaii.com` **verified**. Worker sends from `hello@roofinspectionhawaii.com` to `info@safehomeservice.com`. DNS is at GoDaddy. |

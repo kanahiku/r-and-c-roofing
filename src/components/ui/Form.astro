@@ -38,7 +38,16 @@ const widthClass = {
     inputs && (
       <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-4">
         {inputs.map(
-          ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '', required, options, width = 'full' }) =>
+          ({
+            type = 'text',
+            name,
+            label = '',
+            autocomplete = 'on',
+            placeholder = '',
+            required,
+            options,
+            width = 'full',
+          }) =>
             name && (
               <div class:list={['mb-6', widthClass[width] ?? widthClass.full]}>
                 {label && (
@@ -73,13 +82,15 @@ const widthClass = {
                     class={fieldClass}
                   />
                 )}
-                <p id={`${name}-error`} class={errorClass} data-field-error={name} role="alert"></p>
+                <p id={`${name}-error`} class={errorClass} data-field-error={name} role="alert" />
               </div>
             )
         )}
       </div>
     )
   }
+
+  <div class="mt-6 min-h-[65px]" data-turnstile></div>
 
   {
     textarea && (
@@ -101,7 +112,7 @@ const widthClass = {
           class={errorClass}
           data-field-error={textarea.name ? textarea.name : 'message'}
           role="alert"
-        ></p>
+        />
       </div>
     )
   }
@@ -127,8 +138,6 @@ const widthClass = {
       </div>
     )
   }
-
-  <div class="mt-6" data-turnstile></div>
 
   {
     button && (
@@ -259,10 +268,6 @@ const widthClass = {
 
       const script = document.querySelector<HTMLScriptElement>('script[data-turnstile-api]');
       if (script) {
-        if ((window as Window & { turnstile?: TurnstileApi }).turnstile) {
-          ready();
-          return;
-        }
         script.addEventListener('load', ready, { once: true });
         script.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
         return;
@@ -271,6 +276,7 @@ const widthClass = {
       const next = document.createElement('script');
       next.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
       next.async = true;
+      next.defer = true;
       next.dataset.turnstileApi = 'true';
       next.addEventListener('load', ready, { once: true });
       next.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
@@ -306,24 +312,14 @@ const widthClass = {
     status.classList.remove('hidden');
   }
 
-  async function awaitTurnstileToken(
-    turnstile: TurnstileApi | undefined,
-    widgetId: string,
-    form: HTMLFormElement,
-    timeoutMs = 4000
-  ) {
-    const read = () =>
-      widgetId && turnstile
-        ? turnstile.getResponse(widgetId)
-        : asText(new FormData(form).get('cf-turnstile-response'));
-
+  async function awaitTurnstileToken(turnstile: TurnstileApi | undefined, widgetId: string, timeoutMs = 5000) {
     const deadline = Date.now() + timeoutMs;
-    let token = read();
+    let token = widgetId && turnstile ? turnstile.getResponse(widgetId) : '';
     while (!token && Date.now() < deadline) {
       await new Promise((resolve) => setTimeout(resolve, 200));
-      token = read();
+      token = widgetId && turnstile ? turnstile.getResponse(widgetId) : '';
     }
-    return token || '';
+    return token;
   }
 
   async function bindContactForm() {
@@ -335,15 +331,48 @@ const widthClass = {
 
     const slot = form.querySelector<HTMLElement>('[data-turnstile]');
     const sitekey = form.dataset.turnstileSitekey || '';
+    const site = form.dataset.site || '';
     const phoneDisplay = form.dataset.phoneDisplay || '';
     const phoneHref = form.dataset.phoneHref || '';
     let widgetId = '';
     let turnstileUnavailable = false;
 
-    if (slot && sitekey) {
+    if (!slot || !sitekey) {
+      turnstileUnavailable = true;
+      showSubmitError(
+        status,
+        'The spam protection is not configured, so your message cannot be sent.',
+        true,
+        phoneDisplay,
+        phoneHref
+      );
+    } else {
       try {
         const turnstile = await loadTurnstile();
-        widgetId = turnstile.render(slot, { sitekey });
+        widgetId = turnstile.render(slot, {
+          sitekey,
+          action: site,
+          size: 'flexible',
+          appearance: 'interaction-only',
+          'refresh-expired': 'auto',
+          'error-callback': () => {
+            turnstileUnavailable = true;
+            showSubmitError(
+              status,
+              'The spam check could not load. Please disable content blocking for this page and try again.',
+              true,
+              phoneDisplay,
+              phoneHref
+            );
+          },
+          callback: () => {
+            turnstileUnavailable = false;
+            if (status.textContent?.includes('spam check')) {
+              status.textContent = '';
+              status.classList.add('hidden');
+            }
+          },
+        });
       } catch (error) {
         console.error(error);
         turnstileUnavailable = true;
@@ -432,10 +461,7 @@ const widthClass = {
       status.textContent = 'Sending…';
       status.classList.remove('hidden');
 
-      // After a failed attempt the widget is reset, so its replacement token can
-      // take a moment to arrive. Wait for it instead of blaming the visitor.
-      const turnstileToken = await awaitTurnstileToken(turnstile, widgetId, form);
-
+      const turnstileToken = await awaitTurnstileToken(turnstile, widgetId);
       if (!turnstileToken) {
         if (submitButton) submitButton.disabled = false;
         showSubmitError(
@@ -501,8 +527,6 @@ const widthClass = {
       } finally {
         if (submitButton) submitButton.disabled = false;
         if (status.textContent) status.classList.remove('hidden');
-        // A token is single-use and expires after ~5 minutes. Without this, every
-        // retry after a failure resends the spent token and is rejected as duplicate.
         if (!succeeded && widgetId && turnstile) turnstile.reset(widgetId);
       }
     });
