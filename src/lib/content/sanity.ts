@@ -236,7 +236,7 @@ const SERVICE_PAGE_QUERY = /* groq */ `
         _type == "yelpReviewsSection" => items[] { name, reviewId, userId },
         _type == "quoteCardsSection" => items[] { name, quote },
         _type == "infoCardsSection" => items[] { title, description, icon, href },
-        items[] { title, description, icon }
+        items[] { title, description, icon, href }
       ),
       "steps": steps[] { title, description, icon },
       "rows": rows[] { feature, cell1, cell2, cell3 }

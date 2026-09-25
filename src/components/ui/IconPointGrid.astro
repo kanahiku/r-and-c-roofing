@@ -2,7 +2,7 @@
 import IconPoint from './IconPoint.astro';
 
 export interface Props {
-  items: Array<{ title: string; description: string; icon: string }>;
+  items: Array<{ title: string; description: string; icon: string; href?: string }>;
   variant?: 'light' | 'dark';
 }
 
@@ -16,6 +16,7 @@ const { items, variant = 'light' } = Astro.props;
         title={point.title}
         description={point.description}
         icon={point.icon}
+        href={point.href}
         variant={variant}
         orientation="stack"
         align="start"

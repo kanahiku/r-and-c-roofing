@@ -66,27 +66,31 @@ export const inspectionPages: ServicePageSeed[] = [
             title: 'Active Leaks',
             description: 'We trace interior ceiling stains to the exact exterior breach.',
             icon: 'tabler:droplet',
+            href: '/roof-problems/my-roof-is-leaking',
           },
           {
             title: 'Post-Storm Checks',
             description: 'We identify hidden wind or debris damage after severe Oahu weather.',
             icon: 'tabler:wind',
+            href: '/roof-problems/storm-damage-on-my-roof',
           },
           {
             title: 'Real Estate Transactions',
             description: 'We evaluate structural conditions before you buy or sell a property.',
             icon: 'tabler:home',
+            href: '/roof-problems/buying-or-selling-a-home',
           },
           {
             title: 'Aging Materials',
-            description:
-              'If your roof is getting older and you are wondering whether it has reached the end of its serviceable years, check our guide on [My Roof Is at End of Life](/roof-problems/my-roof-is-at-end-of-life) to see what signs to look for and how we evaluate replacement options.',
+            description: 'We assess whether an older roof is worn out or still has years left.',
             icon: 'tabler:calendar',
+            href: '/roof-problems/my-roof-is-at-end-of-life',
           },
           {
             title: 'Insurance Claims',
             description: 'We document visible damage professionally for your carrier.',
             icon: 'tabler:file-text',
+            href: '/claims',
           },
         ],
       },
