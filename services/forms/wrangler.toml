@@ -17,7 +17,7 @@ database_id = "376bc987-bf24-4f8c-88e0-64ce2daacf61"
 # (for example TURNSTILE_SECRET_RC_ROOFING) are Worker secrets in production.
 [vars]
 # Notify emails per site per UTC day. Extra leads still save; visitor still sees success.
-RESEND_DAILY_LIMIT = "100"
+RESEND_DAILY_LIMIT = "1000"
 
 [triggers]
 # Retry contact notification emails that were safely queued in D1.

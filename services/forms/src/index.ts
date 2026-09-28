@@ -127,7 +127,7 @@ const US_STATE_CODES = new Set([
   'WI',
   'WY',
 ]);
-const DEFAULT_RESEND_DAILY_LIMIT = 20;
+const DEFAULT_RESEND_DAILY_LIMIT = 1000;
 const MAX_PDF_B64 = 3_500_000;
 const PDF_KIND = 'checkup-pdf';
 const DEFAULT_PDF_FILENAME = 'website-summary.pdf';
@@ -568,11 +568,12 @@ function validate(body: Record<string, string>): Submission | { error: string } 
   if (name.length < 1 || name.length > MAX.name) return { error: 'Enter your name' };
   if (!EMAIL_RE.test(email) || email.length > MAX.email) return { error: 'Enter a valid email' };
   if (!isValidPhone(phone) || phone.length > MAX.phone) return { error: 'Enter a valid phone number' };
-  if (street.length < 1 || street.length > MAX.street) return { error: 'Enter a street address' };
+  // Address fields are optional — only validate format when the site's form provides them.
+  if (street && street.length > MAX.street) return { error: 'Enter a valid street address' };
   if (address2.length > MAX.address2) return { error: 'Enter a valid apt/suite' };
-  if (city.length < 1 || city.length > MAX.city) return { error: 'Enter a city' };
-  if (!US_STATE_CODES.has(state)) return { error: 'Select a state' };
-  if (!ZIP_RE.test(zip) || zip.length > MAX.zip) return { error: 'Enter a valid ZIP code' };
+  if (city && city.length > MAX.city) return { error: 'Enter a valid city' };
+  if (state && !US_STATE_CODES.has(state)) return { error: 'Select a valid state' };
+  if (zip && !ZIP_RE.test(zip)) return { error: 'Enter a valid ZIP code' };
   if (message.length < 1 || message.length > MAX.message) return { error: 'Enter a message' };
   if (!turnstileToken) return { error: 'Spam check is required' };
 
@@ -821,20 +822,20 @@ function emailHtml(siteName: string, lead: Submission): string {
     <p><strong>Name:</strong> ${escapeHtml(lead.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(lead.email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(lead.phone || '—')}</p>
-    <p><strong>Address:</strong><br />${escapeHtml(address).replace(/\n/g, '<br />')}</p>
+    ${address ? `<p><strong>Address:</strong><br />${escapeHtml(address).replace(/\n/g, '<br />')}</p>` : ''}
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(lead.message).replace(/\n/g, '<br />')}</p>
   `;
 }
 
 function emailText(siteName: string, lead: Submission): string {
+  const address = formatAddress(lead);
   return [
     `New inquiry from ${siteName}`,
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
     `Phone: ${lead.phone || '—'}`,
-    `Address:`,
-    formatAddress(lead),
+    ...(address ? [`Address:`, address] : []),
     '',
     lead.message,
   ].join('\n');
