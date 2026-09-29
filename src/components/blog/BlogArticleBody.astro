@@ -194,6 +194,14 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
           );
         }
 
+        if (typeof block.html === 'string' && block.html.includes('<iframe')) {
+          return (
+            <div class="mt-8 mb-6 overflow-hidden rounded-lg shadow-sm border border-black/10">
+              <div class="aspect-video w-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-0" set:html={block.html} />
+            </div>
+          );
+        }
+
         return (
           <p
             class:list={[paragraphClass, 'mt-5', block.quote && 'italic border-l-4 border-accent pl-5']}

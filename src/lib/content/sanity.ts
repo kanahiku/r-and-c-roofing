@@ -591,7 +591,16 @@ function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef
   return children
     .map((span) => {
       if (span._type !== 'span') return '';
-      let html = escapeHtml(span.text ?? '');
+      const text = span.text ?? '';
+      // Safe pass-through for embedded Google Maps iframes with enforced lazy loading
+      if (text.trim().startsWith('<iframe') && text.trim().endsWith('</iframe>')) {
+        let iframeHtml = text.trim();
+        if (!iframeHtml.includes('loading=')) {
+          iframeHtml = iframeHtml.replace('<iframe', '<iframe loading="lazy"');
+        }
+        return iframeHtml;
+      }
+      let html = escapeHtml(text);
       for (const mark of span.marks ?? []) {
         const def = defsMap.get(mark);
         if (def?._type === 'link') {
@@ -616,7 +625,8 @@ function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef
 
 const CTA_DIRECTIVE_REGEX =
   /^\s*(?:\((?:create a )?cta button\)|\[(?:insert )?cta button(?::\s*|\s+)?\])\s*(.*)$/i;
-const FAQ_HEADING_REGEX = /frequently asked|faqs?$|^faq\b/i;
+const FAQ_HEADING_REGEX =
+  /frequently asked|faqs?$|^faq\b|what homeowners most often want to know|questions homeowners ask|common questions/i;
 
 function detectCtaButton(
   block: SanityPortableBlock
@@ -652,11 +662,12 @@ function detectCtaButton(
 
   // Check for author directives like (Create a CTA button) Text, (CTA Button) Text, [Insert CTA Button: Text]
   const directiveMatch = fullText.match(CTA_DIRECTIVE_REGEX);
-  const targetText = directiveMatch ? directiveMatch[1].trim() : fullText;
+  const rawTarget = directiveMatch ? directiveMatch[1].trim() : fullText;
+  const targetText = rawTarget.replace(/^\[+|\]+$/g, '').trim();
 
   // Find all spans marked with a link
   const linkSpans = children.filter((c) => (c.marks ?? []).some((m) => linkDefs.has(m)));
-  const linkText = linkSpans.map((c) => c.text ?? '').join('').trim();
+  const linkText = linkSpans.map((c) => c.text ?? '').join('').replace(/^\[+|\]+$/g, '').trim();
 
   // If the link text matches the entire non-whitespace text (or targetText from directive)
   if (linkText && (linkText === targetText || (directiveMatch && targetText.length === 0))) {
