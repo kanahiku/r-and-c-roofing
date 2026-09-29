@@ -28,11 +28,10 @@ const isrBypassToken = process.env.ISR_BYPASS_TOKEN || 'dev-isr-bypass-token-32-
 export default defineConfig({
   output: 'server',
   adapter: vercel({
-    edgeMiddleware: true,
     isr: {
       expiration: 60 * 5,
       bypassToken: isrBypassToken,
-      exclude: [/^\/api(\/|$)/, '/sitemap.xml', '/sitemap-index.xml', '/robots.txt'],
+      exclude: [/^\/api(\/|$)/, '/sitemap.xml'],
     },
   }),
 
@@ -55,6 +54,7 @@ export default defineConfig({
     '/accessibility-statement': '/accessibility',
     '/about/gallery': '/about/our-story',
     '/gallery': '/about/our-story',
+    '/sitemap-index.xml': '/sitemap.xml',
     '/sitemap-0.xml': '/sitemap.xml',
   },
 
