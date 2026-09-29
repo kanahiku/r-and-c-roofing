@@ -23,13 +23,7 @@ export const CONTACT = {
     schema: '+1-808-888-2524',
   },
 
-  alternatePhones: [
-    {
-      display: '(808) 216-3256',
-      href: 'tel:+18082163256',
-      schema: '+1-808-216-3256',
-    },
-  ],
+  alternatePhones: [],
 
   /** Primary contact email shown in legal pages and schema.org. */
   email: 'info@safehomeservice.com',

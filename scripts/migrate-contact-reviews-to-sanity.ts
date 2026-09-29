@@ -89,7 +89,7 @@ async function run() {
       items: withKeys('infoCardItem', [
         {
           title: 'Call Us',
-          description: '(808) 888-2524. Alternate phone: (808) 216-3256.',
+          description: '(808) 888-2524.',
           icon: 'tabler:phone',
         },
         {
@@ -110,7 +110,6 @@ async function run() {
       ]),
       links: withKeys('contactLink', [
         { text: '(808) 888-2524', href: 'tel:+18088882524' },
-        { text: '(808) 216-3256', href: 'tel:+18082163256' },
         { text: 'info@safehomeservice.com', href: 'mailto:info@safehomeservice.com' },
       ]),
     },
@@ -169,7 +168,6 @@ async function run() {
       ctaText: 'Call R&C Roofing',
       ctaHref: 'tel:+18088882524',
       extraLines: [
-        'Alternate Phone: (808) 216-3256',
         'Email: info@safehomeservice.com',
         'Monday to Friday: 8:00 a.m. to 4:30 p.m.',
         'Saturday to Sunday: Closed',
