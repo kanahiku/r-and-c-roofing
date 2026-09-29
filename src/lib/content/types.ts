@@ -451,7 +451,9 @@ export type BlogContentBlock =
   | BlogContentImage
   | BlogContentList
   | BlogContentTable
-  | BlogContentCallout;
+  | BlogContentCallout
+  | BlogContentButton
+  | BlogContentFaq;
 
 export interface BlogContentParagraph {
   _type: 'paragraph';
@@ -504,4 +506,25 @@ export interface BlogContentCallout {
   _key: string;
   calloutType: 'tip' | 'info' | 'warning' | 'note';
   text: string;
+}
+
+export interface BlogContentButton {
+  _type: 'button';
+  _key: string;
+  text: string;
+  href: string;
+  variant?: 'ghost-light' | 'primary';
+}
+
+export interface BlogContentFaqItem {
+  _key?: string;
+  question: string;
+  answer: string;
+}
+
+export interface BlogContentFaq {
+  _type: 'faq';
+  _key: string;
+  title?: string;
+  items: BlogContentFaqItem[];
 }
