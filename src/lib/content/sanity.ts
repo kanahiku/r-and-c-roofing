@@ -572,6 +572,8 @@ type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'conten
   image?: ContentImage;
   relatedPages?: string[] | null;
   body?: SanityPortableBlock[] | null;
+  metaTitle?: string;
+  metaDescription?: string;
 };
 
 function portableBlockText(block: SanityPortableBlock): string {
@@ -789,14 +791,19 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
       flushList();
       flushFaq();
       flushFaqSection();
-      const headerRow = (block.headerRow ?? []).filter(Boolean);
+      let headerRow = (block.headerRow ?? []).filter(Boolean);
+      let rawRows = block.rows ?? [];
+      if (headerRow.length < 2 && rawRows.length > 0 && Array.isArray(rawRows[0]?.cells) && rawRows[0].cells.length >= 2) {
+        headerRow = rawRows[0].cells;
+        rawRows = rawRows.slice(1);
+      }
       if (headerRow.length < 2) return;
       result.push({
         _type: 'table',
         _key: key,
         ...(block.caption ? { caption: block.caption } : {}),
         headerRow,
-        rows: (block.rows ?? []).map((row, ri) => ({
+        rows: rawRows.map((row, ri) => ({
           _key: row._key || `row-${ri}`,
           cells: row.cells ?? [],
         })),
@@ -940,6 +947,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     .filter((block): block is Extract<BlogContentBlock, { _type: 'paragraph' }> => block._type === 'paragraph')
     .map((block) => block.text);
   const excerpt = post.excerpt || body[0] || '';
+  const metaTitle = post.metaTitle || post.meta?.title || post.title;
+  const metaDescription = post.metaDescription || post.meta?.description || excerpt;
   return {
     title: post.title,
     slug: post.slug,
@@ -949,8 +958,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     image: resolveContentImage(post.image as FetchedImage | undefined),
     relatedPages: (post.relatedPages ?? []).map((key) => key.replace(/^\/+/, '')).filter(Boolean),
     meta: {
-      title: post.title,
-      description: excerpt,
+      title: metaTitle,
+      description: metaDescription,
     },
     heroParagraphs: body.slice(0, 2),
     sections:
@@ -978,6 +987,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
 const BLOG_POST_CARD_PROJECTION = /* groq */ `
   title,
   "slug": slug.current,
+  "metaTitle": coalesce(metaTitle, meta.title, title, ""),
+  "metaDescription": coalesce(metaDescription, meta.description, excerpt, ""),
   excerpt,
   publishDate,
   author,

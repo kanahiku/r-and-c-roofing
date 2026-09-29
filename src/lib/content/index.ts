@@ -261,6 +261,7 @@ function overlayCmsFields(local: BlogPost, sanity: BlogPost): BlogPost {
     ...local,
     title: sanity.title || local.title,
     excerpt: sanity.excerpt || local.excerpt,
+    meta: sanity.meta?.title ? sanity.meta : local.meta,
     publishDate: sanity.publishDate || local.publishDate,
     author: sanity.author || local.author,
     image: sanity.image?.src ? sanity.image : local.image,
