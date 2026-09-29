@@ -17,6 +17,7 @@ import {
   getSanityReviewsPage,
   getSanityServicePage,
   getSanityServicePageSlugs,
+  getSanitySitemapContent,
 } from './sanity';
 import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 import { contactHelpOptions as localContactHelpOptions } from '../../data/pages/contact';
@@ -241,15 +242,81 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   return [...new Set([...localSlugs, ...sanitySlugs])];
 }
 
-const STATIC_PATHS = ['/', '/blog', '/contact', '/reviews', '/privacy-policy', '/terms-of-service', '/accessibility'];
+const REDIRECT_PATHS = new Set([
+  '/insurance-claim-help',
+  '/insurance-claim-help/how-the-claim-process-works',
+  '/insurance-claim-help/denied-or-underpaid-claims',
+  '/my-roof-is-leaking',
+  '/storm-damage-on-my-roof',
+  '/my-roof-is-at-end-of-life',
+  '/my-insurance-claim-was-denied',
+  '/buying-or-selling-a-home',
+  '/preparing-for-hurricane-season',
+  '/roof-inspections/pre-listing-sellers-roof-inspection',
+  '/roof-inspection',
+  '/services/roofing-materials/tile-roofing-clay-and-concrete',
+  '/services/roofing-materials/slate-and-rubber-slate-roofing',
+  '/privacy',
+  '/terms',
+  '/accessibility-statement',
+  '/about/gallery',
+  '/gallery',
+  '/sitemap-0.xml',
+]);
+
+const pageModules = import.meta.glob('/src/pages/**/*.astro');
+
+function getDiscoveredStaticPaths(): string[] {
+  const paths: string[] = [];
+  for (const file of Object.keys(pageModules)) {
+    if (file.includes('/[') || file.endsWith('/404.astro') || file.includes('/api/')) continue;
+    let route = file
+      .replace(/^.*\/src\/pages/, '')
+      .replace(/\/index\.astro$/, '')
+      .replace(/\.astro$/, '');
+    if (route === '') route = '/';
+    if (!REDIRECT_PATHS.has(route) && !isHiddenNavHref(route)) {
+      paths.push(route);
+    }
+  }
+  return paths;
+}
+
+export interface SitemapEntry {
+  path: string;
+  lastmod?: string;
+}
+
+export async function getSitemapEntries(): Promise<SitemapEntry[]> {
+  const [sanityEntries, staticPaths] = await Promise.all([
+    getSanitySitemapContent(),
+    Promise.resolve(getDiscoveredStaticPaths()),
+  ]);
+
+  const map = new Map<string, string | undefined>();
+
+  // Add auto-discovered static pages
+  for (const p of staticPaths) {
+    map.set(p, undefined);
+  }
+
+  // Overlay Sanity entries with authentic lastmod timestamps
+  for (const entry of sanityEntries) {
+    if (REDIRECT_PATHS.has(entry.path) || isHiddenNavHref(entry.path)) continue;
+    map.set(entry.path, entry.lastmod);
+  }
+
+  const entries: SitemapEntry[] = [];
+  for (const [path, lastmod] of map.entries()) {
+    entries.push({ path, lastmod });
+  }
+
+  return entries;
+}
 
 export async function getPublicContentPaths(): Promise<string[]> {
-  const [pageSlugs, postSlugs] = await Promise.all([getServicePageSlugs(), getBlogPostSlugs()]);
-  return [
-    ...STATIC_PATHS,
-    ...pageSlugs.map((slug) => `/${slug.replace(/^\/+/, '')}`),
-    ...postSlugs.map((slug) => `/blog/${slug.replace(/^\/+/, '')}`),
-  ].filter((path) => !isHiddenNavHref(path));
+  const entries = await getSitemapEntries();
+  return entries.map((e) => e.path);
 }
 
 export function getBlogPermalink(slug: string): string {

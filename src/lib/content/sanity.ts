@@ -1090,11 +1090,11 @@ export async function getSanityBlogPostsRelatedTo(pageSlug: string): Promise<Blo
 }
 
 const SERVICE_PAGE_SLUGS_QUERY = /* groq */ `
-  *[_type == "servicePage" && defined(slug.current)].slug.current
+  *[_type == "servicePage" && !(_id in path("drafts.**")) && defined(slug.current)].slug.current
 `;
 
 const BLOG_POST_SLUGS_QUERY = /* groq */ `
-  *[_type == "blogPost" && defined(slug.current)].slug.current
+  *[_type == "blogPost" && !(_id in path("drafts.**")) && defined(slug.current)].slug.current
 `;
 
 export async function getSanityServicePageSlugs(): Promise<string[]> {
@@ -1106,3 +1106,56 @@ export async function getSanityBlogPostSlugs(): Promise<string[]> {
   const slugs = await sanityClient.fetch<string[]>(BLOG_POST_SLUGS_QUERY);
   return (slugs ?? []).filter((slug): slug is string => typeof slug === 'string' && slug.length > 0);
 }
+
+export interface SitemapContentEntry {
+  path: string;
+  lastmod?: string;
+}
+
+const SITEMAP_BLOG_POSTS_QUERY = /* groq */ `
+  *[_type == "blogPost" && !(_id in path("drafts.**")) && defined(slug.current)]{
+    "slug": slug.current,
+    _updatedAt,
+    publishDate
+  }
+`;
+
+const SITEMAP_SERVICE_PAGES_QUERY = /* groq */ `
+  *[_type == "servicePage" && !(_id in path("drafts.**")) && defined(slug.current)]{
+    "slug": slug.current,
+    _updatedAt
+  }
+`;
+
+export async function getSanitySitemapContent(): Promise<SitemapContentEntry[]> {
+  const [blogs, services] = await Promise.all([
+    sanityClient.fetch<Array<{ slug: string; _updatedAt?: string; publishDate?: string }>>(SITEMAP_BLOG_POSTS_QUERY).catch(() => []),
+    sanityClient.fetch<Array<{ slug: string; _updatedAt?: string }>>(SITEMAP_SERVICE_PAGES_QUERY).catch(() => []),
+  ]);
+
+  const entries: SitemapContentEntry[] = [];
+
+  for (const s of services ?? []) {
+    if (!s?.slug) continue;
+    const cleanSlug = s.slug.replace(/^\/+/, '');
+    const lastmod = s._updatedAt ? s._updatedAt.slice(0, 10) : undefined;
+    entries.push({
+      path: `/${cleanSlug}`,
+      lastmod,
+    });
+  }
+
+  for (const b of blogs ?? []) {
+    if (!b?.slug) continue;
+    const cleanSlug = b.slug.replace(/^\/+/, '');
+    const dateStr = b._updatedAt || b.publishDate;
+    const lastmod = dateStr ? dateStr.slice(0, 10) : undefined;
+    entries.push({
+      path: `/blog/${cleanSlug}`,
+      lastmod,
+    });
+  }
+
+  return entries;
+}
+

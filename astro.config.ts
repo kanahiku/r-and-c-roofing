@@ -5,7 +5,6 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 import { unified } from '@astrojs/markdown-remark';
 
-import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
@@ -33,7 +32,7 @@ export default defineConfig({
     isr: {
       expiration: 60 * 5,
       bypassToken: isrBypassToken,
-      exclude: [/^\/api(\/|$)/, '/sitemap.xml', '/robots.txt'],
+      exclude: [/^\/api(\/|$)/, '/sitemap.xml', '/sitemap-index.xml', '/robots.txt'],
     },
   }),
 
@@ -56,6 +55,7 @@ export default defineConfig({
     '/accessibility-statement': '/accessibility',
     '/about/gallery': '/about/our-story',
     '/gallery': '/about/our-story',
+    '/sitemap-0.xml': '/sitemap.xml',
   },
 
   // Prefetch links as they enter the viewport for snappier navigations
@@ -89,9 +89,6 @@ export default defineConfig({
   ],
 
   integrations: [
-    sitemap({
-      filter: (page) => !page.includes('/404'),
-    }),
     mdx(),
     icon({
       include: {

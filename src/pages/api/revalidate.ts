@@ -74,7 +74,9 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const origin = new URL(request.url).origin;
-  const paths = [...new Set(await getPublicContentPaths())];
+  const paths = [
+    ...new Set([...(await getPublicContentPaths()), '/sitemap.xml', '/sitemap-index.xml']),
+  ];
 
   const results = await Promise.all(
     paths.map(async (path) => {
