@@ -120,7 +120,7 @@ export const ctaBanner = defineType({
       name: 'license',
       title: 'License line',
       type: 'string',
-      description: 'e.g. Hawaii Contractor License C-33642',
+      description: 'e.g. Hawaii Contractor License CT-33642',
     }),
   ],
 });

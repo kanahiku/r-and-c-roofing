@@ -10,7 +10,7 @@ const contactCta = { ctaHref: '/contact' as const };
 
 const licensedWhy = {
   title: 'Licensed Hawaii Contractor',
-  description: "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+  description: `Operating under License ${CONTACT.licenseNumber} with full general liability and workers' compensation coverage.`,
   icon: 'tabler:certificate',
 };
 
@@ -101,7 +101,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing Materials for Oahu Properties',
       subtitle:
-        "Compare your options before choosing a roof. We help you evaluate how different materials fit your property's architecture, local weather exposure, and budget—backed by Hawaii License C-33642.",
+        `Compare your options before choosing a roof. We help you evaluate how different materials fit your property's architecture, local weather exposure, and budget—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss Your Roofing Material Options',
       ...contactCta,
       ...phone,
@@ -304,7 +304,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Metal Roofing on Oahu',
       subtitle:
-        'Explore high-performance metal roofing systems engineered for residential and commercial properties across Oahu—backed by Hawaii License C-33642.',
+        `Explore high-performance metal roofing systems engineered for residential and commercial properties across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Metal Roofing Project',
       ...contactCta,
       ...phone,
@@ -420,7 +420,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Asphalt Shingle Roofing on Oahu',
       subtitle:
-        'Explore versatile, dependable asphalt shingle roofing systems engineered for residential and sloped properties across Oahu—backed by Hawaii License C-33642.',
+        `Explore versatile, dependable asphalt shingle roofing systems engineered for residential and sloped properties across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss an Asphalt Shingle Project',
       ...contactCta,
       ...phone,
@@ -554,7 +554,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Stone-Coated Steel Roofing on Oahu',
       subtitle:
-        'Get the durability of steel with a traditional residential profile. Explore stone-coated steel systems engineered for Oahu properties—backed by Hawaii License C-33642.',
+        `Get the durability of steel with a traditional residential profile. Explore stone-coated steel systems engineered for Oahu properties—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss Stone-Coated Steel Roofing',
       ...contactCta,
       ...phone,
@@ -668,7 +668,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Clay & Concrete Tile Roofing on Oahu',
       subtitle:
-        'Explore architecturally distinctive, durable tile roofing systems engineered for qualifying residential properties across Oahu—backed by Hawaii License C-33642.',
+        `Explore architecturally distinctive, durable tile roofing systems engineered for qualifying residential properties across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Tile Roofing Project',
       ...contactCta,
       ...phone,
@@ -803,7 +803,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Slate & Rubber Slate Roofing on Oahu',
       subtitle:
-        'Explore natural slate and advanced synthetic rubber slate roofing systems engineered for premium architectural aesthetics and durability across Oahu—backed by Hawaii License C-33642.',
+        `Explore natural slate and advanced synthetic rubber slate roofing systems engineered for premium architectural aesthetics and durability across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Slate Roofing Project',
       ...contactCta,
       ...phone,
@@ -937,7 +937,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Silicone Roof Coating on Oahu',
       subtitle:
-        'Explore high-performance silicone roof coating systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by Hawaii License C-33642.',
+        `Explore high-performance silicone roof coating systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Silicone Coating Project',
       ...contactCta,
       ...phone,
@@ -1074,7 +1074,7 @@ export const materialPages: ServicePageSeed[] = [
     hero: {
       title: 'Modified Bitumen Roofing on Oahu',
       subtitle:
-        'Explore heavy-duty modified bitumen roofing systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by Hawaii License C-33642.',
+        `Explore heavy-duty modified bitumen roofing systems engineered for commercial, industrial, and multi-unit low-slope properties across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Bitumen Project',
       ...contactCta,
       ...phone,

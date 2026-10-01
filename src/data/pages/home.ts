@@ -24,7 +24,7 @@ export const homePageData: HomePageContent = {
   },
 
   statsBar: [
-    { stat: 'C-33642', label: 'License' },
+    { stat: CONTACT.licenseNumber, label: 'License' },
     { stat: 'HAAG', label: 'Certified' },
     { stat: '50+', label: 'Years Combined Experience' },
     { stat: 'BIA', label: 'Hawaii Member' },

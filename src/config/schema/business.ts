@@ -27,7 +27,7 @@ export const business: BusinessSchema = {
     dayOfWeek: [...hours.dayOfWeek],
   })),
   description:
-    'Licensed Honolulu roofing contractor (License C-33642) specializing in HAAG-certified roof inspections and insurance claim documentation, serving Oahu homeowners, property managers, general contractors, architects, and trustees.',
+    `Licensed Honolulu roofing contractor (License ${CONTACT.licenseNumber}) specializing in HAAG-certified roof inspections and insurance claim documentation, serving Oahu homeowners, property managers, general contractors, architects, and trustees.`,
   hasCredential: [
     {
       '@type': 'EducationalOccupationalCredential',

@@ -1,4 +1,5 @@
 import type { BreadcrumbItem, PageSchema } from './types';
+import { CONTACT } from '~/config/contact';
 
 const HOME: BreadcrumbItem = { name: 'Home', path: '/' };
 const ROOF_INSPECTIONS: BreadcrumbItem = { name: 'Roof Inspections', path: '/roof-inspections' };
@@ -68,7 +69,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C repair the roof after inspecting it?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642. Our crews can execute the necessary repairs or a full replacement if we find damage.',
+        a: `Yes. We operate under ${CONTACT.license}. Our crews can execute the necessary repairs or a full replacement if we find damage.`,
       },
       {
         q: 'How much does a roof inspection cost?',
@@ -103,7 +104,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C repair the roof after the inspection?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute the necessary repairs or full replacement.',
+        a: `Yes. We operate under ${CONTACT.license} and can execute the necessary repairs or full replacement.`,
       },
     ],
     breadcrumb: [
@@ -138,7 +139,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C complete repairs after the inspection?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute any necessary repairs if you purchase the property.',
+        a: `Yes. We operate under ${CONTACT.license} and can execute any necessary repairs if you purchase the property.`,
       },
     ],
     breadcrumb: [
@@ -173,7 +174,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C complete repairs before I list the home?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute any necessary roofing work prior to your sale.',
+        a: `Yes. We operate under ${CONTACT.license} and can execute any necessary roofing work prior to your sale.`,
       },
     ],
     breadcrumb: [
@@ -243,7 +244,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C repair the damage found during maintenance?',
-        a: "Yes. We operate under Hawaii Contractor License C-33642 and can execute any targeted repairs necessary to extend your roof's lifespan.",
+        a: `Yes. We operate under ${CONTACT.license} and can execute any targeted repairs necessary to extend your roof's lifespan.`,
       },
     ],
     breadcrumb: [
@@ -279,7 +280,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C complete the repair or replacement after the claim?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute the agreed-upon repair or full replacement once your project moves forward.',
+        a: `Yes. We operate under ${CONTACT.license} and can execute the agreed-upon repair or full replacement once your project moves forward.`,
       },
     ],
     breadcrumb: [HOME, CLAIMS],
@@ -318,7 +319,7 @@ export const pages: PageSchema[] = [
       },
       {
         q: 'Can R&C complete the repairs if the claim gets reopened?',
-        a: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute the approved repair or full replacement once your project is cleared to move forward.',
+        a: `Yes. We operate under ${CONTACT.license} and can execute the approved repair or full replacement once your project is cleared to move forward.`,
       },
     ],
     breadcrumb: [HOME, CLAIMS, { name: 'Denied or Underpaid Claims', path: '/claims/denied-or-underpaid-claims' }],
@@ -539,7 +540,7 @@ export const pages: PageSchema[] = [
     faq: [
       {
         q: 'Are you a licensed and insured roofing contractor?',
-        a: 'Yes. R&C operates under Hawaii Contractor License C-33642 and carries full general liability and workers’ compensation insurance.',
+        a: `Yes. R&C operates under ${CONTACT.license} and carries full general liability and workers’ compensation insurance.`,
       },
       {
         q: 'How do I know if I need a repair or a full replacement?',

@@ -172,7 +172,7 @@ async function run() {
         'Monday to Friday: 8:00 a.m. to 4:30 p.m.',
         'Saturday to Sunday: Closed',
       ],
-      license: 'Hawaii Contractor License C-33642',
+      license: 'Hawaii Contractor License CT-33642',
     },
   });
 
@@ -243,7 +243,7 @@ async function run() {
         'If something is happening with your roof, you do not need to know the solution before you call.<br /><br />R&C can evaluate the roof and help determine what roofing work should be considered next.',
       ctaText: 'Schedule a Roof Inspection',
       ctaHref: '/contact',
-      license: 'Hawaii Contractor License C-33642',
+      license: 'Hawaii Contractor License CT-33642',
     },
   });
 

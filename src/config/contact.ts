@@ -11,8 +11,17 @@ export const CONTACT = {
   /** Legal / display business name used in footer, legal pages, CTABanner. */
   businessName: 'R&C Roofing Contractors',
 
+  /** Legal entity holding the contractor license. */
+  legalEntityName: 'R&C Enterprises LLC',
+
+  /** Raw license number string — used in stats bar, badges, and trust pills. */
+  licenseNumber: 'CT-33642',
+
   /** Contractor license shown in footer or legal copy (set null if none). */
-  license: 'Hawaii Contractor License C-33642',
+  license: 'Hawaii Contractor License CT-33642',
+
+  /** Short license descriptor — used in CTA banners and body text. */
+  licenseShort: 'Hawaii License CT-33642',
 
   phone: {
     /** Human-readable label — used in nav, footer, CTABanner, CTA buttons. */

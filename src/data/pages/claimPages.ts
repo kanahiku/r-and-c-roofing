@@ -194,7 +194,7 @@ export const claimPages: ServicePageSeed[] = [
         {
           question: 'Can R&C complete the repair or replacement after the claim?',
           answer:
-            'Yes. We operate under Hawaii Contractor License C-33642 and can execute the agreed-upon repair or full replacement once your project moves forward.',
+            `Yes. We operate under ${CONTACT.license} and can execute the agreed-upon repair or full replacement once your project moves forward.`,
         },
       ],
     },
@@ -279,7 +279,7 @@ export const claimPages: ServicePageSeed[] = [
           {
             title: 'Complete the Roofing Work',
             description:
-              'Once the project is approved and you select R&C (Hawaii License C-33642), we execute the agreed-upon repair or replacement according to Hawaii building standards.',
+              `Once the project is approved and you select R&C (${CONTACT.licenseShort}), we execute the agreed-upon repair or replacement according to Hawaii building standards.`,
             icon: 'tabler:hammer',
           },
         ],
@@ -504,7 +504,7 @@ export const claimPages: ServicePageSeed[] = [
         {
           question: 'Can R&C complete the repairs if the claim gets reopened?',
           answer:
-            'Yes. We operate under Hawaii Contractor License C-33642 and can execute the approved repair or full replacement once your project is cleared to move forward.',
+            `Yes. We operate under ${CONTACT.license} and can execute the approved repair or full replacement once your project is cleared to move forward.`,
         },
       ],
     },

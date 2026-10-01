@@ -119,7 +119,7 @@ export const servicePages: ServicePageSeed[] = [
         _type: 'linkedCardsSection',
         heading: 'Explore Our Core Roofing Services',
         intro:
-          'As a licensed Hawaii roofing contractor (License C-33642), we provide a complete range of specialized services. Choose a category below to learn more:',
+          `As a licensed Hawaii roofing contractor (License ${CONTACT.licenseNumber}), we provide a complete range of specialized services. Choose a category below to learn more:`,
         display: 'cards',
         items: [
           {
@@ -203,7 +203,7 @@ export const servicePages: ServicePageSeed[] = [
         {
           question: 'Are you a licensed and insured roofing contractor?',
           answer:
-            "Yes. R&C operates under Hawaii Contractor License C-33642 and carries full general liability and workers' compensation insurance.",
+            `Yes. R&C operates under ${CONTACT.license} and carries full general liability and workers' compensation insurance.`,
         },
         {
           question: 'How do I know if I need a repair or a full replacement?',
@@ -245,7 +245,7 @@ export const servicePages: ServicePageSeed[] = [
     hero: {
       title: 'Roof Repair Services on Oahu',
       subtitle:
-        'Targeted, permanent solutions for active leaks, damaged shingles, and compromised flashing when your surrounding roofing system is still sound—backed by Hawaii License C-33642.',
+        `Targeted, permanent solutions for active leaks, damaged shingles, and compromised flashing when your surrounding roofing system is still sound—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Schedule a Roof Repair Inspection',
       ...contactCta,
       ...phone,
@@ -352,7 +352,7 @@ export const servicePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Contractor',
-            description: "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+            description: `Operating under License ${CONTACT.licenseNumber} with full general liability and workers' compensation coverage.`,
             icon: 'tabler:certificate',
           },
           {
@@ -416,7 +416,7 @@ export const servicePages: ServicePageSeed[] = [
     hero: {
       title: 'Roof Replacement & New Installation on Oahu',
       subtitle:
-        'Invest in lasting property protection with licensed, diagnostic-driven roof replacements and new installations across Oahu—backed by Hawaii License C-33642.',
+        `Invest in lasting property protection with licensed, diagnostic-driven roof replacements and new installations across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Schedule a Replacement Consultation',
       ...contactCta,
       ...phone,
@@ -529,7 +529,7 @@ export const servicePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Contractor',
-            description: "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+            description: `Operating under License ${CONTACT.licenseNumber} with full general liability and workers' compensation coverage.`,
             icon: 'tabler:certificate',
           },
           {
@@ -665,7 +665,7 @@ export const servicePages: ServicePageSeed[] = [
         _type: 'linkedCardsSection',
         heading: 'Explore Our Residential Roofing Services',
         intro:
-          "As a licensed Hawaii roofing contractor (License C-33642), we offer a complete suite of services tailored to your home's needs:",
+          `As a licensed Hawaii roofing contractor (License ${CONTACT.licenseNumber}), we offer a complete suite of services tailored to your home's needs:`,
         display: 'directory',
         items: [
           {
@@ -713,7 +713,7 @@ export const servicePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed & Insured',
-            description: 'We operate under active Hawaii Contractor License C-33642, protecting you from liability during construction.',
+            description: `We operate under active ${CONTACT.license}, protecting you from liability during construction.`,
             icon: 'tabler:certificate',
           },
           {
@@ -776,7 +776,7 @@ export const servicePages: ServicePageSeed[] = [
     hero: {
       title: 'Commercial Roofing Services on Oahu',
       subtitle:
-        'Expert roofing support, inspections, repairs, and complete replacements engineered for commercial properties, property managers, and project teams across Oahu—backed by Hawaii License C-33642.',
+        `Expert roofing support, inspections, repairs, and complete replacements engineered for commercial properties, property managers, and project teams across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss Your Commercial Roofing Project',
       ...contactCta,
       ...phone,
@@ -886,7 +886,7 @@ export const servicePages: ServicePageSeed[] = [
           {
             title: 'Licensed Hawaii Contractor',
             description:
-              "Operating under License C-33642 with full general liability and workers' compensation coverage for commercial sites.",
+              `Operating under License ${CONTACT.licenseNumber} with full general liability and workers' compensation coverage for commercial sites.`,
             icon: 'tabler:certificate',
           },
           {
@@ -956,7 +956,7 @@ export const servicePages: ServicePageSeed[] = [
     hero: {
       title: 'Gutter Installation & Repair on Oahu',
       subtitle:
-        'Ensure proper drainage and protect your foundation with custom seamless gutter installation and repair services across Oahu—backed by Hawaii License C-33642.',
+        `Ensure proper drainage and protect your foundation with custom seamless gutter installation and repair services across Oahu—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Get a Gutter Estimate',
       ...contactCta,
       ...phone,
@@ -1036,7 +1036,7 @@ export const servicePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Contractor',
-            description: "Operating under License C-33642 with full general liability and workers' compensation coverage.",
+            description: `Operating under License ${CONTACT.licenseNumber} with full general liability and workers' compensation coverage.`,
             icon: 'tabler:certificate',
           },
           {

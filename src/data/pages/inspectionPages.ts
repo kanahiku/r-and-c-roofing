@@ -162,7 +162,7 @@ export const inspectionPages: ServicePageSeed[] = [
         {
           question: 'Can R&C repair the roof after inspecting it?',
           answer:
-            'Yes. We operate under Hawaii Contractor License C-33642. Our crews can execute the necessary repairs or a full replacement if we find damage.',
+            `Yes. We operate under ${CONTACT.license}. Our crews can execute the necessary repairs or a full replacement if we find damage.`,
         },
         {
           question: 'How much does a roof inspection cost?',
@@ -343,7 +343,7 @@ export const inspectionPages: ServicePageSeed[] = [
         },
         {
           question: 'Can R&C repair the roof after the inspection?',
-          answer: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute the necessary repairs or full replacement.',
+          answer: `Yes. We operate under ${CONTACT.license} and can execute the necessary repairs or full replacement.`,
         },
       ],
     },
@@ -521,7 +521,7 @@ export const inspectionPages: ServicePageSeed[] = [
         {
           question: 'Can R&C complete repairs after the inspection?',
           answer:
-            'Yes. We operate under Hawaii Contractor License C-33642 and can execute any necessary repairs if you purchase the property.',
+            `Yes. We operate under ${CONTACT.license} and can execute any necessary repairs if you purchase the property.`,
         },
       ],
     },
@@ -695,7 +695,7 @@ export const inspectionPages: ServicePageSeed[] = [
         },
         {
           question: 'Can R&C complete repairs before I list the home?',
-          answer: 'Yes. We operate under Hawaii Contractor License C-33642 and can execute any necessary roofing work prior to your sale.',
+          answer: `Yes. We operate under ${CONTACT.license} and can execute any necessary roofing work prior to your sale.`,
         },
       ],
     },
@@ -1049,7 +1049,7 @@ export const inspectionPages: ServicePageSeed[] = [
         {
           question: 'Can R&C repair the damage found during maintenance?',
           answer:
-            "Yes. We operate under Hawaii Contractor License C-33642 and can execute any targeted repairs necessary to extend your roof's lifespan.",
+            `Yes. We operate under ${CONTACT.license} and can execute any targeted repairs necessary to extend your roof's lifespan.`,
         },
       ],
     },

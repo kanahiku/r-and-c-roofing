@@ -30,7 +30,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'My Roof Is Leaking. What Should I Do?',
       subtitle:
-        'If water is entering your property, it rarely stops on its own and dry weather only hides the underlying issue. Get the roof checked promptly by licensed local professionals—backed by Hawaii License C-33642.',
+        `If water is entering your property, it rarely stops on its own and dry weather only hides the underlying issue. Get the roof checked promptly by licensed local professionals—backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Call About a Roof Leak',
       ctaHref: CONTACT.phone.href,
       phoneCtaText: 'Schedule an Inspection Online',
@@ -187,7 +187,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'Storm Damage on My Roof. What Should I Do?',
       subtitle:
-        'After strong wind or heavy rain, roof damage is not always obvious. You may find roofing material in the yard or notice a new ceiling stain, or the roof may look normal from the ground while you are left wondering what happened. Find out what the storm actually did to your roof with expert local evaluation, backed by Hawaii License C-33642.',
+        `After strong wind or heavy rain, roof damage is not always obvious. You may find roofing material in the yard or notice a new ceiling stain, or the roof may look normal from the ground while you are left wondering what happened. Find out what the storm actually did to your roof with expert local evaluation, backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Schedule a Storm Damage Inspection',
       ...contactCta,
       ...phone,
@@ -289,7 +289,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'Is My Roof at the End of Its Life?',
       subtitle:
-        'Maybe your roof has started leaking more often, or repairs are becoming frequent. Your roofing material might look worn or damaged, or perhaps nothing dramatic has happened at all and you simply know the roof has been there a long time. Age matters, but age alone does not determine whether you need a new roof. Get expert local evaluation from licensed professionals backed by Hawaii License C-33642.',
+        `Maybe your roof has started leaking more often, or repairs are becoming frequent. Your roofing material might look worn or damaged, or perhaps nothing dramatic has happened at all and you simply know the roof has been there a long time. Age matters, but age alone does not determine whether you need a new roof. Get expert local evaluation from licensed professionals backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Have R&C Evaluate Your Roof',
       ...contactCta,
       ...phone,
@@ -421,7 +421,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'My Roof Insurance Claim Was Denied. What Should I Do?',
       subtitle:
-        "Getting a denial after dealing with roof damage leaves you wondering what to do next. Do not start by assuming the carrier is wrong or that the claim will eventually be approved. Start with the denial letter, and get expert local evaluation from licensed professionals backed by Hawaii License C-33642.",
+        `Getting a denial after dealing with roof damage leaves you wondering what to do next. Do not start by assuming the carrier is wrong or that the claim will eventually be approved. Start with the denial letter, and get expert local evaluation from licensed professionals backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Have R&C Review the Roof Condition',
       ...contactCta,
       ...phone,
@@ -540,7 +540,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'Buying or Selling a Home? Do Not Guess About the Roof',
       subtitle:
-        'A roof can become a major question during a home purchase or sale, whether flagged by a home inspection, looking old, or showing signs of previous repairs. Get expert local evaluation from licensed professionals backed by Hawaii License C-33642.',
+        `A roof can become a major question during a home purchase or sale, whether flagged by a home inspection, looking old, or showing signs of previous repairs. Get expert local evaluation from licensed professionals backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Schedule a Roof Inspection',
       ...contactCta,
       ...phone,
@@ -650,7 +650,7 @@ export const roofProblemPages: ServicePageSeed[] = [
     hero: {
       title: 'Preparing Your Roof for Hurricane Season on Oahu',
       subtitle:
-        'Tropical weather brings the threat of heavy rainfall, severe wind gusts, and wind-driven moisture. A roof that holds up during normal island trade winds can still have hidden vulnerabilities when put to the test by severe storm conditions. Protect your property before severe tropical weather arrives with expert roof evaluations and wind mitigation guidance, backed by Hawaii License C-33642.',
+        `Tropical weather brings the threat of heavy rainfall, severe wind gusts, and wind-driven moisture. A roof that holds up during normal island trade winds can still have hidden vulnerabilities when put to the test by severe storm conditions. Protect your property before severe tropical weather arrives with expert roof evaluations and wind mitigation guidance, backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Schedule a Hurricane Roof Check',
       ...contactCta,
       ...phone,

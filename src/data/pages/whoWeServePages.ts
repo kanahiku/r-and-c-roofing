@@ -29,7 +29,7 @@ export const whoWeServePages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing for Oahu Homeowners',
       subtitle:
-        'You do not need to know what your roof needs before you call. Whether you are dealing with a leak, storm damage, or an aging system, get expert local support backed by Hawaii License C-33642.',
+        `You do not need to know what your roof needs before you call. Whether you are dealing with a leak, storm damage, or an aging system, get expert local support backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Talk to R&C About Your Roof',
       ...contactCta,
       ...phone,
@@ -121,7 +121,7 @@ export const whoWeServePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Roofing Contractor',
-            description: 'Operating under Hawaii License C-33642.',
+            description: `Operating under ${CONTACT.licenseShort}.`,
             icon: 'tabler:certificate',
           },
           {
@@ -198,7 +198,7 @@ export const whoWeServePages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing for Property Managers, AOAO & HOA Boards on Oahu',
       subtitle:
-        'Managing a roof problem for one building is different from managing roofing across a condominium, association, or multi-building property. There are board approvals to secure, budgets to plan, residents to consider, and several roofs competing for attention at the same time. Get expert local support backed by Hawaii License C-33642.',
+        `Managing a roof problem for one building is different from managing roofing across a condominium, association, or multi-building property. There are board approvals to secure, budgets to plan, residents to consider, and several roofs competing for attention at the same time. Get expert local support backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Request a Property Roof Assessment',
       ...contactCta,
       ...phone,
@@ -290,7 +290,7 @@ export const whoWeServePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Roofing Contractor',
-            description: 'Operating under Hawaii License C-33642.',
+            description: `Operating under ${CONTACT.licenseShort}.`,
             icon: 'tabler:certificate',
           },
           {
@@ -384,7 +384,7 @@ export const whoWeServePages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing Subcontractor for General Contractors on Oahu',
       subtitle:
-        'For a general contractor, the roofing scope is only one part of the job. Roofing work has to fit the construction schedule, coordinate with other trades, account for site access, and move through the project without creating avoidable problems elsewhere. Get expert local support backed by Hawaii License C-33642.',
+        `For a general contractor, the roofing scope is only one part of the job. Roofing work has to fit the construction schedule, coordinate with other trades, account for site access, and move through the project without creating avoidable problems elsewhere. Get expert local support backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss a Roofing Subcontract',
       ...contactCta,
       ...phone,
@@ -478,7 +478,7 @@ export const whoWeServePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Roofing Contractor',
-            description: 'Operating under Hawaii License C-33642.',
+            description: `Operating under ${CONTACT.licenseShort}.`,
             icon: 'tabler:certificate',
           },
           {
@@ -570,7 +570,7 @@ export const whoWeServePages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing Support for Architects & Specifiers on Oahu',
       subtitle:
-        'Roofing decisions made during design can affect material selection, detailing, constructability, project cost, and installation later. Bring roofing into the conversation before details are locked. Get expert contractor-side input backed by Hawaii License C-33642.',
+        `Roofing decisions made during design can affect material selection, detailing, constructability, project cost, and installation later. Bring roofing into the conversation before details are locked. Get expert contractor-side input backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Discuss Roofing Requirements With R&C',
       ...contactCta,
       ...phone,
@@ -666,7 +666,7 @@ export const whoWeServePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Roofing Contractor',
-            description: 'Operating under Hawaii License C-33642.',
+            description: `Operating under ${CONTACT.licenseShort}.`,
             icon: 'tabler:certificate',
           },
           {
@@ -759,7 +759,7 @@ export const whoWeServePages: ServicePageSeed[] = [
     hero: {
       title: 'Roofing for Trustees & Estate Managers on Oahu',
       subtitle:
-        'When you are responsible for property on behalf of an estate, trust, or family ownership structure, a roofing decision must be clearly documented for people who may never visit the property in person. Get expert local evaluation backed by Hawaii License C-33642.',
+        `When you are responsible for property on behalf of an estate, trust, or family ownership structure, a roofing decision must be clearly documented for people who may never visit the property in person. Get expert local evaluation backed by ${CONTACT.licenseShort}.`,
       ctaText: 'Request a Property Roof Assessment',
       ...contactCta,
       ...phone,
@@ -855,7 +855,7 @@ export const whoWeServePages: ServicePageSeed[] = [
         items: [
           {
             title: 'Licensed Hawaii Roofing Contractor',
-            description: 'Operating under Hawaii License C-33642.',
+            description: `Operating under ${CONTACT.licenseShort}.`,
             icon: 'tabler:certificate',
           },
           {

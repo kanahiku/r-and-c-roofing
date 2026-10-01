@@ -56,7 +56,7 @@ export const aboutPages: ServicePageSeed[] = [
         heading: 'Why Inspection Drives Our Work',
         paragraphs: [
           'The purpose of an inspection is not to create a reason for construction, but to create a clearer basis for making a roofing decision.',
-          'Because we operate under Hawaii contractor license C-33642, we move seamlessly from evaluating a condition into construction when work is appropriate. R&C Roofing brings specialized damage assessment expertise through Robert Pilato, HAAG Certified Inspector (#201408313). We connect our findings to practical options: repair, replacement, additional evaluation, or continued monitoring.',
+          `Because we operate under Hawaii contractor license ${CONTACT.licenseNumber}, we move seamlessly from evaluating a condition into construction when work is appropriate. R&C Roofing brings specialized damage assessment expertise through Robert Pilato, HAAG Certified Inspector (#201408313). We connect our findings to practical options: repair, replacement, additional evaluation, or continued monitoring.`,
         ],
         ctaText: 'Explore HAAG Certified Roof Inspections',
         ctaHref: '/roof-inspections/haag-certified-inspection',
@@ -100,7 +100,7 @@ export const aboutPages: ServicePageSeed[] = [
         items: [
           {
             title: 'Hawaii Contractor License',
-            description: 'C-33642',
+            description: CONTACT.licenseNumber,
             icon: 'tabler:certificate',
           },
           {
