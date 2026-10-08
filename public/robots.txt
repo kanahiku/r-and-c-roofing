@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://roofinspectionhawaii.com/sitemap.xml
+Sitemap: https://www.roofinspectionhawaii.com/sitemap.xml

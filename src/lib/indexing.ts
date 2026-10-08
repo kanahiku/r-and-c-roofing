@@ -1,6 +1,6 @@
 import { SITE } from 'astrowind:config';
 
-const FALLBACK_ORIGIN = 'https://roofinspectionhawaii.com';
+const FALLBACK_ORIGIN = 'https://www.roofinspectionhawaii.com';
 
 function hostnameOf(value: string): string | null {
   try {

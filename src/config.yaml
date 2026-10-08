@@ -1,6 +1,6 @@
 site:
   name: R&C Roofing
-  site: 'https://roofinspectionhawaii.com'
+  site: 'https://www.roofinspectionhawaii.com'
   base: '/'
   trailingSlash: false
 
