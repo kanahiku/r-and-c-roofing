@@ -49,6 +49,12 @@ export interface MetaData {
 
   openGraph?: MetaDataOpenGraph;
   twitter?: MetaDataTwitter;
+
+  /**
+   * Custom JSON-LD schema override from Sanity CMS or page frontmatter.
+   * When provided, takes highest precedence for the page's schema markup.
+   */
+  schemaOverride?: string | Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 export interface MetaDataRobots {

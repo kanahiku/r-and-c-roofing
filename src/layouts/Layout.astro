@@ -42,7 +42,7 @@ const { language, textDirection } = I18N;
     <ApplyColorMode />
     <Metadata {...metadata} />
     <Analytics />
-    <JsonLd />
+    <JsonLd schemaOverride={metadata?.schemaOverride} />
 
     <link rel="preconnect" href="https://images.unsplash.com" />
 

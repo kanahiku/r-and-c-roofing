@@ -394,12 +394,22 @@ export const pages: PageSchema[] = [
   },
 
   {
+    name: 'Reviews',
+    path: '/reviews',
+    schemaType: 'WebPage',
+    description:
+      'Read customer reviews of R&C Roofing Contractors from Google, Yelp, and BBB and see what Oahu property owners say about their roofing experience.',
+    faq: null,
+    breadcrumb: [HOME, { name: 'Reviews', path: '/reviews' }],
+  },
+
+  {
     name: 'Roofing Materials',
     path: '/services/roofing-materials',
     schemaType: 'Service',
     serviceType: 'Roofing Material Consultation',
     description:
-      'Compare roofing materials for Oahu properties: asphalt shingles, silicone coating, modified bitumen, metal, tile and more. Explore your options with R&C Roofing.',
+      'Compare roofing materials for Oahu properties, including metal, asphalt shingles, stone-coated steel, tile, slate, modified bitumen, and silicone roof coatings with R&C Roofing.',
     faq: [
       {
         q: 'What roofing materials does R&C install on Oahu?',
@@ -503,9 +513,9 @@ export const pages: PageSchema[] = [
     name: 'Silicone Roof Coating',
     path: '/services/roofing-materials/silicone-roof-coating',
     schemaType: 'Service',
-    serviceType: 'Silicone Roof Coating',
+    serviceType: 'Silicone Roof Coating Application',
     description:
-      'Explore silicone roof coating for Oahu commercial and multi-unit properties. Learn about seamless waterproofing, ponding water resistance, and restoration with R&C.',
+      'Explore silicone roof coating for Oahu properties. Learn when a coating can extend roof life, what to consider in Hawaii conditions, and how R&C Roofing approaches application.',
     faq: null,
     breadcrumb: [
       HOME,
@@ -520,7 +530,7 @@ export const pages: PageSchema[] = [
     schemaType: 'Service',
     serviceType: 'Modified Bitumen Roofing Installation',
     description:
-      'Explore modified bitumen roofing for Oahu commercial and multi-unit properties. Learn about multi-ply durability, low-slope protection, and installation with R&C.',
+      'Explore modified bitumen roofing for Oahu low-slope and flat roofs. Learn how it performs in Hawaii conditions, application methods, and what to consider for your property with R&C Roofing.',
     faq: null,
     breadcrumb: [
       HOME,

@@ -1,7 +1,43 @@
 ---
 import { getJsonLdBlocks } from '~/config/schema';
+import { getCustomSchema } from '~/config/schema/customOverrides';
 
-const blocks = getJsonLdBlocks(Astro.url.pathname);
+interface Props {
+  /**
+   * Custom JSON-LD schema override from Sanity CMS or page metadata.
+   * When provided, takes highest precedence for the page's schema markup.
+   */
+  schemaOverride?: string | Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const { schemaOverride } = Astro.props;
+
+// Parse schemaOverride if it's a string (e.g. from Sanity text field)
+function parseSchemaOverride(
+  override?: string | Record<string, unknown> | Array<Record<string, unknown>>
+): Record<string, unknown> | Array<Record<string, unknown>> | null {
+  if (!override) return null;
+  if (typeof override === 'object') return override;
+  try {
+    return JSON.parse(override);
+  } catch {
+    console.warn('Invalid JSON-LD schemaOverride:', override);
+    return null;
+  }
+}
+
+// 1. Highest priority: Explicit override passed via metadata/props
+const explicitOverride = parseSchemaOverride(schemaOverride);
+
+// 2. Second priority: Pre-compiled custom schema from client Word documents (Batch 1–4)
+const docxOverride = getCustomSchema(Astro.url.pathname);
+
+// 3. Fallback: Automated schema generator from pages.ts and business.ts
+const blocks = explicitOverride
+  ? (Array.isArray(explicitOverride) ? explicitOverride : [explicitOverride])
+  : docxOverride
+    ? [docxOverride]
+    : getJsonLdBlocks(Astro.url.pathname);
 ---
 
 {
@@ -9,3 +45,4 @@ const blocks = getJsonLdBlocks(Astro.url.pathname);
     <script type="application/ld+json" is:inline set:html={JSON.stringify(block)} />
   ))
 }
+
