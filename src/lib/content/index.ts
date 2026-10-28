@@ -4,6 +4,7 @@ import type {
   HomePageContent,
   NavigationContent,
   ReviewsPageContent,
+  ServiceAreasPageContent,
   ServicePageContent,
 } from './types';
 import {
@@ -15,6 +16,7 @@ import {
   getSanityHomeContent,
   getSanityNavigationContent,
   getSanityReviewsPage,
+  getSanityServiceAreasPage,
   getSanityServicePage,
   getSanityServicePageSlugs,
   getSanitySitemapContent,
@@ -38,6 +40,10 @@ export async function getReviewsPage(): Promise<ReviewsPageContent> {
   return getSanityReviewsPage();
 }
 
+export async function getServiceAreasPage(): Promise<ServiceAreasPageContent> {
+  return getSanityServiceAreasPage();
+}
+
 export async function getContactHelpOptions() {
   try {
     const options = await getSanityContactHelpOptions();
@@ -54,7 +60,7 @@ export async function getNavigationContent(): Promise<NavigationContent> {
     throw new Error('Sanity navigation or footer document is missing.');
   }
   return stripHiddenNavLinks(
-    normalizeNavHrefs(ensureEndOfLifeInspectionLink(ensureLegalFooterLinks(ensureBlogNav(nav))))
+    normalizeNavHrefs(ensureServiceAreasLinks(ensureEndOfLifeInspectionLink(ensureLegalFooterLinks(ensureBlogNav(nav)))))
   );
 }
 
@@ -157,6 +163,36 @@ function ensureEndOfLifeInspectionLink(nav: NavigationContent): NavigationConten
         if (link.links.some((item) => navHrefKey(item.href) === END_OF_LIFE_INSPECTION_LINK.href)) return link;
         return { ...link, links: [...link.links, END_OF_LIFE_INSPECTION_LINK] };
       }),
+    },
+  };
+}
+
+const SERVICE_AREAS_LINK = { text: 'Service Areas', href: '/service-areas' };
+
+function ensureServiceAreasLinks(nav: NavigationContent): NavigationContent {
+  const insertBeforeReviews = <T extends { text: string; href?: string }>(items: T[]): T[] => {
+    if (items.some((item) => navHrefKey(item.href) === SERVICE_AREAS_LINK.href)) return items;
+    const next = [...items];
+    const reviewsIndex = next.findIndex((item) => navHrefKey(item.href) === '/reviews');
+    const link = SERVICE_AREAS_LINK as unknown as T;
+    if (reviewsIndex >= 0) next.splice(reviewsIndex, 0, link);
+    else next.push(link);
+    return next;
+  };
+
+  return {
+    ...nav,
+    header: {
+      ...nav.header,
+      links: nav.header.links.map((link) =>
+        link.text === 'About' && link.links ? { ...link, links: insertBeforeReviews(link.links) } : link
+      ),
+    },
+    footer: {
+      ...nav.footer,
+      links: nav.footer.links.map((column) =>
+        column.title === 'Company' ? { ...column, links: insertBeforeReviews(column.links) } : column
+      ),
     },
   };
 }

@@ -78,6 +78,7 @@ export const navigationData: NavigationContent = {
         text: 'About',
         links: [
           { text: 'Our Story & Credentials', href: '/about/our-story' },
+          { text: 'Service Areas', href: '/service-areas' },
           { text: 'Reviews', href: '/reviews' },
         ],
       },
@@ -128,6 +129,7 @@ export const navigationData: NavigationContent = {
         title: 'Company',
         links: [
           { text: 'Our Story', href: '/about/our-story' },
+          { text: 'Service Areas', href: '/service-areas' },
           { text: 'Reviews', href: '/reviews' },
           { text: 'Blog', href: '/blog' },
           { text: 'Claims', href: '/claims' },

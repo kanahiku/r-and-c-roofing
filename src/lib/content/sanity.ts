@@ -9,6 +9,7 @@ import type {
   HomePageContent,
   NavigationContent,
   ReviewsPageContent,
+  ServiceAreasPageContent,
   RoofingMaterialItem,
   ServicePageContent,
   ServiceSection,
@@ -526,6 +527,36 @@ export async function getSanityReviewsPage(): Promise<ReviewsPageContent> {
         .filter((image): image is ContentImage => Boolean(image?.src)),
     },
   };
+}
+
+const SERVICE_AREAS_PAGE_QUERY = /* groq */ `
+  *[_type == "serviceAreasPage" && _id == "singleton-service-areas"][0] {
+    meta,
+    hero { ${HERO_PROJECTION} },
+    location {
+      heading, intro, businessName, addressLine1, addressLine2,
+      phoneText, phoneHref, email, hours, mapEmbedUrl, mapsQuery, directionsLabel
+    },
+    areas {
+      heading, introParagraphs, regionLabel, communitiesLabel,
+      "regions": regions[] { region, communities },
+      closingParagraphs
+    },
+    services {
+      heading, intro,
+      "items": items[] { title, description, href, linkText },
+      footnoteBefore, footnoteLinkText, footnoteLinkHref, footnoteAfter
+    },
+    ctaBanner { ${CTA_BANNER_PROJECTION} }
+  }
+`;
+
+export async function getSanityServiceAreasPage(): Promise<ServiceAreasPageContent> {
+  const page = await sanityClient.fetch<ServiceAreasPageContent | null>(SERVICE_AREAS_PAGE_QUERY);
+  if (!page) {
+    throw new Error('Sanity serviceAreasPage document is missing (singleton-service-areas).');
+  }
+  return { ...page, hero: normalizeHeroImage(page.hero) };
 }
 
 type SanityMarkDef = {

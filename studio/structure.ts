@@ -8,6 +8,7 @@ const SINGLETONS: Record<string, string> = {
   homePage: 'singleton-home',
   contactPage: 'singleton-contact',
   reviewsPage: 'singleton-reviews',
+  serviceAreasPage: 'singleton-service-areas',
   roofingMaterials: 'singleton-roofing-materials',
 };
 
@@ -92,6 +93,14 @@ export const structure = (S: StructureBuilder) =>
                     .schemaType('reviewsPage')
                     .documentId('singleton-reviews')
                     .title('Reviews Page')
+                ),
+              S.listItem()
+                .title('Service Areas')
+                .child(
+                  S.document()
+                    .schemaType('serviceAreasPage')
+                    .documentId('singleton-service-areas')
+                    .title('Service Areas Page')
                 ),
               S.listItem()
                 .title('Services')

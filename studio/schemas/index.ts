@@ -4,6 +4,7 @@ import { siteFooter } from './singletons/footer';
 import { homePage } from './singletons/homePage';
 import { contactPage } from './singletons/contactPage';
 import { reviewsPage } from './singletons/reviewsPage';
+import { serviceAreasPage } from './singletons/serviceAreasPage';
 import { roofingMaterials, roofingMaterialsSection } from './singletons/roofingMaterials';
 import { lead } from './documents/lead';
 import { servicePage } from './documents/servicePage';
@@ -58,6 +59,7 @@ export const schemaTypes = [
   homePage,
   contactPage,
   reviewsPage,
+  serviceAreasPage,
   roofingMaterials,
   servicePage,
   blogPost,

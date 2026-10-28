@@ -1,0 +1,258 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import ServiceDirectory from '~/components/ui/ServiceDirectory.astro';
+import Button from '~/components/ui/Button.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import HeroSubtitle from '~/components/ui/HeroSubtitle.astro';
+import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import { getServiceAreasPage } from '~/lib/content';
+import { mapsDirectionsHref, mapsEmbedSrc } from '~/data/pages/contact';
+
+const page = await getServiceAreasPage();
+const { hero, location, areas, services } = page;
+
+const metadata = {
+  title: page.meta.title,
+  description: page.meta.description,
+  ignoreTitleTemplate: true,
+};
+
+const heroActions = [
+  ...(hero.ctaText
+    ? [{ variant: 'primary' as const, text: hero.ctaText, href: hero.ctaHref || '/contact' }]
+    : []),
+  ...(hero.phoneCtaText && hero.phoneCtaHref
+    ? [{ variant: 'ghost-light' as const, text: hero.phoneCtaText, href: hero.phoneCtaHref }]
+    : []),
+];
+
+const mapsQuery = location.mapsQuery || [location.addressLine1, location.addressLine2].filter(Boolean).join(', ');
+const mapSrc = location.mapEmbedUrl || (mapsQuery ? mapsEmbedSrc(mapsQuery) : '');
+
+const bodyLarge = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted';
+const bodyLargeDark = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-white/70';
+---
+
+<Layout metadata={metadata}>
+  <Hero2 actions={heroActions.length ? heroActions : undefined}>
+    <Fragment slot="title">{hero.title}</Fragment>
+    <Fragment slot="subtitle">
+      <HeroSubtitle visualSubheading={hero.visualSubheading} subtitle={hero.subtitle} />
+    </Fragment>
+    <Fragment slot="image">
+      {
+        hero.image || hero.imageMobile ? (
+          <ArtDirectedImage
+            desktop={hero.image}
+            mobile={hero.imageMobile}
+            class="w-full h-full object-cover"
+            widths={[400, 768, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading="eager"
+            width={700}
+            height={700}
+            layout="cover"
+            format="webp"
+          />
+        ) : (
+          <HeroImagePlaceholder fill label={hero.imagePlaceholder || 'Service areas photo placeholder'} />
+        )
+      }
+    </Fragment>
+    <Fragment slot="bg">
+      <SectionBg variant="hero" />
+    </Fragment>
+  </Hero2>
+
+  <!-- Location: grey -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title={location.heading} classes={{ container: 'mb-[9px]' }} />
+    {location.intro && <p class={`${bodyLarge} text-left max-w-3xl mb-[30px]`}>{location.intro}</p>}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
+      <div>
+        {
+          location.businessName && (
+            <h3 class="text-[18px] md:text-[20px] font-medium leading-[130%] text-heading mb-3">
+              {location.businessName}
+            </h3>
+          )
+        }
+        {
+          (location.addressLine1 || location.addressLine2) && (
+            <address class="not-italic text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">
+              {location.addressLine1}
+              {location.addressLine1 && location.addressLine2 && <br />}
+              {location.addressLine2}
+            </address>
+          )
+        }
+        <dl class="mt-5 space-y-3 text-[14px] md:text-[15px] leading-[160%]">
+          {
+            location.phoneText && (
+              <div>
+                <dt class="font-medium text-heading">Phone</dt>
+                <dd class="text-muted">
+                  <a href={location.phoneHref || undefined} class="hover:underline">
+                    {location.phoneText}
+                  </a>
+                </dd>
+              </div>
+            )
+          }
+          {
+            location.email && (
+              <div>
+                <dt class="font-medium text-heading">Email</dt>
+                <dd class="text-muted">
+                  <a href={`mailto:${location.email}`} class="hover:underline">
+                    {location.email}
+                  </a>
+                </dd>
+              </div>
+            )
+          }
+          {
+            location.hours?.length ? (
+              <div>
+                <dt class="font-medium text-heading">Business Hours</dt>
+                <dd class="text-muted">
+                  {location.hours.map((line, index) => (
+                    <>
+                      {index > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </dd>
+              </div>
+            ) : null
+          }
+        </dl>
+        {
+          mapsQuery && (
+            <div class="mt-6">
+              <Button
+                variant="ghost-light"
+                text={location.directionsLabel || 'Get Directions'}
+                href={mapsDirectionsHref(mapsQuery)}
+                target="_blank"
+              />
+            </div>
+          )
+        }
+      </div>
+      {
+        mapSrc && (
+          <div class="rounded-md overflow-hidden border border-accent/60 bg-[#222] aspect-[4/3] min-h-[280px]">
+            <iframe
+              title={`Map of ${location.businessName || 'our office'}`}
+              src={mapSrc}
+              class="w-full h-full min-h-[280px]"
+              style="border:0;"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            />
+          </div>
+        )
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Service areas: black -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto" isDark={true}>
+    <Headline isDark={true} title={areas.heading} classes={{ container: '!mb-[20px]' }} />
+    {
+      areas.introParagraphs?.length ? (
+        <div class={`${bodyLargeDark} max-w-3xl space-y-4 mb-[30px]`}>
+          {areas.introParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      ) : null
+    }
+
+    <div class="rounded-lg border border-accent/60 bg-[#222] overflow-hidden">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b border-accent/60">
+            <th scope="col" class="px-4 md:px-6 py-3 text-[14px] md:text-[15px] font-medium text-accent">
+              {areas.regionLabel || 'Region'}
+            </th>
+            <th scope="col" class="px-4 md:px-6 py-3 text-[14px] md:text-[15px] font-medium text-accent">
+              {areas.communitiesLabel || 'Communities Served'}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/15">
+          {
+            areas.regions.map(({ region, communities }) => (
+              <tr>
+                <th scope="row" class="px-4 md:px-6 py-4 text-[15px] md:text-[17px] font-medium text-white align-top">
+                  {region}
+                </th>
+                <td class="px-4 md:px-6 py-4 text-[14px] md:text-[15px] font-normal leading-[160%] text-white/70">
+                  {communities}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    {
+      areas.closingParagraphs?.length ? (
+        <div class={`${bodyLargeDark} max-w-3xl space-y-4 mt-[30px]`}>
+          {areas.closingParagraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      ) : null
+    }
+    <Fragment slot="bg">
+      <SectionBg variant="dark" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <!-- Services: white -->
+  <WidgetWrapper containerClass="max-w-[1400px] mx-auto">
+    <Headline title={services.heading} classes={{ container: 'mb-[9px]' }} />
+    {services.intro && <p class={`${bodyLarge} text-left max-w-3xl mb-[30px]`}>{services.intro}</p>}
+    <ServiceDirectory variant="light" items={services.items} />
+    {
+      services.footnoteLinkText && services.footnoteLinkHref && (
+        <p class={`${bodyLarge} mt-[30px]`}>
+          {services.footnoteBefore}{' '}
+          <a
+            href={services.footnoteLinkHref}
+            class="text-heading font-medium underline underline-offset-4 hover:no-underline"
+          >
+            {services.footnoteLinkText}
+          </a>{' '}
+          {services.footnoteAfter}
+        </p>
+      )
+    }
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    title={page.ctaBanner.title}
+    subtitle={page.ctaBanner.subtitle}
+    ctaText={page.ctaBanner.ctaText}
+    ctaHref={page.ctaBanner.ctaHref}
+    extraLines={page.ctaBanner.extraLines}
+    license={page.ctaBanner.license}
+    showAfterHoursNote={page.ctaBanner.showAfterHoursNote}
+  />
+</Layout>

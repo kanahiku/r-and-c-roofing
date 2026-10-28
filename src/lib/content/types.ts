@@ -420,6 +420,46 @@ export interface ReviewsPageContent {
   ctaBanner: CtaBannerContent;
 }
 
+export interface ServiceAreasPageContent {
+  meta: {
+    title: string;
+    description: string;
+  };
+  hero: PageHero;
+  location: {
+    heading: string;
+    intro?: string;
+    businessName?: string;
+    addressLine1?: string;
+    addressLine2?: string;
+    phoneText?: string;
+    phoneHref?: string;
+    email?: string;
+    hours?: string[];
+    mapEmbedUrl?: string;
+    mapsQuery?: string;
+    directionsLabel?: string;
+  };
+  areas: {
+    heading: string;
+    introParagraphs?: string[];
+    regionLabel?: string;
+    communitiesLabel?: string;
+    regions: Array<{ region: string; communities: string }>;
+    closingParagraphs?: string[];
+  };
+  services: {
+    heading: string;
+    intro?: string;
+    items: Array<{ title: string; description: string; href: string; linkText?: string }>;
+    footnoteBefore?: string;
+    footnoteLinkText?: string;
+    footnoteLinkHref?: string;
+    footnoteAfter?: string;
+  };
+  ctaBanner: CtaBannerContent;
+}
+
 // ─── Blog ─────────────────────────────────────────────────────────────────────
 
 export interface BlogPost {
