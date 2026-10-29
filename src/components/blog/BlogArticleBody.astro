@@ -39,7 +39,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
   return ['google', 'yelp'];
 }
 
-const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%] text-heading mb-3 mt-8';
+const h3Class = 'text-[16px] md:text-[18px] font-sans font-bold leading-[130%] text-heading mb-3 mt-8';
 ---
 
 <div class="min-w-0">
@@ -351,7 +351,7 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
                     {index + 1}
                   </div>
                   <div class="min-w-0">
-                    <h3 class="text-[16px] md:text-[18px] font-sans font-medium leading-[130%] text-heading mb-0.5">
+                    <h3 class="text-[16px] md:text-[18px] font-sans font-bold leading-[130%] text-heading mb-0.5">
                       {step.title}
                     </h3>
                     <p class="text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">{step.description}</p>
@@ -392,7 +392,7 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
             <div class="space-y-8">
               {section.items.map((card) => (
                 <div>
-                  <h3 class="text-[16px] md:text-[18px] font-sans font-medium leading-[130%] text-heading mb-3">
+                  <h3 class="text-[16px] md:text-[18px] font-sans font-bold leading-[130%] text-heading mb-3">
                     {card.title}
                   </h3>
                   <ul class="space-y-2">
