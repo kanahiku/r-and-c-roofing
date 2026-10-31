@@ -510,6 +510,8 @@ export interface BlogContentHeading {
   _key: string;
   level: 2 | 3;
   text: string;
+  /** Inline HTML when the heading contains a link or other marks. */
+  html?: string;
 }
 
 export interface BlogContentImage {

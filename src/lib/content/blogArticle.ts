@@ -3,6 +3,7 @@ import type { BlogContentBlock, BlogContentImage, BlogPost, ServiceSection } fro
 export interface TocItem {
   id: string;
   title: string;
+  level: 2 | 3;
 }
 
 export interface ArticleBlock {
@@ -90,15 +91,45 @@ export function getUnmatchedInlineImages(post: BlogPost): BlogContentImage[] {
   return leftover;
 }
 
-export function getArticleToc(post: BlogPost): TocItem[] {
-  if (shouldUsePortableBody(post)) {
-    const used = new Set<string>();
-    return (post.contentBlocks ?? [])
-      .filter((block): block is Extract<BlogContentBlock, { _type: 'heading' }> => block._type === 'heading' && block.level === 2)
-      .map((block) => ({
+interface PortableAnchor {
+  key: string;
+  id: string;
+  title: string;
+  level: 2 | 3;
+}
+
+function portableAnchors(post: BlogPost): PortableAnchor[] {
+  const used = new Set<string>();
+  const items: PortableAnchor[] = [];
+
+  for (const block of post.contentBlocks ?? []) {
+    if (block._type === 'heading' && (block.level === 2 || block.level === 3)) {
+      items.push({
+        key: block._key,
         id: uniqueHeadingId(block.text, used),
         title: block.text,
-      }));
+        level: block.level,
+      });
+      continue;
+    }
+    if (block._type === 'faq') {
+      for (const item of block.items) {
+        items.push({
+          key: item._key || item.question,
+          id: uniqueHeadingId(item.question, used),
+          title: item.question,
+          level: 3,
+        });
+      }
+    }
+  }
+
+  return items;
+}
+
+export function getArticleToc(post: BlogPost): TocItem[] {
+  if (shouldUsePortableBody(post)) {
+    return portableAnchors(post).map(({ id, title, level }) => ({ id, title, level }));
   }
 
   const used = new Set<string>();
@@ -107,7 +138,7 @@ export function getArticleToc(post: BlogPost): TocItem[] {
   for (const section of post.sections) {
     const heading = section.heading?.trim();
     if (!heading || heading === post.title) continue;
-    items.push({ id: uniqueHeadingId(heading, used), title: heading });
+    items.push({ id: uniqueHeadingId(heading, used), title: heading, level: 2 });
   }
 
   return items;
@@ -131,11 +162,5 @@ export function getArticleBlocks(post: BlogPost): ArticleBlock[] {
 }
 
 export function getPortableHeadingId(post: BlogPost, key: string): string | undefined {
-  const used = new Set<string>();
-  for (const block of post.contentBlocks ?? []) {
-    if (block._type !== 'heading' || block.level !== 2) continue;
-    const id = uniqueHeadingId(block.text, used);
-    if (block._key === key) return id;
-  }
-  return undefined;
+  return portableAnchors(post).find((item) => item.key === key)?.id;
 }

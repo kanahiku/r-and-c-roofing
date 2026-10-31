@@ -891,7 +891,13 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
       flushList();
       flushFaq();
       flushFaqSection();
-      result.push({ _type: 'heading', _key: key, level: 2, text });
+      result.push({
+        _type: 'heading',
+        _key: key,
+        level: 2,
+        text,
+        ...(html.includes('<') ? { html } : {}),
+      });
 
       if (FAQ_HEADING_REGEX.test(text)) {
         inFaqSection = true;
@@ -909,7 +915,13 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
       }
 
       flushFaqSection();
-      result.push({ _type: 'heading', _key: key, level: 3, text });
+      result.push({
+        _type: 'heading',
+        _key: key,
+        level: 3,
+        text,
+        ...(html.includes('<') ? { html } : {}),
+      });
       return;
     }
 

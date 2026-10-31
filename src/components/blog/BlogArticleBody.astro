@@ -48,15 +48,22 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-bold leading-[130%] t
       contentBlocks.map((block) => {
         if (block._type === 'heading' && block.level === 2) {
           const headingId = getPortableHeadingId(post, block._key);
+          const headingHtml = block.html?.includes('<') ? block.html : undefined;
           return (
             <h2 id={headingId} class:list={[headingClass, 'mt-10 md:mt-14 scroll-mt-28']}>
-              {block.text}
+              {headingHtml ? <span set:html={headingHtml} /> : block.text}
             </h2>
           );
         }
 
         if (block._type === 'heading') {
-          return <h3 class={h3Class}>{block.text}</h3>;
+          const headingId = getPortableHeadingId(post, block._key);
+          const headingHtml = block.html?.includes('<') ? block.html : undefined;
+          return (
+            <h3 id={headingId} class:list={[h3Class, 'scroll-mt-28']}>
+              {headingHtml ? <span set:html={headingHtml} /> : block.text}
+            </h3>
+          );
         }
 
         if (block._type === 'image') {
@@ -167,7 +174,11 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-bold leading-[130%] t
           return (
             <div class="mt-6 mb-8 space-y-0">
               {block.items.map((item, index) => (
-                <details class:list={['group py-1', index > 0 && 'border-t border-faq-light']} name="faq-accordion">
+                <details
+                  id={item._key ? getPortableHeadingId(post, item._key) : undefined}
+                  class:list={['group scroll-mt-28 py-1', index > 0 && 'border-t border-faq-light']}
+                  name="faq-accordion"
+                >
                   <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
                     <span class="text-[16px] md:text-[18px] font-sans font-medium leading-snug pr-4 text-faq-question-light">
                       {item.question}
