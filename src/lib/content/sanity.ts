@@ -658,6 +658,8 @@ const CTA_DIRECTIVE_REGEX =
   /^\s*(?:\((?:create a )?cta button\)|\[(?:insert )?cta button(?::\s*|\s+)?\])\s*(.*)$/i;
 const FAQ_HEADING_REGEX =
   /frequently asked|faqs?$|^faq\b|what homeowners most often want to know|questions homeowners ask|common questions|questions to ask/i;
+const FAQ_CONCLUSION_REGEX =
+  /\b(?:these|those)\s+questions\b|^(?:in conclusion|to summarize|summary:|final thoughts|takeaway:)/i;
 
 function detectCtaButton(
   block: SanityPortableBlock
@@ -948,6 +950,18 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
         return;
       }
       if (faqSectionItems.length > 0) {
+        if (FAQ_CONCLUSION_REGEX.test(text)) {
+          flushFaqSection();
+          result.push({
+            _type: 'paragraph',
+            _key: key,
+            text,
+            html,
+            ...(block.style === 'blockquote' ? { quote: true } : {}),
+          });
+          return;
+        }
+
         const last = faqSectionItems[faqSectionItems.length - 1];
         last.answer = last.answer ? `${last.answer}<br><br>${html}` : html;
         return;
