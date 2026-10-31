@@ -110,17 +110,6 @@ function portableAnchors(post: BlogPost): PortableAnchor[] {
         title: block.text,
         level: block.level,
       });
-      continue;
-    }
-    if (block._type === 'faq') {
-      for (const item of block.items) {
-        items.push({
-          key: item._key || item.question,
-          id: uniqueHeadingId(item.question, used),
-          title: item.question,
-          level: 3,
-        });
-      }
     }
   }
 

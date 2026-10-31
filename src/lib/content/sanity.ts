@@ -657,7 +657,7 @@ function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef
 const CTA_DIRECTIVE_REGEX =
   /^\s*(?:\((?:create a )?cta button\)|\[(?:insert )?cta button(?::\s*|\s+)?\])\s*(.*)$/i;
 const FAQ_HEADING_REGEX =
-  /frequently asked|faqs?$|^faq\b|what homeowners most often want to know|questions homeowners ask|common questions/i;
+  /frequently asked|faqs?$|^faq\b|what homeowners most often want to know|questions homeowners ask|common questions|questions to ask/i;
 
 function detectCtaButton(
   block: SanityPortableBlock
@@ -946,11 +946,22 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
       if (isQuestion) {
         faqSectionItems.push({ _key: key, question: text, answer: '' });
         return;
-      } else if (faqSectionItems.length > 0) {
+      }
+      if (faqSectionItems.length > 0) {
         const last = faqSectionItems[faqSectionItems.length - 1];
         last.answer = last.answer ? `${last.answer}<br><br>${html}` : html;
         return;
       }
+
+      // Intro copy before the first question stays visible, and the FAQ section stays open.
+      result.push({
+        _type: 'paragraph',
+        _key: key,
+        text,
+        html,
+        ...(block.style === 'blockquote' ? { quote: true } : {}),
+      });
+      return;
     }
 
     // List items
